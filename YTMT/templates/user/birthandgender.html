@@ -15,6 +15,9 @@
           alert("생일을  꼭 입력하세요");
           $("#birth").focus();
         }
+      else if ($("#man").is(':checked') == false && $("#woman").is(':checked') == false) {
+                alert("남자또는 여자를  꼭 선택하세요!");
+            }
       });
     });
   </script>
@@ -34,113 +37,78 @@
 
     table,
     FORM {
-      border: 1px solid rgba(36, 228, 172, 0.29);
+      border: none);
       border-spacing: 15px;
+    }
+    ul {
+      list-style-type: none;
+      padding: 0;
+    }
+
+    li {
+      display: inline-block;
+      margin-left: 10px;
+      margin-right: 0px;
+      margin-top: 30px;
+      float: left;
+      font-size: 15px;
+      font-weight: bold;
     }
   </style>
 
 </head>
+<header>
+  <nav class="navbar navbar-default">
+    <div class="container-fluid" style="background-color: #FFC81E; width:100%; height:60px; ">
+      <div class="navbar-header navbar-right">
+        <a class="navbar-left" href="/"><img src="니맛내맛 로고.png" style="float:left;width:auto;padding:0px 0px 0px 0px;height:auto;"></a>
 
-<div class="header">
-  <h1>
-    <a href="http://www.naver.com"><img src="C:\Users\Yusejeong\Desktop\내꺼\ICT캡디\마이멜로디.jpg">
-    </a>
-  </h1>
+        <li><a href="/" style="font-weight:bold; color:black;">로그인</a></li>
+        <li><a href="/" style="font-weight:bold; color:black;">마이페이지</a></li>
+      </div>
+    </div>
+  </nav>
+  <div class="navbar-header">
 
-  <body style="background-color:#f0f5f3">
-    <center>
-      <span style="
-font-weight: bold;
-font-size: 2em;
-line-height: 2em;
-color: black;
-font-family: 'Nanum Gothic';
-">
-         추가정보입력(선택)
-      </span>
-      <table boder="" bgcolor="#FFD700" cellspacing="0">
-        <FORM>
-          <tr>
-            <td> 생년월일 </td>
-            <td> <input type="date" name="birth" id="birth" /> </td>
-          </tr>
+  </div>
 
-        </FORM>
-      </table>
-      <br>
-      <a href="file:///C:/Users/Yusejeong/Desktop/%EB%82%B4%EA%BA%BC/ICT%EC%BA%A1%EB%94%94/%EC%A2%85%EA%B5%90.html"><input type="button" class="btn btn-warning w200"style="width:120pt;margin-top:12px;" value="다음단계로 이동"></a>
-      <a href=""><input type="button"  class="btn btn-warning  w200" style="width:60pt;margin-top:12px;"  value="Skip"></a>
+</header>
 
 
-    </center>
+<body style="background-color:#f0f5f3">
+  <center>
+    <br><br><br><br><br>
+    <span style="font-weight: bold; font-size: 2em; line-height: 2em; color: black; font-family: 'Nanum Gothic';">
+      추가정보입력(선택)
+    </span>
+    <br>
+    <br>
+    <table boder="" bgcolor="#f0f5f3" cellspacing="0">
+      <FORM>
+        <tr>
+          <th> 생년월일 </th>
+          <td> <input type="date" name="birth" id="birth" /> </td>
+        </tr>
 
-  </body>
+        <tr>
+                <th>성별</th>
+                <td>
+                    <input type="radio" id="man" name="gender" value="M" checked="checked" >남자
+                    <input type="radio" id="woman" name="gender" value="W">여자
+                </td>
+            </tr>
+      </FORM>
+    </table>
+    <br>
+    <a href="file:///C:/Users/Yusejeong/Desktop/%EB%82%B4%EA%BA%BC/ICT%EC%BA%A1%EB%94%94/%ED%9A%8C%EC%9B%90%EA%B0%80%EC%9E%85%EC%B2%AB%ED%99%94%EB%A9%B4.html"><input type="button" class="btn btn-warning w200" style="width:100pt;margin-top:12px;"
+        value="< prev >"></a>
+    <a href="file:///C:/Users/Yusejeong/Desktop/%EB%82%B4%EA%BA%BC/ICT%EC%BA%A1%EB%94%94/%EC%A2%85%EA%B5%90.html"><input type="button" class="btn btn-warning w200" style="width:100pt;margin-top:12px;" value="next >"></a>
+
+
+
+  </center>
+
+</body>
 
 </html>
 
-
-
-
-
-<!-- <tr>
- <td> 이메일 </td>
- <td>
-  <input type = "text"/> @ <input type = "text"/> &nbsp;&nbsp;
-  <select>
-   <option> 직접입력 </option>
-   <option> naver.com </option>
-   <option> daum.net </option>
-   <option> nate.com </option>
-  </select>
- </td>
-</tr>
-
-
-
-
-<tr>
- <td> 주소 </td>
- <td>
-  <input type = "text"/>
-  <input type = "button" value = "주소찾기"/>
- </td>
-</tr>
-<tr>
- <td> 상세주소 </td>
- <td>
-  <input type = "text"/>
- </td>
-</tr>
-
-
-
-<tr>
- <td> 휴대폰 </td>
- <td>
-  <input type = "radio" name = "phone"/> SKT
-  <input type = "radio" name = "phone"/> KTF
-  <input type = "radio" name = "phone"/> LGU+
- <br/>
-  <select>
-   <option> 010 </option>
-   <option> 011 </option>
-   <option> 016 </option>
-   <option> 018 </option>
-  </select>
-  <input type = "text" size = "6"/> - <input type = "text" size = "6"/>
- </td>
-</tr>
-
-
-
-
-<tr>
- <td> 관심  </td>
- <td>
-  <input type = "checkbox"/> 수입차
-  <input type = "checkbox"/> 국산차
-  <input type = "checkbox"/> SUV
-  <input type = "checkbox"/> 경차
-  <input type = "checkbox"/> LPG
- </td>
-</tr> -->
