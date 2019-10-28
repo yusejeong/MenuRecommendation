@@ -61,7 +61,7 @@
   <nav class="navbar navbar-default">
     <div class="container-fluid" style="background-color: #FFC81E; width:100%; height:60px; ">
       <div class="navbar-header navbar-right">
-        <a class="navbar-left" href="/"><img src="니맛내맛 로고.png" style="float:left;width:auto;padding:0px 0px 0px 0px;height:auto;"></a>
+        <a class="navbar-left" href="/"><img src="https://ytmtresource.s3.ap-northeast-2.amazonaws.com/YTMT_Logo.jpg" style="float:left;width:auto;padding:0px 0px 0px 0px;height:auto;"></a>
 
         <li><a href="/" style="font-weight:bold; color:black;">로그인</a></li>
         <li><a href="/" style="font-weight:bold; color:black;">마이페이지</a></li>
@@ -100,9 +100,9 @@
       </FORM>
     </table>
     <br>
-    <a href="file:///C:/Users/Yusejeong/Desktop/%EB%82%B4%EA%BA%BC/ICT%EC%BA%A1%EB%94%94/%ED%9A%8C%EC%9B%90%EA%B0%80%EC%9E%85%EC%B2%AB%ED%99%94%EB%A9%B4.html"><input type="button" class="btn btn-warning w200" style="width:100pt;margin-top:12px;"
-        value="< prev >"></a>
-    <a href="file:///C:/Users/Yusejeong/Desktop/%EB%82%B4%EA%BA%BC/ICT%EC%BA%A1%EB%94%94/%EC%A2%85%EA%B5%90.html"><input type="button" class="btn btn-warning w200" style="width:100pt;margin-top:12px;" value="next >"></a>
+    <a href="{% url 'YTMT:signup'%}"><input type="button" class="btn btn-warning w200" style="width:100pt;margin-top:12px;"
+        value="< prev "></a>
+    <a href="{% url 'YTMT:religion'%}"><input type="button" class="btn btn-warning w200" style="width:100pt;margin-top:12px;" value="next >"></a>
 
 
 

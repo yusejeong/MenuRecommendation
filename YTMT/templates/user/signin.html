@@ -19,7 +19,7 @@
   <div class="warp">
     <div class="header">
       <h1>
-        <a href="http://www.naver.com"><img src="C:\Users\Yusejeong\Desktop\내꺼\ICT캡디\마이멜로디.jpg">
+        <a href="{% url 'YTMT:signin'%}"><img src="https://ytmtresource.s3.ap-northeast-2.amazonaws.com/YTMT_Logo.jpg">
         </a>
       </h1>
       <div class="lang">
@@ -61,7 +61,7 @@
             <div style="margin:24px 0 100px 0; padding:24px 0; border:solid #E0E0E0 1px; line-height:24px;">
               <span class="fs-15 fw-b">아직 니맛내맛 회원이 아니신가요?</span><br>
               <span>회원가입을 하시면 더 많은 정보와 혜택을 받으실 수 있습니다.</span>
-              <a href="file:///C:/Users/Yusejeong/Desktop/%EB%82%B4%EA%BA%BC/ICT%EC%BA%A1%EB%94%94/%ED%9A%8C%EC%9B%90%EA%B0%80%EC%9E%85.html"><input  id="btn_intro" type="button" class="btn btn-white w200" style="margin-top:12px;" value="회원가입"></a>
+              <a href="{% url 'YTMT:signup'%}"><input  id="btn_intro" type="button" class="btn btn-white w200" style="margin-top:12px;" value="회원가입"></a>
             </div>
           </div>
         </form>
