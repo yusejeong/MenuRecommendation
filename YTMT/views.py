@@ -15,18 +15,24 @@ def signin(request):
 def signup(request):
     return render(request, 'user/signup.html')
 
+def birthandgender(request):
+    return render(request, 'user/birthandgender.html')
+
+def religion(request):
+    return render(request, 'user/religion.html')
+
 # class SignInCompleteView(generic.DetailView):
 #     template_name = 'user/signincomplete.html'
 
 
-class SignUpView(generic.DetailView):
-    template_name = 'user/signup.html'
+# class SignUpView(generic.DetailView):
+#     template_name = 'user/signup.html'
 
-class BirthandGenderView(generic.DetailView):
-    template_name = 'user/birthandgender.html'
+# class BirthandGenderView(generic.DetailView):
+#     template_name = 'user/birthandgender.html'
 
-class ReligionView(generic.DetailView):
-    template_name = 'user/religion.html'
+# class ReligionView(generic.DetailView):
+#     template_name = 'user/religion.html'
 
 class AllergieView(generic.DetailView):
     template_name = 'user/allergie.html'
