@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>니맛내맛 : 종교선택</title>
+  <link rel="stylesheet" href="https://dfzrjox9sv97l.cloudfront.net/dicons_20160930/css/common.css?201709272">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+  <script type="text/javascript">
+    $(document).ready(function() {
+
+      $("#btn_join").click(function() {
+        var tel1_pattern = /(^01[016789]$)/;
+        if ($("#man").is(':checked') == false && $("#woman").is(':checked') == false) {
+          alert("남자또는 여자를  꼭 선택하세요!");
+        }
+
+      });
+    });
+  </script>
+  <style>
+    h,
+    td,
+    tr,
+    input,
+    textarea,
+    select,
+    FORM {
+      font-family: 나눔고딕;
+      font-size: 1em;
+      border-radius: 5px;
+    }
+
+    table,
+    FORM {
+      border: 1px solid rgba(36, 228, 172, 0.29);
+      border-spacing: 15px;
+    }
+  </style>
+
+</head>
+<div class="header">
+  <h1>
+    <a href="http://www.naver.com"><img src="C:\Users\Yusejeong\Desktop\내꺼\ICT캡디\마이멜로디.jpg">
+    </a>
+  </h1>
+
+  <body style="background-color:#f0f5f3">
+    <center>
+      <span style="
+font-weight: bold;
+font-size: 2em;
+line-height: 2em;
+color: black;
+font-family: 'Nanum Gothic';
+">
+        추가정보입력(선택)
+      </span>
+      <table boder="" bgcolor="#FFD700" cellspacing="0">
+        <FORM>
+          <tr>
+            <td> 종교 </td>
+            <td colspan="5" height="30" bgcolor="f0f5f3">
+              <input type="checkbox" /> 힌두교<br>
+              <input type="checkbox" /> 불교<br>
+              <input type="checkbox" /> 기독교<br>
+              <input type="checkbox" /> 천주교<br>
+              <input type="checkbox" /> 회교도<br>
+              <input type="checkbox" /> 이슬람교<br>
+              <input type="checkbox" /> 유대교<br>
+              <input type="checkbox" /> 시크교도<br>
+              <input type="checkbox" /> 무교<br>
+
+            </td>
+          </tr>
+          <tr>
+
+
+        </FORM>
+      </table>
+      <br>
+      <a href="http://www.naver.com"><input type="button" class="btn btn-warning w200" style="width:120pt;margin-top:12px;" value="다음단계로 이동"></a>
+      <a href=""><input type="button" class="btn btn-warning  w200" style="width:60pt;margin-top:12px;" value="Skip"></a>
+
+
+    </center>
+
+  </body>
+
+</html>
