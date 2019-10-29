@@ -4,7 +4,7 @@
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <link rel="stylesheet" href="https://dfzrjox9sv97l.cloudfront.net/dicons_20160930/css/common.css?201709272">
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" >
   <link href="https://tistory4.daumcdn.net/tistory/221632/skin/images/bootstrap.css" rel="stylesheet">
   <link rel="stylesheet" media="screen" type="text/css" href="https://tistory4.daumcdn.net/tistory/221632/skin/style.css?_T_=1508225055">
   <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.min.css" rel="stylesheet">
@@ -111,19 +111,15 @@
       font-family: 나눔고딕;
     }
 
-    ul {
-      list-style-type: none;
-      padding: 0;
-    }
 
+
+    <!--forNavbar--!>
     li {
-      display: inline-block;
-      margin-left: 10px;
-      margin-right: 0px;
-      margin-top: 30px;
-      float: left;
-      font-size: 15px;
-      font-weight: bold;
+        font-size: 15px;
+        font-weight: bold;
+    }
+    .nav-link {
+        color: black;
     }
 
   </style>
@@ -132,23 +128,20 @@
 
 
 <header>
-  <nav class="navbar navbar-default">
-    <div class="container-fluid" style="background-color: #FFC81E; width:100%; height:60px; ">
-      <div class="navbar-header navbar-right">
-<<<<<<< HEAD
-        <a class="navbar-left" href="/"><img src="니맛내맛 로고.png" style="float:left;width:auto;padding:0px 0px 0px 0px;height:auto;"></a>
-=======
-        <a class="navbar-left" href="/"><img src="https://ytmtresource.s3.ap-northeast-2.amazonaws.com/YTMT_Logo.jpg" style="float:left;width:auto;padding:0px 0px 0px 0px;height:auto;"></a>
->>>>>>> master
+    <nav class="navbar navbar-light" style="background-color: #FFC81E;" id="navbar">
+            <a class="navbar-brand" href="#">
+                <img src="https://ytmtresource.s3.ap-northeast-2.amazonaws.com/YTMT_Logo.jpg" width="70" height="40" alt="">
+            </a>
+            <ul class="nav nav-pills">
+                <li class="nav-item">
+                  <a class="nav-link" href="#fat">로그인</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#fat">마이페이지</a>
+                </li>
+            </ul>
+    </nav>
 
-        <li><a href="/" style="font-weight:bold; color:black;">로그인</a></li>
-        <li><a href="/" style="font-weight:bold; color:black;">마이페이지</a></li>
-      </div>
-    </div>
-  </nav>
-  <div class="navbar-header">
-
-  </div>
 
 </header>
 
