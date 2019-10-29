@@ -65,14 +65,15 @@
     </div>
     <div class="container">
       <div class="row">
-        <form id="frm_login" method="POST">
+        <form id="frm_login" method="POST" action="{% url 'YTMT:signinrequest'%}">
+          {% csrf_token %}
           <input name="retURL" type="hidden" value="https://.com/">
           <div class="login">
             <div class="title bb-gray">로그인 및 회원가입</div>
 
             <div>
-              <input id="txt_id" type="text" class="input-text" placeholder="아이디 입력" style="margin-bottom:7px;">
-              <input id="txt_pw" type="password" class="input-text" placeholder="비밀번호 입력">
+              <input id="txt_id" name = "username" type="text" class="input-text" placeholder="아이디 입력" style="margin-bottom:7px;">
+              <input id="txt_pw" name = "password" type="password" class="input-text" placeholder="비밀번호 입력">
             </div>
             <div style="padding:24px 0;">
               <div class="fl">
