@@ -1,15 +1,53 @@
-<html>
+<!DOCTYPE html>
 
 <head>
   <!-- <script src="https://connect.facebook.net/ko_KR/sdk.js?hash=2bc317245ae70e125038f2d920bdfc90&amp;ua=modern_es6" async="" crossorigin="anonymous"></script> -->
   <meta charset="utf-8">
   <title>니맛내맛 : 로그인</title>
 
-  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css?201709272">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://dfzrjox9sv97l.cloudfront.net/dicons_20160930/css/common.css?201709272">
   <link rel="stylesheet" href="https://dfzrjox9sv97l.cloudfront.net/dicons_20160930/css/user_web.css?201709272">
+  
+  
+  <style>
+        .column {
+              float: left;
+              width: 50%;
+        }
+        .row:after {
+              content: "";
+              display: table;
+              clear: both;
+        }
+        li {
+              display: inline-block;
+              margin-left: 10px;
+              margin-right: 0px;
+              margin-top: 30px;
+              float: left;
+              font-size: 15px;
+              font-weight: bold;
+        }
+    </style>
 
 </head>
+
+<header>
+  <nav class="navbar navbar-default">
+    <div class="container-fluid" style="background-color: #FFC81E; width:100%; height:60px; ">
+      <div class="navbar-header navbar-right">
+        <a class="navbar-left" href="{% url 'YTMT:signin'%}"><img src="https://ytmtresource.s3.ap-northeast-2.amazonaws.com/YTMT_Logo.jpg" style="float:left;width:auto;padding:0px 0px 0px 0px;height:auto; width:70px;"></a>
+
+        <li><a href="/" style="font-weight:bold; color:black;">로그인</a></li>
+        <li><a href="/" style="font-weight:bold; color:black;">마이페이지</a></li>
+      </div>
+    </div>
+  </nav>
+  <div class="navbar-header">
+
+  </div> 
+</header>
 
 <body>
   <div id="div_shadow">
@@ -18,11 +56,7 @@
 
   <div class="warp">
     <div class="header">
-      <h1>
-        <a href="http://www.naver.com"><img src="C:\Users\Yusejeong\Desktop\내꺼\ICT캡디\마이멜로디.jpg">
-        </a>
-      </h1>
-      <div class="lang">
+      <div class="lang" align="right">
         <select id="locale_switch" name="locale_switch" title="언어선택" class="sel" onchange="switchlocale();nclks_select(this.value,'',{'ko_KR':'log.lankr','en_US':'log.lanen'},this,event);">
           <option value="ko_KR">한국어</option>
           <option value="en_US">English</option>
@@ -35,34 +69,30 @@
           <input name="retURL" type="hidden" value="https://.com/">
           <div class="login">
             <div class="title bb-gray">로그인 및 회원가입</div>
-            <div class="fs-15 fw-b" style="padding:24px 0;">
-              로그인을 통해 니맛내맛의 다양한 혜택을 누리세요.
-            </div>
+
             <div>
-              <input id="txt_id" type="text" class="input-text" placeholder="이메일 입력" style="margin-bottom:7px;">
+              <input id="txt_id" type="text" class="input-text" placeholder="아이디 입력" style="margin-bottom:7px;">
               <input id="txt_pw" type="password" class="input-text" placeholder="비밀번호 입력">
             </div>
             <div style="padding:24px 0;">
               <div class="fl">
                 <label class="checkbox"><input type="checkbox" value="Y"><i class="check-icon" checked></i> <span class="fs-13 fw-b">로그인상태 유지</span></label>
               </div>
-
-              <div class="fr" style="padding-top:3px;"><a href="" style="color:#222222;">비밀번호 찾기</a></div>
+              
               <div class="clear"></div>
             </div>
             <button type="submit" class="btn btn-black">로그인</button>
-            <div style="padding:14px 0;">
-              <div class="fl" style="border-bottom:solid #E0E0E0 1px; width:180px; height:7px;"></div>
-              <div class="fl tc" style="width:40px;">또는</div>
-              <div class="fr" style="border-bottom:solid #E0E0E0 1px; width:180px; height:7px;"></div>
-              <div class="clear"></div>
+            <div class="row">
+                <div class="column">
+                  <a href="{% url 'YTMT:signup'%}"><input  id="btn_intro" type="button" class="btn btn-white w200" style="margin-top:12px;" value="회원가입"></a>
+                </div>
+                <div class="column">
+                  <a href="/"><input  type="button" class="btn btn-white w200" style="margin-top:12px;" value="아이디/비밀번호 찾기"></a>
+                </div>
+            
+                
             </div>
-
-            <div style="margin:24px 0 100px 0; padding:24px 0; border:solid #E0E0E0 1px; line-height:24px;">
-              <span class="fs-15 fw-b">아직 니맛내맛 회원이 아니신가요?</span><br>
-              <span>회원가입을 하시면 더 많은 정보와 혜택을 받으실 수 있습니다.</span>
-              <a href="file:///C:/Users/Yusejeong/Desktop/%EB%82%B4%EA%BA%BC/ICT%EC%BA%A1%EB%94%94/%ED%9A%8C%EC%9B%90%EA%B0%80%EC%9E%85.html"><input  id="btn_intro" type="button" class="btn btn-white w200" style="margin-top:12px;" value="회원가입"></a>
-            </div>
+            
           </div>
         </form>
       </div>

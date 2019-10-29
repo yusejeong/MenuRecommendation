@@ -5,150 +5,87 @@ from django.views import generic
 
 #from django.template import loader
 
-from .models import User
+# from .models import User
 
 # Create your views here.
 
-class SignInView():
-    template_name = 'user/signin.html'
+def signin(request):
+    return render(request, 'user/signin.html')
 
-class SignInCompleteView():
-    template_name = 'user/signincomplete.html'
+def signup(request):
+    return render(request, 'user/signup.html')
+
+def birthandgender(request):
+    return render(request, 'user/birthandgender.html')
+
+def religion(request):
+    return render(request, 'user/religion.html')
+
+# class SignInCompleteView(generic.DetailView):
+#     template_name = 'user/signincomplete.html'
 
 
-class SignUpView():
-    template_name = 'user/signup.html'
+# class SignUpView(generic.DetailView):
+#     template_name = 'user/signup.html'
 
-class BirthandGenderView():
-    template_name = 'user/birthandgender.html'
+# class BirthandGenderView(generic.DetailView):
+#     template_name = 'user/birthandgender.html'
 
-class ReligionView():
-    template_name = 'user/religion.html'
+# class ReligionView(generic.DetailView):
+#     template_name = 'user/religion.html'
 
-class AllergieView():
+class AllergieView(generic.DetailView):
     template_name = 'user/allergie.html'
 
-class VegetarianView():
+class VegetarianView(generic.DetailView):
     template_name = 'user/vegetarian.html'
 
-class HatelistView():
+class HatelistView(generic.DetailView):
     template_name = 'user/hatelist.html'
 
-class SignUpCompleteView():
+class SignUpCompleteView(generic.DetailView):
     template_name = 'user/signupcomplete.html'
 
 
-class FindInfoView():
+class FindInfoView(generic.DetailView):
     template_name = 'user/findinfo.html'
 
-class FindIDView():
+class FindIDView(generic.DetailView):
     template_name = 'user/findid.html'
 
-class IDInfoView():
+class IDInfoView(generic.DetailView):
     template_name = 'user/idinfo.html'
 
-class FindPWView():
+class FindPWView(generic.DetailView):
     template_name = 'user/findpw.html'
 
-class SendPWView():
+class SendPWView(generic.DetailView):
     template_name = 'user/sendpw.html'
 
 
-class MypageView():
+class MypageView(generic.DetailView):
     template_name = 'mypage/mypage.html'
 
-class EditInforView():
+class EditInforView(generic.DetailView):
     template_name = 'mypage/editinfo.html'
 
-class EditMoreInfoView():
+class EditMoreInfoView(generic.DetailView):
     template_name = 'mypage/editmoreinfo.html'
 
-class EditReligionView():
+class EditReligionView(generic.DetailView):
     template_name = 'user/religion.html'
 
-class EditAllergieView():
+class EditAllergieView(generic.DetailView):
     template_name = 'user/allergie.html'
 
-class EditVegetarianView():
+class EditVegetarianView(generic.DetailView):
     template_name = 'user/vegetarian.html'
 
-class EditHatelistView():
+class EditHatelistView(generic.DetailView):
     template_name = 'user/hatelist.html'
 
-class HistoryView():
+class HistoryView(generic.DetailView):
     template_name = 'mypage/history.html'
 
-class FriendlistView():
+class FriendlistView(generic.DetailView):
     template_name = 'mypage/friendlist.html'
-
-
-
-
-
-
-
-
-
-class IndexView(generic.ListView):
-    template_name = 'polls/index.html'
-    context_object_name = 'latest_question_list'
-
-    def get_queryset(self):
-        return Question.objects.order_by('-pub_date')[:5]
-
-# def index(request):
-#     latest_question_list = Question.objects.order_by('-pub_date')[:5]
-#     template = loader.get_template('polls/index.html')
-
-#     context = {
-#         'latest_question_list' : latest_question_list,
-#     }
-#     # return render(request, 'polls/index.html', context)
-#     return HttpResponse(template.render(context, request))
-
-class DetailView(generic.DetailView):
-    model = Question
-    template_name = 'polls/detail.html'
-
-# def detail(request, question_id):
-#     try:
-#         question = Question.objects.get(pk = question_id)
-#     except:
-#         raise Http404("Question dose not exist")
-    
-#     # question = get_objext_or_404(Question, pk = question_id)
-
-#     return render(request, 'polls/detail.html', {'question' : question})
-
-#     # return HttpResponse("You're looking at question %s." % question_id)
-
-class ResultsView(generic.DetailView):
-    model = Question
-    template_name = 'polls/results.html'
-
-# def results(request, question_id):
-#     question = get_object_or_404(Question, pk = question_id)
-#     return render(request, 'polls/results.html', {'question' :question})
-
-#     # response = "You're looking at the results of question %s."
-#     # return HttpResponse(response %question_id)
-
-def vote(request, question_id):
-    question = get_object_or_404(Question, pk=question_id)
-    try:
-        selected_choice = question.choice_set.get(pk=request.POST['choice'])
-    except (KeyError, Choice.DoesNotExist):
-        # Redisplay the question voting form.
-        return render(request, 'polls/detail.html', {
-            'question': question,
-            'error_message': "You didn't select a choice.",
-        })
-    else:
-        selected_choice.votes += 1
-        selected_choice.save()
-        # Always return an HttpResponseRedirect after successfully dealing
-        # with POST data. This prevents data from being posted twice if a
-        # user hits the Back button.
-        return HttpResponseRedirect(reverse('polls:results', args=(question.id,)))
-
-    # return HttpResponse("You're voting on question %s." % question_id)
