@@ -8,10 +8,9 @@ from django.contrib import auth
 
 #from django.template import loader
 
-# from .models import User
-
 # Create your views here.
 
+# 로그인
 def signin(request):
     return render(request, 'user/signin.html')
 
@@ -22,55 +21,48 @@ def signinrequest(request):
         user = auth.authenticate(request, username = id, password = pw)
         if user is not None:
             auth.login(request, user)
-            return HttpResponseRedirect(reverse('YTMT:pagemain'))
+            return HttpResponseRedirect(reverse('YTMT:mainpage'))
         else:
             return render(request, 'user/signin.html', {'error':'id or pw is incorrect'})
     else:
         return render(request, 'user/signin.html')
 
-def pagemain(request):
-    return render(request, 'user/main.html')
 
+# 회원가입
 def signup(request):
     return render(request, 'user/signup.html')
-
-# def signuprequest(request):
-#     if request.method == "POST":
-#         if reuqest.POST["password1"] == request.POST["password2"]:
-#             user = User.objects.create_user(
-#                 username = request.POST["username"], password = request.POST["password1"])
-#             auth.login(request, user)
-#             return redirect('main')
-#         return render(request, 'user/signup.html')
-#     return render(request, 'signup.html')
-
 
 def birthandgender(request):
     return render(request, 'user/birthandgender.html')
 
+def signuprequest(request):
+    if request.method == "POST":
+        if request.POST["pwd"] == request.POST["pwdchk"]:
+            # 이메일 유효성 체크
+            user = User.objects.create_user(
+                username = request.POST["id"], password = request.POST["pwd"])
+            auth.login(request, user)
+            return redirect('YTMT:birthandgender')
+        return render(request, 'user/signup.html')
+    return render(request, 'signup.html')
+
+
+# 회원가입 추가정보
 def religion(request):
     return render(request, 'user/religion.html')
 
-# class SignUpView(generic.DetailView):
-#     template_name = 'user/signup.html'
+def allergie(request):
+    return render(request, 'user/allergie.html')
 
-# class BirthandGenderView(generic.DetailView):
-#     template_name = 'user/birthandgender.html'
+def vegetarian(request):
+    return render(request, 'user/vegetarian.html')
 
-# class ReligionView(generic.DetailView):
-#     template_name = 'user/religion.html'
+def hatelist(request):
+    return render(request, 'user/hatelist.html')
 
-class AllergieView(generic.DetailView):
-    template_name = 'user/allergie.html'
 
-class VegetarianView(generic.DetailView):
-    template_name = 'user/vegetarian.html'
-
-class HatelistView(generic.DetailView):
-    template_name = 'user/hatelist.html'
-
-class SignUpCompleteView(generic.DetailView):
-    template_name = 'user/signupcomplete.html'
+def mainpage(request):
+    return render(request, 'main.html')
 
 
 class FindInfoView(generic.DetailView):
