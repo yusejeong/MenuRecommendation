@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+  <!DOCTYPE html>
 <html>
 
 <head>
@@ -6,55 +6,25 @@
   <title>니맛내맛 : 생년월일입력</title>
   <link rel="stylesheet" href="https://dfzrjox9sv97l.cloudfront.net/dicons_20160930/css/common.css?201709272">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" >
+    <link rel="stylesheet" href="religion.css">
   <script type="text/javascript">
-    $(document).ready(function() {
-
-      $("#btn_join").click(function() {
-        var tel1_pattern = /(^01[016789]$)/;
-        if ($("#birth").val() == "") {
-          alert("생일을  꼭 입력하세요");
-          $("#birth").focus();
-        }
-      else if ($("#man").is(':checked') == false && $("#woman").is(':checked') == false) {
-                alert("남자또는 여자를  꼭 선택하세요!");
+  function checkValue()
+        {
+            if(!document.form.birth.value){
+                alert("생년월일을 입력하세요!");
+                docmment.form.birth.focus();
+                return false;
             }
-      });
-    });
+            if(!document.form.gender.value){
+                alert("성별을 입력하세요.");
+                return false;
+            }
+
+            form.method="post";
+            location.href="{% url 'YTMT:religion'%}";
+        }
+
   </script>
-
-  <style>
-    h,
-    td,
-    tr,
-    input,
-    textarea,
-    select,
-    FORM {
-      font-family: 나눔고딕;
-      font-size: 1em;
-      border-radius: 5px;
-    }
-
-    table,
-    FORM {
-      border: none);
-      border-spacing: 15px;
-    }
-
-    <!--forNavbar--!>
-    li {
-        font-size: 15px;
-        font-weight: bold;
-    }
-    .nav-link {
-        color: black;
-    }
-    th {
-      text-align: center;
-      padding-right: 15px;
-      padding-left: 15px;
-    }
-  </style>
 
 </head>
 <header>
@@ -81,8 +51,8 @@
 
     <br>
     <br>
+    <form name="form" method="post">
     <table boder="" bgcolor="#f0f5f3" cellspacing="0">
-      <FORM>
         <tr>
           <th> 생년월일 </th>
           <td> <input type="date" name="birth" id="birth" /> </td>
@@ -95,13 +65,11 @@
                     <input type="radio" id="woman" name="gender" value="W">여자
                 </td>
             </tr>
-      </FORM>
+
     </table>
     <br>
-    <a href="file:///C:/Users/Yusejeong/Desktop/%EB%82%B4%EA%BA%BC/ICT%EC%BA%A1%EB%94%94/%ED%9A%8C%EC%9B%90%EA%B0%80%EC%9E%85%EC%B2%AB%ED%99%94%EB%A9%B4.html"><input type="button" class="btn btn-warning w200" style="width:100pt;margin-top:12px;"
-        value="< prev >"></a>
-    <a href="file:///C:/Users/Yusejeong/Desktop/%EB%82%B4%EA%BA%BC/ICT%EC%BA%A1%EB%94%94/%EC%A2%85%EA%B5%90.html"><input type="button" class="btn btn-warning w200" style="width:100pt;margin-top:12px;" value="next >"></a>
-
+  <input type="button" id="btn_join" onclick="checkValue();" class="btn btn-warning w200" style="width:200pt;margin-top:12px;" value="next >">
+  </form>
 
 
   </center>
@@ -109,56 +77,3 @@
 </body>
 
 </html>
-
-
-
-
-
-
-
-<!-- <tr>
- <td> 주소 </td>
- <td>
-  <input type = "text"/>
-  <input type = "button" value = "주소찾기"/>
- </td>
-</tr>
-<tr>
- <td> 상세주소 </td>
- <td>
-  <input type = "text"/>
- </td>
-</tr>
-
-
-
-<tr>
- <td> 휴대폰 </td>
- <td>
-  <input type = "radio" name = "phone"/> SKT
-  <input type = "radio" name = "phone"/> KTF
-  <input type = "radio" name = "phone"/> LGU+
- <br/>
-  <select>
-   <option> 010 </option>
-   <option> 011 </option>
-   <option> 016 </option>
-   <option> 018 </option>
-  </select>
-  <input type = "text" size = "6"/> - <input type = "text" size = "6"/>
- </td>
-</tr>
-
-
-
-
-<tr>
- <td> 관심  </td>
- <td>
-  <input type = "checkbox"/> 수입차
-  <input type = "checkbox"/> 국산차
-  <input type = "checkbox"/> SUV
-  <input type = "checkbox"/> 경차
-  <input type = "checkbox"/> LPG
- </td>
-</tr> -->
