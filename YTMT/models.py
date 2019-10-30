@@ -1,9 +1,11 @@
 from django.db import models
+from django.contrib.auth.models import User
+from django.contrib import auth
 
-# class User(models.Model):
-#     id = models.CharField(max_length=10)
-#     pw = models.CharField(max_length=20)
-#     email = models.CharField(max_length=20)
+# class Member(models.Model):
+    # id = models.CharField(max_length=10)
+    # pw = models.CharField(max_length=20)
+    # email = models.CharField(max_length=20)
 
 #     birth = models.DateField()
 #     gender = 1

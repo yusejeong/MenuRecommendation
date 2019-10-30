@@ -4,15 +4,21 @@ from . import views
 
 app_name = 'YTMT'
 urlpatterns = [
+    # 로그인
     path('', views.signin, name = 'signin'),
     path('signinrequest', views.signinrequest, name = 'signinrequest'),
 
+    # 회원가입
     path('signup', views.signup, name = 'signup'),
     path('signup/birthandgender', views.birthandgender, name = 'birthandgender'),
-    path('signup/religion', views.religion, name = 'religion'),
-    path('signup/allergie', views.AllergieView.as_view(), name = 'allergie'),
-    path('signup/vegetarian', views.VegetarianView.as_view(), name = 'vegetarian'),
-    path('signup/hatelist', views.HatelistView.as_view(), name = 'hatelist'),
+    path('signup/signuprequeset', views.signuprequest, name = 'signuprequest'),
 
-    path('pagemain', views.pagemain, name = 'pagemain'),
+    # 회원가입 추가정보
+    path('signup/religion', views.religion, name = 'religion'),
+    path('signup/allergie', views.allergie, name = 'allergie'),
+    path('signup/vegetarian', views.vegetarian, name = 'vegetarian'),
+    path('signup/hatelist', views.hatelist, name = 'hatelist'),
+
+    #메인
+    path('mainpage', views.mainpage, name = 'mainpage'),
 ]
