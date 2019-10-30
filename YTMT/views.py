@@ -1,7 +1,10 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
 from django.views import generic
+from django.contrib.auth.models import User
+from django.contrib import auth
+
 
 #from django.template import loader
 
@@ -12,18 +15,41 @@ from django.views import generic
 def signin(request):
     return render(request, 'user/signin.html')
 
+def signinrequest(request):
+    if request.method == "POST":
+        id = request.POST['username']
+        pw = request.POST['password']
+        user = auth.authenticate(request, username = id, password = pw)
+        if user is not None:
+            auth.login(request, user)
+            return HttpResponseRedirect(reverse('YTMT:pagemain'))
+        else:
+            return render(request, 'user/signin.html', {'error':'id or pw is incorrect'})
+    else:
+        return render(request, 'user/signin.html')
+
+def pagemain(request):
+    return render(request, 'user/main.html')
+
 def signup(request):
     return render(request, 'user/signup.html')
+
+# def signuprequest(request):
+#     if request.method == "POST":
+#         if reuqest.POST["password1"] == request.POST["password2"]:
+#             user = User.objects.create_user(
+#                 username = request.POST["username"], password = request.POST["password1"])
+#             auth.login(request, user)
+#             return redirect('main')
+#         return render(request, 'user/signup.html')
+#     return render(request, 'signup.html')
+
 
 def birthandgender(request):
     return render(request, 'user/birthandgender.html')
 
 def religion(request):
     return render(request, 'user/religion.html')
-
-# class SignInCompleteView(generic.DetailView):
-#     template_name = 'user/signincomplete.html'
-
 
 # class SignUpView(generic.DetailView):
 #     template_name = 'user/signup.html'

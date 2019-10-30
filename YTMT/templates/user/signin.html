@@ -5,10 +5,10 @@
   <meta charset="utf-8">
   <title>니맛내맛 : 로그인</title>
 
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+
   <link rel="stylesheet" href="https://dfzrjox9sv97l.cloudfront.net/dicons_20160930/css/common.css?201709272">
   <link rel="stylesheet" href="https://dfzrjox9sv97l.cloudfront.net/dicons_20160930/css/user_web.css?201709272">
-  
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" >
   
   <style>
         .column {
@@ -20,33 +20,33 @@
               display: table;
               clear: both;
         }
+        <!--forNavbar--!>
         li {
-              display: inline-block;
-              margin-left: 10px;
-              margin-right: 0px;
-              margin-top: 30px;
-              float: left;
-              font-size: 15px;
-              font-weight: bold;
+            font-size: 15px;
+            font-weight: bold;
+        }
+        .nav-link {
+            color: black;
         }
     </style>
 
 </head>
 
 <header>
-  <nav class="navbar navbar-default">
-    <div class="container-fluid" style="background-color: #FFC81E; width:100%; height:60px; ">
-      <div class="navbar-header navbar-right">
-        <a class="navbar-left" href="{% url 'YTMT:signin'%}"><img src="https://ytmtresource.s3.ap-northeast-2.amazonaws.com/YTMT_Logo.jpg" style="float:left;width:auto;padding:0px 0px 0px 0px;height:auto; width:70px;"></a>
+    <nav class="navbar navbar-light" style="background-color: #FFC81E;" id="navbar">
+            <a class="navbar-brand" href="#">
+                <img src="https://ytmtresource.s3.ap-northeast-2.amazonaws.com/YTMT_Logo.jpg" width="70" height="40" alt="">
+            </a>
+            <ul class="nav nav-pills">
+                <li class="nav-item">
+                  <a class="nav-link" href="#fat">로그인</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#fat">마이페이지</a>
+                </li>
+            </ul>
+    </nav>
 
-        <li><a href="/" style="font-weight:bold; color:black;">로그인</a></li>
-        <li><a href="/" style="font-weight:bold; color:black;">마이페이지</a></li>
-      </div>
-    </div>
-  </nav>
-  <div class="navbar-header">
-
-  </div> 
 </header>
 
 <body>
@@ -65,14 +65,15 @@
     </div>
     <div class="container">
       <div class="row">
-        <form id="frm_login" method="POST">
+        <form id="frm_login" method="POST" action="{% url 'YTMT:signinrequest'%}">
+          {% csrf_token %}
           <input name="retURL" type="hidden" value="https://.com/">
           <div class="login">
             <div class="title bb-gray">로그인 및 회원가입</div>
 
             <div>
-              <input id="txt_id" type="text" class="input-text" placeholder="아이디 입력" style="margin-bottom:7px;">
-              <input id="txt_pw" type="password" class="input-text" placeholder="비밀번호 입력">
+              <input id="txt_id" name = "username" type="text" class="input-text" placeholder="아이디 입력" style="margin-bottom:7px;">
+              <input id="txt_pw" name = "password" type="password" class="input-text" placeholder="비밀번호 입력">
             </div>
             <div style="padding:24px 0;">
               <div class="fl">
