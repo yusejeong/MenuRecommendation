@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+  <!DOCTYPE html>
 <html>
 
 <head>
@@ -9,20 +9,21 @@
     <link rel="stylesheet" href="templete.css">
     <link rel="stylesheet" href="birthandgender.css">
   <script type="text/javascript">
-    $(document).ready(function() {
-
-      $("#btn_join").click(function() {
-        var tel1_pattern = /(^01[016789]$)/;
-        if ($("#birth").val() == "") {
-          alert("생일을  꼭 입력하세요");
-          $("#birth").focus();
-        }
-      else if ($("#man").is(':checked') == false && $("#woman").is(':checked') == false) {
-                alert("남자또는 여자를  꼭 선택하세요!");
+  function checkValue()
+        {
+            if(!document.form.birth.value){
+                alert("생년월일을 입력하세요!");
+                docmment.form.birth.focus();
+                return false;
             }
-      });
-    });
-  </script>
+            if(!document.form.gender.value){
+                alert("성별을 입력하세요.");
+                return false;
+            }
+
+            form.method="post";
+            location.href="{% url 'YTMT:religion'%}";
+        }
 
 
 
@@ -41,10 +42,11 @@
 <body style="background-color:#f0f5f3">
   <center>
     <br><br><br><br><br>
+
     <br>
     <br>
+    <form name="form" method="post">
     <table boder="" bgcolor="#f0f5f3" cellspacing="0">
-      <FORM>
         <tr>
           <th> 생년월일 </th>
           <td> <input type="date" name="birth" id="birth" /> </td>
@@ -57,13 +59,11 @@
                     <input type="radio" id="woman" name="gender" value="W">여자
                 </td>
             </tr>
-      </FORM>
+
     </table>
     <br>
-    <a href="{% url 'YTMT:signin'%}"><input type="button" class="btn btn-warning w200" style="width:100pt;margin-top:12px;"
-        value=" 완료 "></a>
-    <a href="{% url 'YTMT:religion'%}"><input type="button" class="btn btn-warning w200" style="width:100pt;margin-top:12px;" value="next >"></a>
-
+  <input type="button" id="btn_join" onclick="checkValue();" class="btn btn-warning w200" style="width:200pt;margin-top:12px;" value="next >">
+  </form>
 
 
   </center>
@@ -71,56 +71,3 @@
 </body>
 
 </html>
-
-
-
-
-
-
-
-<!-- <tr>
- <td> 주소 </td>
- <td>
-  <input type = "text"/>
-  <input type = "button" value = "주소찾기"/>
- </td>
-</tr>
-<tr>
- <td> 상세주소 </td>
- <td>
-  <input type = "text"/>
- </td>
-</tr>
-
-
-
-<tr>
- <td> 휴대폰 </td>
- <td>
-  <input type = "radio" name = "phone"/> SKT
-  <input type = "radio" name = "phone"/> KTF
-  <input type = "radio" name = "phone"/> LGU+
- <br/>
-  <select>
-   <option> 010 </option>
-   <option> 011 </option>
-   <option> 016 </option>
-   <option> 018 </option>
-  </select>
-  <input type = "text" size = "6"/> - <input type = "text" size = "6"/>
- </td>
-</tr>
-
-
-
-
-<tr>
- <td> 관심  </td>
- <td>
-  <input type = "checkbox"/> 수입차
-  <input type = "checkbox"/> 국산차
-  <input type = "checkbox"/> SUV
-  <input type = "checkbox"/> 경차
-  <input type = "checkbox"/> LPG
- </td>
-</tr> -->
