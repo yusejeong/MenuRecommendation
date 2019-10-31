@@ -1,88 +1,45 @@
 <!DOCTYPE html>
 
 <head>
-  <!-- <script src="https://connect.facebook.net/ko_KR/sdk.js?hash=2bc317245ae70e125038f2d920bdfc90&amp;ua=modern_es6" async="" crossorigin="anonymous"></script> -->
+
   <meta charset="utf-8">
   <title>니맛내맛 : 로그인</title>
 
 
   <link rel="stylesheet" href="https://dfzrjox9sv97l.cloudfront.net/dicons_20160930/css/common.css?201709272">
   <link rel="stylesheet" href="https://dfzrjox9sv97l.cloudfront.net/dicons_20160930/css/user_web.css?201709272">
-      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" >
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css?201709272">
+  <link rel="stylesheet" href="templete.css">
+  <link rel="stylesheet" href="signin.css">
 
-  <style>
-        .column {
-              float: left;
-              width: 50%;
-        }
-        .row:after {
-              content: "";
-              display: table;
-              clear: both;
-        }
-        <!--forNavbar--!>
-        li {
-            font-size: 15px;
-            font-weight: bold;
-        }
-        .nav-link {
-            color: black;
-        }
-    </style>
-    <script  type="text/javascript">
 
-        function btn() {
-            alert("님 환영합니다.")
-            if(result) {
-                location.replace("birthandgender.html")
-            }
-        }
-
-        </script>
 </head>
 
-<header>
-    <nav class="navbar navbar-light" style="background-color: #FFC81E;" id="navbar">
-            <a class="navbar-brand" href="#">
-                <img src="https://ytmtresource.s3.ap-northeast-2.amazonaws.com/YTMT_Logo.jpg" width="70" height="40" alt="">
-            </a>
-            <ul class="nav nav-pills">
-                <li class="nav-item">
-                  <a class="nav-link" href="#fat">로그인</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="#fat">마이페이지</a>
-                </li>
-            </ul>
-    </nav>
-
-</header>
-
 <body>
-  <div id="div_shadow">
-    <div class="loader"></div>
-  </div>
-
-  <div class="warp">
-    <div class="header">
-      <div class="lang" align="right">
-        <select id="locale_switch" name="locale_switch" title="언어선택" class="sel" onchange="switchlocale();nclks_select(this.value,'',{'ko_KR':'log.lankr','en_US':'log.lanen'},this,event);">
-          <option value="ko_KR">한국어</option>
-          <option value="en_US">English</option>
-        </select>
-      </div>
+    <div class="warp">
+        <div class="header">
+            <div class="lang">
+                <select id="locale_switch" name="locale_switch" title="언어선택" class="sel" onchange="switchlocale();nclks_select(this.value,'',{'ko_KR':'log.lankr','en_US':'log.lanen'},this,event);">
+                    <option value="ko_KR">한국어</option>
+                    <option value="en_US">English</option>
+                </select>
+            </div>
+            <img src="https://ytmtresource.s3.ap-northeast-2.amazonaws.com/YTMT_Logo.jpg" width="300" height="auto" alt="">
+        </div>
     </div>
+
     <div class="container">
       <div class="row">
+
         <form id="frm_login" method="POST" action="{% url 'YTMT:signinrequest'%}">
-          {% csrf_token %}
+          <h4 class="text-hide">{% csrf_token %}</h4>
           <input name="retURL" type="hidden" value="https://.com/">
           <div class="login">
             <div class="title bb-gray">로그인 및 회원가입</div>
 
             <div>
-              <input id="txt_id" name = "username" type="text" class="input-text" placeholder="아이디 입력" style="margin-bottom:7px;">
-              <input id="txt_pw" name = "password" type="password" class="input-text" placeholder="비밀번호 입력">
+              <input id="id" name = "username" type="text" class="input-text" placeholder="아이디 입력" style="margin-bottom:7px;">
+              <input id="pw" name = "password" type="password" class="input-text" placeholder="비밀번호 입력">
             </div>
             <div style="padding:24px 0;">
               <div class="fl">
@@ -97,15 +54,11 @@
                   <a href="{% url 'YTMT:signup'%}"><input  id="btn_intro" type="button" class="btn btn-white w200" style="margin-top:12px;" value="회원가입"></a>
                 </div>
                 <div class="column">
-                  <a href="/"><input  type="button" class="btn btn-white w200" style="margin-top:12px;" value="아이디/비밀번호 찾기"></a>
+                  <a href="{% url 'YTMT:findinfo'%}"><input  type="button" class="btn btn-white w200" style="margin-top:12px;" value="아이디/비밀번호 찾기"></a>
                 </div>
-
-
             </div>
 
           </div>
         </form>
       </div>
     </div>
-
-  </div>

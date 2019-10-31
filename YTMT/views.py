@@ -51,8 +51,8 @@ def signuprequest(request):
 def religion(request):
     return render(request, 'user/religion.html')
 
-def allergie(request):
-    return render(request, 'user/allergie.html')
+def allergy(request):
+    return render(request, 'user/allergy.html')
 
 def vegetarian(request):
     return render(request, 'user/vegetarian.html')
@@ -61,24 +61,20 @@ def hatelist(request):
     return render(request, 'user/hatelist.html')
 
 
+# 회원정보찾기
+def findinfo(request):
+    return render(request, 'user/findinfo.html')
+
+def findid(request):
+    return render(request, 'user/findid.html')
+
+def findpw(request):
+    return render(request, 'user/findpw.html')
+
+
+# 메인
 def mainpage(request):
     return render(request, 'main.html')
-
-
-class FindInfoView(generic.DetailView):
-    template_name = 'user/findinfo.html'
-
-class FindIDView(generic.DetailView):
-    template_name = 'user/findid.html'
-
-class IDInfoView(generic.DetailView):
-    template_name = 'user/idinfo.html'
-
-class FindPWView(generic.DetailView):
-    template_name = 'user/findpw.html'
-
-class SendPWView(generic.DetailView):
-    template_name = 'user/sendpw.html'
 
 
 class MypageView(generic.DetailView):
