@@ -9,7 +9,7 @@
   <link rel="stylesheet" href="https://dfzrjox9sv97l.cloudfront.net/dicons_20160930/css/common.css?201709272">
   <link rel="stylesheet" href="https://dfzrjox9sv97l.cloudfront.net/dicons_20160930/css/user_web.css?201709272">
       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" >
-  
+
   <style>
         .column {
               float: left;
@@ -29,7 +29,16 @@
             color: black;
         }
     </style>
+    <script  type="text/javascript">
 
+        function btn() {
+            alert("님 환영합니다.")
+            if(result) {
+                location.replace("birthandgender.html")
+            }
+        }
+
+        </script>
 </head>
 
 <header>
@@ -79,10 +88,10 @@
               <div class="fl">
                 <label class="checkbox"><input type="checkbox" value="Y"><i class="check-icon" checked></i> <span class="fs-13 fw-b">로그인상태 유지</span></label>
               </div>
-              
+
               <div class="clear"></div>
             </div>
-            <button type="submit" class="btn btn-black">로그인</button>
+            <button type="submit" class="btn btn-black"onclick="javascript:btn()">로그인</button>
             <div class="row">
                 <div class="column">
                   <a href="{% url 'YTMT:signup'%}"><input  id="btn_intro" type="button" class="btn btn-white w200" style="margin-top:12px;" value="회원가입"></a>
@@ -90,10 +99,10 @@
                 <div class="column">
                   <a href="/"><input  type="button" class="btn btn-white w200" style="margin-top:12px;" value="아이디/비밀번호 찾기"></a>
                 </div>
-            
-                
+
+
             </div>
-            
+
           </div>
         </form>
       </div>
