@@ -39,8 +39,8 @@ class Profile(models.Model):
         (7, "플렉시테리언"), (8, "해당사항없음"),
     )
     
-    gender = models.IntegerField(blank = False, null = False, choices=Gender_TYPE)
-    birth = models.DateField(blank = False, null = False)
+    gender = models.IntegerField(blank = False, null = False, choices=Gender_TYPE, default=1)
+    birth = models.DateField(blank = False, null = False, auto_now_add=True)
     reli_id = models.IntegerField(choices=Religion_TYPE)
     vege_id = models.IntegerField(choices=Vegetarian_TYPE)
 
