@@ -48,8 +48,8 @@ def birthandgender(request):
     return render(request, 'user/birthandgender.html')
 
 def birthandgendersave(request):
-    if request.method = "POST":
-        if request.POST["man"] = 1:
+    # if request.method = "POST":
+    #     if request.POST["man"] = 1:
         
         
     return render(request, 'user/religion.html')
