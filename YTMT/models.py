@@ -5,11 +5,11 @@ from django.contrib import auth
 # 메뉴
 class Menu(models.Model):
     menu_id = models.IntegerField(blank = False, null = False, primary_key=True)
-    name = models.CharField(blank = False, null = False)
+    name = models.CharField(max_length=50, blank = False, null = False)
 
 class Ingredient(models.Model):
     ingre_id = models.IntegerField(blank = False, null = False, primary_key=True)
-    name = models.CharField(blank = False, null = False)
+    name = models.CharField(max_length=50, blank = False, null = False)
     # type(유제품/육류/어류)
 
 class Recipe(models.Model):
