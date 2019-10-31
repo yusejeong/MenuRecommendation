@@ -78,7 +78,7 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'HOST': 'ytmtdb.cajybcgm143w.ap-northeast-2.rds.amazonaws.com',
+        'HOST': 'ytmtdatabase.cajybcgm143w.ap-northeast-2.rds.amazonaws.com',
         'PORT': '3306',
         'NAME': 'ytmtdb',
         'USER': 'admin',
@@ -95,7 +95,7 @@ DATABASES = {
         # 'PASSWORD': 'ytmt123',
         # 'HOST': 'localhost',
         # 'PORT': '8080'
-    }
+    # }
 }
 
 
