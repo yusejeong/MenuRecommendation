@@ -36,6 +36,7 @@ color:white;
 
 }
 
+
 button2 {
 
   background-color: #000000;
@@ -55,9 +56,4 @@ button2 {
 
   cursor: pointer;
 
-}
-
-a:hover{
-  color:red;
-  text-decoration: none;
 }
