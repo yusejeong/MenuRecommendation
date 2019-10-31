@@ -15,10 +15,15 @@ urlpatterns = [
 
     # 회원가입 추가정보
     path('signup/religion', views.religion, name = 'religion'),
-    path('signup/allergie', views.allergie, name = 'allergie'),
+    path('signup/allergy', views.allergy, name = 'allergy'),
     path('signup/vegetarian', views.vegetarian, name = 'vegetarian'),
     path('signup/hatelist', views.hatelist, name = 'hatelist'),
 
-    #메인
+    # 회원정보찾기
+    path('findinfo', views.findinfo, name = 'findinfo'),
+    path('findinfo/findid', views.findid, name = 'findid'),
+    path('findinfo/findpw', views.findpw, name = 'findpw'),
+
+    # 메인
     path('mainpage', views.mainpage, name = 'mainpage'),
 ]
