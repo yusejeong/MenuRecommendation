@@ -24,6 +24,7 @@ def signinrequest(request):
             return HttpResponseRedirect(reverse('YTMT:mainpage'))
         else:
             return render(request, 'user/signin.html', {'error':'id or pw is incorrect'})
+        # 팝업창으로 띄우기
     else:
         return render(request, 'user/signin.html')
 
@@ -31,9 +32,6 @@ def signinrequest(request):
 # 회원가입
 def signup(request):
     return render(request, 'user/signup.html')
-
-def birthandgender(request):
-    return render(request, 'user/birthandgender.html')
 
 def signuprequest(request):
     if request.method == "POST":
@@ -44,8 +42,17 @@ def signuprequest(request):
             auth.login(request, user)
             return redirect('YTMT:birthandgender')
         return render(request, 'user/signup.html')
-    return render(request, 'signup.html')
+    return render(request, 'user/signup.html')
 
+def birthandgender(request):
+    return render(request, 'user/birthandgender.html')
+
+def birthandgendersave(request):
+    if request.method = "POST":
+        if request.POST["man"] = 1:
+        
+        
+    return render(request, 'user/religion.html')
 
 # 회원가입 추가정보
 def religion(request):
