@@ -33,12 +33,7 @@
         <form id="frm_login" method="POST" action="{% url 'YTMT:signinrequest'%}">
           <h4 class="text-hide">{% csrf_token %}</h4>
           <input name="retURL" type="hidden" value="https://.com/">
-            <div class="lang" >
-                <select id="locale_switch" name="locale_switch" title="언어선택" class="sel" onchange="switchlocale();nclks_select(this.value,'',{'ko_KR':'log.lankr','en_US':'log.lanen'},this,event);">
-                    <option value="ko_KR">한국어</option>
-                    <option value="en_US">English</option>
-                </select>
-            </div>
+          
           <div class="login">
             <div class="title" >로그인 및 회원가입</div>
             <img src="https://ytmtresource.s3.ap-northeast-2.amazonaws.com/YTMT_Logo.jpg" width="200" height="auto"  style="padding-bottom: 10px">
