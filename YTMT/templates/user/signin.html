@@ -9,17 +9,16 @@
   <link rel="stylesheet" href="https://dfzrjox9sv97l.cloudfront.net/dicons_20160930/css/common.css?201709272">
   <link rel="stylesheet" href="https://dfzrjox9sv97l.cloudfront.net/dicons_20160930/css/user_web.css?201709272">
   <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css?201709272">
-  <link rel="stylesheet" href="templete.css"> 
-  <link rel="stylesheet" href="signin.css"> 
-    <script type="text/javascript">
-
-    <script>
+  
+  <script type="text/javascript">
+      {% load static %}
+      <link rel="stylesheet" href={% static "YTMT/templete.css" %}>
+      <link rel="stylesheet" href={% static "YTMT/signin.css" %}>
 
     function movebtn(url) {
         alert("-님 환영합니다.");
         document.location.href = "main.html";
     }
-    
     </script>
 
 </head>
