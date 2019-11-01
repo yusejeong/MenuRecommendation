@@ -5,11 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <link rel="stylesheet" href="https://dfzrjox9sv97l.cloudfront.net/dicons_20160930/css/common.css?201709272">
       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" >
-  <link href="https://tistory4.daumcdn.net/tistory/221632/skin/images/bootstrap.css" rel="stylesheet">
   {% load static %}
-  <link rel="stylesheet" href={% static "YTMT/templete.css" %}>
-  <link rel="stylesheet" href={% static "YTMT/signup.css" %}>
-  <link rel="stylesheet" media="screen" type="text/css" href="https://tistory4.daumcdn.net/tistory/221632/skin/style.css?_T_=1508225055">
+  <link rel="stylesheet" href={% static "YTMT/css/templete.css" %}>
+  <link rel="stylesheet" href={% static "YTMT/css/signup.css" %}>
   <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.min.css" rel="stylesheet">
   <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css">
   <script src="//code.jquery.com/jquery.min.js"></script>
@@ -45,7 +43,7 @@
                 return false;
             }
             form.method="post";
-            location.href="{% url 'YTMT:birthandgender%}";
+            location.href="{% url 'YTMT:birthandgender'%}";
         }
   </script>
 
@@ -55,7 +53,7 @@
        <nav class="navbar navbar-light" style="background-color: #FFC81E;" id="navbar">
              <div class="container-fluid">
                 <div class="navbar-header">
-                    <a class="navbar-brand" href="#">
+                    <a class="navbar-brand" href="{% url 'YTMT:mainpage'%}">
                         <img src="https://ytmtresource.s3.ap-northeast-2.amazonaws.com/YTMT_LOGO_mini.png" width="auto" height="40" alt="">
                     </a>
                 </div>
@@ -72,7 +70,7 @@
     </span>
     <br><br>
     <form name="form" method="post" onsubmit="return checkValue()">
-    <table border="3" bgcolor="#f0f5f3" cellspacing="0" >
+    <table border="0" cellspacing="0" frame="void" width="500">
 
 
         <tr>
