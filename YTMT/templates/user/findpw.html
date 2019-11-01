@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <link rel="stylesheet" href="https://dfzrjox9sv97l.cloudfront.net/dicons_20160930/css/common.css?201709272">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+  {% load static %}
+<link rel="stylesheet" href={% static "YTMT/css/templete.css" %}>
+<link rel="stylesheet" href={% static "YTMT/css/findid.css" %}>
+  <script type="text/javascript">
+  function checkValue()
+        {
+            if(!document.form.id.value){
+                alert("아이디를 입력하세요.");
+                return false;
+            }
+            if(!document.form.email.value){
+                alert("이메일주소를 입력하세요.");
+                return false;
+            }
+            if(!document.form.email2.value){
+                alert("이메일주소를 선택하세요.");
+                return false;
+            }
+            form.method="post";
+            alert("회원님의 이메일로 임시 비밀번호를 전송했습니다.")
+        }
+
+  </script>
+
+</head>
+
+
+<header>
+			 <nav class="navbar navbar-light" style="background-color: #FFC81E;" id="navbar">
+						 <div class="container-fluid">
+										<a class="navbar-brand" href="{% url 'YTMT:mainpage'%}">
+												<img src="https://ytmtresource.s3.ap-northeast-2.amazonaws.com/YTMT_LOGO_mini.png" width="auto" height="40" alt="">
+										</a>
+										<ul class="nav nav-pills">
+												<li class="nav-item">
+													<a class="nav-link" style="color:black; font-weight: bold;"href="{% url 'YTMT:signin'%}">로그인</a>
+												</li>
+												<li class="nav-item">
+													<a class="nav-link"style="color:black; font-weight: bold;" href="{% url 'YTMT:mypagemain'%}">마이페이지</a>
+												</li>
+										</ul>
+								</div>
+		</nav>
+
+</header>
+
+<body>
+  <center>
+    <br><br><br><br><br>
+    <span style="font-weight: bold; font-size: 2em; line-height: 2em; color: black; font-family: 'Nanum Gothic';">
+      비밀번호 찾기
+    </span>
+    <br><br>
+    <form name="form" method="post" onsubmit="return checkValue()">
+    <table frame="void" width="500" border="0"  cellspacing="0" >
+
+      <tr>
+        <th>아이디 </th>
+        <td>
+          <input type="text" name="id" id="id" placeholder="아이디를 입력해주세요" />
+        </td>
+      </tr>
+        <tr>
+          <th>이메일 </th>
+          <td>
+            <input style="width:200px;" type="text" name="email" id="email" placeholder="이메일 아이디" />@<select id="email2" name="email2">
+                <option value="" selected="selected">-메일 주소-</option>
+                <option value="naver.com">naver.com</option>
+                <option value="daum.net">daum.net</option>
+                <option value="nate.com">nate.com</option>
+                <option value="hotmail.com">honmail.net</option>
+                <option value="yahoo.com">yahoo.com</option>
+                <option value="empas.com">empas.com</option>
+                <option value="korea.com">korea.com</option>
+                <option value="dreamwiz.com">hotmail.com</option>
+                <option value="gmail.com">gmail.com</option>
+                <option value="etc">직접입력</option>
+              </select>
+            </td>
+          </tr>
+
+
+
+
+    </table>
+
+
+    <!-- <input type="submit" value="회원가입" />
+    <input type="reset" value="다시 입력" /> -->
+
+<input type="button"id="btn_join" onclick="checkValue();" class="btn btn-pink w200" style="background-color: #fd7e14;width:250pt;margin-top:12px;font-weight:bold;" value="임시 비밀번호 이메일로 전송">
+
+</form>
+  </center>
+</body>
+
+</html>

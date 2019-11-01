@@ -1,0 +1,63 @@
+h,
+td,
+tr,
+input,
+FORM {
+  font-family:'Nanum Gothic';
+  font-size: 1em;
+  border-radius: 5px;
+
+}
+
+th {
+  text-align: center;
+  padding-right: 15px;
+  padding-left: 15px;
+}
+
+button {
+
+  background-color: #000000;
+  border: none;
+  color: white;
+  text-align: center;
+width:95pt;
+  text-decoration: none;
+
+  display: inline-block;
+padding:5px 5px;
+  font-size: 15px;
+  font-weight: bold;
+
+  margin: 4px 1px;
+
+  cursor: pointer;
+
+}
+
+table,
+FORM {
+    border:none;
+  border-spacing: 15px;
+  border-collapse: collapse
+
+}
+
+body {
+  font-family: 나눔고딕;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+li {
+  display: inline-block;
+  margin-left: 10px;
+  margin-right: 0px;
+  margin-top: 30px;
+  float: left;
+  font-size: 15px;
+  font-weight: bold;
+}
