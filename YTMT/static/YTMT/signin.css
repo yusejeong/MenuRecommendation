@@ -6,10 +6,11 @@ select {
 
 .lang {
     float: right;
+    margin-right: 20px;
 }
-      h4 {
+h4 {
               /* Hide the text. */
         text-indent: 100%;
         white-space: nowrap;
         overflow: hidden;
-      }
+}
