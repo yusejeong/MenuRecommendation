@@ -1,7 +1,7 @@
 select {
     
     width: 90px;
-    height:25px;
+    height: 25px;
 }
 
 .lang {
@@ -9,8 +9,8 @@ select {
     margin-right: 20px;
 }
 h4 {
-              /* Hide the text. */
-        text-indent: 100%;
-        white-space: nowrap;
-        overflow: hidden;
+    /* Hide the text. */
+    text-indent: 100%;
+    white-space: nowrap;
+    overflow: hidden;
 }
