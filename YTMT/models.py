@@ -44,6 +44,10 @@ class Profile(models.Model):
     reli_id = models.IntegerField(choices=Religion_TYPE)
     vege_id = models.IntegerField(choices=Vegetarian_TYPE)
 
+class Allergy(models.Model):
+    user_id = models.OneToOneField(User, on_delete = models.CASCADE)
+
+
 class Hate_menu(models.Model):
     user_id = models.OneToOneField(User, on_delete = models.CASCADE)
     menu_id = models.ForeignKey(Menu, on_delete=models.CASCADE)

@@ -74,10 +74,12 @@ def birthandgendersave(request):
 # 회원가입 추가정보
 def religion(request):
     profile = request.session.get('profile')
+    profile.reli_id = request.POST["religion"]
     return render(request, 'user/religion.html')
 
 def allergy(request):
     profile = request.session.get('profile')
+    profile 
     return render(request, 'user/allergy.html')
 
 def vegetarian(request):
