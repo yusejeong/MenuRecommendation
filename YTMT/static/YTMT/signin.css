@@ -1,22 +1,16 @@
-    .column {
-        float: left;
-        width: 50%;
-    }
-    .row:after {
-        content: "";
-        display: table;
-        clear: both;
-    }
+select {
+    
+    width: 90px;
+    height:25px;
+}
 
-      ul {
-          list-style-type: none;
-      }
-      .container, .header {
-          margin: 0 auto;
-      }
-      h4 {
+.lang {
+    float: right;
+    margin-right: 20px;
+}
+h4 {
               /* Hide the text. */
         text-indent: 100%;
         white-space: nowrap;
         overflow: hidden;
-      }
+}
