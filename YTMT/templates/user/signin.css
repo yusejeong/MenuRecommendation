@@ -1,19 +1,12 @@
-    .column {
-        float: left;
-        width: 50%;
-    }
-    .row:after {
-        content: "";
-        display: table;
-        clear: both;
-    }
+select {
+    
+    width: 90px;
+    height:25px;
+}
 
-      ul {
-          list-style-type: none;
-      }
-      .container, .header {
-          margin: 0 auto;
-      }
+.lang {
+    float: right;
+}
       h4 {
               /* Hide the text. */
         text-indent: 100%;
