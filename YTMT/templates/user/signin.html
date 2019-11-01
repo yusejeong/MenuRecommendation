@@ -9,34 +9,39 @@
   <link rel="stylesheet" href="https://dfzrjox9sv97l.cloudfront.net/dicons_20160930/css/common.css?201709272">
   <link rel="stylesheet" href="https://dfzrjox9sv97l.cloudfront.net/dicons_20160930/css/user_web.css?201709272">
   <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css?201709272">
-  <link rel="stylesheet" href="templete.css">
-  <link rel="stylesheet" href="signin.css">
+  
+  <script type="text/javascript">
+      <h4 class="text-hide">{% load static %}</h4>
+      
+      <link rel="stylesheet" href={% static "YTMT/templete.css" %}>
+      <link rel="stylesheet" href={% static "YTMT/signin.css" %}>
 
+    function movebtn(url) {
+        alert("-님 환영합니다.");
+        document.location.href = "main.html";
+    }
+</script>
 
 </head>
 
 <body>
-    <div class="warp">
-        <div class="header">
-            <div class="lang">
+
+    
+    <div class="container">
+      <div class="row">
+        
+        <form id="frm_login" method="POST" action="{% url 'YTMT:signinrequest'%}">
+          <h4 class="text-hide">{% csrf_token %}</h4>
+          <input name="retURL" type="hidden" value="https://.com/">
+            <div class="lang" >
                 <select id="locale_switch" name="locale_switch" title="언어선택" class="sel" onchange="switchlocale();nclks_select(this.value,'',{'ko_KR':'log.lankr','en_US':'log.lanen'},this,event);">
                     <option value="ko_KR">한국어</option>
                     <option value="en_US">English</option>
                 </select>
             </div>
-            <img src="https://ytmtresource.s3.ap-northeast-2.amazonaws.com/YTMT_Logo.jpg" width="300" height="auto" alt="">
-        </div>
-    </div>
-
-    <div class="container">
-      <div class="row">
-
-        <form id="frm_login" method="POST" action="{% url 'YTMT:signinrequest'%}">
-          <h4 class="text-hide">{% csrf_token %}</h4>
-          <input name="retURL" type="hidden" value="https://.com/">
           <div class="login">
-            <div class="title bb-gray">로그인 및 회원가입</div>
-
+            <div class="title" >로그인 및 회원가입</div>
+            <img src="https://ytmtresource.s3.ap-northeast-2.amazonaws.com/YTMT_Logo.jpg" width="200" height="auto"  style="padding-bottom: 10px">
             <div>
               <input id="id" name = "username" type="text" class="input-text" placeholder="아이디 입력" style="margin-bottom:7px;">
               <input id="pw" name = "password" type="password" class="input-text" placeholder="비밀번호 입력">
@@ -45,20 +50,23 @@
               <div class="fl">
                 <label class="checkbox"><input type="checkbox" value="Y"><i class="check-icon" checked></i> <span class="fs-13 fw-b">로그인상태 유지</span></label>
               </div>
-
+              
               <div class="clear"></div>
             </div>
-            <button type="submit" class="btn btn-black"onclick="javascript:btn()">로그인</button>
-            <div class="row">
-                <div class="column">
-                  <a href="{% url 'YTMT:signup'%}"><input  id="btn_intro" type="button" class="btn btn-white w200" style="margin-top:12px;" value="회원가입"></a>
-                </div>
-                <div class="column">
-                  <a href="{% url 'YTMT:findinfo'%}"><input  type="button" class="btn btn-white w200" style="margin-top:12px;" value="아이디/비밀번호 찾기"></a>
-                </div>
-            </div>
+            <button type="submit" class="btn btn-black" onclick="movebtn('main.html')">로그인</button>
+            <table>
+                <tr>
+                  <a href="{% url 'YTMT:signup'%}"><input  id="btn_intro" type="button" class="btn btn-white w200" style="margin-top:12px;" value="회원가입"></a>                    
+                </tr>
+                <tr>
+                  <a href="{% url 'YTMT:findinfo'%}"><input  type="button" class="btn btn-white w200" style="margin-top:12px;" value="아이디/비밀번호 찾기"></a>                    
+                </tr>
+            </table>
 
+            
           </div>
         </form>
       </div>
     </div>
+
+
