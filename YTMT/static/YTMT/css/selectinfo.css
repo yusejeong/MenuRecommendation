@@ -1,0 +1,22 @@
+button {
+
+  background-color: #000000;
+  border: none;
+
+  padding: 15px 70px;
+  text-align: center;
+color:white;
+
+  text-decoration: none;
+
+  display: inline-block;
+
+  font-size: 20px;
+  font-weight: bold;
+
+  margin: 4px 1px;
+
+  cursor: pointer;
+  width:250pt;
+
+}

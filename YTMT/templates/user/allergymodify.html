@@ -23,20 +23,7 @@
         });
     });
     var list;
-    function check(){
-      var frm = document.form;
-      for( var i = 0; i <= frm.elements.length - 1; i++ ){
-         if( frm.elements[i].name == "addText" )
-         {
-             if( !frm.elements[i].value ){
-                 alert("글자를 입력하세요!");
-                     frm.elements[i].focus();
-       return false;
-              }
-          }
-        }
-        return true;
-    }
+
     function insRow() {
       var frm = document.form;
       for( var i = 0; i <= frm.elements.length - 1; i++ ){
@@ -45,10 +32,10 @@
              if( !frm.elements[i].value ){
                  alert("글자를 입력하세요!");
                      frm.elements[i].focus();
-       return;
+       return ;
               }
           }
-       }
+        }
       list = document.getElementById("addTable");
       var Row = list.insertRow();
       Row.onmouseover=function(){list.clickedRowIndex=this.rowIndex}; //clickedRowIndex - 클릭한 Row의 위치를 확인;
@@ -61,27 +48,38 @@
     function removeRow() {
       list.deleteRow(list.clickedRowIndex);
     }
+    function Alert(){
+      alert("회원정보 수정이 완료되었습니다.");
+      document.form.submit();
+      return true;
+
+    }
     </script>
   </head>
   <body>
     <header>
-           <nav class="navbar navbar-light" style="background-color: #FFC81E;" id="navbar">
-                 <div class="container-fluid">
-                    <div class="navbar-header">
-                        <a class="navbar-brand" href="{% url 'YTMT:mainpage'%}">
-                            <img src="https://ytmtresource.s3.ap-northeast-2.amazonaws.com/YTMT_LOGO_mini.png" width="auto" height="40" alt="">
-                        </a>
-                    </div>
-                </div>
-        </nav>
+    			 <nav class="navbar navbar-light" style="background-color: #FFC81E;" id="navbar">
+    						 <div class="container-fluid">
+    										<a class="navbar-brand" href="{% url 'YTMT:mainpage'%}">
+    												<img src="https://ytmtresource.s3.ap-northeast-2.amazonaws.com/YTMT_LOGO_mini.png" width="auto" height="40" alt="">
+    										</a>
+    										<ul class="nav nav-pills">
+    												<li class="nav-item">
+    													<a class="nav-link" style="color:black; font-weight: bold;"href="{% url 'YTMT:signin'%}">로그인</a>
+    												</li>
+    												<li class="nav-item">
+    													<a class="nav-link"style="color:black; font-weight: bold;" href="{% url 'YTMT:mypagemain'%}">마이페이지</a>
+    												</li>
+    										</ul>
+    								</div>
+    		</nav>
 
     </header>
-
     <center>
       <br>
       <span style="font-weight: bold; font-size: 2em; line-height: 2em; color: black; font-family: 'Nanum Gothic';">알레르기 </span>
       <br>
-      <form name="form" method="post" action="{% url 'YTMT:hate'%}" onsubmit="return check();">
+      <form name="form" method="post" action="{% url 'YTMT:selectinfo'%}" onsubmit="return Alert()">
     <div style="padding:50px;">
 <table width="400" border="0" cellspacing="0" cellpadding="0">
   <tr>
@@ -101,9 +99,9 @@
   </tr>
 
 </div>
-  </form>
+<input type="submit"id="btn_join"  class="btn btn-pink w200" style="font-weight:bold;background-color: #fd7e14;width:250pt;margin-top:12px;"value="개인정보 수정완료">
 
-  <input type="submit"id="btn_join"  class="btn btn-pink w200" style="font-weight:bold;background-color: #fd7e14;width:250pt;margin-top:12px;"value="next">
+  </form>
 </center>
 </body>
   <html>
