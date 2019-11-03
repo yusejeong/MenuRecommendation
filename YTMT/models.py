@@ -46,7 +46,7 @@ class Profile(models.Model):
 
 class Allergy(models.Model):
     user_id = models.OneToOneField(User, on_delete = models.CASCADE)
-
+    ingre_id = models.ForeignKey(Ingredient, on_delete=models.CASCADE)
 
 class Hate_menu(models.Model):
     user_id = models.OneToOneField(User, on_delete = models.CASCADE)

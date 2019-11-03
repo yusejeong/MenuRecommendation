@@ -79,14 +79,17 @@ def religion(request):
 
 def allergy(request):
     profile = request.session.get('profile')
-    profile 
+    # 일대다
     return render(request, 'user/allergy.html')
 
 def vegetarian(request):
     profile = request.session.get('profile')
+    # 일대다
     return render(request, 'user/vegetarian.html')
 
 def hatelist(request):
+    profile = request.session.get('profile')
+    # 일대다
     # 회원가입 완료/세션 만료
     request.session.modified = True
     del request.session['user'], request.session['profile']
