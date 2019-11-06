@@ -45,7 +45,7 @@ return true;
 
     <br>
     <br>
-  <form name="form" method="post"  action="{% url 'YTMT:religion'%}" onsubmit="return checkValue()">
+  <form name="form" method="post"  action="{% url 'YTMT:birthandgendersave'%}" onsubmit="return checkValue()">{% csrf_token %}
     <table boder="" bgcolor="#f0f5f3" cellspacing="0">
         <tr>
           <th> 생년월일 </th>
