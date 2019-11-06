@@ -41,7 +41,7 @@ class Profile(models.Model):
     )
     
     gender = models.IntegerField(blank = False, null = False, choices=Gender_TYPE, default=1)
-    birth = models.DateField(blank = False, null = False, auto_now_add=True)
+    birth = models.DateTimeField(blank = False, null = False)
     reli_id = models.IntegerField(choices=Religion_TYPE, default=8)
     vege_id = models.IntegerField(choices=Vegetarian_TYPE, default=8)
 

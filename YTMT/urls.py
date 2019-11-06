@@ -31,4 +31,7 @@ urlpatterns = [
 
     # 메인
     path('mainpage', views.mainpage, name = 'mainpage'),
+    
+    #마이페이지
+    path("mypageMain", views.MypageView, name= 'mypagemain'),
 ]

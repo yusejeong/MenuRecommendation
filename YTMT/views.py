@@ -5,17 +5,31 @@ from django.views import generic
 from django.contrib.auth.models import User
 from .models import *
 from django.contrib import auth
-
+import datetime
 
 #from django.template import loader
 
 # Create your views here.
 
 def save_user_session(request, User):
-    request.session['user'] = User
 
-def save_profile_session(request, Profile):
-    request.session['profile'] = Profile
+    # request.session['User'] = User
+
+    '''
+        위와 같은 방식은 Session의 User영역에 User 객체를 넣는 시도를 의미함
+        하지만 Session은 객체를 저장할 수 있는 방법이 없음
+        따라서 아래와 같이 세션에 넣을 수 있는 사용자의 ID와 Password를 넘겨주는 방식으로
+        로그인 상태를 유지해야함
+    '''
+    request.session['userid'] = User.username
+    request.session['password'] = User.password
+
+# def save_profile_session(request, Profile):
+#     request.session['profile'] = Profile
+    '''
+        세션에는 프로필 객체가 들어갈 수 없음,
+        프로필 조회가 필요하다면 username 으로 프로필의 외래키를 조회하는 방식을 사용해야함
+    '''
 
 # 로그인
 def signin(request):
@@ -25,12 +39,17 @@ def signinrequest(request):
     if request.method == "POST":
         id = request.POST['username']
         pw = request.POST['password']
+        print(id,pw)
         user = auth.authenticate(request, username = id, password = pw)
         if user is not None:
             auth.login(request, user)
             save_user_session(request, user)
             return HttpResponseRedirect(reverse('YTMT:mainpage'))
         else:
+            '''
+               수정 필요한 부분, 비동기적으로 로그인이 되지 않았음을 보내는 기능을 만들어야함
+                현재는 Template의 수정이 우선되어야 기능구현을 확인할 수 있으므로 추후 방안논의
+            '''
             return render(request, 'user/signin.html', {'error':'id or pw is incorrect'})
         # 팝업창으로 띄우기
     else:
@@ -39,6 +58,7 @@ def signinrequest(request):
 
 # 회원가입
 def signup(request):
+    request.session.expire_session()
     return render(request, 'user/signup.html')
 
 def signuprequest(request):
@@ -46,7 +66,8 @@ def signuprequest(request):
         if request.POST["pwd"] == request.POST["pwdchk"]:
             # 이메일 유효성 체크
             user = User.objects.create_user(
-                username = request.POST["id"], password = request.POST["pwd"], email = request.POST["email"]+request.POST["email2"])
+                #이메일 중간에 @ 가 들어가지 않아 수정해줬음
+                username = request.POST["id"], password = request.POST["pwd"], email = request.POST["email"] + "@" + request.POST["email2"])
             auth.login(request, user)
             save_user_session(request, user)
             return redirect('YTMT:birthandgender')
@@ -57,19 +78,34 @@ def birthandgender(request):
     return render(request, 'user/birthandgender.html')
 
 def birthandgendersave(request):
-    user = request.session.get('user')
-    profile = Profile(user)
+    id = request.session.get('userid')
+    #위에서 저장된 session 안의 userid를 저장
 
+    login_user = User.objects.get(username = id)
+    #id가 동일한 user객체를 검색하여 생성
+    
+    #프로필 객체를 생성
+    userProfile = Profile.objects.create(user_id = login_user, birth = datetime.datetime.now())
+    
     gender = request.POST.get("gender")
     if gender == "M":
         gender_num = 1
     else:
-        gender_num = 0
+        gender_num = 2
+    
+    print(gender_num)
+    brithday_str = request.POST.get('birth')
+    
+    #POST 방식으로 받아온 birth가 String값이기 때문에 DateTime 객체로 변환
+    birthday_obj = datetime.datetime.strptime(brithday_str, '%Y-%m-%d')
 
-    profile.gender = gender_num
-    profile.birth = request.POST.get("birth")
-    save_profile_session(request, profile)
+
+    userProfile.gender = gender_num
+    userProfile.birth = birthday_obj
+    #수정된 프로필을 저장
+    userProfile.save()
     return render(request, 'user/religion.html')
+
 
 # 회원가입 추가정보
 def religion(request):
