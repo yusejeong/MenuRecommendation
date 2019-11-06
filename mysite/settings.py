@@ -43,7 +43,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'django.constrib.sessions.middleware.SessionMiddleware',
+    'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -76,26 +76,26 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'HOST': 'ytmtdatabase.cajybcgm143w.ap-northeast-2.rds.amazonaws.com',
-        'PORT': '3306',
-        'NAME': 'ytmtdb',
-        'USER': 'admin',
-        'PASSWORD': 'ytmt2019',
-    }
-
     # 'default': {
-    #     'ENGINE': 'django.db.backends.sqlite3',
-    #     'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-
-        # 'ENGINE': 'django.db.backends.mysql',
-        # 'NAME': 'YTMT', 
-        # 'USER': 'root',
-        # 'PASSWORD': 'ytmt123',
-        # 'HOST': 'localhost',
-        # 'PORT': '8080'
+    #     'ENGINE': 'django.db.backends.mysql',
+    #     'HOST': 'ytmtdatabase.cajybcgm143w.ap-northeast-2.rds.amazonaws.com',
+    #     'PORT': '3306',
+    #     'NAME': 'ytmtdb',
+    #     'USER': 'admin',
+    #     'PASSWORD': 'ytmt2019',
     # }
+
+    'default': {
+        # 'ENGINE': 'django.db.backends.sqlite3',
+        # 'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'YTMT', 
+        'USER': 'root',
+        'PASSWORD': 'ytmt123',
+        'HOST': 'localhost',
+        'PORT': '8080'
+    }
 }
 
 

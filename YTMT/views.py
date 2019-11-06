@@ -46,7 +46,7 @@ def signuprequest(request):
         if request.POST["pwd"] == request.POST["pwdchk"]:
             # 이메일 유효성 체크
             user = User.objects.create_user(
-                username = request.POST["id"], password = request.POST["pwd"], email = request.POST["email"])
+                username = request.POST["id"], password = request.POST["pwd"], email = request.POST["email"]+request.POST["email2"])
             auth.login(request, user)
             save_user_session(request, user)
             return redirect('YTMT:birthandgender')
@@ -60,35 +60,62 @@ def birthandgendersave(request):
     user = request.session.get('user')
     profile = Profile(user)
 
-    gender = request.POST["gender"]
+    gender = request.POST.get("gender")
     if gender == "M":
         gender_num = 1
     else:
         gender_num = 0
 
     profile.gender = gender_num
-    profile.birth = request.POST["birth"]
+    profile.birth = request.POST.get("birth")
     save_profile_session(request, profile)
     return render(request, 'user/religion.html')
 
 # 회원가입 추가정보
 def religion(request):
-    profile = request.session.get('profile')
     return render(request, 'user/religion.html')
 
-def allergy(request):
-    profile = request.session.get('profile')
-    return render(request, 'user/allergy.html')
+def get_reli_id(reli_name):
+    return {'hindu':1, 'budd':2, 'christian':3, 'catholic':4, 'islam':5, 'juda':6, 'sikh':7, 'none':8}.get('reli_name', 8)
 
-def vegetarian(request):
+def religionsave(request):
     profile = request.session.get('profile')
+    reli_name = request.POST.get("religion")
+    profile.reli_id = get_reli_id(reli_name)
     return render(request, 'user/vegetarian.html')
 
+def vegetarian(request):
+    return render(request, 'user/vegetarian.html')
+
+def get_vege_id(vege_name):
+    return {'vegan':1, 'lacto':2, 'ovo':3, 'lactoovo':4, 'pesco':5, 'flo':6, 'flexi':7}.get('vege_name', 8)
+
+def vegetariansave(request):
+    profile = request.session.get('profile')
+    vege_name = request.POST.get("vegetarian")
+    profile.vege_id = get_vege_id(vege_name)
+    return render(request, 'user/allergy.html')
+
+def allergy(request):
+    return render(request, 'user/allergy.html')
+
+def allergysave(request):
+    profile = request.session.get('profile')
+    # 일대다
+    return render(request, 'user/hatelist.html')
+
 def hatelist(request):
-    # 회원가입 완료/세션 만료
+    return render(request, 'user/hatelist.html')
+
+def hatelistsave(request):
+    profile = request.session.get('profile')
+    expire_session(request)
+    return render(request, 'user/signin.html')
+
+def expire_session(request):
     request.session.modified = True
     del request.session['user'], request.session['profile']
-    return render(request, 'user/hatelist.html')
+    return render(request, 'user/signin.html')
 
 
 # 회원정보찾기
