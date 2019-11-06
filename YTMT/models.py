@@ -42,8 +42,8 @@ class Profile(models.Model):
     
     gender = models.IntegerField(blank = False, null = False, choices=Gender_TYPE, default=1)
     birth = models.DateField(blank = False, null = False, auto_now_add=True)
-    reli_id = models.IntegerField(choices=Religion_TYPE)
-    vege_id = models.IntegerField(choices=Vegetarian_TYPE)
+    reli_id = models.IntegerField(choices=Religion_TYPE, default=8)
+    vege_id = models.IntegerField(choices=Vegetarian_TYPE, default=8)
 
 class Allergy(models.Model):
     user_id = models.OneToOneField(User, on_delete = models.CASCADE)
