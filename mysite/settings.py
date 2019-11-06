@@ -78,14 +78,27 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
 DATABASES = {
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.mysql',
+    #     'HOST': 'ytmtdatabase.cajybcgm143w.ap-northeast-2.rds.amazonaws.com',
+    #     'PORT': '3306',
+    #     'NAME': 'ytmtdb',
+    #     'USER': 'admin',
+    #     'PASSWORD': 'ytmt2019',
+    # }
+
     'default': {
+        # 'ENGINE': 'django.db.backends.sqlite3',
+        # 'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+
         'ENGINE': 'django.db.backends.mysql',
-        'HOST': 'ytmtdatabase.cajybcgm143w.ap-northeast-2.rds.amazonaws.com',
-        'PORT': '3306',
-        'NAME': 'ytmtdb',
-        'USER': 'admin',
-        'PASSWORD': 'ytmt2019',
+        'NAME': 'YTMT', 
+        'USER': 'root',
+        'PASSWORD': 'ytmt123',
+        'HOST': 'localhost',
+        'PORT': '8080'
     }
+<<<<<<< HEAD
 
     # 'default': {
     #     # 'ENGINE': 'django.db.backends.sqlite3',
@@ -98,6 +111,8 @@ DATABASES = {
     #     'HOST': 'localhost',
     #     'PORT': '8080'
     # }
+=======
+>>>>>>> 4766e39b76c2929bac840a02b22002cedb3c0650
 }
 
 
