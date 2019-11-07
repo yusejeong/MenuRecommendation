@@ -29,6 +29,9 @@ urlpatterns = [
     path('findinfo/findid', views.findid, name = 'findid'),
     path('findinfo/findpw', views.findpw, name = 'findpw'),
 
+    # 로그아웃
+    path('signout', views.signout, name = 'signout'),
+
     # 메인
     path('mainpage', views.mainpage, name = 'mainpage'),
     
@@ -36,5 +39,6 @@ urlpatterns = [
     path('mypagemain', views.mypagemain, name= 'mypagemain'),
     path('mypagemain/infomodify', views.infomodify, name= 'infomodify'),
     path('mypagemain/infomodifysave', views.infomodifysave, name= 'infomodifysave'),
+    path('mypagemain/infomodifynext', views.infomodifynext, name= 'infomodifynext'),
     path('mypagemain/selectinfo', views.selectinfo, name='selectinfo'),
 ]
