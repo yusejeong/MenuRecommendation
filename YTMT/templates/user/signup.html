@@ -68,6 +68,7 @@
       회원가입
     </span>
     <br><br>
+
       <form name="form" method="post" action= "{% url 'YTMT:signuprequest'%}" onsubmit="return checkValue()">{% csrf_token %}
     <table border="0" cellspacing="0" frame="void" width="500">
 
@@ -104,10 +105,11 @@
         <tr>
           <th> 비밀번호 확인 </th></tr>
           <td> <input type="password" name="pwdchk" id="pwdchk" placeholder="비밀번호를 입력해주세요" /> </td>
-      
+
 
 
     </table>
+
 
 
     <!-- <input type="submit" value="회원가입" />

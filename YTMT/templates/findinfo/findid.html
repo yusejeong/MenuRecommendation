@@ -58,32 +58,32 @@
     <table frame="void" width="500" border="0"  cellspacing="0" >
 
 
-        <tr>
-          <th>이메일 </th>
-          <td>
-            <input style="width:200px;" type="text" name="email" id="email" placeholder="이메일 아이디" />@<select id="email2" name="email2">
-                <option value="" selected="selected">-메일 주소-</option>
-                <option value="naver.com">naver.com</option>
-                <option value="daum.net">daum.net</option>
-                <option value="nate.com">nate.com</option>
-                <option value="hotmail.com">honmail.net</option>
-                <option value="yahoo.com">yahoo.com</option>
-                <option value="empas.com">empas.com</option>
-                <option value="korea.com">korea.com</option>
-                <option value="dreamwiz.com">hotmail.com</option>
-                <option value="gmail.com">gmail.com</option>
-                <option value="etc">직접입력</option>
-              </select>
-            </td>
-          </tr>
-          <tr><th></th><td>
-            <input type="button"id="btn_join"  class="btn btn-warning w200" style="width:250pt;font-weight:bold;" value="이메일로 인증번호 발송"></td></tr>
-        <tr>
-          <th> 인증번호 </th>
-          <td> <input style="width:200px;" type="password" name="pwd" id="pwd" placeholder="인증번호를 입력해주세요" />
-<button class="button"><a href="{% url 'YTMT:findpw'%}"> 인증번호 확인</a> </button>
+      <tr>
+        <th style="float:left;">이메일 </th><tr>
+        <td>
+          <input type="text" name="email" id="email" placeholder="이메일 아이디" />@<select id="email2" name="email2">
+              <option value="" selected="selected">-메일 주소-</option>
+              <option value="naver.com">naver.com</option>
+              <option value="daum.net">daum.net</option>
+              <option value="nate.com">nate.com</option>
+              <option value="hotmail.com">hotmail.com</option>
+              <option value="yahoo.com">yahoo.com</option>
+              <option value="empas.com">empas.com</option>
+              <option value="korea.com">korea.com</option>
+              <option value="dreamwiz.com">dreamwiz.com</option>
+              <option value="gmail.com">gmail.com</option>
+              <option value="etc">직접입력</option>
+            </select>
           </td>
         </tr>
+
+          <tr><td>
+            <input type="button"id="btn_join"  class="btn btn-warning w200" style="width:250pt;font-weight:bold;" value="이메일로 인증번호 발송"></td></tr>
+        <tr>
+          <th style="float:left;"> 인증번호 </th></tr>
+          <td> <input style="width:200px;" type="password" name="pwd" id="pwd" placeholder="인증번호를 입력해주세요" />
+<button class="button"><a href="{% url 'YTMT:pwdfind'%}"> 인증번호 확인</a> </button>
+</td>
 
 
 
