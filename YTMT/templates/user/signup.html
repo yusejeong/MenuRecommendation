@@ -68,46 +68,47 @@
       회원가입
     </span>
     <br><br>
-      <form name="form" method="post" action= "{% url 'YTMT:birthandgender'%}" onsubmit="return checkValue()">
-        <table border="0" cellspacing="0" frame="void">
+
+      <form name="form" method="post" action= "{% url 'YTMT:signuprequest'%}" onsubmit="return checkValue()">{% csrf_token %}
+    <table border="0" cellspacing="0" frame="void" width="500">
 
 
-            <tr>
-              <th style="float:left;">아이디 </th></tr>
-              <td>
-                <input type="text" name="id" id="id" placeholder="아이디를 입력해주세요" />
-                <input type="button" value="중복확인" />
-              </td>
+        <tr>
+          <th>아이디 </th></tr>
+          <td>
+            <input type="text" name="id" id="id" placeholder="아이디를 입력해주세요" />
+            <input type="button" value="중복확인" />
+          </td>
 
-            <tr>
-              <th style="float:left;">이메일 </th></tr>
-              <td>
-                <input type="text" name="email" id="email" placeholder="이메일 아이디" />@<select id="email2" name="email2">
-                    <option value="" selected="selected">-메일 주소-</option>
-                    <option value="naver.com">naver.com</option>
-                    <option value="daum.net">daum.net</option>
-                    <option value="nate.com">nate.com</option>
-                    <option value="hotmail.com">hotmail.com</option>
-                    <option value="yahoo.com">yahoo.com</option>
-                    <option value="empas.com">empas.com</option>
-                    <option value="korea.com">korea.com</option>
-                    <option value="dreamwiz.com">dreamwiz.com</option>
-                    <option value="gmail.com">gmail.com</option>
-                    <option value="etc">직접입력</option>
-                  </select>
-                </td>
+        <tr>
+          <th>이메일 </th></tr>
+          <td>
+            <input type="text" name="email" id="email" placeholder="이메일 아이디" />@<select id="email2" name="email2">
+                <option value="" selected="selected">-메일 주소-</option>
+                <option value="naver.com">naver.com</option>
+                <option value="daum.net">daum.net</option>
+                <option value="nate.com">nate.com</option>
+                <option value="hotmail.com">hotmail.com</option>
+                <option value="yahoo.com">yahoo.com</option>
+                <option value="empas.com">empas.com</option>
+                <option value="korea.com">korea.com</option>
+                <option value="dreamwiz.com">dreamwiz.com</option>
+                <option value="gmail.com">gmail.com</option>
+                <option value="etc">직접입력</option>
+              </select>
+            </td>
 
-            <tr>
-              <th style="float:left;"> 비밀번호 </th></tr>
-              <td> <input type="password" name="pwd" id="pwd" placeholder="비밀번호를 입력해주세요" /> </td>
+        <tr>
+          <th> 비밀번호 </th></tr>
+          <td> <input type="password" name="pwd" id="pwd" placeholder="비밀번호를 입력해주세요" /> </td>
 
-            <tr>
-              <th style="float:left;"> 비밀번호 확인 </th></tr>
-              <td> <input type="password" name="pwdchk" id="pwdchk" placeholder="비밀번호를 입력해주세요" /> </td>
+        <tr>
+          <th> 비밀번호 확인 </th></tr>
+          <td> <input type="password" name="pwdchk" id="pwdchk" placeholder="비밀번호를 입력해주세요" /> </td>
 
 
 
-        </table>
+    </table>
 
 
 
