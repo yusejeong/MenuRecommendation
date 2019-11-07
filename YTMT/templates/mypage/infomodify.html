@@ -43,7 +43,7 @@
             }
             else{
               document.form.submit();
-              document.form.action="{% url 'YTMT:selectinfo'%}";
+              document.form.action="{% url 'YTMT:infomodifynext'%}";
 
             }
         }
@@ -82,7 +82,7 @@
                 else{
                   document.form.submit();
                 alert("회원정보 수정이 완료되었습니다.");
-                document.form.action="{% url 'YTMT:mypagemain'%}";
+                document.form.action="{% url 'YTMT:infomodifysave'%}";
               }
               }
 

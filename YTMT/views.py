@@ -67,7 +67,6 @@ def signuprequest(request):
             user = User.objects.create_user(
                 #이메일 중간에 @ 가 들어가지 않아 수정해줬음
                 username = request.POST["id"], password = request.POST["pwd"], email = request.POST["email"] + "@" + request.POST["email2"])
-            auth.login(request, user)
             save_user_session(request, user)
             return redirect('YTMT:birthandgender')
         return render(request, 'user/signup.html')
@@ -114,9 +113,13 @@ def get_reli_id(reli_name):
     return {'hindu':1, 'budd':2, 'christian':3, 'catholic':4, 'islam':5, 'juda':6, 'sikh':7, 'none':8}.get('reli_name', 8)
 
 def religionsave(request):
-    profile = request.session.get('profile')
+    id = request.session.get('userid')
+    userProfile = Profile.objects.get(user_id = id)
+
     reli_name = request.POST.get("religion")
-    profile.reli_id = get_reli_id(reli_name)
+    userProfile.reli_id = get_reli_id(reli_name)
+
+    userProfile.save()
     return render(request, 'user/vegetarian.html')
 
 def vegetarian(request):
@@ -126,16 +129,21 @@ def get_vege_id(vege_name):
     return {'vegan':1, 'lacto':2, 'ovo':3, 'lactoovo':4, 'pesco':5, 'flo':6, 'flexi':7}.get('vege_name', 8)
 
 def vegetariansave(request):
-    profile = request.session.get('profile')
+    id = request.session.get('userid')
+    userProfile = Profile.objects.get(user_id = id)
+
     vege_name = request.POST.get("vegetarian")
-    profile.vege_id = get_vege_id(vege_name)
+    userProfile.vege_id = get_vege_id(vege_name)
+
+    userProfile.save()
     return render(request, 'user/allergy.html')
 
 def allergy(request):
     return render(request, 'user/allergy.html')
 
 def allergysave(request):
-    profile = request.session.get('profile')
+    id = request.session.get('userid')
+    userProfile = Profile.objects.get(user_id = id)
     # 일대다
     return render(request, 'user/hatelist.html')
 
@@ -143,26 +151,29 @@ def hatelist(request):
     return render(request, 'user/hatelist.html')
 
 def hatelistsave(request):
-    profile = request.session.get('profile')
+    id = request.session.get('userid')
+    userProfile = Profile.objects.get(user_id = id)
     expire_session(request)
     return render(request, 'user/signin.html')
 
 def expire_session(request):
     request.session.modified = True
-    del request.session['user'], request.session['profile']
+    del request.session['user']
     return render(request, 'user/signin.html')
 
 
 # 회원정보찾기
 def findinfo(request):
-    return render(request, 'user/findinfo.html')
+    return render(request, 'findinfo/findinfo.html')
 
 def findid(request):
-    return render(request, 'user/findid.html') 
+    return render(request, 'findinfo/findid.html') 
 
 def findpw(request):
-    return render(request, 'user/findpw.html')
+    return render(request, 'findinfo/findpw.html')
 
+
+# 로그아웃
 def signout(request):
     request.session.modified = True
     del request.session['user']
@@ -171,17 +182,48 @@ def signout(request):
 
 # 메인
 def mainpage(request):
-    return render(request, 'main.html')
+    if request.session.get('userid') is not None:
+        return render(request, 'main.html')
+    return render(request, 'user/signin.html')
 
 
-class MypageView(generic.DetailView):
-    template_name = 'mypage/mypage.html'
+# 마이페이지
+def mypagemain(request):
+    return render(request, 'mypage/mypagemain.html')
 
-class EditInforView(generic.DetailView):
-    template_name = 'mypage/editinfo.html'
+def infomodify(request):
+    return render(request, 'mypage/infomodify.html')
 
-class EditMoreInfoView(generic.DetailView):
-    template_name = 'mypage/editmoreinfo.html'
+def infomodifysave(request):
+    id = request.session.get('userid')
+    userNow = User.objects.get(username = id)
+    if request.method == "POST":
+        if request.POST["pwd"] == userNow.password:
+            if request.POST["newpwd"] == request.POST["pwdchk"]:
+                userNow.password = request.POST["newpwd"]
+                userNow.email = request.POST["email"] + "@" + request.POST["email2"]
+                userNow.save()
+                return render(request, 'mypage/mypagemain.html')
+            return render(request,'mypage/infomodify.html')
+        return render(request,'mypage/infomodify.html')
+    return render(request,'mypage/infomodify.html')
+
+def infomodifynext(request):
+    id = request.session.get('userid')
+    userNow = User.objects.get(username = id)
+    if request.method == "POST":
+        if request.POST["pwd"] == userNow.password:
+            if request.POST["newpwd"] == request.POST["pwdchk"]:
+                userNow.password = request.POST["newpwd"]
+                userNow.email = request.POST["email"] + "@" + request.POST["email2"]
+                userNow.save()
+                return render(request, 'mypage/selectinfo.html')
+            return render(request,'mypage/infomodify.html')
+        return render(request,'mypage/infomodify.html')
+    return render(request,'mypage/infomodify.html')
+
+def selectinfo(request):
+    return render(request, 'mypage/selectinfo.html')
 
 class EditReligionView(generic.DetailView):
     template_name = 'user/religion.html'
