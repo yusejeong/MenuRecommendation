@@ -27,9 +27,10 @@ class Profile(models.Model):
     )
 
     Religion_TYPE = (
-        (1, "힌두교"), (2, "불교"), (3, "기독교"),
-        (4, "천주교"), (5, "이슬람교"), (6, "유대교"),
-        (7, "회교도"), (8, "시크교도"), (9, "무교"),
+        (1, "힌두교"), (2, "불교"), 
+        (3, "기독교"), (4, "천주교"), 
+        (5, "이슬람교"), (6, "유대교"),
+        (7, "시크교도"), (8, "무교"),
     )
 
     Vegetarian_TYPE = (
@@ -40,9 +41,13 @@ class Profile(models.Model):
     )
     
     gender = models.IntegerField(blank = False, null = False, choices=Gender_TYPE, default=1)
-    birth = models.DateField(blank = False, null = False, auto_now_add=True)
-    reli_id = models.IntegerField(choices=Religion_TYPE)
-    vege_id = models.IntegerField(choices=Vegetarian_TYPE)
+    birth = models.DateTimeField(blank = False, null = False)
+    reli_id = models.IntegerField(choices=Religion_TYPE, default=8)
+    vege_id = models.IntegerField(choices=Vegetarian_TYPE, default=8)
+
+class Allergy(models.Model):
+    user_id = models.OneToOneField(User, on_delete = models.CASCADE)
+    ingre_id = models.ForeignKey(Ingredient, on_delete=models.CASCADE)
 
 class Hate_menu(models.Model):
     user_id = models.OneToOneField(User, on_delete = models.CASCADE)

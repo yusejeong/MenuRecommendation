@@ -14,16 +14,13 @@
         {
             if(!document.form.birth.value){
                 alert("생년월일을 입력하세요!");
-                docmment.form.birth.focus();
                 return false;
             }
             if(!document.form.gender.value){
                 alert("성별을 입력하세요.");
                 return false;
             }
-
-            form.method="post";
-            location.href="{% url 'YTMT:religion'%}";
+return true;
         }
   </script>
 </head>
@@ -48,7 +45,7 @@
 
     <br>
     <br>
-    <form name="form" method="post">
+  <form name="form" method="post"  action="{% url 'YTMT:birthandgendersave'%}" onsubmit="return checkValue()">{% csrf_token %}
     <table boder="" bgcolor="#f0f5f3" cellspacing="0">
         <tr>
           <th> 생년월일 </th>
@@ -65,7 +62,7 @@
 
     </table>
     <br>
-  <input type="button" id="btn_join" onclick="checkValue();" class="btn btn-warning w200" style="width:200pt;margin-top:12px;" value="next >">
+    <input type="submit"   id="btn_join" class="btn btn-pink w200" style="font-weight:bold;background-color: #fd7e14;width:250pt;margin-top:12px;"value="next">
   </form>
 
 

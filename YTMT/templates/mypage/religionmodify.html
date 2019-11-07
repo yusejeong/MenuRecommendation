@@ -9,23 +9,38 @@
   {% load static %}
   <link rel="stylesheet" href={% static "YTMT/css/templete.css" %}>
   <link rel="stylesheet" href={% static "YTMT/css/religion.css" %}>
+    <script type="text/javascript">
+
+    function Alert(){
+      alert("회원정보 수정이 완료되었습니다.");
+      document.form.submit();
+      return true;
+
+    }
+    </script>
 </head>
 <header>
        <nav class="navbar navbar-light" style="background-color: #FFC81E;" id="navbar">
              <div class="container-fluid">
-                <div class="navbar-header">
                     <a class="navbar-brand" href="{% url 'YTMT:mainpage'%}">
                         <img src="https://ytmtresource.s3.ap-northeast-2.amazonaws.com/YTMT_LOGO_mini.png" width="auto" height="40" alt="">
                     </a>
+                    <ul class="nav nav-pills">
+                        <li class="nav-item">
+                          <a class="nav-link" style="color:black; font-weight: bold;"href="{% url 'YTMT:signin'%}">로그인</a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link"style="color:black; font-weight: bold;" href="{% url 'YTMT:mypagemain'%}">마이페이지</a>
+                        </li>
+                    </ul>
                 </div>
-            </div>
     </nav>
 
 </header>
 
 <body>
   <center>
-    <form name="form" method="post" action="{% url 'YTMT:religionsave'%}" onsubmit="">{% csrf_token %}
+    <form name="form" method="post" action="{% url 'YTMT:selectinfo'%}" onsubmit="return Alert()">{% csrf_token %}
     <br>
     <span style="font-weight: bold; font-size: 2em; line-height: 2em; color: black; font-family: 'Nanum Gothic';">종교 </span>
     <br>
@@ -94,7 +109,7 @@
       </div>
     </div>
     <br>
-<input type="submit"id="btn_join" class="btn btn-pink w200" style="font-weight:bold;background-color: #fd7e14;width:250pt;margin-top:12px;"value="next">
+    <input type="submit"id="btn_join"  class="btn btn-pink w200" style="font-weight:bold;background-color: #fd7e14;width:250pt;margin-top:12px;"value="개인정보 수정완료">
     </form>
       </center>
 

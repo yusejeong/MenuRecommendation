@@ -10,14 +10,19 @@ urlpatterns = [
 
     # 회원가입
     path('signup', views.signup, name = 'signup'),
-    path('signup/birthandgender', views.birthandgender, name = 'birthandgender'),
     path('signup/signuprequeset', views.signuprequest, name = 'signuprequest'),
+    path('signup/birthandgender', views.birthandgender, name = 'birthandgender'),
+    path('signup/birthandgendersave', views.birthandgendersave, name = 'birthandgendersave'),
 
     # 회원가입 추가정보
     path('signup/religion', views.religion, name = 'religion'),
-    path('signup/allergy', views.allergy, name = 'allergy'),
+    path('signup/religionsave', views.religionsave, name = 'religionsave'),
     path('signup/vegetarian', views.vegetarian, name = 'vegetarian'),
+    path('signup/vegetariansave', views.vegetariansave, name = 'vegetariansave'),
+    path('signup/allergy', views.allergy, name = 'allergy'),
+    path('signup/allergysave', views.allergysave, name = 'allergysave'),
     path('signup/hatelist', views.hatelist, name = 'hatelist'),
+    path('signup/hatelistsave', views.hatelistsave, name = 'hatelistsave'),
 
     # 회원정보찾기
     path('findinfo', views.findinfo, name = 'findinfo'),
@@ -26,4 +31,7 @@ urlpatterns = [
 
     # 메인
     path('mainpage', views.mainpage, name = 'mainpage'),
+    
+    #마이페이지
+    path("mypageMain", views.MypageView, name= 'mypagemain'),
 ]

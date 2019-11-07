@@ -17,7 +17,6 @@
         {
             if(!document.form.id.value){
                 alert("아이디를 입력하세요.");
-                docmment.form.id.focus();
                 return false;
             }
             if(!document.form.email.value){
@@ -42,8 +41,8 @@
                 alert("비밀번호를 동일하게 입력하세요.");
                 return false;
             }
-            form.method="post";
-            location.href="{% url 'YTMT:birthandgender'%}";
+
+            return true;
         }
   </script>
 
@@ -69,19 +68,19 @@
       회원가입
     </span>
     <br><br>
-    <form name="form" method="post" onsubmit="return checkValue()">
+      <form name="form" method="post" action= "{% url 'YTMT:signuprequest'%}" onsubmit="return checkValue()">{% csrf_token %}
     <table border="0" cellspacing="0" frame="void" width="500">
 
 
         <tr>
-          <th>아이디 </th>
+          <th>아이디 </th></tr>
           <td>
             <input type="text" name="id" id="id" placeholder="아이디를 입력해주세요" />
             <input type="button" value="중복확인" />
           </td>
-        </tr>
+
         <tr>
-          <th>이메일 </th>
+          <th>이메일 </th></tr>
           <td>
             <input type="text" name="email" id="email" placeholder="이메일 아이디" />@<select id="email2" name="email2">
                 <option value="" selected="selected">-메일 주소-</option>
@@ -97,15 +96,15 @@
                 <option value="etc">직접입력</option>
               </select>
             </td>
-          </tr>
+
         <tr>
-          <th> 비밀번호 </th>
+          <th> 비밀번호 </th></tr>
           <td> <input type="password" name="pwd" id="pwd" placeholder="비밀번호를 입력해주세요" /> </td>
-        </tr>
+
         <tr>
-          <th> 비밀번호 확인 </th>
+          <th> 비밀번호 확인 </th></tr>
           <td> <input type="password" name="pwdchk" id="pwdchk" placeholder="비밀번호를 입력해주세요" /> </td>
-        </tr>
+      
 
 
     </table>
@@ -114,7 +113,8 @@
     <!-- <input type="submit" value="회원가입" />
     <input type="reset" value="다시 입력" /> -->
 
-    <input type="button"id="btn_join" onclick="checkValue();" class="btn btn-warning w200" style="width:200pt;margin-top:12px;" value="next">
+    <input type="submit"id="btn_join" class="btn btn-pink w200" style="font-weight:bold;background-color: #fd7e14;width:250pt;margin-top:12px;"value="next">
+
 
 </form>
   </center>
