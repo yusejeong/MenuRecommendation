@@ -115,9 +115,13 @@ def get_reli_id(reli_name):
     return {'hindu':1, 'budd':2, 'christian':3, 'catholic':4, 'islam':5, 'juda':6, 'sikh':7, 'none':8}.get('reli_name', 8)
 
 def religionsave(request):
-    profile = request.session.get('profile')
+    id = request.session.get('userid')
+    userProfile = Profile.objects.get(user_id = id)
+
     reli_name = request.POST.get("religion")
-    profile.reli_id = get_reli_id(reli_name)
+    userProfile.reli_id = get_reli_id(reli_name)
+
+    userProfile.save()
     return render(request, 'user/vegetarian.html')
 
 def vegetarian(request):
@@ -127,9 +131,13 @@ def get_vege_id(vege_name):
     return {'vegan':1, 'lacto':2, 'ovo':3, 'lactoovo':4, 'pesco':5, 'flo':6, 'flexi':7}.get('vege_name', 8)
 
 def vegetariansave(request):
-    profile = request.session.get('profile')
+    id = request.session.get('userid')
+    userProfile = Profile.objects.get(user_id = id)
+
     vege_name = request.POST.get("vegetarian")
-    profile.vege_id = get_vege_id(vege_name)
+    userProfile.vege_id = get_vege_id(vege_name)
+
+    userProfile.save()
     return render(request, 'user/allergy.html')
 
 def allergy(request):
@@ -175,8 +183,31 @@ def mainpage(request):
     return render(request, 'main.html')
 
 
-class MypageView(generic.DetailView):
-    template_name = 'mypage/mypage.html'
+# 마이페이지
+def mypagemain(request):
+    return render(request, 'user/mypagemain.html')
+
+def infomodify(request):
+    return render(request, 'user/infomodify.html')
+
+def infomodifysave(request):
+    # 버튼따라 달라야함
+    id = request.session.get('userid')
+    userNow = User.objects.get(username = id)
+    if request.method == "POST":
+        if request.POST["pwd"] == userNow.password
+            if request.POST["newpwd"] == request.POST["pwdchk"]
+                userNow.password = request.POST["newpwd"]
+                userNow.email = request.POST["email"] + "@" + request.POST["email2"]
+                nowUser.save()
+                return render(request, 'user/mypagemain.html')
+            return render(request,'user/infomodify.html')
+        return render(request,'user/infomodify.html')
+    return render(request,'user/infomodify.html')
+
+def selectinfo(request):
+    return render(request, 'user/selectinfo.html')
+
 
 class EditInforView(generic.DetailView):
     template_name = 'mypage/editinfo.html'
