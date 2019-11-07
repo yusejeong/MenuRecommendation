@@ -38,7 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'django.contrib.staticfiles',
+    'django.contrib.staticfiles'
 ]
 
 MIDDLEWARE = [
@@ -48,8 +48,7 @@ MIDDLEWARE = [
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'debug_toolbar.middleware.DebugToolbarMiddleware',
+    'django.middleware.clickjacking.XFrameOptionsMiddleware'
 ]
 
 ROOT_URLCONF = 'mysite.urls'
@@ -91,7 +90,7 @@ DATABASES = {
     #     # 'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
 
     #     'ENGINE': 'django.db.backends.mysql',
-    #     'NAME': 'YTMT', 
+    #     'NAME': 'YTMT',
     #     'USER': 'root',
     #     'PASSWORD': 'ytmt123',
     #     'HOST': 'localhost',
