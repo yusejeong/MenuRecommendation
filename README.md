@@ -1,7 +1,9 @@
 # Your_Taste_My_Taste
 
-Task List
+## Task List
+
 니맛 내맛 개인 프로필 생성 작업
+	
 	-프로필 요소 검토 후 각 프로필요소 Create Update Read 기능
 	
 	-프론트 페이지 수정
