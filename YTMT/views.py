@@ -6,7 +6,6 @@ from django.contrib.auth.models import User
 from .models import *
 from django.contrib import auth
 import datetime
-
 #from django.template import loader
 
 # Create your views here.
@@ -58,7 +57,7 @@ def signinrequest(request):
 
 # 회원가입
 def signup(request):
-    request.session.expire_session()
+    auth.logout(request)
     return render(request, 'user/signup.html')
 
 def signuprequest(request):
