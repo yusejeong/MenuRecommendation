@@ -182,7 +182,9 @@ def signout(request):
 
 # 메인
 def mainpage(request):
-    return render(request, 'main.html')
+    if request.session.get('userid') is not None:
+        return render(request, 'main.html')
+    return render(request, 'user/signin.html')
 
 
 # 마이페이지
@@ -222,13 +224,6 @@ def infomodifynext(request):
 
 def selectinfo(request):
     return render(request, 'mypage/selectinfo.html')
-
-
-class EditInforView(generic.DetailView):
-    template_name = 'mypage/editinfo.html'
-
-class EditMoreInfoView(generic.DetailView):
-    template_name = 'mypage/editmoreinfo.html'
 
 class EditReligionView(generic.DetailView):
     template_name = 'user/religion.html'
