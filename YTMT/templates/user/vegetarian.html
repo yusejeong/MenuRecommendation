@@ -28,75 +28,80 @@
 
 <body>
   <center>
-      <form name="form" method="post" action="{% url 'YTMT:vegetariansave'%}"onsubmit="">
-    <br>
-    <span style="font-weight: bold; font-size: 2em; line-height: 2em; color: black; font-family: 'Nanum Gothic';">채식주의자 </span>
-    <br>
-    <div class="row">
+    <form name="form" method="post" action="{% url 'YTMT:allergy'%}" onsubmit="">
+      <br>{% csrf_token %}
+      <span style="font-weight: bold; font-size: 2em; line-height: 2em; color: black; font-family: 'Nanum Gothic';">종교 </span>
+      <br>
 
-      <div class="box box-a">
-        <button type="button" class="contents project-card"  name="vegetarian" id="vegan" value="vegan">
-          <section class="project-explain">
-            <p>비건</p>
-          </section>
-        </button>
-      </div>
-      <div class="box box-b">
-        <button type="button"class="contents project-card"name="vegetarian" id="lacto" value="lacto">
-          <section class="project-explain">
-            <p>락토 베지테리언</p>
-          </section>
-        </button>
-      </div>
-    </div>
-    <div class="row">
-      <div class="box box-a">
-        <button type="button"class="contents project-card"name="vegetarian" id="ovo" value="ovo">
-          <section class="project-explain">
-            <p>오보 베지테리언</p>
-          </section>
-        </button>
-      </div>
-      <div class="box box-b">
-        <button type="button"class="contents project-card"name="vegetarian" id="lactoovo" value="lactoovo">
-          <section class="project-explain">
-            <p>락토 오보 베지테리언</p>
-          </section>
-        </button>
-      </div>
-    </div>
-    <div class="row">
-      <div class="box box-a">
-        <button type="button" class="contents project-card"name="vegetarian" id="pesco" value="pesco">
-          <section class="project-explain">
-            <p>페스코 베지테리언</p>
-          </section>
-        </button>
-      </div>
-
-      <div class="box box-b">
-        <button type="button" class="contents project-card"name="vegetarian" id="flo" value="flo">
-          <section class="project-explain">
-            <p>플로 베지테리언</p>
-          </section>
-        </button>
-      </div>
-    </div>
-    <div class="row">
-      <div class="box box-a">
-        <button type="button" class="contents project-card"name="vegetarian" id="flexi" value="flexi">
-          <section class="project-explain">
-            <p>플렉시테리언</p>
-          </section>
-        </button>
-      </div>
-    </div>
-    <br>
-
-    <input type="submit"id="btn_join"  class="btn btn-pink w200" style="font-weight:bold;background-color: #fd7e14;width:250pt;margin-top:12px;"value="next">
-
-</form>
+          <div class="container">
+            <div class="row">
+              <div class="box box-a">
+                <div class="contents project-card">
+                <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                  <label class="btn btn-warning" style="width:120pt;height:60pt;font-weight:bold;">
+                    <input type="radio" name="vegetarian" id="vegan" value="vegan"><br>비건
+                  </label></div>
+              </div></div>
+              <div class="box box-b">
+                <div class="contents project-card">
+                <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                  <label class="btn btn-warning" style="width:120pt;height:60pt;font-weight:bold;">
+                    <input type="radio" name="vegetarian" id="lacto" value="lacto"><br>락토 베지테리언
+                  </label></div>
+              </div>
+            </div></div>
+            <div class="row">
+              <div class="box box-a">
+                <div class="contents project-card">
+                <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                  <label class="btn btn-warning" style="width:120pt;height:60pt;font-weight:bolder;">
+                      <input type="radio" name="vegetarian" id="ovo" value="ovo"><br>오보 베지테리언
+                  </label></div>
+              </div></div>
+              <div class="box box-b">
+                <div class="contents project-card">
+                <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                  <label class="btn btn-warning" style="width:120pt;height:60pt;font-weight:bold;">
+                      <input type="radio" name="vegetarian" id="lactoovo" value="lactoovo"><br>락토 오보 베지테리언
+                  </label></div>
+              </div></div>
+            </div>
+            <div class="row">
+              <div class="box box-a">
+                <div class="contents project-card">
+                <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                  <label class="btn btn-warning" style="width:120pt;height:60pt;font-weight:bold;">
+                    <input type="radio" name="vegetarian" id="pesco" value="pesco"><br>페스코 베지테리언
+                  </label></div>
+              </div></div>
+              <div class="box box-b">
+                <div class="contents project-card">
+                <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                  <label class="btn btn-warning" style="width:120pt;height:60pt;font-weight:bold;">
+                    <input type="radio" name="vegetarian" id="flo" value="flo"><br>플로 베지테리언
+                  </label></div>
+              </div></div>
+            </div>  <div class="row">
+                <div class="box box-a">
+                  <div class="contents project-card">
+                  <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                    <label class="btn btn-warning" style=" width:120pt; height:60pt;font-weight:bold;">
+                      <input type="radio" name="vegetarian" id="flexi" value="flexi"><br>플렉시테리언
+                    </label></div>
+                </div></div>
+                <div class="box box-b">
+                  <div class="contents project-card">
+                  <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                    <label class="btn btn-warning" style="width:120pt;height:60pt;font-weight:bold;">
+                      <input type="radio" name="religion" id="none"value="none"><br>  무교
+                    </label></div>
+                </div></div>
+              </div>
+<br>
+          <input type="submit" id="btn_join" class="btn btn-pink w200" style="font-weight:bold;background-color: #fd7e14;width:250pt;margin-top:12px;" value="next">
+    </form>
   </center>
+
 
 </body>
 
