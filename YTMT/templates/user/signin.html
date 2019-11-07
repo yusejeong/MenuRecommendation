@@ -9,18 +9,11 @@
   <link rel="stylesheet" href="https://dfzrjox9sv97l.cloudfront.net/dicons_20160930/css/common.css?201709272">
   <link rel="stylesheet" href="https://dfzrjox9sv97l.cloudfront.net/dicons_20160930/css/user_web.css?201709272">
   <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css?201709272">
+  {% load static %}   
+     <link rel="stylesheet" href={% static "YTMT/css/templete.css" %}>
+    <link rel="stylesheet" href={% static "YTMT/css/signin.css" %}>
 
-  <script type="text/javascript">
-      <h4 class="text-hide">{% load static %}</h4>
 
-      <link rel="stylesheet" href={% static "YTMT/css/templete.css" %}>
-      <link rel="stylesheet" href={% static "YTMT/css/signin.css" %}>
-
-    function movebtn(url) {
-        alert("-님 환영합니다.");
-        document.location.href = "main.html";
-    }
-</script>
 
 </head>
 
@@ -30,8 +23,9 @@
     <div class="container">
       <div class="row">
 
-        <form id="frm_login" method="POST" action="{% url 'YTMT:signinrequest'%}">
-          <h4 class="text-hide">{% csrf_token %}</h4>
+        <form id="frm_login" method="POST" action="D:/frontendfile/Your_Taste_My_Taste/YTMT/templates/main.html">
+<!--        {% url 'YTMT:signinrequest'%}-->
+         {% csrf_token %}
           <input name="retURL" type="hidden" value="https://.com/">
           
           <div class="login">
@@ -48,10 +42,40 @@
 
               <div class="clear"></div>
             </div>
-            <button type="submit" class="btn btn-black" onclick="movebtn('main.html')">로그인</button>
+            <input type="button" class="btn btn-black" onclick="logincheck()" value="로그인">
+              <script type="text/javascript">
+                function logincheck() {
+                    var idvalue = document.getElementById("id");
+                    var pwvalue = document.getElementById("pw");
+                    
+                        if(idvalue==""){
+                            alert("아이디를 입력하세요.");
+                            return false;
+                        }
+                        else if(pwvalue==""){
+                            alert("비밀번호를 입력하세요.");
+                            return false;
+                        }
+                        else {
+                            alert(idvalue+"님 환영합니다.");
+                            location.href="D:/frontendfile/Your_Taste_My_Taste/YTMT/templates/main.html";
+                        }
+                        form.method="post";
+            //        "{% url 'YTMT:mainpage'%}"
+                }  
+            </script>
             <table>
                 <tr>
-                  <a href="{% url 'YTMT:signup'%}"><input  id="btn_intro" type="button" class="btn btn-white w200" style="margin-top:12px;" value="회원가입"></a>
+                  <a href="{% url 'YTMT:signup'%}">
+                      <input  id="btn_intro" type="button" class="btn btn-white w200" style="margin-top:12px;" value="회원가입" 
+                      onclick="movesignup()"> 
+                  </a>
+                  <script>
+                        function movesignup(){
+                            location.href = "www.naver.com";
+                        }
+                    </script>
+                  
                 </tr>
                 <tr>
                   <a href="{% url 'YTMT:findinfo'%}"><input  type="button" class="btn btn-white w200" style="margin-top:12px;" value="아이디/비밀번호 찾기"></a>
