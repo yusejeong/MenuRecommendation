@@ -19,8 +19,9 @@
     <div class="container">
       <div class="row">
 
-        <form name="form" id="frm_login" method="POST" action="D:/frontendfile/Your_Taste_My_Taste/YTMT/templates/main.html">
-<!--        {% url 'YTMT:signinrequest'%}-->
+
+        <form name="form" id="frm_login" method="POST" action="{% url 'YTMT:signinrequest'%}">
+
          {% csrf_token %}
           <input name="retURL" type="hidden" value="https://.com/">
 
@@ -32,9 +33,6 @@
               <input id="pw" name = "password" type="password" class="input-text" placeholder="비밀번호 입력">
             </div>
             <div style="padding:24px 0;">
-              <div class="fl">
-                <label class="checkbox"><input type="checkbox" value="Y"><i class="check-icon" checked></i> <span class="fs-13 fw-b">로그인상태 유지</span></label>
-              </div>
 
               <div class="clear"></div>
             </div>
@@ -49,26 +47,20 @@
                       alert("비밀번호를 입력하세요.");
                       return false;
                   }
-
                     alert(document.form.id.value+"님 환영합니다.");
-                    location.href="D:/frontendfile/Your_Taste_My_Taste/YTMT/templates/main.html";
+                    location.href="{% url 'YTMT:mainpage'%}";
                     document.form.submit();
                 }
             </script>
-            <table>
-                <tr>
                   <a href="{% url 'YTMT:signup'%}">
                       <input  id="btn_intro" type="button" class="btn btn-white w200" style="margin-top:12px;" value="회원가입">
                   </a>
-
-                </tr>
-                <tr>
-                  <a href="{% url 'YTMT:findinfo'%}"><input  type="button" class="btn btn-white w200" style="margin-top:12px;" value="아이디/비밀번호 찾기"></a>
-                </tr>
-            </table>
-
+                  <a href="{% url 'YTMT:findinfo'%}">
+                      <input  type="button" class="btn btn-white w200" style="margin-top:12px;" value="아이디/비밀번호 찾기">
+                    </a>
 
           </div>
         </form>
       </div></div>
+
     </body>
