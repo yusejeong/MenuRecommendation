@@ -19,6 +19,7 @@
     <div class="container">
       <div class="row">
 
+
         <form name="form" id="frm_login" method="POST" action="{% url 'YTMT:signinrequest'%}">
 
          {% csrf_token %}
@@ -46,7 +47,6 @@
                       alert("비밀번호를 입력하세요.");
                       return false;
                   }
-
                     alert(document.form.id.value+"님 환영합니다.");
                     location.href="{% url 'YTMT:mainpage'%}";
                     document.form.submit();
@@ -62,4 +62,5 @@
           </div>
         </form>
       </div></div>
+
     </body>

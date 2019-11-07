@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+
     'django.contrib.staticfiles',
 ]
 
@@ -90,7 +91,7 @@ DATABASES = {
     #     # 'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
 
     #     'ENGINE': 'django.db.backends.mysql',
-    #     'NAME': 'YTMT', 
+    #     'NAME': 'YTMT',
     #     'USER': 'root',
     #     'PASSWORD': 'ytmt123',
     #     'HOST': 'localhost',
