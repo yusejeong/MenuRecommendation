@@ -11,9 +11,6 @@ import datetime
 # Create your views here.
 
 def save_user_session(request, User):
-
-    # request.session['User'] = User
-
     '''
         위와 같은 방식은 Session의 User영역에 User 객체를 넣는 시도를 의미함
         하지만 Session은 객체를 저장할 수 있는 방법이 없음
@@ -22,13 +19,11 @@ def save_user_session(request, User):
     '''
     request.session['userid'] = User.username
     request.session['password'] = User.password
-
-# def save_profile_session(request, Profile):
-#     request.session['profile'] = Profile
     '''
         세션에는 프로필 객체가 들어갈 수 없음,
         프로필 조회가 필요하다면 username 으로 프로필의 외래키를 조회하는 방식을 사용해야함
     '''
+
 
 # 로그인
 def signin(request):
@@ -63,10 +58,12 @@ def signup(request):
 def signuprequest(request):
     if request.method == "POST":
         if request.POST["pwd"] == request.POST["pwdchk"]:
-            # 이메일 유효성 체크
-            user = User.objects.create_user(
-                #이메일 중간에 @ 가 들어가지 않아 수정해줬음
-                username = request.POST["id"], password = request.POST["pwd"], email = request.POST["email"] + "@" + request.POST["email2"])
+            if request.POST["email2"] is not None:
+                user = User.objects.create_user(
+                    username = request.POST["id"], password = request.POST["pwd"], email = request.POST["email"] + "@" + request.POST["email2"])
+            else:
+                user = User.objects.create_user(
+                    username = request.POST["id"], password = request.POST["pwd"], email = request.POST["email"])
             save_user_session(request, user)
             return redirect('YTMT:birthandgender')
         return render(request, 'user/signup.html')
@@ -91,12 +88,10 @@ def birthandgendersave(request):
     else:
         gender_num = 2
     
-    print(gender_num)
     brithday_str = request.POST.get('birth')
     
     #POST 방식으로 받아온 birth가 String값이기 때문에 DateTime 객체로 변환
     birthday_obj = datetime.datetime.strptime(brithday_str, '%Y-%m-%d')
-
 
     userProfile.gender = gender_num
     userProfile.birth = birthday_obj
@@ -114,7 +109,8 @@ def get_reli_id(reli_name):
 
 def religionsave(request):
     id = request.session.get('userid')
-    userProfile = Profile.objects.get(user_id = id)
+    userNow = User.objects.get(username = id)
+    userProfile = Profile.objects.get(user_id = userNow)
 
     reli_name = request.POST.get("religion")
     userProfile.reli_id = get_reli_id(reli_name)
@@ -130,7 +126,8 @@ def get_vege_id(vege_name):
 
 def vegetariansave(request):
     id = request.session.get('userid')
-    userProfile = Profile.objects.get(user_id = id)
+    userNow = User.objects.get(username = id)
+    userProfile = Profile.objects.get(user_id = userNow)
 
     vege_name = request.POST.get("vegetarian")
     userProfile.vege_id = get_vege_id(vege_name)
@@ -143,7 +140,8 @@ def allergy(request):
 
 def allergysave(request):
     id = request.session.get('userid')
-    userProfile = Profile.objects.get(user_id = id)
+    userNow = User.objects.get(username = id)
+    userProfile = Profile.objects.get(user_id = userNow)
     # 일대다
     return render(request, 'user/hatelist.html')
 
@@ -152,13 +150,15 @@ def hatelist(request):
 
 def hatelistsave(request):
     id = request.session.get('userid')
-    userProfile = Profile.objects.get(user_id = id)
+    userNow = User.objects.get(username = id)
+    userProfile = Profile.objects.get(user_id = userNow)
+
     expire_session(request)
     return render(request, 'user/signin.html')
 
 def expire_session(request):
     request.session.modified = True
-    del request.session['user']
+    del request.session['userid'], request.session['password']
     return render(request, 'user/signin.html')
 
 
@@ -201,7 +201,10 @@ def infomodifysave(request):
         if request.POST["pwd"] == userNow.password:
             if request.POST["newpwd"] == request.POST["pwdchk"]:
                 userNow.password = request.POST["newpwd"]
-                userNow.email = request.POST["email"] + "@" + request.POST["email2"]
+                if request.POST["email2"] is not None:
+                    userNow.email = request.POST["email"] + "@" + request.POST["email2"]
+                else:
+                    userNow.email = request.POST["email"]
                 userNow.save()
                 return render(request, 'mypage/mypagemain.html')
             return render(request,'mypage/infomodify.html')
@@ -215,7 +218,10 @@ def infomodifynext(request):
         if request.POST["pwd"] == userNow.password:
             if request.POST["newpwd"] == request.POST["pwdchk"]:
                 userNow.password = request.POST["newpwd"]
-                userNow.email = request.POST["email"] + "@" + request.POST["email2"]
+                if request.POST["email2"] is not None:
+                    userNow.email = request.POST["email"] + "@" + request.POST["email2"]
+                else:
+                    userNow.email = request.POST["email"]
                 userNow.save()
                 return render(request, 'mypage/selectinfo.html')
             return render(request,'mypage/infomodify.html')
@@ -225,17 +231,20 @@ def infomodifynext(request):
 def selectinfo(request):
     return render(request, 'mypage/selectinfo.html')
 
-class EditReligionView(generic.DetailView):
-    template_name = 'user/religion.html'
+def religionmodify(request):
+    return render(request, 'mypage/religionmodify.html')
 
-class EditAllergieView(generic.DetailView):
-    template_name = 'user/allergie.html'
+def vegetarianmodify(request):
+    return render(request, 'mypage/vegetarianmodify.html')
 
-class EditVegetarianView(generic.DetailView):
-    template_name = 'user/vegetarian.html'
+def allergymodify(request):
+    return render(request, 'mypage/allergymodify.html')
 
-class EditHatelistView(generic.DetailView):
-    template_name = 'user/hatelist.html'
+def hatemodify(request):
+    return render(request, 'mypage/hatemodify.html')
+
+
+
 
 class HistoryView(generic.DetailView):
     template_name = 'mypage/history.html'

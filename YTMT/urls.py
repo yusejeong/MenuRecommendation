@@ -36,9 +36,14 @@ urlpatterns = [
     path('mainpage', views.mainpage, name = 'mainpage'),
     
     #마이페이지
-    path('mypagemain', views.mypagemain, name= 'mypagemain'),
-    path('mypagemain/infomodify', views.infomodify, name= 'infomodify'),
-    path('mypagemain/infomodifysave', views.infomodifysave, name= 'infomodifysave'),
-    path('mypagemain/infomodifynext', views.infomodifynext, name= 'infomodifynext'),
-    path('mypagemain/selectinfo', views.selectinfo, name='selectinfo'),
+    path('mypage', views.mypagemain, name= 'mypagemain'),
+    path('mypage/infomodify', views.infomodify, name= 'infomodify'),
+    path('mypage/infomodifysave', views.infomodifysave, name= 'infomodifysave'),
+    path('mypage/infomodifynext', views.infomodifynext, name= 'infomodifynext'),
+    path('mypage/selectinfo', views.selectinfo, name='selectinfo'),
+    path('mypage/religionmodify', views.religionmodify, name='religionmodify'),
+    path('mypage/vegetarianmodify', views.vegetarianmodify, name='vegetarianmodify'),
+    path('mypage/allergymodify', views.allergymodify, name='allergymodify'),
+    path('mypage/hatemodify', views.hatemodify, name='hatemodify'),
+    
 ]
