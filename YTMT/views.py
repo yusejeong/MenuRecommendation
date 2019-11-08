@@ -108,6 +108,7 @@ def get_reli_id(reli_name):
     return {'hindu':1, 'budd':2, 'christian':3, 'catholic':4, 'islam':5, 'juda':6, 'sikh':7, 'none':8}.get('reli_name', 8)
 
 def religionsave(request):
+
     id = request.session.get('userid')
 
     userNow = User.objects.get(username = id)
@@ -190,6 +191,8 @@ def mainpage(request):
         return render(request, 'main.html')
     return render(request, 'user/signin.html')
 
+def menureco(request):
+    return render(request, 'user/menureco.html')
 
 # 마이페이지
 def mypagemain(request):
