@@ -45,10 +45,10 @@
              if( !frm.elements[i].value ){
                  alert("글자를 입력하세요!");
                      frm.elements[i].focus();
-       return;
+       return ;
               }
           }
-       }
+        }
       list = document.getElementById("addTable");
       var Row = list.insertRow();
       Row.onmouseover=function(){list.clickedRowIndex=this.rowIndex}; //clickedRowIndex - 클릭한 Row의 위치를 확인;
@@ -81,7 +81,8 @@
       <br>
       <span style="font-weight: bold; font-size: 2em; line-height: 2em; color: black; font-family: 'Nanum Gothic';">알레르기 </span>
       <br>
-      <form name="form" method="post" action="{% url 'YTMT:hate'%}" onsubmit="return check();">
+  <form name="form" method="post" action="{% url 'YTMT:allergysave'%}">
+     {% csrf_token %}
     <div style="padding:50px;">
 <table width="400" border="0" cellspacing="0" cellpadding="0">
   <tr>
@@ -101,9 +102,9 @@
   </tr>
 
 </div>
-  </form>
+<input type="submit"id="btn_join"  class="btn btn-pink w200" style="font-weight:bold;background-color: #fd7e14;width:250pt;margin-top:12px;"value="next">
 
-  <input type="submit"id="btn_join"  class="btn btn-pink w200" style="font-weight:bold;background-color: #fd7e14;width:250pt;margin-top:12px;"value="next">
+  </form>
 </center>
 </body>
   <html>

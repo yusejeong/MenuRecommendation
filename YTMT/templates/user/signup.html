@@ -68,20 +68,20 @@
       회원가입
     </span>
     <br><br>
-
-      <form name="form" method="post" action= "{% url 'YTMT:signuprequest'%}" onsubmit="return checkValue()">{% csrf_token %}
-    <table border="0" cellspacing="0" frame="void" width="500">
+      <form name="form" method="post" action= "{% url 'YTMT:signuprequest'%}" onsubmit="return checkValue()">
+            {% csrf_token %}
+    <table border="0" cellspacing="0" frame="void">
 
 
         <tr>
-          <th>아이디 </th></tr>
+          <th style="float:left;">아이디 </th></tr>
           <td>
             <input type="text" name="id" id="id" placeholder="아이디를 입력해주세요" />
             <input type="button" value="중복확인" />
           </td>
 
         <tr>
-          <th>이메일 </th></tr>
+          <th style="float:left;">이메일 </th></tr>
           <td>
             <input type="text" name="email" id="email" placeholder="이메일 아이디" />@<select id="email2" name="email2">
                 <option value="" selected="selected">-메일 주소-</option>
@@ -99,17 +99,16 @@
             </td>
 
         <tr>
-          <th> 비밀번호 </th></tr>
+          <th style="float:left;"> 비밀번호 </th></tr>
           <td> <input type="password" name="pwd" id="pwd" placeholder="비밀번호를 입력해주세요" /> </td>
 
         <tr>
-          <th> 비밀번호 확인 </th></tr>
+          <th style="float:left;"> 비밀번호 확인 </th></tr>
           <td> <input type="password" name="pwdchk" id="pwdchk" placeholder="비밀번호를 입력해주세요" /> </td>
 
 
 
     </table>
-
 
 
     <!-- <input type="submit" value="회원가입" />
@@ -121,5 +120,4 @@
 </form>
   </center>
 </body>
-
 </html>
