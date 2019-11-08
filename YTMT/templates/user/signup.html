@@ -69,6 +69,7 @@
     </span>
     <br><br>
       <form name="form" method="post" action= "{% url 'YTMT:birthandgender'%}" onsubmit="return checkValue()">
+            {% csrf_token %}
     <table border="0" cellspacing="0" frame="void">
 
 
