@@ -34,7 +34,7 @@ urlpatterns = [
 
     # 메인
     path('mainpage', views.mainpage, name = 'mainpage'),
-    
+    path('menureco', views.menureco, name = 'menureco'),
     #마이페이지
     path('mypage', views.mypagemain, name= 'mypagemain'),
     path('mypage/infomodify', views.infomodify, name= 'infomodify'),
@@ -45,5 +45,5 @@ urlpatterns = [
     path('mypage/vegetarianmodify', views.vegetarianmodify, name='vegetarianmodify'),
     path('mypage/allergymodify', views.allergymodify, name='allergymodify'),
     path('mypage/hatemodify', views.hatemodify, name='hatemodify'),
-    
+
 ]

@@ -78,18 +78,18 @@ def birthandgendersave(request):
 
     login_user = User.objects.get(username = id)
     #id가 동일한 user객체를 검색하여 생성
-    
+
     #프로필 객체를 생성
     userProfile = Profile.objects.create(user_id = login_user, birth = datetime.datetime.now())
-    
+
     gender = request.POST.get("gender")
     if gender == "M":
         gender_num = 1
     else:
         gender_num = 2
-    
+
     brithday_str = request.POST.get('birth')
-    
+
     #POST 방식으로 받아온 birth가 String값이기 때문에 DateTime 객체로 변환
     birthday_obj = datetime.datetime.strptime(brithday_str, '%Y-%m-%d')
 
@@ -105,12 +105,15 @@ def religion(request):
     return render(request, 'user/religion.html')
 
 def get_reli_id(reli_name):
-    return {'hindu':1, 'budd':2, 'christian':3, 'catholic':4, 'islam':5, 'juda':6, 'sikh':7, 'none':8}.get('reli_name', 8)
+    return {'hindu':1, 'budd':2, 'christian':3, 'catholic':4, 'islam':5, 'juda':6, 'sikh':7, 'none':8}.get(reli_name, 8)
 
 def religionsave(request):
+
     id = request.session.get('userid')
+
     userNow = User.objects.get(username = id)
     userProfile = Profile.objects.get(user_id = userNow)
+
 
     reli_name = request.POST.get("religion")
     userProfile.reli_id = get_reli_id(reli_name)
@@ -122,7 +125,7 @@ def vegetarian(request):
     return render(request, 'user/vegetarian.html')
 
 def get_vege_id(vege_name):
-    return {'vegan':1, 'lacto':2, 'ovo':3, 'lactoovo':4, 'pesco':5, 'flo':6, 'flexi':7}.get('vege_name', 8)
+    return {'vegan':1, 'lacto':2, 'ovo':3, 'lactoovo':4, 'pesco':5, 'flo':6, 'flexi':7}.get(vege_name, 8)
 
 def vegetariansave(request):
     id = request.session.get('userid')
@@ -139,9 +142,11 @@ def allergy(request):
     return render(request, 'user/allergy.html')
 
 def allergysave(request):
+
     id = request.session.get('userid')
     userNow = User.objects.get(username = id)
     userProfile = Profile.objects.get(user_id = userNow)
+
     # 일대다
     return render(request, 'user/hatelist.html')
 
@@ -167,7 +172,7 @@ def findinfo(request):
     return render(request, 'findinfo/findinfo.html')
 
 def findid(request):
-    return render(request, 'findinfo/findid.html') 
+    return render(request, 'findinfo/findid.html')
 
 def findpw(request):
     return render(request, 'findinfo/findpw.html')
@@ -186,6 +191,8 @@ def mainpage(request):
         return render(request, 'main.html')
     return render(request, 'user/signin.html')
 
+def menureco(request):
+    return render(request, 'user/menureco.html')
 
 # 마이페이지
 def mypagemain(request):

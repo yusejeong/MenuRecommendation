@@ -128,8 +128,7 @@ document.form1.submit();
                         </a>
                         <ul class="nav nav-pills">
                             <li class="nav-item">
-                              <a class="nav-link" style="color:black; font-weight: bold;"href="{% url 'YTMT:signin'%}">로그인</a>
-                            </li>
+<a class="nav-link" style="color:black; font-weight: bold;"href="{% url 'YTMT:signout'%}">로그아웃</a>                            </li>
                             <li class="nav-item">
                               <a class="nav-link"style="color:black; font-weight: bold;" href="{% url 'YTMT:mypagemain'%}">마이페이지</a>
                             </li>
@@ -144,6 +143,7 @@ document.form1.submit();
       <br><br><br>
         <span style="font-weight: bold; font-size: 1em; line-height: 2em; color: black; font-family: 'Nanum Gothic';">싫어하는 음식 </span>
         <form name="form" method="post" action="{% url 'YTMT:selectinfo'%}" onsubmit="return Alert()">
+              {% csrf_token %}
         <div style="padding:50px;">
     <table width="400" border="0" cellspacing="0" cellpadding="0">
       <tr>
@@ -168,6 +168,7 @@ document.form1.submit();
 <span style="font-weight: bold; font-size: 1em; line-height: 2em; color: black; font-family: 'Nanum Gothic';">싫어하는 재료 </span>
   <br>
   <form name="form1" method="post" action="{% url 'YTMT:selectinfo'%}" onsubmit="return Alert()">
+        {% csrf_token %}
   <div style="padding:50px;">
   <table width="400" border="0" cellspacing="0" cellpadding="0">
   <tr>
