@@ -62,5 +62,5 @@ class Hate_ingredient(models.Model):
 #     menu_id
 
 # class Relation(models.Model):
-#     user_id
-#     friend_id
+#     user_id = models.OneToOneField(User, on_delete = models.CASCADE)
+#     friend_id = models.ForeignKey(User, on_delete=models.CASCADE)

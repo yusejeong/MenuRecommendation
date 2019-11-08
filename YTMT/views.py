@@ -10,19 +10,19 @@ import datetime
 
 # Create your views here.
 
-def save_user_session(request, User):
-    '''
-        위와 같은 방식은 Session의 User영역에 User 객체를 넣는 시도를 의미함
-        하지만 Session은 객체를 저장할 수 있는 방법이 없음
-        따라서 아래와 같이 세션에 넣을 수 있는 사용자의 ID와 Password를 넘겨주는 방식으로
-        로그인 상태를 유지해야함
-    '''
-    request.session['userid'] = User.username
-    request.session['password'] = User.password
-    '''
-        세션에는 프로필 객체가 들어갈 수 없음,
-        프로필 조회가 필요하다면 username 으로 프로필의 외래키를 조회하는 방식을 사용해야함
-    '''
+# def save_user_session(request, User):
+#     '''
+#         위와 같은 방식은 Session의 User영역에 User 객체를 넣는 시도를 의미함
+#         하지만 Session은 객체를 저장할 수 있는 방법이 없음
+#         따라서 아래와 같이 세션에 넣을 수 있는 사용자의 ID와 Password를 넘겨주는 방식으로
+#         로그인 상태를 유지해야함
+#     '''
+#     request.session['username'] = User.username
+#     request.session['password'] = User.password
+#     '''
+#         세션에는 프로필 객체가 들어갈 수 없음,
+#         프로필 조회가 필요하다면 username 으로 프로필의 외래키를 조회하는 방식을 사용해야함
+#     '''
 
 
 # 로그인
@@ -37,7 +37,8 @@ def signinrequest(request):
         user = auth.authenticate(request, username = id, password = pw)
         if user is not None:
             auth.login(request, user)
-            save_user_session(request, user)
+            request.session['username'] = id
+            request.session['password'] = pw
             return HttpResponseRedirect(reverse('YTMT:mainpage'))
         else:
             '''
@@ -58,14 +59,15 @@ def signup(request):
 def signuprequest(request):
     if request.method == "POST":
         if request.POST["pwd"] == request.POST["pwdchk"]:
-            if request.POST["email2"] is not None:
+            if request.POST["email2"] != "etc":
                 user = User.objects.create_user(
                     username = request.POST["id"], password = request.POST["pwd"], email = request.POST["email"] + "@" + request.POST["email2"])
             else:
                 user = User.objects.create_user(
                     username = request.POST["id"], password = request.POST["pwd"], email = request.POST["email"])
-            save_user_session(request, user)
-            return redirect('YTMT:birthandgender')
+            request.session['username'] = request.POST["id"]
+            request.session['password'] = request.POST["pwd"]
+            return render(request, 'user/birthandgender.html')
         return render(request, 'user/signup.html')
     return render(request, 'user/signup.html')
 
@@ -73,8 +75,8 @@ def birthandgender(request):
     return render(request, 'user/birthandgender.html')
 
 def birthandgendersave(request):
-    id = request.session.get('userid')
-    #위에서 저장된 session 안의 userid를 저장
+    id = request.session.get('username')
+    #위에서 저장된 session 안의 username을 저장
 
     login_user = User.objects.get(username = id)
     #id가 동일한 user객체를 검색하여 생성
@@ -109,7 +111,7 @@ def get_reli_id(reli_name):
 
 def religionsave(request):
 
-    id = request.session.get('userid')
+    id = request.session.get('username')
 
     userNow = User.objects.get(username = id)
     userProfile = Profile.objects.get(user_id = userNow)
@@ -128,7 +130,7 @@ def get_vege_id(vege_name):
     return {'vegan':1, 'lacto':2, 'ovo':3, 'lactoovo':4, 'pesco':5, 'flo':6, 'flexi':7}.get(vege_name, 8)
 
 def vegetariansave(request):
-    id = request.session.get('userid')
+    id = request.session.get('username')
     userNow = User.objects.get(username = id)
     userProfile = Profile.objects.get(user_id = userNow)
 
@@ -142,8 +144,7 @@ def allergy(request):
     return render(request, 'user/allergy.html')
 
 def allergysave(request):
-
-    id = request.session.get('userid')
+    id = request.session.get('username')
     userNow = User.objects.get(username = id)
     userProfile = Profile.objects.get(user_id = userNow)
 
@@ -154,16 +155,11 @@ def hatelist(request):
     return render(request, 'user/hatelist.html')
 
 def hatelistsave(request):
-    id = request.session.get('userid')
+    id = request.session.get('username')
     userNow = User.objects.get(username = id)
     userProfile = Profile.objects.get(user_id = userNow)
 
-    expire_session(request)
-    return render(request, 'user/signin.html')
-
-def expire_session(request):
-    request.session.modified = True
-    del request.session['userid'], request.session['password']
+    signout(request)
     return render(request, 'user/signin.html')
 
 
@@ -181,20 +177,18 @@ def findpw(request):
 # 로그아웃
 def signout(request):
     request.session.modified = True
-    del request.session['user']
+    del request.session['username'], request.session['password']
     return render(request, 'user/signin.html')
 
 
 # 메인
 def mainpage(request):
-    if request.session.get('userid') is not None:
+    if request.session.get('username') is not None:
         return render(request, 'main.html')
     return render(request, 'user/signin.html')
 
-def menureco(request):
-    return render(request, 'user/menureco.html')
 
-# 마이페이지
+# 마이페이지_수정
 def mypagemain(request):
     return render(request, 'mypage/mypagemain.html')
 
@@ -202,13 +196,15 @@ def infomodify(request):
     return render(request, 'mypage/infomodify.html')
 
 def infomodifysave(request):
-    id = request.session.get('userid')
+    id = request.session.get('username')
     userNow = User.objects.get(username = id)
+
     if request.method == "POST":
-        if request.POST["pwd"] == userNow.password:
+        if request.POST["pwd"] == request.session.get('password'):
             if request.POST["newpwd"] == request.POST["pwdchk"]:
                 userNow.password = request.POST["newpwd"]
-                if request.POST["email2"] is not None:
+                request.session['password'] = request.POST["newpwd"]
+                if request.POST["email2"] != "etc":
                     userNow.email = request.POST["email"] + "@" + request.POST["email2"]
                 else:
                     userNow.email = request.POST["email"]
@@ -219,13 +215,15 @@ def infomodifysave(request):
     return render(request,'mypage/infomodify.html')
 
 def infomodifynext(request):
-    id = request.session.get('userid')
+    id = request.session.get('username')
     userNow = User.objects.get(username = id)
+
     if request.method == "POST":
-        if request.POST["pwd"] == userNow.password:
+        if request.POST["pwd"] == request.session.get('password'):
             if request.POST["newpwd"] == request.POST["pwdchk"]:
                 userNow.password = request.POST["newpwd"]
-                if request.POST["email2"] is not None:
+                request.session['password'] = request.POST["newpwd"]
+                if request.POST["email2"] != "etc":
                     userNow.email = request.POST["email"] + "@" + request.POST["email2"]
                 else:
                     userNow.email = request.POST["email"]
@@ -251,10 +249,14 @@ def hatemodify(request):
     return render(request, 'mypage/hatemodify.html')
 
 
+# 마이페이지_기타
+def history(request):
+    return render(request, 'mypage/history.html')
 
+def friendlist(request):
+    return render(request, 'mypage/friendlist.html')
+    
 
-class HistoryView(generic.DetailView):
-    template_name = 'mypage/history.html'
-
-class FriendlistView(generic.DetailView):
-    template_name = 'mypage/friendlist.html'
+# 기능1
+def menureco(request):
+    return render(request, 'menureco/menureco.html')
