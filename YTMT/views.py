@@ -87,12 +87,7 @@ def birthandgendersave(request):
         gender_num = 1
     else:
         gender_num = 2
-<<<<<<< HEAD
 
-    print(gender_num)
-=======
-    
->>>>>>> origin/master
     brithday_str = request.POST.get('birth')
 
     #POST 방식으로 받아온 birth가 String값이기 때문에 DateTime 객체로 변환
@@ -114,12 +109,10 @@ def get_reli_id(reli_name):
 
 def religionsave(request):
     id = request.session.get('userid')
-<<<<<<< HEAD
-    userProfile = Profile.objects.get(username = id)
-=======
+
     userNow = User.objects.get(username = id)
     userProfile = Profile.objects.get(user_id = userNow)
->>>>>>> origin/master
+
 
     reli_name = request.POST.get("religion")
     userProfile.reli_id = get_reli_id(reli_name)
@@ -148,14 +141,11 @@ def allergy(request):
     return render(request, 'user/allergy.html')
 
 def allergysave(request):
-<<<<<<< HEAD
-    id = request.session.get('username')
-    userProfile = Profile.objects.get(username = id)
-=======
+
     id = request.session.get('userid')
     userNow = User.objects.get(username = id)
     userProfile = Profile.objects.get(user_id = userNow)
->>>>>>> origin/master
+
     # 일대다
     return render(request, 'user/hatelist.html')
 
