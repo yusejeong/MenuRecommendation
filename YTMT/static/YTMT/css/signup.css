@@ -1,69 +1,84 @@
-    h,
-    td,
-    tr,
-    input,
-    textarea,
-    select,
-    FORM {
-      font-family: 나눔고딕;
-      font-size: 1em;
-      border-radius: 5px;
-    }
+h,
+td,
+tr,
+input,
+textarea,
+select,
+FORM {
+  font-family: 나눔고딕;
+  font-size: 1em;
+  border-radius: 5px;
+}
 
-    th {
-      text-align: center;
-      padding-right: 15px;
-      padding-left: 15px;
-    }
+th {
+  text-align: center;
+  padding-right: 15px;
+  padding-left: 15px;
+}
 
-    button {
+button {
 
-      background-color: #000000;
-      border: none;
-      color: white;
-      padding: 25px 70px;
-      text-align: center;
+  background-color: #000000;
+  border: none;
+  color: white;
+  padding: 25px 70px;
+  text-align: center;
 
-      text-decoration: none;
+  text-decoration: none;
 
-      display: inline-block;
+  display: inline-block;
 
-      font-size: 30px;
-      font-weight: bold;
+  font-size: 30px;
+  font-weight: bold;
 
-      margin: 4px 1px;
+  margin: 4px 1px;
 
-      cursor: pointer;
+  cursor: pointer;
 
-    }
+}
 
-    button2 {
+button2 {
 
-      background-color: #000000;
-      border: none;
-      color: white;
-      padding: 25px 55px;
-      text-align: center;
+  background-color: #000000;
+  border: none;
+  color: white;
+  padding: 25px 55px;
+  text-align: center;
 
-      text-decoration: none;
+  text-decoration: none;
 
-      display: inline-block;
+  display: inline-block;
 
-      font-size: 30px;
-      font-weight: bold;
+  font-size: 30px;
+  font-weight: bold;
 
-      margin: 4px 1px;
+  margin: 4px 1px;
 
-      cursor: pointer;
+  cursor: pointer;
 
-    }
+}
 
-    table,
-    FORM {
-      border: none;
-      border-spacing: 15px;
-    }
+table,
+FORM {
+  border: none;
+  border-spacing: 15px;
+}
 
-    body {
-      font-family: 나눔고딕;
-    }
+body {
+  font-family: 나눔고딕;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+li {
+  display: inline-block;
+  margin-left: 10px;
+  margin-right: 0px;
+  margin-top: 30px;
+  float: left;
+  font-size: 15px;
+  font-weight: bold;
+}
