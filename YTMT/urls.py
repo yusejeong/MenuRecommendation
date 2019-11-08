@@ -29,9 +29,21 @@ urlpatterns = [
     path('findinfo/findid', views.findid, name = 'findid'),
     path('findinfo/findpw', views.findpw, name = 'findpw'),
 
+    # 로그아웃
+    path('signout', views.signout, name = 'signout'),
+
     # 메인
     path('mainpage', views.mainpage, name = 'mainpage'),
     
     #마이페이지
-    path("mypageMain", views.MypageView, name= 'mypagemain'),
+    path('mypage', views.mypagemain, name= 'mypagemain'),
+    path('mypage/infomodify', views.infomodify, name= 'infomodify'),
+    path('mypage/infomodifysave', views.infomodifysave, name= 'infomodifysave'),
+    path('mypage/infomodifynext', views.infomodifynext, name= 'infomodifynext'),
+    path('mypage/selectinfo', views.selectinfo, name='selectinfo'),
+    path('mypage/religionmodify', views.religionmodify, name='religionmodify'),
+    path('mypage/vegetarianmodify', views.vegetarianmodify, name='vegetarianmodify'),
+    path('mypage/allergymodify', views.allergymodify, name='allergymodify'),
+    path('mypage/hatemodify', views.hatemodify, name='hatemodify'),
+    
 ]
