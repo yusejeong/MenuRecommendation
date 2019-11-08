@@ -45,6 +45,7 @@
 	2. 유사도 분석 단계
 		각 사용자별 유사도 분석이 필요 프로필 을 Materix 형대로 핸들링 할 수 있도록 만들어야함
 		사용할 유사도 공식 조사 및 적용
+		- 우선 Content-based Filtering으로 진행/계정생성 후 Collaborative Filtering
 		
 	3. 회원과 유사한 회원 내림차순으로 뽑아내는 작업
 	
