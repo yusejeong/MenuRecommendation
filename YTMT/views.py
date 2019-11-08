@@ -81,19 +81,19 @@ def birthandgendersave(request):
 
     login_user = User.objects.get(username = id)
     #id가 동일한 user객체를 검색하여 생성
-    
+
     #프로필 객체를 생성
     userProfile = Profile.objects.create(user_id = login_user, birth = datetime.datetime.now())
-    
+
     gender = request.POST.get("gender")
     if gender == "M":
         gender_num = 1
     else:
         gender_num = 2
-    
+
     print(gender_num)
     brithday_str = request.POST.get('birth')
-    
+
     #POST 방식으로 받아온 birth가 String값이기 때문에 DateTime 객체로 변환
     birthday_obj = datetime.datetime.strptime(brithday_str, '%Y-%m-%d')
 
@@ -114,7 +114,7 @@ def get_reli_id(reli_name):
 
 def religionsave(request):
     id = request.session.get('userid')
-    userProfile = Profile.objects.get(user_id = id)
+    userProfile = Profile.objects.get(username = id)
 
     reli_name = request.POST.get("religion")
     userProfile.reli_id = get_reli_id(reli_name)
@@ -142,8 +142,8 @@ def allergy(request):
     return render(request, 'user/allergy.html')
 
 def allergysave(request):
-    id = request.session.get('userid')
-    userProfile = Profile.objects.get(user_id = id)
+    id = request.session.get('username')
+    userProfile = Profile.objects.get(username = id)
     # 일대다
     return render(request, 'user/hatelist.html')
 
@@ -167,7 +167,7 @@ def findinfo(request):
     return render(request, 'findinfo/findinfo.html')
 
 def findid(request):
-    return render(request, 'findinfo/findid.html') 
+    return render(request, 'findinfo/findid.html')
 
 def findpw(request):
     return render(request, 'findinfo/findpw.html')
