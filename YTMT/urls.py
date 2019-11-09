@@ -34,16 +34,23 @@ urlpatterns = [
 
     # 메인
     path('mainpage', views.mainpage, name = 'mainpage'),
-    path('menureco', views.menureco, name = 'menureco'),
-    #마이페이지
-    path('mypage', views.mypagemain, name= 'mypagemain'),
-    path('mypage/infomodify', views.infomodify, name= 'infomodify'),
-    path('mypage/infomodifysave', views.infomodifysave, name= 'infomodifysave'),
-    path('mypage/infomodifynext', views.infomodifynext, name= 'infomodifynext'),
-    path('mypage/selectinfo', views.selectinfo, name='selectinfo'),
-    path('mypage/religionmodify', views.religionmodify, name='religionmodify'),
-    path('mypage/vegetarianmodify', views.vegetarianmodify, name='vegetarianmodify'),
-    path('mypage/allergymodify', views.allergymodify, name='allergymodify'),
-    path('mypage/hatemodify', views.hatemodify, name='hatemodify'),
+     
+    # 마이페이지_수정
+    path('mypage', views.mypagemain, name = 'mypagemain'),
+    path('mypage/infomodify', views.infomodify, name = 'infomodify'),
+    path('mypage/infomodifysave', views.infomodifysave, name = 'infomodifysave'),
+    path('mypage/infomodifynext', views.infomodifynext, name = 'infomodifynext'),
+    path('mypage/selectinfo', views.selectinfo, name ='selectinfo'),
+    path('mypage/religionmodify', views.religionmodify, name ='religionmodify'),
+    path('mypage/vegetarianmodify', views.vegetarianmodify, name ='vegetarianmodify'),
+    path('mypage/allergymodify', views.allergymodify, name ='allergymodify'),
+    path('mypage/hatemodify', views.hatemodify, name ='hatemodify'),
+    
+    # 마이페이지_기타
+    path('mypage/history', views.history, name ='history'),
+    path('mypage/friendlist', views.friendlist, name ='friendlist'),
 
+    # 기능1
+    path('menureco', views.menureco, name = 'menureco'),
+   
 ]
