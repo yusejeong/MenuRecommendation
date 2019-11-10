@@ -40,7 +40,8 @@
 </header>
 <body>
   <center>
-    <form name="form" method="post" action="{% url 'YTMT:allergymodify'%}" onsubmit="">
+    <form name="form" method="post" action="{% url 'YTMT:vegetarianmodifysave'%}" onsubmit="">
+      {% csrf_token %}
       <br>
       <span style="font-weight: bold; font-size: 2em; line-height: 2em; color: black; font-family: 'Nanum Gothic';">종교 </span>
       <br>
