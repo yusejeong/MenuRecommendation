@@ -10,19 +10,24 @@ import datetime
 
 # Create your views here.
 
-# def save_user_session(request, User):
-#     '''
-#         위와 같은 방식은 Session의 User영역에 User 객체를 넣는 시도를 의미함
-#         하지만 Session은 객체를 저장할 수 있는 방법이 없음
-#         따라서 아래와 같이 세션에 넣을 수 있는 사용자의 ID와 Password를 넘겨주는 방식으로
-#         로그인 상태를 유지해야함
-#     '''
-#     request.session['username'] = User.username
-#     request.session['password'] = User.password
-#     '''
-#         세션에는 프로필 객체가 들어갈 수 없음,
-#         프로필 조회가 필요하다면 username 으로 프로필의 외래키를 조회하는 방식을 사용해야함
-#     '''
+    # '''
+    #     위와 같은 방식은 Session의 User영역에 User 객체를 넣는 시도를 의미함
+    #     하지만 Session은 객체를 저장할 수 있는 방법이 없음
+    #     따라서 아래와 같이 세션에 넣을 수 있는 사용자의 ID와 Password를 넘겨주는 방식으로
+    #     로그인 상태를 유지해야함
+
+    #     세션에는 프로필 객체가 들어갈 수 없음,
+    #     프로필 조회가 필요하다면 username 으로 프로필의 외래키를 조회하는 방식을 사용해야함
+    # '''
+def create_session(request, id, pwd):
+    request.session['username'] = id
+    request.session['password'] = pwd
+
+def find_user(request):
+    # 저장된 session 안의 username을 저장
+    id = request.session.get('username')
+    # id가 동일한 user객체를 검색하여 생성
+    return User.objects.get(username = id)
 
 
 # 로그인
@@ -32,20 +37,18 @@ def signin(request):
 def signinrequest(request):
     if request.method == "POST":
         id = request.POST['username']
-        pw = request.POST['password']
-        print(id,pw)
-        user = auth.authenticate(request, username = id, password = pw)
+        pwd = request.POST['password']
+        user = auth.authenticate(request, username = id, password = pwd)
         if user is not None:
             auth.login(request, user)
-            request.session['username'] = id
-            request.session['password'] = pw
+            create_session(request, id, pwd)
             return HttpResponseRedirect(reverse('YTMT:mainpage'))
         else:
             '''
                수정 필요한 부분, 비동기적으로 로그인이 되지 않았음을 보내는 기능을 만들어야함
                 현재는 Template의 수정이 우선되어야 기능구현을 확인할 수 있으므로 추후 방안논의
             '''
-            return render(request, 'user/signin.html', {'error':'id or pw is incorrect'})
+            return render(request, 'user/signin.html', {'error':'id or pwd is incorrect'})
         # 팝업창으로 띄우기
     else:
         return render(request, 'user/signin.html')
@@ -65,8 +68,7 @@ def signuprequest(request):
             else:
                 user = User.objects.create_user(
                     username = request.POST["id"], password = request.POST["pwd"], email = request.POST["email"])
-            request.session['username'] = request.POST["id"]
-            request.session['password'] = request.POST["pwd"]
+            create_session(request, user.username, request.POST["pwd"])
             return render(request, 'user/birthandgender.html')
         return render(request, 'user/signup.html')
     return render(request, 'user/signup.html')
@@ -75,15 +77,11 @@ def birthandgender(request):
     return render(request, 'user/birthandgender.html')
 
 def birthandgendersave(request):
-    id = request.session.get('username')
-    #위에서 저장된 session 안의 username을 저장
-
-    login_user = User.objects.get(username = id)
-    #id가 동일한 user객체를 검색하여 생성
-
+    login_user = find_user(request)
     #프로필 객체를 생성
     userProfile = Profile.objects.create(user_id = login_user, birth = datetime.datetime.now())
 
+    # 성별 구분
     gender = request.POST.get("gender")
     if gender == "M":
         gender_num = 1
@@ -91,13 +89,12 @@ def birthandgendersave(request):
         gender_num = 2
 
     brithday_str = request.POST.get('birth')
-
-    #POST 방식으로 받아온 birth가 String값이기 때문에 DateTime 객체로 변환
+    # POST 방식으로 받아온 birth가 String값이기 때문에 DateTime 객체로 변환
     birthday_obj = datetime.datetime.strptime(brithday_str, '%Y-%m-%d')
 
     userProfile.gender = gender_num
     userProfile.birth = birthday_obj
-    #수정된 프로필을 저장
+    # 수정된 프로필을 저장
     userProfile.save()
     return render(request, 'user/religion.html')
 
@@ -110,12 +107,8 @@ def get_reli_id(reli_name):
     return {'hindu':1, 'budd':2, 'christian':3, 'catholic':4, 'islam':5, 'juda':6, 'sikh':7, 'none':8}.get(reli_name, 8)
 
 def religionsave(request):
-
-    id = request.session.get('username')
-
-    userNow = User.objects.get(username = id)
-    userProfile = Profile.objects.get(user_id = userNow)
-
+    login_user = find_user(request)
+    userProfile = Profile.objects.get(user_id = login_user)
 
     reli_name = request.POST.get("religion")
     userProfile.reli_id = get_reli_id(reli_name)
@@ -130,9 +123,8 @@ def get_vege_id(vege_name):
     return {'vegan':1, 'lacto':2, 'ovo':3, 'lactoovo':4, 'pesco':5, 'flo':6, 'flexi':7}.get(vege_name, 8)
 
 def vegetariansave(request):
-    id = request.session.get('username')
-    userNow = User.objects.get(username = id)
-    userProfile = Profile.objects.get(user_id = userNow)
+    login_user = find_user(request)
+    userProfile = Profile.objects.get(user_id = login_user)
 
     vege_name = request.POST.get("vegetarian")
     userProfile.vege_id = get_vege_id(vege_name)
@@ -144,9 +136,8 @@ def allergy(request):
     return render(request, 'user/allergy.html')
 
 def allergysave(request):
-    id = request.session.get('username')
-    userNow = User.objects.get(username = id)
-    userProfile = Profile.objects.get(user_id = userNow)
+    login_user = find_user(request)
+    userProfile = Profile.objects.get(user_id = login_user)
 
     # 일대다
     return render(request, 'user/hatelist.html')
@@ -155,9 +146,8 @@ def hatelist(request):
     return render(request, 'user/hatelist.html')
 
 def hatelistsave(request):
-    id = request.session.get('username')
-    userNow = User.objects.get(username = id)
-    userProfile = Profile.objects.get(user_id = userNow)
+    login_user = find_user(request)
+    userProfile = Profile.objects.get(user_id = login_user)
 
     signout(request)
     return render(request, 'user/signin.html')
@@ -196,38 +186,36 @@ def infomodify(request):
     return render(request, 'mypage/infomodify.html')
 
 def infomodifysave(request):
-    id = request.session.get('username')
-    userNow = User.objects.get(username = id)
+    login_user = find_user(request)
 
     if request.method == "POST":
         if request.POST["pwd"] == request.session.get('password'):
             if request.POST["newpwd"] == request.POST["pwdchk"]:
-                userNow.password = request.POST["newpwd"]
+                login_user.set_password(request.POST["newpwd"])
                 request.session['password'] = request.POST["newpwd"]
                 if request.POST["email2"] != "etc":
-                    userNow.email = request.POST["email"] + "@" + request.POST["email2"]
+                    login_user.email = request.POST["email"] + "@" + request.POST["email2"]
                 else:
-                    userNow.email = request.POST["email"]
-                userNow.save()
+                    login_user.email = request.POST["email"]
+                login_user.save()
                 return render(request, 'mypage/mypagemain.html')
             return render(request,'mypage/infomodify.html')
         return render(request,'mypage/infomodify.html')
     return render(request,'mypage/infomodify.html')
 
 def infomodifynext(request):
-    id = request.session.get('username')
-    userNow = User.objects.get(username = id)
+    login_user = find_user(request)
 
     if request.method == "POST":
         if request.POST["pwd"] == request.session.get('password'):
             if request.POST["newpwd"] == request.POST["pwdchk"]:
-                userNow.password = request.POST["newpwd"]
+                login_user.set_password(request.POST["newpwd"])
                 request.session['password'] = request.POST["newpwd"]
                 if request.POST["email2"] != "etc":
-                    userNow.email = request.POST["email"] + "@" + request.POST["email2"]
+                    login_user.email = request.POST["email"] + "@" + request.POST["email2"]
                 else:
-                    userNow.email = request.POST["email"]
-                userNow.save()
+                    login_user.email = request.POST["email"]
+                login_user.save()
                 return render(request, 'mypage/selectinfo.html')
             return render(request,'mypage/infomodify.html')
         return render(request,'mypage/infomodify.html')
@@ -239,15 +227,47 @@ def selectinfo(request):
 def religionmodify(request):
     return render(request, 'mypage/religionmodify.html')
 
+def religionmodifysave(request):
+    login_user = find_user(request)
+    userProfile = Profile.objects.get(user_id = login_user)
+
+    reli_name = request.POST.get("religion")
+    userProfile.reli_id = get_reli_id(reli_name)
+
+    userProfile.save()
+    return render(request, 'mypage/selectinfo.html')
+
 def vegetarianmodify(request):
     return render(request, 'mypage/vegetarianmodify.html')
+
+def vegetarianmodifysave(request):
+    login_user = find_user(request)
+    userProfile = Profile.objects.get(user_id = login_user)
+
+    vege_name = request.POST.get("vegetarian")
+    userProfile.vege_id = get_vege_id(vege_name)
+
+    userProfile.save()
+    return render(request, 'mypage/selectinfo.html')
 
 def allergymodify(request):
     return render(request, 'mypage/allergymodify.html')
 
+def allergymodifysave(request):
+    login_user = find_user(request)
+    userProfile = Profile.objects.get(user_id = login_user)
+
+    # 일대다
+    return render(request, 'mypage/selectinfo.html')
+
 def hatemodify(request):
     return render(request, 'mypage/hatemodify.html')
 
+def hatemodifysave(request):
+    login_user = find_user(request)
+    userProfile = Profile.objects.get(user_id = login_user)
+    
+    return render(request, 'mypage/selectinfo.html')
 
 # 마이페이지_기타
 def history(request):
