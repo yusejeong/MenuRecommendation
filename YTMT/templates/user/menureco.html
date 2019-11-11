@@ -44,8 +44,10 @@
             </div>
 		</nav>        
     </header>
+    
     <body>
-
+        <form name="form" method="post"  >
+        {% csrf_token %}
     <center>
         <div class="title" style="font-weight: bold; font-size: 2em; line-height: 2em; color: black; ">메뉴 추천</div>
      </center>
@@ -65,22 +67,26 @@
    
     </nav>
 
-   
+ 
    
     <div class="container">
      
       <div class="col-12">
-          <div class="card">
+          <div class="card" style="height: 180px">
             <div class="row no-gutters">
               <div class="col-4">
-                <img src="https://ytmtresource.s3.ap-northeast-2.amazonaws.com/YTMT_Logo.jpg" alt="" class="card-img" style="height: 100%;"/>
+                <img src="https://ytmtresource.s3.ap-northeast-2.amazonaws.com/YTMT_Logo.jpg" alt="" class="card-img" style="height: 180px; width:auto"/>
               </div>
               <div class="col-8">
-                <div class="card-body">
+                <div class="card-body" style="height: 180px">
                  <h3>메뉴 이름</h3>
                   <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam egestas sed sem ut malesuada.</p>
+
                    <div class="like-img" align="right">
-                       <img src="./like.png" width="30" height="auto" ><h>100</h>
+                        <a class="navbar-brand" href="{% url 'YTMT:mainpage'%}">
+                            <img src="./like.png" width="30px" height="auto" >
+                        </a><h style="margin-left: 0">100</h>
+                       
                    </div>
                 </div>
               </div>
@@ -89,17 +95,21 @@
         </div>
 
       <div class="col-12">
-          <div class="card">
+          <div class="card" style="height: 180px">
             <div class="row no-gutters">
               <div class="col-4">
-                <img src="https://ytmtresource.s3.ap-northeast-2.amazonaws.com/YTMT_Logo.jpg" alt="" class="card-img" style="height: 100%;"/>
+                <img src="https://ytmtresource.s3.ap-northeast-2.amazonaws.com/YTMT_Logo.jpg" alt="" class="card-img" style="height: 180px; width:auto"/>
               </div>
               <div class="col-8">
                 <div class="card-body">
                  <h3>메뉴 이름</h3>
                   <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam egestas sed sem ut malesuada.</p>
+
                    <div class="like-img" align="right">
-                       <img src="./like.png" width="30" height="auto" ><h>100</h>
+                        <a class="navbar-brand" href="{% url 'YTMT:mainpage'%}">
+                            <img src="./like.png" width="30px" height="auto" >
+                        </a><h style="margin-left: 0">100</h>
+                       
                    </div>
                 </div>
               </div>
@@ -109,8 +119,10 @@
 
       
     </div>
+</form>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
     </body>
 </html>
+
