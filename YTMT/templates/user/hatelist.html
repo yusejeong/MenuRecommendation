@@ -133,7 +133,7 @@ document.form1.submit();
 
 <span style="font-weight: bold; font-size: 1em; line-height: 2em; color: black; font-family: 'Nanum Gothic';">싫어하는 재료 </span>
   <br>
-  <form name="form1" class="hform" method="post" action="{% url 'YTMT:mainpage'%}" onsubmit="return check1();">  {% csrf_token %}
+  <form name="form1" class="hform" method="post" action="{% url 'YTMT:hatelistsave'%}" onsubmit="return check1();">  {% csrf_token %}
   <div style="padding:50px;">
   <table width="400" border="0" cellspacing="0" cellpadding="0">
   <tr>
