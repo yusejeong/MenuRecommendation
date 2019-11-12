@@ -37,13 +37,13 @@ FORM {
 }
 
 .box-a {
-  width: 10px;
+  width: 50%;
   text-align: center;
 
 
 }
 
 .box-b {
-  width: 30px;
+  width: 50%;
   text-align: center;
 }
