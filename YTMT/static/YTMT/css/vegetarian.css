@@ -27,16 +27,17 @@ FORM {
 
 
 .row {
-  width: 40%;
+  width: 100%;
   display: table;
 }
 
 .box {
   display: table-cell;
+  margin: 4%
 }
 
 .box-a {
-  width: 80px;
+  width: 10px;
   text-align: center;
 
 
@@ -45,5 +46,4 @@ FORM {
 .box-b {
   width: 30px;
   text-align: center;
-
 }
