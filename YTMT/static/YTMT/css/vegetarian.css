@@ -20,17 +20,16 @@ FORM {
 
 .box {
   display: table-cell;
-  margin: 4%
 }
 
 .box-a {
-  width: 100%;
+  width: 40%;
   text-align: center;
 
 
 }
 
 .box-b {
-  width: 50%;
+  width: 40%;
   text-align: center;
 }
