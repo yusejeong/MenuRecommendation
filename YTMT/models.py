@@ -7,6 +7,12 @@ class Menu(models.Model):
     menu_id = models.IntegerField(blank = False, null = False, primary_key=True)
     name = models.CharField(max_length=50, blank = False, null = False)
 
+class Menu2(models.Model):
+    menu_id = models.IntegerField(blank = False, null = False, primary_key=True)
+    name = models.CharField(max_length=50, blank = False, null = False)
+    text = models.CharField(max_length=1000)
+    img = models.CharField(max_length=10000)
+
 class Ingredient(models.Model):
     ingre_id = models.IntegerField(blank = False, null = False, primary_key=True)
     name = models.CharField(max_length=50, blank = False, null = False)
@@ -57,10 +63,12 @@ class Hate_ingredient(models.Model):
     user_id = models.OneToOneField(User, on_delete = models.CASCADE)
     ingre_id = models.ForeignKey(Ingredient, on_delete=models.CASCADE)
 
-# class History(models.Model):
-#     user_id
-#     menu_id
+class History(models.Model):
+    user_id = models.OneToOneField(User, on_delete = models.CASCADE)
+    menu_id = models.ForeignKey(Menu, on_delete=models.CASCADE)
 
 # class Relation(models.Model):
 #     user_id = models.OneToOneField(User, on_delete = models.CASCADE)
 #     friend_id = models.ForeignKey(User, on_delete=models.CASCADE)
+
+# class restaurant():

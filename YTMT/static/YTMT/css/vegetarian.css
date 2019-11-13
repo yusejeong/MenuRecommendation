@@ -14,18 +14,17 @@ FORM {
 
 
 .row {
-  width: 100%;
-  display: table;
+  width: 40%;
+/*  display: table;*/
 }
 
 .box {
-  display: table-cell;
+/*  display: table-cell;*/
 }
 
 .box-a {
   width: 40%;
   text-align: center;
-
 
 }
 

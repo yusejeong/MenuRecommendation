@@ -45,12 +45,12 @@
     <form name="form" method="post" action="{% url 'YTMT:vegetarianmodifysave'%}" onsubmit="">
       {% csrf_token %}
       <br>
-      <span style="font-weight: bold; font-size: 2em; line-height: 2em; color: black; font-family: 'Nanum Gothic';">종교 </span>
+      <span style="font-weight: bold; font-size: 2em; line-height: 2em; color: black; font-family: 'Nanum Gothic';">채식주의 </span>
       <br>
 
           <div class="container">
             <div class="row">
-              <div class="box box-a">
+              <div class="box box-a" style="margin-right: 30px;">
                 <div class="contents project-card">
                 <div class="btn-group btn-group-toggle" data-toggle="buttons">
                   <label class="btn btn-warning" style="width:120pt;height:60pt;font-weight:bold;">
@@ -77,7 +77,7 @@
                 <div class="contents project-card">
                 <div class="btn-group btn-group-toggle" data-toggle="buttons">
                   <label class="btn btn-warning" style="width:120pt;height:60pt;font-weight:bold;">
-                      <input type="radio" name="vegetarian" id="lactoovo" value="lactoovo"><br>락토 오보 베지테리언
+                      <input type="radio" name="vegetarian" id="lactoovo" value="lactoovo">락토 오보<br>베지테리언
                   </label></div>
               </div></div>
             </div>
@@ -86,7 +86,7 @@
                 <div class="contents project-card">
                 <div class="btn-group btn-group-toggle" data-toggle="buttons">
                   <label class="btn btn-warning" style="width:120pt;height:60pt;font-weight:bold;">
-                    <input type="radio" name="vegetarian" id="pesco" value="pesco"><br>페스코 베지테리언
+                    <input type="radio" name="vegetarian" id="pesco" value="pesco">페스코<br>베지테리언
                   </label></div>
               </div></div>
               <div class="box box-b">
@@ -107,7 +107,7 @@
 
               </div>
 <br>
-          <input type="submit" id="btn_join" class="btn btn-pink w200" style="font-weight:bold;background-color: #fd7e14;width:250pt;margin-top:12px;" value="next">
+          <input type="submit" id="btn_join" class="btn btn-pink w200" style="font-weight:bold;background-color: #fd7e14;width:250pt;margin-top:12px;" value="수정완료">
     </form>
   </center>
 
