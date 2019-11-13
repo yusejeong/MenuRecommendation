@@ -279,4 +279,5 @@ def friendlist(request):
 
 # 기능1
 def menureco(request):
-    return render(request, 'menureco/menureco.html')
+    menu_list = Menu2.objects.all()
+    return render(request, 'menureco/menureco.html',{ 'menu_list': menu_list })

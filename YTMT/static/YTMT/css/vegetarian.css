@@ -28,17 +28,16 @@ FORM {
 
 .row {
   width: 40%;
-  display: table;
+/*  display: table;*/
 }
 
 .box {
-  display: table-cell;
+/*  display: table-cell;*/
 }
 
 .box-a {
   width: 80px;
   text-align: center;
-
 
 }
 
