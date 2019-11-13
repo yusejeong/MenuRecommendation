@@ -12,19 +12,6 @@ FORM {
 
 }
 
-.project-card {
-  width: 50px;
-  height: 50px;
-  border-radius: 25px;
-
-  position: relative;
-
-  transition: all 0.5s;
-  transition-delay: 0.4s;
-  margin: 30px 30px 30px;
-  font-weight:bold;
-}
-
 
 .row {
   width: 40%;
@@ -36,13 +23,12 @@ FORM {
 }
 
 .box-a {
-  width: 80px;
+  width: 40%;
   text-align: center;
 
 }
 
 .box-b {
-  width: 30px;
+  width: 40%;
   text-align: center;
-
 }
