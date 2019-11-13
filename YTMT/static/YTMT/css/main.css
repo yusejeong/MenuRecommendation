@@ -17,11 +17,10 @@ button {
 
   background-color: #000000;
   border: none;
-  color: white;
   padding: 25px 70px;
   text-align: center;
 
-  text-decoration: none;
+/*  text-decoration: none;*/
 
   display: inline-block;
 
@@ -34,11 +33,11 @@ button {
 
 }
 
+
 button2 {
 
   background-color: #000000;
   border: none;
-  color: white;
   padding: 25px 55px;
   text-align: center;
 
