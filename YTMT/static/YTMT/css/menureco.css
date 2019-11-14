@@ -4,25 +4,10 @@
     line-height: 2em; 
     color: black;
 }
-body .col-8 {
-    margin-bottom: 10px;
-}
-.like-img {
-/*    max-width: 90%;*/
-    margin-left: auto;
-    margin-right: -10px;
-}
-.like-img img {
-    padding-bottom: 10px;
-}
-.card-body p {
-    max-width: 90%;
-}
-h {
-    margin-left: 0.5em;
-}
-header, body {
+
+html, header, body {
     font-family: 'Nanum Gothic';
+    background: #FCEEB5;
 }
 header {
     margin-bottom: 10px;
@@ -46,10 +31,52 @@ header {
     text-decoration:none;
 }
 
-/*templete 내부 tag*/
-.card, .card-body, .card-img {
-    height: 180px;
-}
-.card-img { 
-    width:auto
-}
+    .center {
+      position: absolute;
+      top: 50%;
+      left: 12%;
+      -webkit-transform: translate(-50%, -50%);
+    }
+
+    .card {
+      width: 1000px;
+      height: 250px;
+      background-color: #fff;
+      background: linear-gradient(#f8f8f8, #fff);
+      box-shadow: 0 8px 16px -8px rgba(0,0,0,0.4);
+      border-radius: 6px;
+      overflow: hidden;
+      position: relative;
+      margin: 1.5rem;
+       top: 50%;
+        border: none;
+    }
+    .card .general {
+      width: 700px;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      right: 0;
+      z-index: 1;
+      box-sizing: border-box;
+      padding: 1.5rem;
+    }
+
+    .card-img { 
+        width:auto;
+        height: 100%;
+        position: absolute;
+        top: 50%;
+        left: 12%;
+        -webkit-transform: translate(-50%, -50%);
+    }
+      .like-img {
+          position:absolute; 
+          right:2rem; 
+          bottom:0.5rem;
+          
+      }
+      .card-text {
+          padding-top: 1rem;
+          font-size: 1.2rem;
+      }
