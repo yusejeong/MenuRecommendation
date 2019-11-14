@@ -38,8 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-
     'django.contrib.staticfiles',
+    'django_extensions',
 ]
 
 MIDDLEWARE = [
@@ -78,11 +78,11 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'HOST': 'ytmtdatabase.cajybcgm143w.ap-northeast-2.rds.amazonaws.com',
-        'PORT': '3306',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'HOST': 'ytmtpostgresdb.cajybcgm143w.ap-northeast-2.rds.amazonaws.com',
+        'PORT': '5432',
         'NAME': 'ytmtdb',
-        'USER': 'admin',
+        'USER': 'YTMT',
         'PASSWORD': 'ytmt2019',
     }
 
