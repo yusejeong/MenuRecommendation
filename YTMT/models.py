@@ -4,7 +4,7 @@ from django.contrib import auth
 
 # 메뉴
 class Menu(models.Model):
-    menu_id = models.IntegerField(blank = False, null = False, primary_key=True)
+    menu_id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=50, blank = False, null = False)
 
 class Menu2(models.Model):
@@ -14,7 +14,7 @@ class Menu2(models.Model):
     img = models.CharField(max_length=10000)
 
 class Ingredient(models.Model):
-    ingre_id = models.IntegerField(blank = False, null = False, primary_key=True)
+    ingre_id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=50, blank = False, null = False)
     # type(유제품/육류/어류)
 

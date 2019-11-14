@@ -3,3 +3,7 @@ __pycache__/
 venv/
 .vscode/
 db.sqlite3
+venvReq.txt
+.ipynb_checkpoints/
+__pycache__/
+
