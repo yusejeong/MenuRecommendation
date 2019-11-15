@@ -3,25 +3,29 @@
 
 
 {% block content %}
+  <header>
+      <link rel="stylesheet" href='{% static "YTMT/css/menureco.css" %}'>
+  </header>
    {% for menu2 in menu_list %}
      <div class="post">
-          <div class="col-8">
-              <div class="card">
-                <div class="row no-gutters">
-                    <div class="col-4">
-                        <img src="https://ytmtresource.s3.ap-northeast-2.amazonaws.com/YTMT_Logo.jpg" alt="" class="card-img"/>
-                    </div>
-                        <div class="col-8">
-                            <div class="card-body">
-                               
-                                <a href="/" style="color:black; text-decoration: none;"><h3 class="card-title">{{ menu2.name }}</h3></a>
-                                <p class="card-text">{{ menu2.text }}</p>
+          <div class="card">
+                        <img src="https://ytmtresource.s3.ap-northeast-2.amazonaws.com/YTMT_Logo.jpg" alt="" class="center" width="auto" height="100%"/>
+                            <div class="general">
+                            
+                                <a href="/" style="color:black; text-decoration: none;">
+                                <h3 class="card-title">{{ menu2.name }}</h3>
+                                </a>
+                                <div class="card-text">
+                                    <span>{{ menu2.text }}</span>
+                                </div>
 
-    
-                                <span class="like-img" align="right">
+                                <div class="like-img" align="right" >
 <!--                                <a class="navbar-brand" href="/">-->
 <!--                                   여기에 좋아요 누르면 history로 반영되도록-->
-                                    <img id="likes" src='{% static "YTMT/img/nolike.png" %}' width="30px" height="auto" onclick="likechange()">
+                                    <h5>
+                                    <img id="likes" src='{% static "YTMT/img/nolike.png" %}' width="40px" height="auto" onclick="likechange()">
+                                    100</h5>
+<!--                                여기에 좋아요 수 계산하는거 넣어줘-->
                                     <script type="text/javascript">
                                         function likechange() {
                                             var likes = document.getElementById('likes');
@@ -33,16 +37,8 @@
                                             } 
                                         }
                                     </script>
-<!--                                </a>-->
-                                <h style="margin-left: 0">100</h>
-<!--                                여기에 좋아요 수 계산하는거 넣어줘-->
-                                </span>
-    
+                                </div>
                             </div>
-                        </div> 
-                   </div>
-                </div>
-
           </div>
         </div>
 
