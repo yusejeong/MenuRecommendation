@@ -15,9 +15,7 @@
   <script type="text/javascript" src={% static "YTMT/js/Autocomplete/jquery/jquery.autocomplete.js" %}></script>
   <link rel="stylesheet" type="text/css" href={% static "YTMT/js/Autocomplete/jquery/jquery.autocomplete.css" %}>
   <script type="text/javascript">
-    var allergy = [
-                '초콜릿','밀','대두','복숭아','우유','계란','새우'
-              ];
+    var allergy = {ingredient_list|safe}};
     $(document).ready(function() {
         $("#searchbox").autocomplete(allergy,{
             matchContains: true,
