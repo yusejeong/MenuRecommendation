@@ -3,19 +3,20 @@
 
 
 {% block content %}
-   {% for menu2 in menu_list %}
+   {% for menu in menu_list %}
      <div class="post">
           <div class="col-8">
               <div class="card">
                 <div class="row no-gutters">
-                    <div class="col-4">
+                    <div class="col-3">
                         <img src="https://ytmtresource.s3.ap-northeast-2.amazonaws.com/YTMT_Logo.jpg" alt="" class="card-img"/>
+                        <!-- <img src="{{menu.img_url}}" data-src = "{{menu.img_url}}"alt="" class="card-img"/> -->
                     </div>
                         <div class="col-8">
                             <div class="card-body">
                                
-                                <a href="/" style="color:black; text-decoration: none;"><h3 class="card-title">{{ menu2.name }}</h3></a>
-                                <p class="card-text">{{ menu2.text }}</p>
+                                <a href="/" style="color:black; text-decoration: none;"><h3 class="card-title">{{ menu.name }}</h3></a>
+                                <p class="card-text">{{ menu.text }}</p>
 
     
                                 <span class="like-img" align="right">
