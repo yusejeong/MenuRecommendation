@@ -86,9 +86,9 @@ class History(models.Model):
     def __str__(self):
         return self.user_id.username + ":" + self.menu_id.name
 
-class Friend(models.Model):
-    user_id=models.ForeignKey(User, on_delete=models.CASCADE)
-    friend_id=models.ForeignKey(Friend, on_delete=models.CASCADE)
+# class Friend(models.Model):
+#     user_id=models.ForeignKey(User, on_delete=models.CASCADE)
+#     friend_id=models.ForeignKey(Friend, on_delete=models.CASCADE)
 # class Relation(models.Model):
 #     user_id = models.OneToOneField(User, on_delete = models.CASCADE)
 #     friend_id = models.ForeignKey(User, on_delete=models.CASCADE)

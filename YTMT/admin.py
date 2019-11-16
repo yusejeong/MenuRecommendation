@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.contrib.auth.models import User
-from .models import Profile, Ingredient, Menu, Recipe, Hate_menu, History, Hate_ingredient, Allergy, Friend
+from .models import Profile, Ingredient, Menu, Recipe, Hate_menu, History, Hate_ingredient, Allergy
 
 
 admin.site.register(Profile)
