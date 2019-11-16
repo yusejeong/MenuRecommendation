@@ -8,6 +8,12 @@ from django.contrib import auth
 import datetime
 #from django.template import loader
 
+import os
+import math
+import pandas as pd
+
+sim_df = pd.read_csv("similarity_matrix.csv", index_col = 0)
+
 # Create your views here.
 
     # '''
@@ -32,6 +38,7 @@ def find_user(request):
 
 # 로그인
 def signin(request):
+    
     return render(request, 'user/signin.html')
 
 def signinrequest(request):
@@ -138,9 +145,17 @@ def allergy(request):
 def allergysave(request):
     login_user = find_user(request)
     userProfile = Profile.objects.get(user_id = login_user)
+    
+    ingre_list = []
+    menu_list = []
+    for ingre in Ingredient.objects.all():
+        ingre_list.append(ingre.name)
+
+    for menu in Menu.objects.all():
+        menu_list.append(Menu.name)
 
     # 일대다
-    return render(request, 'user/hatelist.html')
+    return render(request, 'user/hatelist.html',{'ingredient_list': ingre_list, 'menu_list' : menu_list})
 
 def hatelist(request):
     return render(request, 'user/hatelist.html')
@@ -277,7 +292,34 @@ def friendlist(request):
     return render(request, 'mypage/friendlist.html')
     
 
+class food_object:
+    def __init__(self, Menu_name,Menu_text, img_ulr):
+        self.name = Menu_name
+        self.text = Menu_text
+        self.url = img_url
+
+
+
+
+
 # 기능1
 def menureco(request):
-    menu_list = Menu2.objects.all()
+    login_user = find_user(request)
+    userProfile = Profile.objects.get(user_id = login_user)
+    
+    #사용자의 싫어하는 메뉴, 싫어하는 재료, 알레르기 리스트를 로드함
+    hate_menu_list = Hate_menu.objects.filter(user_id = login_user)
+    hate_ingredient_list = Hate_ingredient.objects.filter(user_id = login_user)
+    Allergy_list = Allergy.objects.filter(user_id = login_user)
+
+    #사용자의 좋아했던 메뉴를 로드
+    history_list = History.objects.filter(user_id = login_user)
+    menu_list = []
+    
+    for food in history_list:
+        menu_name = food.menu_id        
+        cos = sim_df[str(menu_name)].sort_values(ascending=False)
+        for name in cos.head(3).index:
+            menu_list.append(Menu.objects.get(name = name))
+
     return render(request, 'menureco/menureco.html',{ 'menu_list': menu_list })

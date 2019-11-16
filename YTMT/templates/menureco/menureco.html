@@ -55,17 +55,17 @@
       <link rel="stylesheet" href='{% static "YTMT/css/menureco.css" %}'>
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
   </header>
-   {% for menu2 in menu_list %}
+   {% for menu in menu_list %}
      <div class="post">
           <div class="card">
                         <img src="https://ytmtresource.s3.ap-northeast-2.amazonaws.com/YTMT_Logo.jpg" alt="" class="center" width="auto" height="100%"/>
+
                             <div class="general" align="left">
-                            
                                 <a href="/" style="color:black; text-decoration: none;">
-                                <h3 class="card-title">{{ menu2.name }}</h3>
+                                <h3 class="card-title">{{ menu.name }}</h3>
                                 </a>
                                 <div class="card-text">
-                                    <span>{{ menu2.text }}</span>
+                                    <span>{{ menu.text }}</span>
                                 </div>
 
                                 <div class="like-img" align="right" >
