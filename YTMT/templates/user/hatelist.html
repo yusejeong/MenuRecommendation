@@ -15,12 +15,8 @@
   <script type="text/javascript" src={% static "YTMT/js/Autocomplete/jquery/jquery.autocomplete.js" %}></script>
   <link rel="stylesheet" type="text/css" href={% static "YTMT/js/Autocomplete/jquery/jquery.autocomplete.css" %}>
   <script type="text/javascript">
-    var hateelement = [
-              '새우','오이','토마토','당근','파프리카','오징어','버섯'
-              ];
-              var hatefood = [
-                        '밀푀유나베','버섯전골','굴전','오징어순대','오이냉국'
-                        ];
+    var hateelement = {{ingredient_list|safe}}; 
+    var hatefood = {{menu_list|safe}};
     $(document).ready(function() {
         $("#searchbox").autocomplete(hatefood,{
             matchContains: true,

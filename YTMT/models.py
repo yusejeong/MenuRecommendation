@@ -4,8 +4,12 @@ from django.contrib import auth
 
 # 메뉴
 class Menu(models.Model):
-    menu_id = models.IntegerField(blank = False, null = False, primary_key=True)
+    menu_id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=50, blank = False, null = False)
+    img_url = models.TextField(null=True)
+    text = models.TextField(null=True)
+    def __str__(self):
+        return self.name
 
 class Menu2(models.Model):
     menu_id = models.IntegerField(blank = False, null = False, primary_key=True)
@@ -14,14 +18,17 @@ class Menu2(models.Model):
     img = models.CharField(max_length=10000)
 
 class Ingredient(models.Model):
-    ingre_id = models.IntegerField(blank = False, null = False, primary_key=True)
+    ingre_id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=50, blank = False, null = False)
     # type(유제품/육류/어류)
+    def __str__(self):
+        return self.name
 
 class Recipe(models.Model):
     menu_id = models.ForeignKey(Menu, on_delete=models.CASCADE)
     ingre_id = models.ForeignKey(Ingredient, on_delete=models.CASCADE)
-
+    def __str__(self):
+        return self.menu_id.name + " " + self.ingre_id.name
 
 # 회원정보
 class Profile(models.Model):
@@ -50,22 +57,34 @@ class Profile(models.Model):
     birth = models.DateTimeField(blank = False, null = False)
     reli_id = models.IntegerField(choices=Religion_TYPE, default=8)
     vege_id = models.IntegerField(choices=Vegetarian_TYPE, default=8)
+    def __str__(self):
+        return self.user_id
+
 
 class Allergy(models.Model):
-    user_id = models.OneToOneField(User, on_delete = models.CASCADE)
+    user_id = models.ForeignKey(User, on_delete = models.CASCADE)
     ingre_id = models.ForeignKey(Ingredient, on_delete=models.CASCADE)
+    def __str__(self):
+        return self.user_id.username + ":" + self.ingre_id.name
 
 class Hate_menu(models.Model):
-    user_id = models.OneToOneField(User, on_delete = models.CASCADE)
+    user_id = models.ForeignKey(User, on_delete = models.CASCADE)
     menu_id = models.ForeignKey(Menu, on_delete=models.CASCADE)
-    
+    def __str__(self):
+        return self.user_id.username + ":" + self.menu_id.name
+
 class Hate_ingredient(models.Model):
-    user_id = models.OneToOneField(User, on_delete = models.CASCADE)
+    user_id = models.ForeignKey(User, on_delete = models.CASCADE)
     ingre_id = models.ForeignKey(Ingredient, on_delete=models.CASCADE)
+    
+    def __str__(self):
+        return self.user_id.username+ ":" + self.ingre_id.name
 
 class History(models.Model):
-    user_id = models.OneToOneField(User, on_delete = models.CASCADE)
+    user_id = models.ForeignKey(User, on_delete = models.CASCADE)
     menu_id = models.ForeignKey(Menu, on_delete=models.CASCADE)
+    def __str__(self):
+        return self.user_id.username + ":" + self.menu_id.name
 
 # class Relation(models.Model):
 #     user_id = models.OneToOneField(User, on_delete = models.CASCADE)

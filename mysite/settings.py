@@ -33,12 +33,12 @@ ALLOWED_HOSTS = "*"
 INSTALLED_APPS = [
     'YTMT.apps.YtmtConfig',
     'polls.apps.PollsConfig',
+    'django_extensions',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-
     'django.contrib.staticfiles',
 ]
 
@@ -78,11 +78,11 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'HOST': 'ytmtdatabase.cajybcgm143w.ap-northeast-2.rds.amazonaws.com',
-        'PORT': '3306',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'HOST': 'ytmtpostgresdb.cajybcgm143w.ap-northeast-2.rds.amazonaws.com',
+        'PORT': '5432',
         'NAME': 'ytmtdb',
-        'USER': 'admin',
+        'USER': 'YTMT',
         'PASSWORD': 'ytmt2019',
     }
 
