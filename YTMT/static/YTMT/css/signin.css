@@ -1,16 +1,17 @@
-select {
-    
-    width: 90px;
-    height: 25px;
+/*
+body {
+    margin-left: auto;
+    margin-right: auto;
 }
+*/
 
-.lang {
-    float: right;
-    margin-right: 20px;
-}
-h4 {
-    /* Hide the text. */
-    text-indent: 100%;
-    white-space: nowrap;
-    overflow: hidden;
+@media (max-width: 480px) {
+    .input-text {
+        width: 350px;
+    }
+    .btn {
+        width: 350px;
+    }
+
+
 }

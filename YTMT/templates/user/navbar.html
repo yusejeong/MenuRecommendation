@@ -1,13 +1,29 @@
 <!DOCTYPE html>
+{% load static %}
+
 <html lang= "ko">
 
 <head>
     <meta charset="utf-8">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" >
-    {% load static %}
-    <link rel="stylesheet" href={% static "YTMT/templete.css" %}>
+  
+    <link rel="stylesheet" href='{% static "YTMT/templete.css" %}'>
 
     <title>상단바</title>
+<style>
+.nav-link {
+    color: black;
+    font-weight: bold;
+    font-size: 15px;
+}
+
+@media (max-width: 480px) {
+    .container-fluid {
+        padding-left: 0;
+        padding-right: 0;
+    }
+}
+    </style>
 
 </head>
 
@@ -20,7 +36,7 @@
              <div class="container-fluid">
                 <div class="navbar-header">
                     <a class="navbar-brand" href="#">
-                        <img src="https://ytmtresource.s3.ap-northeast-2.amazonaws.com/YTMT_LOGO_mini.png" width="auto" height="40" alt="">
+                        <img src="https://ytmtresource.s3.ap-northeast-2.amazonaws.com/YTMT_LOGO_mini.png" width="auto" height="35" alt="">
                     </a>
                 </div>
                 <ul class="nav nav-pills">
@@ -35,5 +51,6 @@
     </nav>
 
 </header>
+               
 </body>
 </html>
