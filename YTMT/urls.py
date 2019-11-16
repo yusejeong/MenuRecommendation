@@ -34,7 +34,7 @@ urlpatterns = [
 
     # 메인
     path('mainpage', views.mainpage, name = 'mainpage'),
-     
+
     # 마이페이지_수정
     path('mypage', views.mypagemain, name = 'mypagemain'),
     path('mypage/infomodify', views.infomodify, name = 'infomodify'),
@@ -49,12 +49,12 @@ urlpatterns = [
     path('mypage/allergymodifysave', views.allergymodifysave, name ='allergymodifysave'),
     path('mypage/hatemodify', views.hatemodify, name ='hatemodify'),
     path('mypage/hatemodifysave', views.hatemodifysave, name ='hatemodifysave'),
-    
+
     # 마이페이지_기타
     path('mypage/history', views.history, name ='history'),
     path('mypage/friendlist', views.friendlist, name ='friendlist'),
 
     # 기능1
     path('menureco', views.menureco, name = 'menureco'),
-   
+   path('friendreco', views.friendreco, name = 'friendreco'),
 ]

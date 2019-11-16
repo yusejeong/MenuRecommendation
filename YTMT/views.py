@@ -38,7 +38,7 @@ def find_user(request):
 
 # 로그인
 def signin(request):
-    
+
     return render(request, 'user/signin.html')
 
 def signinrequest(request):
@@ -145,7 +145,7 @@ def allergy(request):
 def allergysave(request):
     login_user = find_user(request)
     userProfile = Profile.objects.get(user_id = login_user)
-    
+
     ingre_list = []
     menu_list = []
     for ingre in Ingredient.objects.all():
@@ -281,7 +281,7 @@ def hatemodify(request):
 def hatemodifysave(request):
     login_user = find_user(request)
     userProfile = Profile.objects.get(user_id = login_user)
-    
+
     return render(request, 'mypage/selectinfo.html')
 
 # 마이페이지_기타
@@ -290,7 +290,7 @@ def history(request):
 
 def friendlist(request):
     return render(request, 'mypage/friendlist.html')
-    
+
 
 class food_object:
     def __init__(self, Menu_name,Menu_text, img_ulr):
@@ -306,7 +306,7 @@ class food_object:
 def menureco(request):
     login_user = find_user(request)
     userProfile = Profile.objects.get(user_id = login_user)
-    
+
     #사용자의 싫어하는 메뉴, 싫어하는 재료, 알레르기 리스트를 로드함
     hate_menu_list = Hate_menu.objects.filter(user_id = login_user)
     hate_ingredient_list = Hate_ingredient.objects.filter(user_id = login_user)
@@ -315,11 +315,17 @@ def menureco(request):
     #사용자의 좋아했던 메뉴를 로드
     history_list = History.objects.filter(user_id = login_user)
     menu_list = []
-    
+
     for food in history_list:
-        menu_name = food.menu_id        
+        menu_name = food.menu_id
         cos = sim_df[str(menu_name)].sort_values(ascending=False)
         for name in cos.head(3).index:
             menu_list.append(Menu.objects.get(name = name))
 
     return render(request, 'menureco/menureco.html',{ 'menu_list': menu_list })
+
+    #친구와 함께 기능!
+    def friendreco(request):
+        login_user=find_user(request)
+        userProfile=Profile.objects.get(user_id=login_user)
+        friend_list=Friend
