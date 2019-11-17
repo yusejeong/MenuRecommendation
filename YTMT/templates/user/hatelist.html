@@ -15,7 +15,7 @@
   <script type="text/javascript" src={% static "YTMT/js/Autocomplete/jquery/jquery.autocomplete.js" %}></script>
   <link rel="stylesheet" type="text/css" href={% static "YTMT/js/Autocomplete/jquery/jquery.autocomplete.css" %}>
   <script type="text/javascript">
-    var hateelement = {{ingredient_list|safe}}; 
+    var hateelement = {{ingredient_list|safe}};
     var hatefood = {{menu_list|safe}};
     $(document).ready(function() {
         $("#searchbox").autocomplete(hatefood,{
@@ -108,7 +108,7 @@ document.form1.submit();
         <form name="form" class="hform"method="post" action="{% url 'YTMT:hatelistsave'%}" onsubmit="return check();">  {% csrf_token %}
 
 
-        <div style="padding:50px;">
+          <div class="row" style="padding-top:50px; padding-bottom:50px;">
     <!-- <table width="400" border="0" cellspacing="0" cellpadding="0"> -->
       <tr>
         <td colspan="2" align="left" bgcolor="#FFFFFF" align="center">
@@ -132,7 +132,7 @@ document.form1.submit();
 <span style="font-weight: bold; font-size: 1em; line-height: 2em; color: black; font-family: 'Nanum Gothic';">싫어하는 재료 </span>
   <br>
   <form name="form1" class="hform" method="post" action="{% url 'YTMT:hatelistsave'%}" onsubmit="return check1();">  {% csrf_token %}
-  <div style="padding:50px;">
+    <div class="row" style="padding-top:50px; padding-bottom:50px;">
   <!-- <table width="400" border="0" cellspacing="0" cellpadding="0"> -->
   <tr>
   <td colspan="2" align="left" bgcolor="#FFFFFF">

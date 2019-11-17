@@ -11,6 +11,7 @@
     <link rel="stylesheet" href={% static "YTMT/css/templete.css" %}>
     <link rel="stylesheet" href={% static "YTMT/css/birthandgender.css" %}>
   <script type="text/javascript">
+    document.getElementById('birth').valueAsDate = new Date();
   function checkValue()
         {
             if(!document.form.birth.value){
