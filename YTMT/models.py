@@ -4,31 +4,23 @@ from django.contrib import auth
 
 # 메뉴
 class Menu(models.Model):
-    menu_id = models.AutoField(primary_key=True)
-    name = models.CharField(max_length=50, blank = False, null = False)
+    menu = models.CharField(primary_key=True, max_length=50, blank = False, null = False)
     img_url = models.TextField(null=True)
     text = models.TextField(null=True)
     def __str__(self):
-        return self.name
-
-class Menu2(models.Model):
-    menu_id = models.IntegerField(blank = False, null = False, primary_key=True)
-    name = models.CharField(max_length=50, blank = False, null = False)
-    text = models.CharField(max_length=1000)
-    img = models.CharField(max_length=10000)
+        return self.menu
 
 class Ingredient(models.Model):
-    ingre_id = models.AutoField(primary_key=True)
-    name = models.CharField(max_length=50, blank = False, null = False)
+    ingre = models.CharField(primary_key=True, max_length=50, blank = False, null = False)
     # type(유제품/육류/어류)
     def __str__(self):
-        return self.name
+        return self.ingre
 
 class Recipe(models.Model):
-    menu_id = models.ForeignKey(Menu, on_delete=models.CASCADE)
-    ingre_id = models.ForeignKey(Ingredient, on_delete=models.CASCADE)
+    menu = models.ForeignKey(Menu, on_delete=models.CASCADE)
+    ingre = models.ForeignKey(Ingredient, on_delete=models.CASCADE)
     def __str__(self):
-        return self.menu_id.name + " " + self.ingre_id.name
+        return self.menu + " " + self.ingre
 
 # 회원정보
 class Profile(models.Model):
@@ -63,28 +55,39 @@ class Profile(models.Model):
 
 class Allergy(models.Model):
     user_id = models.ForeignKey(User, on_delete = models.CASCADE)
-    ingre_id = models.ForeignKey(Ingredient, on_delete=models.CASCADE)
+    ingre = models.ForeignKey(Ingredient, on_delete=models.CASCADE)
     def __str__(self):
-        return self.user_id.username + ":" + self.ingre_id.name
+        return self.user_id.username + ":" + self.ingre
 
 class Hate_menu(models.Model):
     user_id = models.ForeignKey(User, on_delete = models.CASCADE)
-    menu_id = models.ForeignKey(Menu, on_delete=models.CASCADE)
+    menu= models.ForeignKey(Menu, on_delete=models.CASCADE)
     def __str__(self):
-        return self.user_id.username + ":" + self.menu_id.name
+        return self.user_id.username + ":" + self.menu
 
 class Hate_ingredient(models.Model):
     user_id = models.ForeignKey(User, on_delete = models.CASCADE)
-    ingre_id = models.ForeignKey(Ingredient, on_delete=models.CASCADE)
-
+    ingre = models.ForeignKey(Ingredient, on_delete=models.CASCADE)
     def __str__(self):
-        return self.user_id.username+ ":" + self.ingre_id.name
+        return self.user_id.username+ ":" + self.ingre
 
 class History(models.Model):
     user_id = models.ForeignKey(User, on_delete = models.CASCADE)
-    menu_id = models.ForeignKey(Menu, on_delete=models.CASCADE)
+    menu = models.ForeignKey(Menu, on_delete=models.CASCADE)
     def __str__(self):
-        return self.user_id.username + ":" + self.menu_id.name
+        return self.user_id.username + ":" + self.menu
+
+class Religion(models.Model):
+    reli_id = models.ForeignKey(User, on_delete = models.CASCADE)
+    ingre = models.ForeignKey(Ingredient, on_delete=models.CASCADE)
+    def __str__(self):
+        return self.reli_id + ":" + self.ingre
+
+class Vegetarian(models.Model):
+    vege_id = models.ForeignKey(User, on_delete = models.CASCADE)
+    ingre = models.ForeignKey(Ingredient, on_delete=models.CASCADE)
+    def __str__(self):
+        return self.vege_id + ":" + self.ingre
 
 # class Friend(models.Model):
 #     user_id=models.ForeignKey(User, on_delete=models.CASCADE)
