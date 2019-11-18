@@ -68,7 +68,7 @@ def signuprequest(request):
             else:
                 user = User.objects.create_user(
                     username = request.POST["id"], password = request.POST["pwd"], email = request.POST["email"])
-            create_session(request, user.username, request.POST["pwd"])
+            request.session['username'] = id
             return render(request, 'user/birthandgender.html')
         return render(request, 'user/signup.html')
     return render(request, 'user/signup.html')
@@ -149,7 +149,8 @@ def hatelistsave(request):
     login_user = find_user(request)
     userProfile = Profile.objects.get(user_id = login_user)
 
-    signout(request)
+    request.session.modified = True
+    del request.session['username']
     return render(request, 'user/signin.html')
 
 
