@@ -1,29 +1,41 @@
 {% extends 'menureco/menulist.html' %}
 {% load staticfiles %}
 
-
 {% block content %}
-  <header>
+ {% load static %}
+
+  <head>
       <link rel="stylesheet" href='{% static "YTMT/css/menureco.css" %}'>
-  </header>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  </head>
    {% for menu in menu_list %}
      <div class="post">
-          <div class="card">
-                        <img src="https://ytmtresource.s3.ap-northeast-2.amazonaws.com/YTMT_Logo.jpg" alt="" class="center" width="auto" height="100%"/>
-                            <div class="general">                            
-                                <a href="/" style="color:black; text-decoration: none;">
-                                <h3 class="card-title">{{ menu.name }}</h3>
-                                </a>
-                                <div class="card-text">
+                <div class="firma-card row">
+                    <div class="col-md-5 img-padding-no">
+                        <div class="firma-resim">
+                            <a href="#">
+
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-md-7">
+                        <div class="firma-aciklama card-body">
+                            <h4>{{ menu.name }}</h4>
+
+                            <div class="yacht-info__list space-2">
+
+                                <div class="menutext">
                                     <span>{{ menu.text }}</span>
                                 </div>
-
+                                
+                                 <br><br>
+                            </div>
                                 <div class="like-img" align="right" >
 <!--                                <a class="navbar-brand" href="/">-->
 <!--                                   여기에 좋아요 누르면 history로 반영되도록-->
                                     <h5>
-                                    <img id="likes" src='{% static "YTMT/img/nolike.png" %}' width="40px" height="auto" onclick="likechange()">
-                                    100</h5>
+                                    <img id="likes" src='{% static "YTMT/img/nolike.png" %}' width="35px" height="auto" onclick="likechange()">
+                                    10</h5>
 <!--                                여기에 좋아요 수 계산하는거 넣어줘-->
                                     <script type="text/javascript">
                                         function likechange() {
@@ -37,9 +49,14 @@
                                         }
                                     </script>
                                 </div>
-                            </div>
-          </div>
-        </div>
+                 
+                        </div>
+                    </div>
+                </div>        
+        </div>  
+
+              
+
 
     {% endfor %}
 {% endblock %}

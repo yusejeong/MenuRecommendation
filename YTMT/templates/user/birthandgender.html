@@ -1,5 +1,6 @@
-  <!DOCTYPE html>
-<html>
+{% extends 'user/navbar.html' %}
+{% block bodycontent %}
+{% load static %}
 
 <head>
   <meta charset="UTF-8">
@@ -7,8 +8,6 @@
   <title>니맛내맛 : 생년월일입력</title>
   <link rel="stylesheet" href="https://dfzrjox9sv97l.cloudfront.net/dicons_20160930/css/common.css?201709272">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" >
-    {% load static %}
-    <link rel="stylesheet" href={% static "YTMT/css/templete.css" %}>
     <link rel="stylesheet" href={% static "YTMT/css/birthandgender.css" %}>
   <script type="text/javascript">
 
@@ -27,21 +26,6 @@ return true;
   </script>
 </head>
 
-<header>
-       <nav class="navbar navbar-light" style="background-color: #FFC81E;" id="navbar">
-             <div class="container-fluid">
-                <div class="navbar-header">
-                    <a class="navbar-brand" href="{% url 'YTMT:mainpage'%}">
-                        <img src="https://ytmtresource.s3.ap-northeast-2.amazonaws.com/YTMT_LOGO_mini.png" width="auto" height="40" alt="">
-                    </a>
-                </div>
-            </div>
-    </nav>
-
-</header>
-
-
-<body>
   <center>
     <br><br><br><br><br>
 
@@ -73,6 +57,4 @@ return true;
 
   </center>
 
-</body>
-
-</html>
+{% endblock %}
