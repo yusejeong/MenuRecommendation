@@ -75,7 +75,11 @@ def signuprequest(request):
             else:
                 user = User.objects.create_user(
                     username = request.POST["id"], password = request.POST["pwd"], email = request.POST["email"])
-            create_session(request, user.username, request.POST["pwd"])
+            #프로필 객체를 생성
+            userProfile = Profile.objects.create(user_id = user, birth = datetime.datetime.now())
+            userProfile.name = request.POST["name"]
+            userProfile.save()
+            request.session['username'] = request.POST["id"]
             return render(request, 'user/birthandgender.html')
         return render(request, 'user/signup.html')
     return render(request, 'user/signup.html')
@@ -85,8 +89,7 @@ def birthandgender(request):
 
 def birthandgendersave(request):
     login_user = find_user(request)
-    #프로필 객체를 생성
-    userProfile = Profile.objects.create(user_id = login_user, birth = datetime.datetime.now())
+    userProfile = Profile.objects.get(user_id = login_user)
 
     # 성별 구분
     gender = request.POST.get("gender")
@@ -164,7 +167,8 @@ def hatelistsave(request):
     login_user = find_user(request)
     userProfile = Profile.objects.get(user_id = login_user)
 
-    signout(request)
+    request.session.modified = True
+    del request.session['username']
     return render(request, 'user/signin.html')
 
 
@@ -197,6 +201,10 @@ def mainpage(request):
 def mypagemain(request):
     return render(request, 'mypage/mypagemain.html')
 
+# 마이페이지_개인정보 수정
+def selectinfo(request):
+    return render(request, 'mypage/selectinfo.html')
+
 def infomodify(request):
     return render(request, 'mypage/infomodify.html')
 
@@ -213,31 +221,10 @@ def infomodifysave(request):
                 else:
                     login_user.email = request.POST["email"]
                 login_user.save()
-                return render(request, 'mypage/mypagemain.html')
-            return render(request,'mypage/infomodify.html')
-        return render(request,'mypage/infomodify.html')
-    return render(request,'mypage/infomodify.html')
-
-def infomodifynext(request):
-    login_user = find_user(request)
-
-    if request.method == "POST":
-        if request.POST["pwd"] == request.session.get('password'):
-            if request.POST["newpwd"] == request.POST["pwdchk"]:
-                login_user.set_password(request.POST["newpwd"])
-                request.session['password'] = request.POST["newpwd"]
-                if request.POST["email2"] != "etc":
-                    login_user.email = request.POST["email"] + "@" + request.POST["email2"]
-                else:
-                    login_user.email = request.POST["email"]
-                login_user.save()
                 return render(request, 'mypage/selectinfo.html')
             return render(request,'mypage/infomodify.html')
         return render(request,'mypage/infomodify.html')
     return render(request,'mypage/infomodify.html')
-
-def selectinfo(request):
-    return render(request, 'mypage/selectinfo.html')
 
 def religionmodify(request):
     return render(request, 'mypage/religionmodify.html')
@@ -324,9 +311,9 @@ def menureco(request):
 
     return render(request, 'menureco/menureco.html',{ 'menu_list': menu_list })
 
-    # 친구와 함께 기능!
-    def friendreco(request):
-        login_user=find_user(request)
-        userProfile=Profile.objects.get(user_id=login_user)
-        friend_list=Friend_list.objects.filter(user_id = login_user)
-        return render(request, 'menureco/friendreco.html')
+    #친구와 함께 기능!
+#     def friendreco(request):
+#         login_user=find_user(request)
+#         userProfile=Profile.objects.get(user_id=login_user)
+#         friend_list=Friend
+#         return render(request, 'menureco/friendreco.html')

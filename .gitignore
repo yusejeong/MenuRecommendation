@@ -7,3 +7,4 @@ venvReq.txt
 .ipynb_checkpoints/
 __pycache__/
 *.ipynb
+.csv
