@@ -15,8 +15,10 @@
   <script type="text/javascript" src={% static "YTMT/js/Autocomplete/jquery/jquery.autocomplete.js" %}></script>
   <link rel="stylesheet" type="text/css" href={% static "YTMT/js/Autocomplete/jquery/jquery.autocomplete.css" %}>
   <script type="text/javascript">
+
     var hateelement = {{ingredient_list|safe}};
     var hatefood = {{menu_list|safe}};
+
     $(document).ready(function() {
         $("#searchbox").autocomplete(hatefood,{
             matchContains: true,
