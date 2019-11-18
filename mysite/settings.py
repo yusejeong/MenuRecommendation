@@ -78,8 +78,8 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'HOST': 'ytmtpostgresdb.cajybcgm143w.ap-northeast-2.rds.amazonaws.com',
-        'PORT': '5432',
+        'HOST': 'ytmtpostgres.cajybcgm143w.ap-northeast-2.rds.amazonaws.com',
+        'PORT': '4400',
         'NAME': 'ytmtdb',
         'USER': 'YTMT',
         'PASSWORD': 'ytmt2019',
