@@ -1,5 +1,5 @@
 
-button {
+.button {
 
   background-color: #000000;
   border: none;
@@ -14,12 +14,12 @@ button {
   font-weight: bold;
 
   margin: 4px 1px;
-
+  
   cursor: pointer;
 }
 
 
-button2 {
+.button2 {
 
   background-color: #000000;
   border: none;

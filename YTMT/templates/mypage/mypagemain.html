@@ -3,18 +3,18 @@
 {% load static %}
 
 <head>
+    <meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 	<link rel="stylesheet" href="https://dfzrjox9sv97l.cloudfront.net/dicons_20160930/css/common.css?201709272">
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" >
 	 <link rel="stylesheet" type="text/css" href={% static "YTMT/css/mypagemain.css" %}>
 </head>
+{% csrf_token %}
 
-
-<!--<body>-->
 	<center>
 		<br><br><br>
-{% csrf_token %}
+
 		<br>
 		<a href="{% url 'YTMT:selectinfo'%}"><button class="button"> 회원정보수정 </button></a>
 		<br>
@@ -26,9 +26,5 @@
 					<br>
 
 	</center>
-<!--
-</body>
 
-</html>
--->
 {% endblock %}
