@@ -155,7 +155,7 @@ def allergysave(request):
         menu_list.append(Menu.name)
 
     # 일대다
-    return render(request, 'user/hatelist.html',{'ingredient_list': ingre_list, 'menu_list' : menu_list})
+    return render(request, 'user/hatelist.html',{'ingredient_list': ingre_list})
 
 def hatelist(request):
     return render(request, 'user/hatelist.html')
