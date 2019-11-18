@@ -56,5 +56,5 @@ urlpatterns = [
 
     # 기능1
     path('menureco', views.menureco, name = 'menureco'),
-   # path('friendreco', views.friendreco, name = 'friendreco')
+    path('friendreco', views.friendreco, name = 'friendreco')
 ]
