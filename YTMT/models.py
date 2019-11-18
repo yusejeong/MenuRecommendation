@@ -28,6 +28,7 @@ class Recipe(models.Model):
 # 회원정보
 class Profile(models.Model):
     user_id = models.OneToOneField(User, on_delete = models.CASCADE)
+    name = models.CharField(max_length=50, blank = False, null = False)
 
     Gender_TYPE = (
         (1, "남자"),
@@ -58,6 +59,10 @@ class Profile(models.Model):
 
     def __str__(self):
         return self.user_id
+
+    @classmethod
+    def full_info(cls, current_user):
+        return self.user_id.username + ":" + self.user_id.email + ":" + self.name + ":" + self.gender.choices + ":" + self.birth + ":" + self.reli_id.choices + ":" + self.vege_id.choices
 
 
 class Allergy(models.Model):
