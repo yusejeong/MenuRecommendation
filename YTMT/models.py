@@ -4,18 +4,21 @@ from django.contrib import auth
 
 # 메뉴
 class Menu(models.Model):
-    
-    name = models.CharField(primary_key=True, max_length=50, blank = False, null = False)
-    img_url = models.ImageField(null=True, max_length=50)
+    id = models.AutoField(primary_key=True)
+    name = models.CharField(max_length=50, blank = False, null = False)
+    img_url = models.ImageField(null=True, max_length=100)
     text = models.TextField(null=True)
 
     likes = models.IntegerField(default= 0)
+
     def __str__(self):
         return self.name
         
-class Ingredient(models.Model):
-    name = models.CharField(primary_key=True, max_length=50, blank = False, null = False)
+class Ingredient(models.Model):    
+    id = models.AutoField(primary_key=True)
+    name = models.CharField(max_length=50, blank = False, null = False)
     # type(유제품/육류/어류)
+
     def __str__(self):
         return self.name
 
