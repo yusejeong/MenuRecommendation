@@ -13,19 +13,24 @@
 </head>
 
 <body>
-    <center>
-        <form name="form" id="frm_login" method="POST" action="{% url 'YTMT:signinrequest'%}">
+  <center>
+    <form name="form" id="frm_login" method="POST" action="{% url 'YTMT:signinrequest'%}">
+
       {% csrf_token %}
+      <br>
+        <span style="font-weight: bold; font-size: 1.5em; line-height: 2em; color: black; font-family: 'Nanum Gothic';">로그인 및 회원가입 </span>
+        <br><br>
+
       <div class="container">
         <div class="row">
           <input name="retURL" type="hidden" value="https://.com/">
 
-          <div class="login">
-            <div class="title" >로그인 및 회원가입</div>
-            <img src="https://ytmtresource.s3.ap-northeast-2.amazonaws.com/YTMT_Logo.jpg" width="200" height="auto"  style="padding-bottom: 10px">
-              <input id="id" name = "username" type="text" class="input-text" placeholder="아이디 입력" style="margin-bottom:7px;">
-              <input id="pw" name = "password" type="password" class="input-text" placeholder="비밀번호 입력">
-              
+
+            <img src="https://ytmtresource.s3.ap-northeast-2.amazonaws.com/YTMT_Logo.jpg" width="200" height="auto" style="padding-bottom: 10px">
+            <div>
+              <input id="id" name="username" type="text" class="input-text" placeholder="아이디 입력" style="margin-bottom:7px;">
+              <input id="pw" name="password" type="password" class="input-text" placeholder="비밀번호 입력">
+            </div>
             <div style="padding:24px 0;">
               <div class="clear"></div>
             </div>
@@ -56,8 +61,10 @@
 
                   
           </div>
+
+
+    </div>
         </form>
-    </center>
-    </body>  
-</html>  
+    <center>
+</body>
 

@@ -39,7 +39,6 @@ urlpatterns = [
     path('mypage', views.mypagemain, name = 'mypagemain'),
     path('mypage/infomodify', views.infomodify, name = 'infomodify'),
     path('mypage/infomodifysave', views.infomodifysave, name = 'infomodifysave'),
-    path('mypage/infomodifynext', views.infomodifynext, name = 'infomodifynext'),
     path('mypage/selectinfo', views.selectinfo, name ='selectinfo'),
     path('mypage/religionmodify', views.religionmodify, name ='religionmodify'),
     path('mypage/religionmodifysave', views.religionmodifysave, name ='religionmodifysave'),
@@ -56,5 +55,5 @@ urlpatterns = [
 
     # 기능1
     path('menureco', views.menureco, name = 'menureco'),
-   # path('friendreco', views.friendreco, name = 'friendreco')
+    path('friendreco', views.friendreco, name = 'friendreco')
 ]

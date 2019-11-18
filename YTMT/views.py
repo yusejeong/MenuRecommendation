@@ -214,28 +214,28 @@ def infomodifysave(request):
                 else:
                     login_user.email = request.POST["email"]
                 login_user.save()
-                return render(request, 'mypage/mypagemain.html')
-            return render(request,'mypage/infomodify.html')
-        return render(request,'mypage/infomodify.html')
-    return render(request,'mypage/infomodify.html')
-
-def infomodifynext(request):
-    login_user = find_user(request)
-
-    if request.method == "POST":
-        if request.POST["pwd"] == request.session.get('password'):
-            if request.POST["newpwd"] == request.POST["pwdchk"]:
-                login_user.set_password(request.POST["newpwd"])
-                request.session['password'] = request.POST["newpwd"]
-                if request.POST["email2"] != "etc":
-                    login_user.email = request.POST["email"] + "@" + request.POST["email2"]
-                else:
-                    login_user.email = request.POST["email"]
-                login_user.save()
                 return render(request, 'mypage/selectinfo.html')
             return render(request,'mypage/infomodify.html')
         return render(request,'mypage/infomodify.html')
     return render(request,'mypage/infomodify.html')
+
+# def infomodifynext(request):
+#     login_user = find_user(request)
+#
+#     if request.method == "POST":
+#         if request.POST["pwd"] == request.session.get('password'):
+#             if request.POST["newpwd"] == request.POST["pwdchk"]:
+#                 login_user.set_password(request.POST["newpwd"])
+#                 request.session['password'] = request.POST["newpwd"]
+#                 if request.POST["email2"] != "etc":
+#                     login_user.email = request.POST["email"] + "@" + request.POST["email2"]
+#                 else:
+#                     login_user.email = request.POST["email"]
+#                 login_user.save()
+#                 return render(request, 'mypage/selectinfo.html')
+#             return render(request,'mypage/infomodify.html')
+#         return render(request,'mypage/infomodify.html')
+#     return render(request,'mypage/infomodify.html')
 
 def selectinfo(request):
     return render(request, 'mypage/selectinfo.html')
