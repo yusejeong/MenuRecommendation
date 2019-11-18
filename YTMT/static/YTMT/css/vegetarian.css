@@ -14,7 +14,7 @@ FORM {
 
 
 .row {
-  width: 100%;
+  width: 40%;
   display: table;
 }
 
@@ -32,4 +32,12 @@ FORM {
 .box-b {
   width: 50%;
   text-align: center;
+}
+
+@media (max-width: 480px) {
+  .row {
+    width: 100%;
+    display: table;
+  }
+
 }
