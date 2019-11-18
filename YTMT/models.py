@@ -94,7 +94,7 @@ class Vegetarian_case(models.Model):
     ingre = models.ForeignKey(Ingredient, on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.Vegetarian_TYPE(self.vege_id) + " : " + self.menu.name
+        return self.Vegetarian_TYPE(self.vege_id) + " : " + self.ingre.name
 
 class Religion_case(models.Model):
 
@@ -109,7 +109,7 @@ class Religion_case(models.Model):
     ingre = models.ForeignKey(Ingredient, on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.Religion_TYPE(self.reli_id) + " : " + self.menu.name
+        return self.Religion_TYPE(self.reli_id) + " : " + self.ingre.name
 
 class History(models.Model):
     user_id = models.ForeignKey(User, on_delete = models.CASCADE)
