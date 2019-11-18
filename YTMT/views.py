@@ -155,7 +155,7 @@ def allergysave(request):
         menu_list.append(Menu.name)
 
     # 일대다
-    return render(request, 'user/hatelist.html',{'ingredient_list': ingre_list, 'menu_list' : menu_list})
+    return render(request, 'user/hatelist.html',{'ingredient_list': ingre_list})
 
 def hatelist(request):
     return render(request, 'user/hatelist.html')
@@ -324,8 +324,9 @@ def menureco(request):
 
     return render(request, 'menureco/menureco.html',{ 'menu_list': menu_list })
 
-    # #친구와 함께 기능!
+    #친구와 함께 기능!
     # def friendreco(request):
     #     login_user=find_user(request)
     #     userProfile=Profile.objects.get(user_id=login_user)
     #     friend_list=Friend
+    #     return render(request, 'menureco/friendreco.html')
