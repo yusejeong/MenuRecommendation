@@ -1,5 +1,5 @@
 
-button {
+.button {
 
   background-color: #000000;
   border: none;
@@ -10,32 +10,30 @@ button {
 
   display: inline-block;
 
-  font-size: 30px;
+  font-size: 18px;
   font-weight: bold;
 
   margin: 4px 1px;
-
+  
   cursor: pointer;
-
 }
 
 
-button2 {
+.button2 {
 
   background-color: #000000;
   border: none;
-  padding: 25px 55px;
+  padding: 25px 61px;
   text-align: center;
 
   text-decoration: none;
 
   display: inline-block;
 
-  font-size: 30px;
+  font-size: 18px;
   font-weight: bold;
 
   margin: 4px 1px;
 
   cursor: pointer;
-
 }

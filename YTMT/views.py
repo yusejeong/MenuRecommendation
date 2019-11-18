@@ -75,7 +75,7 @@ def signuprequest(request):
             else:
                 user = User.objects.create_user(
                     username = request.POST["id"], password = request.POST["pwd"], email = request.POST["email"])
-            create_session(request, user.username, request.POST["pwd"])
+            request.session['username'] = request.POST["id"]
             return render(request, 'user/birthandgender.html')
         return render(request, 'user/signup.html')
     return render(request, 'user/signup.html')
@@ -164,7 +164,8 @@ def hatelistsave(request):
     login_user = find_user(request)
     userProfile = Profile.objects.get(user_id = login_user)
 
-    signout(request)
+    request.session.modified = True
+    del request.session['username']
     return render(request, 'user/signin.html')
 
 
@@ -325,8 +326,8 @@ def menureco(request):
     return render(request, 'menureco/menureco.html',{ 'menu_list': menu_list })
 
     #친구와 함께 기능!
-    # def friendreco(request):
-    #     login_user=find_user(request)
-    #     userProfile=Profile.objects.get(user_id=login_user)
-    #     friend_list=Friend
-    #     return render(request, 'menureco/friendreco.html')
+#     def friendreco(request):
+#         login_user=find_user(request)
+#         userProfile=Profile.objects.get(user_id=login_user)
+#         friend_list=Friend
+#         return render(request, 'menureco/friendreco.html')

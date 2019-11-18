@@ -1,4 +1,7 @@
-<html>
+{% extends 'user/navbar.html' %}
+{% block bodycontent %}
+{% load static %}
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -6,9 +9,7 @@
   <title>니맛내맛 : 싫어하는 음식 및 재료 선택</title>
   <link rel="stylesheet" href="https://dfzrjox9sv97l.cloudfront.net/dicons_20160930/css/common.css?201709272">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
-  {% load static %}
   <link rel="stylesheet" type="text/css" href={% static "YTMT/css/hate.css" %}>
-  <link rel="stylesheet" href={% static "YTMT/css/templete.css" %}>
   <script type="text/javascript" src={% static "YTMT/js/Autocomplete/jquery/lib/jquery.js" %}></script>
   <script type="text/javascript" src={% static "YTMT/js/Autocomplete/jquery/lib/jquery.bgiframe.min.js" %}></script>
   <script type="text/javascript" src={% static "YTMT/js/Autocomplete/jquery/lib/jquery.ajaxQueue.js" %}></script>
@@ -89,19 +90,7 @@ document.form1.submit();
 }
     </script>
   </head>
-  <body>
-    <header>
-           <nav class="navbar navbar-light" style="background-color: #FFC81E;" id="navbar">
-                 <div class="container-fluid">
-                    <div class="navbar-header">
-                        <a class="navbar-brand" href="{% url 'YTMT:mainpage'%}">
-                            <img src="https://ytmtresource.s3.ap-northeast-2.amazonaws.com/YTMT_LOGO_mini.png" width="auto" height="40" alt="">
-                        </a>
-                    </div>
-                </div>
-        </nav>
 
-    </header>
     <center>
       <br>
       <span style="font-weight: bold; font-size: 2em; line-height: 2em; color: black; font-family: 'Nanum Gothic';">개인적 식성 </span>
@@ -155,5 +144,4 @@ document.form1.submit();
 
   <input type="submit"id="btn_join"  onclick="twosend()"class="btn btn-pink w200" style="font-weight:bold;background-color: #fd7e14;width:250pt;margin-top:12px;"value="회원가입 완료">
 </center>
-</body>
-  <html>
+{% endblock %}

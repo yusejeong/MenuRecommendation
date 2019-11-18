@@ -1,6 +1,6 @@
-<!DOCTYPE html>
-  {% load static %}
-<html>
+{% extends 'user/navbar.html' %}
+{% block bodycontent %}
+{% load static %}
 
 <head>
   <meta charset="UTF-8">
@@ -8,27 +8,11 @@
   <title>니맛내맛 : 채식주의자 선택</title>
   <link rel="stylesheet" href="https://dfzrjox9sv97l.cloudfront.net/dicons_20160930/css/common.css?201709272">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
-
-  <link rel="stylesheet" href={% static "YTMT/css/templete.css" %}>
   <link rel="stylesheet" href={% static "YTMT/css/vegetarian.css" %}>
 
 
 </head>
-<header>
-       <nav class="navbar navbar-light" style="background-color: #FFC81E;" id="navbar">
-             <div class="container-fluid">
-                <div class="navbar-header">
-                    <a class="navbar-brand" href="{% url 'YTMT:mainpage'%}">
-                        <img src="https://ytmtresource.s3.ap-northeast-2.amazonaws.com/YTMT_LOGO_mini.png" width="auto" height="40" alt="">
-                    </a>
-                </div>
-            </div>
-    </nav>
 
-</header>
-
-
-<body>
   <center>
     <form name="form" method="post" action="{% url 'YTMT:vegetariansave' %}" onsubmit="">
 {% csrf_token %}
@@ -95,10 +79,7 @@
 <br>
       <input type="submit" id="btn_join" class="btn btn-pink w200" style="font-weight:bold;background-color: #fd7e14;width:250pt;" value="next">
 </form>
-    </form>
+
   </center>
 
-
-</body>
-
-</html>
+{% endblock %}
