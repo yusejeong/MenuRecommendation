@@ -71,7 +71,11 @@
       <form name="form" method="post" action= "{% url 'YTMT:signuprequest'%}" onsubmit="return checkValue()">
             {% csrf_token %}
     <table border="0" cellspacing="0" frame="void">
-
+      <tr>
+        <th style="float:left;">이름 </th></tr>
+        <td>
+          <input type="text" style="width:120pt;" name="name" id="name" placeholder="이름을 입력해주세요" />
+        </td>
 
         <tr>
           <th style="float:left;">아이디 </th></tr>
