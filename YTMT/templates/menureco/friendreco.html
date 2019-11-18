@@ -1,36 +1,39 @@
 <!DOCTYPE html>
+{% load static %}
+{% load staticfiles %}
 <html>
 
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <link rel="stylesheet" href="https://dfzrjox9sv97l.cloudfront.net/dicons_20160930/css/common.css?201709272">
       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" >
-      <script type="text/javascript" src="Autocomplete/jquery/lib/jquery.js"></script>
-      <script type="text/javascript" src="Autocomplete/jquery/lib/jquery.bgiframe.min.js"></script>
-      <script type="text/javascript" src="Autocomplete/jquery/lib/jquery.ajaxQueue.js"></script>
-      <script type="text/javascript" src="Autocomplete/jquery/jquery.autocomplete.js"></script>
-      <link rel="stylesheet" type="text/css" href="Autocomplete/jquery/jquery.autocomplete.css">
+      <script type="text/javascript" src={% static "YTMT/js/Autocomplete/jquery/lib/jquery.js" %}></script>
+      <script type="text/javascript" src={% static "YTMT/js/Autocomplete/jquery/lib/jquery.bgiframe.min.js" %}></script>
+      <script type="text/javascript" src={% static "YTMT/js/Autocomplete/jquery/lib/jquery.ajaxQueue.js" %}></script>
+      <script type="text/javascript" src={% static "YTMT/js/Autocomplete/jquery/jquery.autocomplete.js" %}></script>
+      <link rel="stylesheet" type="text/css" href={% static "YTMT/js/Autocomplete/jquery/jquery.autocomplete.css" %}>
 
-  <link rel="stylesheet" href="main.css">
-  <!-- <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css">
-  <script src="//code.jquery.com/jquery.min.js"></script>
-  <script src="//maxcdn.bootstrapcdn.com/bootstrap/latest/js/bootstrap.min.js"></script> -->
+<link rel="stylesheet" href='{% static "YTMT/css/main.css" %}'>
+	<link rel="stylesheet" href={% static "YTMT/css/templete.css" %}>
 
 
-<header>
-       <nav class="navbar navbar-light" style="background-color: #FFC81E;" id="navbar">
-             <div class="container-fluid">
-                <div class="navbar-header">
-                    <a class="navbar-brand" href="{% url 'YTMT:mainpage'%}">
-                        <img src="https://ytmtresource.s3.ap-northeast-2.amazonaws.com/YTMT_LOGO_mini.png" width="auto" height="40" alt="">
-                    </a>
-                </div>
-            </div>
-    </nav>
-
-</header>
-
+  <header>
+      <nav class="navbar navbar-light" style="background-color: #FFC81E;" id="navbar">
+           <div class="container-fluid">
+      <a class="navbar-brand" href="/">
+          <img src="https://ytmtresource.s3.ap-northeast-2.amazonaws.com/YTMT_LOGO_mini.png" width="auto" height="40" alt="">
+      </a>
+      <ul class="nav nav-pills">
+          <li class="nav-item">
+              <a class="nav-link" style="color:black; font-weight: bold;" href="{% url 'YTMT:signout'%}">로그아웃</a>
+          </li>
+          <li class="nav-item">
+              <a class="nav-link" style="color:black; font-weight: bold;" href="{% url 'YTMT:mypagemain'%}">마이페이지</a>
+          </li>
+      </ul>
+          </div>
+  </nav>
+  </header>
 <body>
   <center>
     <br><br><br><br><br>
@@ -42,6 +45,7 @@
     </span>
     <br><br><br><br>
       <form name="form" method="post" action= "{% url 'YTMT:menureco'%}" onsubmit="return check()">
+            {% csrf_token %}
         <span style="font-weight: bold; font-size:1em; line-height: 2em; color: black; font-family: 'Nanum Gothic';">
         같이 먹을 친구들
         </span>
@@ -97,7 +101,7 @@
           }
           </script>
         <div style="padding:50px;">
-    <table width="400" border="0" cellspacing="0" cellpadding="0">
+    <!-- <table width="400" border="0" cellspacing="0" cellpadding="0"> -->
       <tr>
         <td colspan="2" align="left" bgcolor="#FFFFFF" align="center">
           <table width="100%" border="0" cellpadding="0" cellspacing="0">
