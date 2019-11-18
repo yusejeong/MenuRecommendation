@@ -62,11 +62,7 @@ class Profile(models.Model):
     vege_id = models.IntegerField(choices=Vegetarian_TYPE, default=8)
 
     def __str__(self):
-        return self.user_id
-
-    @classmethod
-    def full_info(cls, current_user):
-        return self.user_id.username + ":" + self.user_id.email + ":" + self.name + ":" + self.gender.choices + ":" + self.birth + ":" + self.reli_id.choices + ":" + self.vege_id.choices
+        return self.user_id.username
 
 
 class Allergy(models.Model):
