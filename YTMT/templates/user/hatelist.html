@@ -17,7 +17,7 @@
   <script type="text/javascript">
 
     var hateelement = {{ingredient_list|safe}};
-    var hatefood = {{menu_list|safe}};
+    var hatefood = [];
 
     $(document).ready(function() {
         $("#searchbox").autocomplete(hatefood,{
@@ -155,7 +155,7 @@ document.form1.submit();
   </div>
   </form>
 
-  <input type="submit"id="btn_join"  onclick="twosend();"class="btn btn-pink w200" style="font-weight:bold;background-color: #fd7e14;width:250pt;margin-top:12px;"value="회원가입 완료">
+  <input type="submit"id="btn_join"  onclick="twosend()"class="btn btn-pink w200" style="font-weight:bold;background-color: #fd7e14;width:250pt;margin-top:12px;"value="회원가입 완료">
 </center>
 </body>
   <html>

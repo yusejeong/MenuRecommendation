@@ -4,43 +4,26 @@ from django.contrib import auth
 
 # 메뉴
 class Menu(models.Model):
-<<<<<<< HEAD
-    menu = models.CharField(primary_key=True, max_length=50, blank = False, null = False)
-    img_url = models.TextField(null=True)
-=======
     name = models.CharField(primary_key=True, max_length=50, blank = False, null = False)
     img_url = models.ImageField(null=True, max_length=50)
->>>>>>> origin/master
     text = models.TextField(null=True)
 
     likes = models.IntegerField(default= 0)
     def __str__(self):
-<<<<<<< HEAD
-        return self.menu
-
-class Ingredient(models.Model):
-    ingre = models.CharField(primary_key=True, max_length=50, blank = False, null = False)
-=======
         return self.name
         
 class Ingredient(models.Model):
     name = models.CharField(primary_key=True, max_length=50, blank = False, null = False)
->>>>>>> origin/master
     # type(유제품/육류/어류)
     def __str__(self):
-        return self.ingre
+        return self.name
 
 class Recipe(models.Model):
     menu = models.ForeignKey(Menu, on_delete=models.CASCADE)
     ingre = models.ForeignKey(Ingredient, on_delete=models.CASCADE)
-<<<<<<< HEAD
-    def __str__(self):
-        return self.menu + " " + self.ingre
-=======
  
     def __str__(self):
         return self.menu.name + " " + self.ingre.name
->>>>>>> origin/master
 
 # 회원정보
 class Profile(models.Model):
@@ -80,16 +63,6 @@ class Profile(models.Model):
 class Allergy(models.Model):
     user_id = models.ForeignKey(User, on_delete = models.CASCADE)
     ingre = models.ForeignKey(Ingredient, on_delete=models.CASCADE)
-<<<<<<< HEAD
-    def __str__(self):
-        return self.user_id.username + ":" + self.ingre
-
-class Hate_menu(models.Model):
-    user_id = models.ForeignKey(User, on_delete = models.CASCADE)
-    menu= models.ForeignKey(Menu, on_delete=models.CASCADE)
-    def __str__(self):
-        return self.user_id.username + ":" + self.menu
-=======
 
     def __str__(self):
         return self.user_id.username + ":" + self.ingre.name
@@ -100,34 +73,11 @@ class Hate_menu(models.Model):
     
     def __str__(self):
         return self.user_id.username + " : " + self.menu.name
->>>>>>> origin/master
 
     
 class Hate_ingredient(models.Model):
     user_id = models.ForeignKey(User, on_delete = models.CASCADE)
     ingre = models.ForeignKey(Ingredient, on_delete=models.CASCADE)
-<<<<<<< HEAD
-    def __str__(self):
-        return self.user_id.username+ ":" + self.ingre
-
-class History(models.Model):
-    user_id = models.ForeignKey(User, on_delete = models.CASCADE)
-    menu = models.ForeignKey(Menu, on_delete=models.CASCADE)
-    def __str__(self):
-        return self.user_id.username + ":" + self.menu
-
-class Religion(models.Model):
-    reli_id = models.ForeignKey(User, on_delete = models.CASCADE)
-    ingre = models.ForeignKey(Ingredient, on_delete=models.CASCADE)
-    def __str__(self):
-        return self.reli_id + ":" + self.ingre
-
-class Vegetarian(models.Model):
-    vege_id = models.ForeignKey(User, on_delete = models.CASCADE)
-    ingre = models.ForeignKey(Ingredient, on_delete=models.CASCADE)
-    def __str__(self):
-        return self.vege_id + ":" + self.ingre
-=======
 
     def __str__(self):
         return self.user_id.username + " : " + self.ingre.name
@@ -144,7 +94,7 @@ class Vegetarian_case(models.Model):
     ingre = models.ForeignKey(Ingredient, on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.Vegetarian_TYPE(self.vege_id) + " : " + self.menu.name
+        return self.Vegetarian_TYPE(self.vege_id) + " : " + self.ingre.name
 
 class Religion_case(models.Model):
 
@@ -159,7 +109,7 @@ class Religion_case(models.Model):
     ingre = models.ForeignKey(Ingredient, on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.Religion_TYPE(self.reli_id) + " : " + self.menu.name
+        return self.Religion_TYPE(self.reli_id) + " : " + self.ingre.name
 
 class History(models.Model):
     user_id = models.ForeignKey(User, on_delete = models.CASCADE)
@@ -167,7 +117,6 @@ class History(models.Model):
 
     def __str__(self):
         return self.user_id.username + " : " + self.menu.name
->>>>>>> origin/master
 
 class Restaurant(models.Model):
     rest_id = models.AutoField(primary_key=True)
