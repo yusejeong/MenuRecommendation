@@ -311,9 +311,5 @@ def menureco(request):
 
     return render(request, 'menureco/menureco.html',{ 'menu_list': menu_list })
 
-    #친구와 함께 기능!
-#     def friendreco(request):
-#         login_user=find_user(request)
-#         userProfile=Profile.objects.get(user_id=login_user)
-#         friend_list=Friend
-#         return render(request, 'menureco/friendreco.html')
+def friendreco(request):
+    return render(request, 'menureco/friendreco.html')
