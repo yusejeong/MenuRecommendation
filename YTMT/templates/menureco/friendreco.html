@@ -13,19 +13,19 @@
       <script type="text/javascript" src={% static "YTMT/js/Autocomplete/jquery/jquery.autocomplete.js" %}></script>
       <link rel="stylesheet" type="text/css" href={% static "YTMT/js/Autocomplete/jquery/jquery.autocomplete.css" %}>
 
-<link rel="stylesheet" href='{% static "YTMT/css/main.css" %}'>
+<link rel="stylesheet" href='{% static "YTMT/css/allergy.css" %}'>
 
 
 <!--<body>-->
   <center>
-    <br><br><br><br><br>
+    <br><br>
     <span style="font-weight: bold; font-size: 2em; line-height: 2em; color: black; font-family: 'Nanum Gothic';">
      친구와 함께 하는 메뉴 추천
    </span><br>
     <span style="font-weight: bold; font-size: 1em; line-height: 2em; color: black; font-family: 'Nanum Gothic';">
     친구를 검색해서 함께 먹을 음식을 추천 받으세요!
     </span>
-    <br><br><br><br>
+    <br><br><br>
       <form name="form" method="post" action= "{% url 'YTMT:menureco'%}" onsubmit="return check()">
             {% csrf_token %}
         <span style="font-weight: bold; font-size:1em; line-height: 2em; color: black; font-family: 'Nanum Gothic';">
@@ -82,8 +82,7 @@
             list.deleteRow(list.clickedRowIndex);
           }
           </script>
-        <div style="padding:50px;">
-    <!-- <table width="400" border="0" cellspacing="0" cellpadding="0"> -->
+          <div class="row" style="padding-bottom:50px;">
       <tr>
         <td colspan="2" align="left" bgcolor="#FFFFFF" align="center">
           <table width="100%" border="0" cellpadding="0" cellspacing="0">
@@ -92,8 +91,6 @@
               <input name="addButton" id="addbutton" type="button" style="cursor:hand" onClick="insRow();" value="추가"></td></table></td>
            </tr>
 
-
-      </table>
       <tr>
        <td height="25" align="center"  >
          <table id="addTable" width="200" cellspacing="0" cellpadding="0" bgcolor="#FFFFFF" border="0">
