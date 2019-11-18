@@ -35,8 +35,8 @@ class Profile(models.Model):
     )
 
     Religion_TYPE = (
-        (1, "힌두교"), (2, "불교"), 
-        (3, "기독교"), (4, "천주교"), 
+        (1, "힌두교"), (2, "불교"),
+        (3, "기독교"), (4, "천주교"),
         (5, "이슬람교"), (6, "유대교"),
         (7, "시크교도"), (8, "무교"),
     )
@@ -92,7 +92,7 @@ class Vegetarian_case(models.Model):
     )
     vege_id = models.IntegerField(choices=Vegetarian_TYPE, default=8)
     ingre = models.ForeignKey(Ingredient, on_delete=models.CASCADE)
-    
+
     def __str__(self):
         return self.Vegetarian_TYPE(self.vege_id) + " : " + self.menu.name
 

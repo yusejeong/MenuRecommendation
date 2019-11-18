@@ -3,7 +3,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  <title>니맛내맛 : 알레르기 선택</title>
+  <title>니맛내맛 : 싫어하는 음식 및 재료 선택</title>
   <link rel="stylesheet" href="https://dfzrjox9sv97l.cloudfront.net/dicons_20160930/css/common.css?201709272">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
   {% load static %}
@@ -15,8 +15,10 @@
   <script type="text/javascript" src={% static "YTMT/js/Autocomplete/jquery/jquery.autocomplete.js" %}></script>
   <link rel="stylesheet" type="text/css" href={% static "YTMT/js/Autocomplete/jquery/jquery.autocomplete.css" %}>
   <script type="text/javascript">
-    var hateelement = {{ingredient_list|safe}}; 
-    var hatefoodl = [];
+
+    var hateelement = {{ingredient_list|safe}};
+    var hatefood = {{menu_list|safe}};
+
     $(document).ready(function() {
         $("#searchbox").autocomplete(hatefood,{
             matchContains: true,
@@ -108,8 +110,8 @@ document.form1.submit();
         <form name="form" class="hform"method="post" action="{% url 'YTMT:hatelistsave'%}" onsubmit="return check();">  {% csrf_token %}
 
 
-        <div style="padding:50px;">
-    <table width="400" border="0" cellspacing="0" cellpadding="0">
+          <div class="row" style="padding-top:50px; padding-bottom:50px;">
+    <!-- <table width="400" border="0" cellspacing="0" cellpadding="0"> -->
       <tr>
         <td colspan="2" align="left" bgcolor="#FFFFFF" align="center">
           <table width="100%" border="0" cellpadding="0" cellspacing="0">
@@ -132,8 +134,8 @@ document.form1.submit();
 <span style="font-weight: bold; font-size: 1em; line-height: 2em; color: black; font-family: 'Nanum Gothic';">싫어하는 재료 </span>
   <br>
   <form name="form1" class="hform" method="post" action="{% url 'YTMT:hatelistsave'%}" onsubmit="return check1();">  {% csrf_token %}
-  <div style="padding:50px;">
-  <table width="400" border="0" cellspacing="0" cellpadding="0">
+    <div class="row" style="padding-top:50px; padding-bottom:50px;">
+  <!-- <table width="400" border="0" cellspacing="0" cellpadding="0"> -->
   <tr>
   <td colspan="2" align="left" bgcolor="#FFFFFF">
   <table width="100%" border="0" cellpadding="0" cellspacing="0">
