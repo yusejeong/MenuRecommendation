@@ -50,28 +50,32 @@
 
 <!--<body>-->
   <center>
-
+    <br>
+    <span style="font-weight: bold; font-size: 2em; line-height: 2em; color: black; font-family: 'Nanum Gothic';">
+      비밀번호 및 이메일 변경
+    </span>
     <br><br>
+
     <form name="form" method="post">
           {% csrf_token %}
-    <table frame:"void" border="0"  cellspacing="0" >
+          <table border="0" cellspacing="0" frame="void">
         <tr>
           <th style="float:left;"> 비밀번호 </th></tr>
-          <td> <input type="password" name="pwd" id="pwd" placeholder="비밀번호를 입력해주세요" /> </td>
+          <td> <input style="width:120pt;"type="password" name="pwd" id="pwd" placeholder="비밀번호를 입력해주세요" /> </td>
 
         <tr>
           <th style="float:left;"> 변경할 비밀번호 </th></tr>
-          <td> <input type="password" name="newpwd" id="newpwd" placeholder="비밀번호를 입력해주세요" /> </td>
+          <td> <input style="width:120pt;"type="password" name="newpwd" id="newpwd" placeholder="비밀번호를 입력해주세요" /> </td>
 
         <tr>
           <th style="float:left;"> 비밀번호 확인 </th></tr>
-          <td> <input type="password" name="pwdchk" id="pwdchk" placeholder="비밀번호를 입력해주세요" /> </td>
+          <td> <input style="width:120pt;"type="password" name="pwdchk" id="pwdchk" placeholder="비밀번호를 입력해주세요" /> </td>
 
 
         <tr>
           <th style="float:left;">이메일 </th><tr>
           <td>
-            <input type="text" name="email" id="email" placeholder="이메일 아이디" />@<select id="email2" name="email2">
+            <input style="width:120pt;"type="text" name="email" id="email" placeholder="이메일 아이디" />@<select id="email2" name="email2">
                 <option value="" selected="selected">-메일 주소-</option>
                 <option value="naver.com">naver.com</option>
                 <option value="daum.net">daum.net</option>
