@@ -40,8 +40,8 @@ class Profile(models.Model):
     )
 
     Religion_TYPE = (
-        (1, "힌두교"), (2, "불교"), 
-        (3, "기독교"), (4, "천주교"), 
+        (1, "힌두교"), (2, "불교"),
+        (3, "기독교"), (4, "천주교"),
         (5, "이슬람교"), (6, "유대교"),
         (7, "시크교도"), (8, "무교"),
     )
@@ -52,7 +52,7 @@ class Profile(models.Model):
         (5, "페스코 베지테리언"), (6, "플로 베지테리언"),
         (7, "플렉시테리언"), (8, "해당사항없음"),
     )
-    
+
     gender = models.IntegerField(blank = False, null = False, choices=Gender_TYPE, default=1)
     birth = models.DateTimeField(blank = False, null = False)
     reli_id = models.IntegerField(choices=Religion_TYPE, default=8)
@@ -76,7 +76,7 @@ class Hate_menu(models.Model):
 class Hate_ingredient(models.Model):
     user_id = models.ForeignKey(User, on_delete = models.CASCADE)
     ingre_id = models.ForeignKey(Ingredient, on_delete=models.CASCADE)
-    
+
     def __str__(self):
         return self.user_id.username+ ":" + self.ingre_id.name
 
@@ -86,6 +86,9 @@ class History(models.Model):
     def __str__(self):
         return self.user_id.username + ":" + self.menu_id.name
 
+# class Friend(models.Model):
+#     user_id=models.ForeignKey(User, on_delete=models.CASCADE)
+#     friend_id=models.ForeignKey(Friend, on_delete=models.CASCADE)
 # class Relation(models.Model):
 #     user_id = models.OneToOneField(User, on_delete = models.CASCADE)
 #     friend_id = models.ForeignKey(User, on_delete=models.CASCADE)
