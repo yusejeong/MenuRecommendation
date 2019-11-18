@@ -75,6 +75,10 @@ def signuprequest(request):
             else:
                 user = User.objects.create_user(
                     username = request.POST["id"], password = request.POST["pwd"], email = request.POST["email"])
+            #프로필 객체를 생성
+            userProfile = Profile.objects.create(user_id = user, birth = datetime.datetime.now())
+            userProfile.name = request.POST["name"]
+            userProfile.save()
             request.session['username'] = request.POST["id"]
             return render(request, 'user/birthandgender.html')
         return render(request, 'user/signup.html')
@@ -85,8 +89,7 @@ def birthandgender(request):
 
 def birthandgendersave(request):
     login_user = find_user(request)
-    #프로필 객체를 생성
-    userProfile = Profile.objects.create(user_id = login_user, birth = datetime.datetime.now())
+    userProfile = Profile.objects.get(user_id = login_user)
 
     # 성별 구분
     gender = request.POST.get("gender")
@@ -198,6 +201,10 @@ def mainpage(request):
 def mypagemain(request):
     return render(request, 'mypage/mypagemain.html')
 
+# 마이페이지_개인정보 수정
+def selectinfo(request):
+    return render(request, 'mypage/selectinfo.html')
+
 def infomodify(request):
     return render(request, 'mypage/infomodify.html')
 
@@ -218,27 +225,6 @@ def infomodifysave(request):
             return render(request,'mypage/infomodify.html')
         return render(request,'mypage/infomodify.html')
     return render(request,'mypage/infomodify.html')
-
-# def infomodifynext(request):
-#     login_user = find_user(request)
-#
-#     if request.method == "POST":
-#         if request.POST["pwd"] == request.session.get('password'):
-#             if request.POST["newpwd"] == request.POST["pwdchk"]:
-#                 login_user.set_password(request.POST["newpwd"])
-#                 request.session['password'] = request.POST["newpwd"]
-#                 if request.POST["email2"] != "etc":
-#                     login_user.email = request.POST["email"] + "@" + request.POST["email2"]
-#                 else:
-#                     login_user.email = request.POST["email"]
-#                 login_user.save()
-#                 return render(request, 'mypage/selectinfo.html')
-#             return render(request,'mypage/infomodify.html')
-#         return render(request,'mypage/infomodify.html')
-#     return render(request,'mypage/infomodify.html')
-
-def selectinfo(request):
-    return render(request, 'mypage/selectinfo.html')
 
 def religionmodify(request):
     return render(request, 'mypage/religionmodify.html')
@@ -308,12 +294,12 @@ def menureco(request):
     login_user = find_user(request)
     userProfile = Profile.objects.get(user_id = login_user)
 
-    #사용자의 싫어하는 메뉴, 싫어하는 재료, 알레르기 리스트를 로드함
+    # 사용자의 싫어하는 메뉴, 싫어하는 재료, 알레르기 리스트를 로드함
     hate_menu_list = Hate_menu.objects.filter(user_id = login_user)
     hate_ingredient_list = Hate_ingredient.objects.filter(user_id = login_user)
     Allergy_list = Allergy.objects.filter(user_id = login_user)
 
-    #사용자의 좋아했던 메뉴를 로드
+    # 사용자의 좋아했던 메뉴를 로드
     history_list = History.objects.filter(user_id = login_user)
     menu_list = []
 
