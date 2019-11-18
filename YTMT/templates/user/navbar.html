@@ -39,14 +39,19 @@
                         <img src="https://ytmtresource.s3.ap-northeast-2.amazonaws.com/YTMT_LOGO_mini.png" width="auto" height="35" alt="">
                     </a>
                 </div>
-                <ul class="nav nav-pills">
-                    <li class="nav-item">
-                      <a class="nav-link" href="#fat">로그인</a>
-                    </li>
-                    <li class="nav-item">
-                      <a class="nav-link" href="#fat">마이페이지</a>
-                    </li>
-                </ul>
+                {% if session.userid %}
+                    <ul class="nav nav-pills">
+                        <li class="nav-item">
+                            <a class="nav-link" style="color:black; font-weight: bold;" href="{% url 'YTMT:signout'%}">로그아웃</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" style="color:black; font-weight: bold;" href="{% url 'YTMT:mypagemain'%}">마이페이지</a>
+                        </li>
+                    </ul>
+                {% else %}
+
+                {% endif %}
+
             </div>
     </nav>
 

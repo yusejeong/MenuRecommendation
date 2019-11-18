@@ -3,60 +3,60 @@
 
 {% block content %}
  {% load static %}
-<!--
- <head>
-     <style>
-        .card {
-          width: 1000px;
-          height: 250px;
-          background-color: #fff;
-          background: linear-gradient(#f8f8f8, #fff);
-          box-shadow: 0 8px 16px -8px rgba(0,0,0,0.4);
-          border-radius: 6px;
-          overflow: hidden;
-          position: relative;
-          margin: 1.5rem;
-           top: 50%;
-            border: none;
-        }
-        .card .general {
-          width: 700px;
-          height: 100%;
-          position: absolute;
-          top: 0;
-          right: 0;
-          z-index: 1;
-          box-sizing: border-box;
-          padding: 1.5rem;
-        }
 
-        .card-img { 
-            width:auto;
-            height: 100%;
-            position: absolute;
-            top: 50%;
-            left: 12%;
-            -webkit-transform: translate(-50%, -50%);
-        }
-          .like-img {
-              position:absolute; 
-              right:2rem; 
-              bottom:0.5rem;
-
-          }
-          .card-text {
-              padding-top: 1rem;
-              font-size: 1.2rem;
-          }
-     </style>
- </head>
--->
   <header>
       <link rel="stylesheet" href='{% static "YTMT/css/menureco.css" %}'>
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
   </header>
    {% for menu in menu_list %}
      <div class="post">
+                <div class="firma-card row">
+                    <div class="col-md-5 img-padding-no">
+                        <div class="firma-resim">
+                            <a href="#">
+
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-md-7">
+                        <div class="firma-aciklama card-body">
+                            <h4>{{ menu.name }}</h4>
+
+                            <div class="yacht-info__list space-2">
+
+                                <div class="menutext">
+                                    <span>{{ menu.text }}</span>
+                                </div>
+                                
+                                 <br><br>
+                            </div>
+                                <div class="like-img" align="right" >
+<!--                                <a class="navbar-brand" href="/">-->
+<!--                                   여기에 좋아요 누르면 history로 반영되도록-->
+                                    <h5>
+                                    <img id="likes" src='{% static "YTMT/img/nolike.png" %}' width="35px" height="auto" onclick="likechange()">
+                                    10</h5>
+<!--                                여기에 좋아요 수 계산하는거 넣어줘-->
+                                    <script type="text/javascript">
+                                        function likechange() {
+                                            var likes = document.getElementById('likes');
+                                            
+                                            if(likes.src.match('{% static "YTMT/img/like.png" %}')) {
+                                                likes.src = '{% static "YTMT/img/nolike.png" %}'
+                                            } else {
+                                                likes.src = '{% static "YTMT/img/like.png" %}'
+                                            } 
+                                        }
+                                    </script>
+                                </div>
+                 
+                        </div>
+                    </div>
+                </div>        
+        </div>  
+
+              
+<!--
           <div class="card">
                         <img src="https://ytmtresource.s3.ap-northeast-2.amazonaws.com/YTMT_Logo.jpg" alt="" class="center" width="auto" height="100%"/>
 
@@ -69,12 +69,9 @@
                                 </div>
 
                                 <div class="like-img" align="right" >
-<!--                                <a class="navbar-brand" href="/">-->
-<!--                                   여기에 좋아요 누르면 history로 반영되도록-->
                                     <h5>
                                     <img id="likes" src='{% static "YTMT/img/nolike.png" %}' width="40px" height="auto" onclick="likechange()">
                                     100</h5>
-<!--                                여기에 좋아요 수 계산하는거 넣어줘-->
                                     <script type="text/javascript">
                                         function likechange() {
                                             var likes = document.getElementById('likes');
@@ -89,7 +86,8 @@
                                 </div>
                             </div>
           </div>
-        </div>
+-->
+
 
     {% endfor %}
 {% endblock %}
