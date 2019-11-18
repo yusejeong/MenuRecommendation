@@ -1,4 +1,9 @@
-<html>
+<!--<html>-->
+{% extends 'user/navbar.html' %}
+{% load static %}
+
+{% block bodycontent %}
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -6,9 +11,7 @@
   <title>니맛내맛 : 알레르기 선택</title>
   <link rel="stylesheet" href="https://dfzrjox9sv97l.cloudfront.net/dicons_20160930/css/common.css?201709272">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
-  {% load static %}
   <link rel="stylesheet" type="text/css" href={% static "YTMT/css/allergy.css" %}>
-  <link rel="stylesheet" href={% static "YTMT/css/templete.css" %}>
   <script type="text/javascript" src={% static "YTMT/js/Autocomplete/jquery/lib/jquery.js" %}></script>
   <script type="text/javascript" src={% static "YTMT/js/Autocomplete/jquery/lib/jquery.bgiframe.min.js" %}></script>
   <script type="text/javascript" src={% static "YTMT/js/Autocomplete/jquery/lib/jquery.ajaxQueue.js" %}></script>
@@ -58,7 +61,7 @@
     }
     </script>
   </head>
-  <body>
+<!--  <body>-->
     <header>
     			 <nav class="navbar navbar-light" style="background-color: #FFC81E;" id="navbar">
     						 <div class="container-fluid">
@@ -106,5 +109,8 @@
 
   </form>
 </center>
+<!--
 </body>
   <html>
+-->
+{% endblock %}

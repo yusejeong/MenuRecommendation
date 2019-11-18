@@ -4,10 +4,10 @@
 {% block content %}
  {% load static %}
 
-  <header>
+  <head>
       <link rel="stylesheet" href='{% static "YTMT/css/menureco.css" %}'>
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  </header>
+  </head>
    {% for menu in menu_list %}
      <div class="post">
                 <div class="firma-card row">
@@ -56,37 +56,6 @@
         </div>  
 
               
-<!--
-          <div class="card">
-                        <img src="https://ytmtresource.s3.ap-northeast-2.amazonaws.com/YTMT_Logo.jpg" alt="" class="center" width="auto" height="100%"/>
-
-                            <div class="general" align="left">
-                                <a href="/" style="color:black; text-decoration: none;">
-                                <h3 class="card-title">{{ menu.name }}</h3>
-                                </a>
-                                <div class="card-text">
-                                    <span>{{ menu.text }}</span>
-                                </div>
-
-                                <div class="like-img" align="right" >
-                                    <h5>
-                                    <img id="likes" src='{% static "YTMT/img/nolike.png" %}' width="40px" height="auto" onclick="likechange()">
-                                    100</h5>
-                                    <script type="text/javascript">
-                                        function likechange() {
-                                            var likes = document.getElementById('likes');
-                                            
-                                            if(likes.src.match('{% static "YTMT/img/like.png" %}')) {
-                                                likes.src = '{% static "YTMT/img/nolike.png" %}'
-                                            } else {
-                                                likes.src = '{% static "YTMT/img/like.png" %}'
-                                            } 
-                                        }
-                                    </script>
-                                </div>
-                            </div>
-          </div>
--->
 
 
     {% endfor %}

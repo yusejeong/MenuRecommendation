@@ -1,7 +1,7 @@
-<!DOCTYPE html>
+{% extends 'user/navbar.html' %}
 {% load static %}
-{% load staticfiles %}
-<html>
+
+{% block bodycontent %}
 
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -14,27 +14,9 @@
       <link rel="stylesheet" type="text/css" href={% static "YTMT/js/Autocomplete/jquery/jquery.autocomplete.css" %}>
 
 <link rel="stylesheet" href='{% static "YTMT/css/main.css" %}'>
-	<link rel="stylesheet" href={% static "YTMT/css/templete.css" %}>
 
 
-  <header>
-      <nav class="navbar navbar-light" style="background-color: #FFC81E;" id="navbar">
-           <div class="container-fluid">
-      <a class="navbar-brand" href="/">
-          <img src="https://ytmtresource.s3.ap-northeast-2.amazonaws.com/YTMT_LOGO_mini.png" width="auto" height="40" alt="">
-      </a>
-      <ul class="nav nav-pills">
-          <li class="nav-item">
-              <a class="nav-link" style="color:black; font-weight: bold;" href="{% url 'YTMT:signout'%}">로그아웃</a>
-          </li>
-          <li class="nav-item">
-              <a class="nav-link" style="color:black; font-weight: bold;" href="{% url 'YTMT:mypagemain'%}">마이페이지</a>
-          </li>
-      </ul>
-          </div>
-  </nav>
-  </header>
-<body>
+<!--<body>-->
   <center>
     <br><br><br><br><br>
     <span style="font-weight: bold; font-size: 2em; line-height: 2em; color: black; font-family: 'Nanum Gothic';">
@@ -126,6 +108,9 @@
 
 </form>
   </center>
+<!--
 </body>
 
 </html>
+-->
+{% endblock %}
