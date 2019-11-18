@@ -1,70 +1,75 @@
 <!DOCTYPE html>
+<html>
 
 <head>
 
-  <meta charset="utf-8">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <title>니맛내맛 : 로그인</title>
 
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
 
   <link rel="stylesheet" href="https://dfzrjox9sv97l.cloudfront.net/dicons_20160930/css/common.css?201709272">
   <link rel="stylesheet" href="https://dfzrjox9sv97l.cloudfront.net/dicons_20160930/css/user_web.css?201709272">
   <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css?201709272">
-
+  {% load static %}
+  <link rel="stylesheet" type="text/css" href={% static "YTMT/css/signin.css" %}>
 
 </head>
 
 <body>
+  <center>
 
 
-    <div class="container">
-      <div class="row">
 
 
-        <form name="form" id="frm_login" method="POST" action="{% url 'YTMT:signinrequest'%}">
+    <form name="form" id="frm_login" method="POST" action="{% url 'YTMT:signinrequest'%}">
 
-         {% csrf_token %}
+      {% csrf_token %}
+      <div class="container">
+        <div class="row">
           <input name="retURL" type="hidden" value="https://.com/">
 
           <div class="login">
-            <div class="title" >로그인 및 회원가입</div>
-            <img src="https://ytmtresource.s3.ap-northeast-2.amazonaws.com/YTMT_Logo.jpg" width="200" height="auto"  style="padding-bottom: 10px">
+            <div class="title">로그인 및 회원가입</div>
+            <img src="https://ytmtresource.s3.ap-northeast-2.amazonaws.com/YTMT_Logo.jpg" width="200" height="auto" style="padding-bottom: 10px">
             <div>
-              <input id="id" name = "username" type="text" class="input-text" placeholder="아이디 입력" style="margin-bottom:7px;">
-              <input id="pw" name = "password" type="password" class="input-text" placeholder="비밀번호 입력">
+              <input id="id" name="username" type="text" class="input-text" placeholder="아이디 입력" style="margin-bottom:7px;">
+              <input id="pw" name="password" type="password" class="input-text" placeholder="비밀번호 입력">
             </div>
             <div style="padding:24px 0;">
 
               <div class="clear"></div>
             </div>
             <input type="button" class="btn btn-black" onclick="logincheck()" value="로그인">
-              <script type="text/javascript">
-                function logincheck() {
-                  if(!document.form.id.value){
-                      alert("아이디를 입력하세요.");
-                      return false;
-                  }
-                 if(!document.form.pw.value){
-                      alert("비밀번호를 입력하세요.");
-                      return false;
-                  }
-                
-                    location.href="{% url 'YTMT:signinrequest'%}";
-//                    alert(document.form.id.value+"님 환영합니다.");
-
-                    document.form.submit();
+            <script type="text/javascript">
+              function logincheck() {
+                if (!document.form.id.value) {
+                  alert("아이디를 입력하세요.");
+                  return false;
                 }
-            </script>
-                  <a href="{% url 'YTMT:signup'%}">
-                      <input  id="btn_intro" type="button" class="btn btn-white w200" style="margin-top:12px;" value="회원가입">
-                  </a>
-                  <a href="{% url 'YTMT:findinfo'%}">
-                      <input  type="button" class="btn btn-white w200" style="margin-top:12px;" value="아이디/비밀번호 찾기">
-                    </a>
-          </div>
-        </form>
-      </div>
-      </div>
-    </body>
-    
+                if (!document.form.pw.value) {
+                  alert("비밀번호를 입력하세요.");
+                  return false;
+                }
 
+                location.href = "{% url 'YTMT:signinrequest'%}";
+                //                    alert(document.form.id.value+"님 환영합니다.");
+
+                document.form.submit();
+              }
+            </script>
+            <a href="{% url 'YTMT:signup'%}">
+              <input id="btn_intro" type="button" class="btn btn-white" style="margin-top:12px;" value="회원가입">
+            </a>
+            <a href="{% url 'YTMT:findinfo'%}">
+              <input type="button" class="btn btn-white" style="margin-top:12px;" value="아이디/비밀번호 찾기">
+            </a>
+          </div>
+    </form>
+    </div>
+    </div>
+    <center>
+</body>
+
+</html>

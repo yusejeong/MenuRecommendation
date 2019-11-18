@@ -1,5 +1,5 @@
 select {
-    
+
     width: 90px;
     height: 25px;
 }
@@ -13,4 +13,14 @@ h4 {
     text-indent: 100%;
     white-space: nowrap;
     overflow: hidden;
+}
+@media (max-width: 480px) {
+    .input-text {
+        width: 350px;
+    }
+    .btn {
+        width: 350px;
+    }
+
+
 }
