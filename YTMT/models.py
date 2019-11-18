@@ -4,6 +4,7 @@ from django.contrib import auth
 
 # 메뉴
 class Menu(models.Model):
+    
     name = models.CharField(primary_key=True, max_length=50, blank = False, null = False)
     img_url = models.ImageField(null=True, max_length=50)
     text = models.TextField(null=True)
@@ -19,8 +20,8 @@ class Ingredient(models.Model):
         return self.name
 
 class Recipe(models.Model):
-    menu = models.ForeignKey(Menu, on_delete=models.CASCADE)
-    ingre = models.ForeignKey(Ingredient, on_delete=models.CASCADE)
+    menu = models.ForeignKey(Menu, on_delete = models.CASCADE)
+    ingre = models.ForeignKey(Ingredient, on_delete = models.CASCADE)
  
     def __str__(self):
         return self.menu.name + " " + self.ingre.name
