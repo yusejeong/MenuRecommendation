@@ -75,7 +75,7 @@ def signuprequest(request):
             else:
                 user = User.objects.create_user(
                     username = request.POST["id"], password = request.POST["pwd"], email = request.POST["email"])
-            request.session['username'] = id
+            request.session['username'] = request.POST["id"]
             return render(request, 'user/birthandgender.html')
         return render(request, 'user/signup.html')
     return render(request, 'user/signup.html')
