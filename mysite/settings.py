@@ -32,7 +32,6 @@ ALLOWED_HOSTS = "*"
 
 INSTALLED_APPS = [
     'YTMT.apps.YtmtConfig',
-    'polls.apps.PollsConfig',
     'django_extensions',
     'django.contrib.admin',
     'django.contrib.auth',
