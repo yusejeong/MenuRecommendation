@@ -96,6 +96,7 @@ document.form1.submit();
       <span style="font-weight: bold; font-size: 2em; line-height: 2em; color: black; font-family: 'Nanum Gothic';">개인적 식성 </span>
       <br><br>
         <span style="font-weight: bold; font-size: 1em; line-height: 2em; color: black; font-family: 'Nanum Gothic';">싫어하는 음식 </span>
+        {{allergy_list}}
         <form name="form" class="hform"method="post" action="{% url 'YTMT:hatelistsave'%}" onsubmit="return check();">  {% csrf_token %}
           <div class="row" style="padding-bottom:50px;">
     <!-- <table width="400" border="0" cellspacing="0" cellpadding="0"> -->
