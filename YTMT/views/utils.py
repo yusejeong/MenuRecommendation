@@ -1,3 +1,4 @@
+
 def get_reli_id(reli_name):
     return {'hindu':1, 'budd':2, 'christian':3, 'catholic':4, 'islam':5, 'juda':6, 'sikh':7, 'none':8}.get(reli_name, 8)
 
