@@ -32,7 +32,7 @@ class Recipe(models.Model):
 # 회원정보
 class Profile(models.Model):
     user_id = models.OneToOneField(User, on_delete = models.CASCADE)
-    name = models.CharField(max_length=50, blank = False, null = False)
+    name = models.CharField(default = "",max_length=50, blank = False, null = False)
 
     Gender_TYPE = (
         (1, "남자"),
@@ -78,7 +78,6 @@ class Hate_menu(models.Model):
     
     def __str__(self):
         return self.user_id.username + " : " + self.menu.name
-
     
 class Hate_ingredient(models.Model):
     user_id = models.ForeignKey(User, on_delete = models.CASCADE)
