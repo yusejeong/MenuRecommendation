@@ -98,7 +98,6 @@ document.form1.submit();
         <span style="font-weight: bold; font-size: 1em; line-height: 2em; color: black; font-family: 'Nanum Gothic';">싫어하는 음식 </span>
         <form name="form" class="hform"method="post" action="{% url 'YTMT:hatelistsave'%}" onsubmit="return check();">  {% csrf_token %}
           <div class="row" style="padding-bottom:50px;">
-    <!-- <table width="400" border="0" cellspacing="0" cellpadding="0"> -->
       <tr>
         <td colspan="2" align="left" bgcolor="#FFFFFF" align="center">
           <table width="100%" border="0" cellpadding="0" cellspacing="0">
@@ -108,10 +107,9 @@ document.form1.submit();
            </tr>
 
 
-      </table>
       <tr>
        <td height="100%" align="center"  >
-         <table id="addTable" width="200" cellspacing="0" cellpadding="0" bgcolor="#FFFFFF" border="0" height="auto">
+         <table id="addTable" cellspacing="0" cellpadding="0" bgcolor="#FFFFFF" border="0" height="auto">
         </table></td>
       </tr>
 
@@ -122,7 +120,6 @@ document.form1.submit();
   <br>
   <form name="form1" class="hform" method="post" action="{% url 'YTMT:hatelistsave'%}" onsubmit="return check1();">  {% csrf_token %}
     <div class="row" style="padding-bottom:50px;">
-  <!-- <table width="400" border="0" cellspacing="0" cellpadding="0"> -->
   <tr>
   <td colspan="2" align="left" bgcolor="#FFFFFF">
   <table width="100%" border="0" cellpadding="0" cellspacing="0">
@@ -133,10 +130,10 @@ document.form1.submit();
     </table>
    </td>
   </tr>
-  </table>
+
   <tr>
    <td height="auto">
-     <table id="addTable1" width="200" cellspacing="0" cellpadding="0" bgcolor="#FFFFFF" border="0">
+     <table id="addTable1"  cellspacing="0" cellpadding="0" bgcolor="#FFFFFF" border="0">
     </table></td>
   </tr>
   </div>

@@ -33,7 +33,7 @@
           for (var i = 0; i <= frm.elements.length - 1; i++) {
             if (frm.elements[i].name == "addText") {
               if (!frm.elements[i].value) {
-                alert("글자를 입력하세요!");
+                alert("친구를 입력하세요!");
                 frm.elements[i].focus();
                 return false;
               }
@@ -47,7 +47,7 @@
           for (var i = 0; i <= frm.elements.length - 1; i++) {
             if (frm.elements[i].name == "addText") {
               if (!frm.elements[i].value) {
-                alert("글자를 입력하세요!");
+                alert("친구를 입력하세요!");
                 frm.elements[i].focus();
                 return;
               }
@@ -61,12 +61,23 @@
           var aCell = Row.insertCell();
           var jb = $('input#searchbox').val();
           var frmTag = jb;
-          frmTag += "<input type='button' id='rmbutton' value='요청' onClick='removeRow()' style='cursor:hand'>";
+          frmTag += "<input type='button' id='addfriend' value='추가' onClick=''insRow1()' style='cursor:hand'>";
           aCell.innerHTML = frmTag;
         }
-
+        function insRow1() {
+          var frm = document.form1;
+          list1 = document.getElementById("addTable1");
+          var Row1 = list1.insertRow();
+          Row1.onmouseover = function() {
+            list1.clickedRowIndex = this.rowIndex
+          }; //clickedRowIndex - 클릭한 Row의 위치를 확인;
+          var aCell = Row1.insertCell();
+          var jb = document.form.
+          jb += "<input type='button' id='rmbutton' value='삭제' onClick='removeRow()' style='cursor:hand'>";
+          aCell.innerHTML = jb;
+        }
         function removeRow() {
-          list.deleteRow(list.clickedRowIndex);
+          list.deleteRow(list1.clickedRowIndex);
         }
       </script>
     </head>
@@ -78,34 +89,7 @@
           <div class="title" style="font-weight: bold; font-size: 2em; line-height: 2em; color: black; ">친구 목록 편집</div>
         <br>
 
-    <form name="form" method="post">
-      {% csrf_token %}
-      <div class="container">
-      <h3 style="text-align:left;">친구 요청</h3>
-      <div class="card">
-      <div style="padding-bottom:50px;">
-        <tr>
-        <td colspan="2" align="left" bgcolor="#FFFFFF">
-        <table width="100%" border="0" cellpadding="0" cellspacing="0">
-        <td colspan="5" bgcolor="#FFFFFF" height="auto" align="center">
-         <input type="text" id="searchbox" name="addText">
-            <input name="addButton" id="addbutton" type="button" style="cursor:hand" onClick="insRow();" value="검색"></td>
-
-          </table>
-         </td>
-        </tr>
-
-        <tr>
-         <td height="auto">
-           <table id="addTable" width="70%" cellspacing="0" cellpadding="0" bgcolor="#FFFFFF" border="0">
-          </table></td>
-        </tr>
-
-  </div></div></div>
-
-</form>
-
-      <form name="form1" method="post">\
+      <form name="form" method="post">\
         {% csrf_token %}
         <div class="container">
         <h3  style="text-align:left;">친구 추가</h3>
@@ -118,10 +102,9 @@
            <input type="text" id="searchbox" name="addText">
               <input name="addButton" id="addbutton" type="button" style="cursor:hand" onClick="insRow();" value="검색"></td></table></td>
            </tr>
-
       <tr>
        <td height="25" align="center"  >
-         <table id="addTable" width="200" cellspacing="0" cellpadding="0" bgcolor="#FFFFFF" border="0">
+         <table id="addTable" cellspacing="0" cellpadding="0" bgcolor="#FFFFFF" border="0">
         </table></td>
       </tr>
 
@@ -129,24 +112,21 @@
 
   </form>
 
-      <form name="form2" method="post">
+      <form name="form1" method="post">
         {% csrf_token %}
       <div class="container">
-        <h3  style="text-align:left;">친구 삭제</h3>
+        <h3  style="text-align:left;">내 친구</h3>
         <div class="card">
         <div style="padding-bottom:50px;">
-
           <center>
       <tr>
         <td colspan="2" align="left" bgcolor="#FFFFFF" align="center">
           <table width="100%" border="0" cellpadding="0" cellspacing="0">
-         <td colspan="5" bgcolor="#FFFFFF" height="25" align="center">
-           <input type="text" id="searchbox" name="addText">
-              <input name="addButton" id="addbutton" type="button" style="cursor:hand" onClick="insRow();" value="검색"></td></table></td>
+         <td colspan="5" bgcolor="#FFFFFF" height="25" align="center"></td></table></td>
            </tr>
       <tr>
        <td height="25" align="center"  >
-         <table id="addTable" width="200" cellspacing="0" cellpadding="0" bgcolor="#FFFFFF" border="0">
+         <table id="addTable1" cellspacing="0" cellpadding="0" bgcolor="#FFFFFF" border="0">
         </table></td>
       </tr>
     </div>
