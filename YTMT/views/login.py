@@ -7,6 +7,11 @@ from YTMT.models import *
 from django.contrib import auth
 from . import session as SS
 
+'''
+    로그인 관련 기능이 저장되는 view 파일입니다.
+    로그인에 추가적인 기능이 필요하면 추가하십시요.
+'''
+
 def signin(request):
     return render(request, 'user/signin.html')
 
