@@ -55,5 +55,4 @@ urlpatterns = [
     # 마이페이지_기타
     path('mypage/history', mypage.history, name ='history'),
     path('mypage/friendlist', mypage.friendlist, name ='friendlist'),
-
 ]
