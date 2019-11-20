@@ -94,6 +94,7 @@ def religionsave(request):
     userProfile.reli_id = utils.get_reli_id(reli_name)
 
     userProfile.save()
+    
     return render(request, 'user/vegetarian.html')
 
 def vegetarian(request):
@@ -107,14 +108,28 @@ def vegetariansave(request):
     userProfile.vege_id = utils.get_vege_id(vege_name)
 
     userProfile.save()
-    return render(request, 'user/allergy.html')
+    
+    ingredient = Ingredient.objects.all()
+    ingre_list = []
+    for ingre in ingredient:
+        ingre_list.append(ingre.name)
+    return render(request, 'user/allergy.html', {"ingre_list" : ingre_list})
 
 def allergy(request):
-    return render(request, 'user/allergy.html')
+    ingredient = Ingredient.objects.all()
+    ingre_list = []
+    for ingre in ingredient:
+        ingre_list.append(ingre.name)
+        
+    return render(request, 'user/allergy.html', {"ingre_list" : ingre_list})
 
 def allergysave(request):
-    login_user = SS.find_user(request)
-    userProfile = Profile.objects.get(user_id = login_user)
+    # login_user = SS.find_user(request)
+    # userProfile = Profile.objects.get(user_id = login_user)
+    print("#############################################")
+    allergy_list = request.POST.get("allergy_list")    
+    print(allergy_list)    
+    print("#############################################")
 
     ingre_list = []
     menu_list = []
@@ -125,7 +140,7 @@ def allergysave(request):
         menu_list.append(Menu.name)
 
     # 일대다
-    return render(request, 'user/hatelist.html',{'ingredient_list': ingre_list})
+    return render(request, 'user/hatelist.html',{'ingredient_list': ingre_list,"allergy_list" : allergy_list})
 
 def hatelist(request):
     return render(request, 'user/hatelist.html')
