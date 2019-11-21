@@ -21,7 +21,10 @@ color:white;
 
 }
 
-
+html, header, body {
+    font-family: 'Nanum Gothic';
+    background: #FCEEB5;
+}
 button2 {
 
   background-color: #000000;

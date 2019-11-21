@@ -1,7 +1,6 @@
 {% extends 'user/navbar.html' %}
-{% load static %}
-
 {% block bodycontent %}
+{% load static %}
 
 <head>
   <meta charset="UTF-8">
@@ -17,9 +16,9 @@
   <script type="text/javascript" src={% static "YTMT/js/Autocomplete/jquery/jquery.autocomplete.js" %}></script>
   <link rel="stylesheet" type="text/css" href={% static "YTMT/js/Autocomplete/jquery/jquery.autocomplete.css" %}>
   <script type="text/javascript">
-    var allergy = [
-                '초콜릿','밀','대두','복숭아','우유','계란','새우'
-              ];
+
+    var allergy = {{ingre_list|safe}};
+
     $(document).ready(function() {
         $("#searchbox").autocomplete(allergy,{
             matchContains: true,
@@ -36,7 +35,7 @@
              if( !frm.elements[i].value ){
                  alert("글자를 입력하세요!");
                      frm.elements[i].focus();
-       return ;
+              return ;
               }
           }
         }
@@ -44,47 +43,82 @@
       var Row = list.insertRow();
       Row.onmouseover=function(){list.clickedRowIndex=this.rowIndex}; //clickedRowIndex - 클릭한 Row의 위치를 확인;
       var aCell = Row.insertCell();
-      var jb = $( 'input#searchbox' ).val();
-      var frmTag = jb;
-       frmTag += "<input type='button' id='rmbutton' value='삭제' onClick='removeRow()' style='cursor:hand'>";
-      aCell.innerHTML = frmTag;
+
+
+      var jb = document.createElement("div");
+      $(jb).attr("class", "allergy");
+      $(jb).css({"display" : "inline",
+                  "float" : "left",
+                  })
+
+      $(jb).html($('#searchbox').val());
+
+      console.log($('#searchbox').val())
+
+      $("input[name*='addText']").val("");
+      var button = $("<input type='button' id='rmbutton' value='삭제' onClick='removeRow()' style='cursor:hand'>")
+      $("#addTable > tbody:last > tr:last > td:last").append(jb)
+      $(button).insertAfter(jb)
+
+
     }
+
     function removeRow() {
       list.deleteRow(list.clickedRowIndex);
     }
-    function Alert(){
-      alert("회원정보 수정이 완료되었습니다.");
-      document.form.submit();
-      return true;
 
+
+    function submit_form(){
+
+      var allergy_list = []
+        $(".allergy").each(function(index,elements){
+            allergy_list.push($(elements).text())
+        })
+
+      var temp = document.createElement("input");
+      var input = $(temp).attr('name',"allergy_list").val(JSON.stringify(allergy_list));
+      $(input).attr('type' , 'hidden')
+      $('#allergyform').append($(input))
+      console.log(JSON.stringify(allergy_list));
+      $('#allergyform').submit()
     }
+
+
     </script>
   </head>
-
+   <!-- {% for ingre in ingre_list %}
+   <div class="col-md-5 img-padding-no">
+   <h4>{{ ingre.name }}</h4></div>
+       {% endfor %} -->
     <center>
       <br>
       <span style="font-weight: bold; font-size: 2em; line-height: 2em; color: black; font-family: 'Nanum Gothic';">알레르기 </span>
       <br>
-      <form name="form" method="post" action="{% url 'YTMT:allergymodifysave'%}" onsubmit="return Alert()">
-            {% csrf_token %}
-            <div class="allergy">
-            <div style="padding-bottom:50px;">
-          <tr>
-            <td colspan="auto" bgcolor="#FFFFFF" align="center">
-              <table width="100%" border="0" cellpadding="0" cellspacing="0">
-             <td colspan="auto" bgcolor="#FFFFFF" height="25" align="center">
-               <input type="text" id="searchbox" name="addText">
-                  <input name="addButton" id="addbutton" type="button" style="cursor:hand" onClick="insRow();" value="추가"></td></table></td>
-               </tr>
 
-          <tr>
-            <td colspan="auto"  align="center">
-             <table id="addTable" align="center"  cellspacing="0" cellpadding="0" bgcolor="#FFFFFF" border="0">
-            </table></td>
-          </tr>
+  <form id = "allergyform" name="form" method="post" action="{% url 'YTMT:allergymodifysave'%}" content_type=u"application/json; charset=utf-8">
 
-          </div></div>
-<input type="submit"id="btn_join"  class="btn btn-pink w200" style="font-weight:bold;background-color: #fd7e14;width:250pt;margin-top:12px;"value="수정완료">
+     {% csrf_token %}
+     <div>
+      <div style="padding-bottom:50px;">
+
+  <tr>
+    <td colspan="4" align="left" align="center">
+      <table width="100%" border="0" cellpadding="0" cellspacing="0">
+     <td colspan="5"  height="25" align="center">
+       <input type="text" id="searchbox" name="addText">
+          <input name="addButton" id="addbutton" type="button" style="cursor:hand" onClick="insRow();" value="추가"></td></table></td>
+       </tr>
+
+  <tr>
+   <td height="25" align="center"  >
+     <table id="addTable" cellspacing="0" cellpadding="0" bgcolor="#FFFFFF" border="0">
+    </table></td>
+  </tr>
+
+
+  </div>
+</div>
+<input type="button" id="submit_btn" onClick="submit_form()" class="btn btn-pink w200" style="font-weight:bold;background-color: #fd7e14;width:250pt;margin-top:12px;"value="next">
 
   </form>
 </center>

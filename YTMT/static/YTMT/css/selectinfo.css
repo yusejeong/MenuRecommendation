@@ -20,3 +20,7 @@ color:white;
   width:250pt;
 
 }
+html, header, body {
+    font-family: 'Nanum Gothic';
+    background: #FCEEB5;
+}
