@@ -25,6 +25,7 @@ for ingre in Ingredient.objects.all():
 for menu in Menu.objects.all():
     menu_list.append(menu.name)
 
+
 def signinrequest(request):
     if request.method == "POST":
         id = request.POST['username']

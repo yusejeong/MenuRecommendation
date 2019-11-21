@@ -10,7 +10,9 @@ from . import session as SS
 from . import utils
 menu_list = []
 ingre_list = []
-
+friend_list=[]
+for friend in Friend_list.objects.all():
+    friend_list.append(friend.friend_id)
 for ingre in Ingredient.objects.all():
     ingre_list.append(ingre.name)
 

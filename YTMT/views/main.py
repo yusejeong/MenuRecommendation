@@ -30,7 +30,7 @@ def menureco(request):
     hate_menu_list = Hate_menu.objects.filter(user_id = login_user)
     hate_ingredient_list = Hate_ingredient.objects.filter(user_id = login_user)
     Allergy_list = Allergy.objects.filter(user_id = login_user)
-    
+
     #사용자의 종교, 채식주의 성향 확인
     user_religion_type = userProfile.reli_id
     user_vege_type = userProfile.vege_id
@@ -49,12 +49,12 @@ def menureco(request):
     for hate_vege_ingre in vegetarian_list:
         filter_list.append(hate_vege_ingre.ingre.name)
     # #싫어하는 재료 필터
-    for hate_ingredient in hate_ingredient_list:        
+    for hate_ingredient in hate_ingredient_list:
         filter_list.append(hate_ingredient.ingre.name)
     # #알레르기 재료 필터
     for allergy in Allergy_list:
         filter_list.append(allergy.ingre.name)
-    
+
 
 
     #중복 요소 제거
@@ -68,7 +68,7 @@ def menureco(request):
     for food in history_list:
         menu_name = food.menu
         cos = sim_df[str(menu_name)].sort_values(ascending=False)
-    
+
         for name in cos[1:4].index:
             menu_obj = Menu.objects.get(name = name)
             recipes = Recipe.objects.filter(menu = menu_obj)
@@ -78,7 +78,7 @@ def menureco(request):
                 if recipe.ingre.name in filter_list:
                     can_append = False
                     break
-            
+
             if can_append:
                 menu_list.append(menu_obj)
 
@@ -97,7 +97,7 @@ def menureco(request):
                 # print(menu_obj.name + " has " + recipe.ingre.name)
                 can_append = False
                 break
-        
+
         if can_append:
             # print("append : " + menu_obj.name)
             filter_menu.append(menu_obj)
@@ -105,7 +105,7 @@ def menureco(request):
         if len(filter_menu) >= 5:
             break
 
-    menu_list.extend(filter_menu)   
+    menu_list.extend(filter_menu)
 
 
     return render(request, 'menureco/menureco.html',{ 'menu_list': menu_list })
