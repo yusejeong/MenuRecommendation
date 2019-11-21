@@ -26,7 +26,9 @@ def selectinfo(request):
     return render(request, 'mypage/selectinfo.html')
 
 def infomodify(request):
-    return render(request, 'mypage/infomodify.html')
+    login_user = SS.find_user(request)
+    
+    return render(request, 'mypage/infomodify.html', {"user" : login_user})
 
 def infomodifysave(request):
     login_user = SS.find_user(request)
@@ -73,7 +75,14 @@ def vegetarianmodifysave(request):
     return render(request, 'mypage/selectinfo.html')
 
 def allergymodify(request):
-    return render(request, 'mypage/allergymodify.html',{"ingre_list" : ingre_list})
+    login_user = SS.find_user(request)
+    allergy_objects = Allergy.objects.filter(user_id = login_user)
+    allergy_list = []
+
+    for allergy in allergy_objects:
+        allergy_list.append(allergy)
+
+    return render(request, 'mypage/allergymodify.html',{"allergy_list" : allergy_list})
 
 def allergymodifysave(request):
     login_user = SS.find_user(request)
@@ -101,6 +110,7 @@ def history(request):
     return render(request, 'mypage/history.html')
 
 def friendlist(request):
+    
     return render(request, 'mypage/friendlist.html',{"ingre_list" : ingre_list})
 
 def friendlistsave(request):

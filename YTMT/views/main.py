@@ -37,17 +37,13 @@ def menureco(request):
     # print("사용자 종교, 채식 성향")
     # print(user_religion_type, user_vege_type)
 
-    # 종교, 채식주의 성향에 따른 필터 재료 목록 가져오기    
+    # 종교, 채식주의 성향에 따른 필터 재료 목록 가져오기
     vegetarian_list = Vegetarian_case.objects.filter(vege_id = user_vege_type)
     religion_list = Religion_case.objects.filter(reli_id= user_religion_type)
-
-
-
 
     filter_list = []
 
     for hate_religion_ingre in religion_list:
-        # print(type(hate_religion_ingre.ingre))
         filter_list.append(hate_religion_ingre.ingre.name)
     # #채식 성향 재료 필터
     for hate_vege_ingre in vegetarian_list:
@@ -67,7 +63,6 @@ def menureco(request):
 
     # 사용자의 좋아했던 메뉴를 로드
     history_list = History.objects.filter(user_id = login_user)
-    print(history_list)
     menu_list = []
 
     for food in history_list:
@@ -89,14 +84,14 @@ def menureco(request):
 
     filter_menu = []
 
-    menu_cnt = len(Menu.objects.all())
+    menu_cnt = Menu.objects.count()
     
     while True:
         menu_id = random.randint(1, menu_cnt)
         menu_obj = Menu.objects.get(id = menu_id)
         recipes = Recipe.objects.filter(menu = menu_obj)
         can_append = True
-        
+
         for recipe in recipes:
             if recipe.ingre.name in filter_list:
                 # print(menu_obj.name + " has " + recipe.ingre.name)
