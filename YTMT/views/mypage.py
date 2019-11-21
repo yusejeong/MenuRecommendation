@@ -7,7 +7,15 @@ from YTMT.models import *
 from django.contrib import auth
 import datetime
 from . import session as SS
-from . import utils 
+from . import utils
+menu_list = []
+ingre_list = []
+
+for ingre in Ingredient.objects.all():
+    ingre_list.append(ingre.name)
+
+for menu in Menu.objects.all():
+    menu_list.append(menu.name)
 
 # 마이페이지_수정
 def mypagemain(request):
@@ -65,21 +73,26 @@ def vegetarianmodifysave(request):
     return render(request, 'mypage/selectinfo.html')
 
 def allergymodify(request):
-    return render(request, 'mypage/allergymodify.html')
+    return render(request, 'mypage/allergymodify.html',{"ingre_list" : ingre_list})
 
 def allergymodifysave(request):
-    login_user = SS.find_user(request)
-    userProfile = Profile.objects.get(user_id = login_user)
+    # login_user = SS.find_user(request)
+    # userProfile = Profile.objects.get(user_id = login_user)
 
     # 일대다
     return render(request, 'mypage/selectinfo.html')
 
 def hatemodify(request):
-    return render(request, 'mypage/hatemodify.html')
+    return render(request, 'mypage/hatemodify.html',{'ingredient_list': ingre_list,'menu_list' : menu_list})
 
 def hatemodifysave(request):
-    login_user = SS.find_user(request)
-    userProfile = Profile.objects.get(user_id = login_user)
+    # login_user = SS.find_user(request)
+    # userProfile = Profile.objects.get(user_id = login_user)
+    hate_menu_list = request.POST.get("menu_list")
+    hate_menu_list = json.loads(hate_menu_list)
+
+    hate_ingredient_list = request.POST.get("ingredient_list")
+    hate_ingredient_list = json.loads(hate_ingredient_list)
 
     return render(request, 'mypage/selectinfo.html')
 
