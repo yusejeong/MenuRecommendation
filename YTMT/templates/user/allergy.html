@@ -16,12 +16,9 @@
   <script type="text/javascript" src={% static "YTMT/js/Autocomplete/jquery/jquery.autocomplete.js" %}></script>
   <link rel="stylesheet" type="text/css" href={% static "YTMT/js/Autocomplete/jquery/jquery.autocomplete.css" %}>
   <script type="text/javascript">
-<<<<<<< HEAD
-    var allergy = {{ingredient_list|safe}};
-=======
+
     var allergy = {{ingre_list|safe}};
 
->>>>>>> origin/master
     $(document).ready(function() {
         $("#searchbox").autocomplete(allergy,{
             matchContains: true,
@@ -46,20 +43,20 @@
       var Row = list.insertRow();
       Row.onmouseover=function(){list.clickedRowIndex=this.rowIndex}; //clickedRowIndex - 클릭한 Row의 위치를 확인;
       var aCell = Row.insertCell();
-<<<<<<< HEAD
-      var jb=document.createElement("div");
-      var jb = $( 'input#searchbox' ).val();
-      var frmTag = jb;
-       frmTag += "<input type='button' id='rmbutton' value='삭제' onClick='removeRow()' style='cursor:hand'>";
+      //
+      // var jb=document.createElement("div");
+      // var jb = $( 'input#searchbox' ).val();
+      // var frmTag = jb;
+      //  frmTag += "<input type='button' id='rmbutton' value='삭제' onClick='removeRow()' style='cursor:hand'>";
+      //
+      // aCell.innerHTML = frmTag;
 
-      aCell.innerHTML = frmTag;
-=======
       var jb = document.createElement("div");
       $(jb).attr("class", "allergy");
       $(jb).css({"display" : "inline",
                   "float" : "left",
                   })
-      
+
       $(jb).html($('#searchbox').val());
 
       console.log($('#searchbox').val())
@@ -68,41 +65,22 @@
       var button = $("<input type='button' id='rmbutton' value='삭제' onClick='removeRow()' style='cursor:hand'>")
       $("#addTable > tbody:last > tr:last > td:last").append(jb)
       $(button).insertAfter(jb)
-      
-      
->>>>>>> origin/master
+
+
     }
-    
+
     function removeRow() {
       list.deleteRow(list.clickedRowIndex);
     }
-<<<<<<< HEAD
-    var allergy_list=[]
 
-    $('#allergyform').submit(function(event){
-      event.preventDefault();
-      $(".allergy"),each(function(index,elements){
-        console.log(this)
-      })
 
-      $.ajax({
-      method:'POST',
-      url :"{% url 'YTMT:allergysave'%}",
-      traditional:true,
-      data:{
-        'allergy_list[]':allergy_list
-      }
-    });
-    })
-=======
-          
     function submit_form(){
-      
+
       var allergy_list = []
         $(".allergy").each(function(index,elements){
             allergy_list.push($(elements).text())
         })
-      
+
       var temp = document.createElement("input");
       var input = $(temp).attr('name',"allergy_list").val(JSON.stringify(allergy_list));
       $(input).attr('type' , 'hidden')
@@ -112,12 +90,12 @@
     }
 
     // $('#allergyform').submit(function(event){
-        
+
     //     var allergy_list = []
     //     $(".allergy").each(function(index,elements){
     //         allergy_list.push($(elements).text())
     //     })
-        
+
     //   var temp = document.createElement("input");
     //   var input = $(temp).attr('name',"allergy_list").val(JSON.stringify(allergy_list));
     //   $(input).attr('type' , 'hidden')
@@ -125,7 +103,6 @@
     //   console.log(JSON.stringify(allergy_list));
     // });
 
->>>>>>> origin/master
     </script>
   </head>
 
@@ -133,18 +110,12 @@
       <br>
       <span style="font-weight: bold; font-size: 2em; line-height: 2em; color: black; font-family: 'Nanum Gothic';">알레르기 </span>
       <br>
-<<<<<<< HEAD
-  <form id="allergyform" name="form" method="post" action="{% url 'YTMT:allergysave'%}">
-     {% csrf_token %}
-     <div class="allergy">
-     <div style="padding-bottom:50px;">
-=======
+
   <form id = "allergyform" name="form" method="post" action="{% url 'YTMT:allergysave'%}">
      {% csrf_token %}
      <div>
       <div style="padding-bottom:50px;">
-<!-- <table width="400" border="0" cellspacing="0" cellpadding="0"> -->
->>>>>>> origin/master
+
   <tr>
     <td colspan="4" align="left" bgcolor="#FFFFFF" align="center">
       <table width="100%" border="0" cellpadding="0" cellspacing="0">
@@ -159,16 +130,12 @@
      <table id="addTable"  cellspacing="0" cellpadding="0" bgcolor="#FFFFFF" border="0">
     </table></td>
   </tr>
-<<<<<<< HEAD
 
-</div></div>
-<input type="submit"id="btn_join"  class="btn btn-pink w200" style="font-weight:bold;background-color: #fd7e14;width:250pt;margin-top:12px;"value="next">
 
-=======
   </div>
 </div>
 <input type="button" id="submit_btn" onClick="submit_form()" class="btn btn-pink w200" style="font-weight:bold;background-color: #fd7e14;width:250pt;margin-top:12px;"value="next">
->>>>>>> origin/master
+
   </form>
 </center>
 {% endblock %}
