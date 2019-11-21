@@ -18,7 +18,8 @@
   <script type="text/javascript">
 
     var hateelement = {{ingredient_list|safe}};
-    var hatefood = [];
+
+    var hatefood = {{menu_list|safe}};
 
     $(document).ready(function() {
         $("#searchbox").autocomplete(hatefood,{
@@ -30,8 +31,40 @@
             selectFirst: false
         });
     });
-    var list;
+
     function insRow() {
+      var frm = document.form;
+      for( var i = 0; i <= frm.elements.length - 1; i++ ){
+         if( frm.elements[i].name == "addText1" )
+         {
+             if( !frm.elements[i].value ){
+                 alert("글자를 입력하세요!");
+                     frm.elements[i].focus();
+       return;
+              }
+          }
+       }
+      list = document.getElementById("addTable1");
+      var Row = list.insertRow();
+      var aCell = Row.insertCell();
+      Row.onmouseover=function(){list.clickedRowIndex=this.rowIndex}; //clickedRowIndex - 클릭한 Row의 위치를 확인;
+      var jb = document.createElement("div");
+      $(jb).attr("class", "hateelement");
+      $(jb).css({"display" : "inline",
+                  "float" : "left",
+                  })
+
+      $(jb).html($('#searchbox1').val());
+
+      console.log($('#searchbox1').val())
+
+      $("input[name*='addText1']").val("");
+      var button = $("<input type='button' id='rmbutton' value='삭제' onClick='removeRow()' style='cursor:hand'>")
+      $("#addTable1 > tbody:last > tr:last > td:last").append(jb)
+      $(button).insertAfter(jb)
+
+    }
+    function insRow1() {
       var frm = document.form;
       for( var i = 0; i <= frm.elements.length - 1; i++ ){
          if( frm.elements[i].name == "addText" )
@@ -43,51 +76,58 @@
               }
           }
        }
-      list = document.getElementById("addTable");
-      var Row = list.insertRow();
-      Row.onmouseover=function(){list.clickedRowIndex=this.rowIndex}; //clickedRowIndex - 클릭한 Row의 위치를 확인;
-      var aCell = Row.insertCell();
-      var jb = $( 'input#searchbox' ).val();
-      var frmTag = jb;
-       frmTag += "<input type='button' id='rmbutton' value='삭제' onClick='removeRow()' style='cursor:hand'>";
-      aCell.innerHTML = frmTag;
-    }
-    function insRow1() {
-      var frm = document.form1;
-      for( var i = 0; i <= frm.elements.length - 1; i++ ){
-         if( frm.elements[i].name == "addText1" )
-         {
-             if( !frm.elements[i].value ){
-                 alert("글자를 입력하세요!");
-                     frm.elements[i].focus();
-       return;
-              }
-          }
-       }
-      list1 = document.getElementById("addTable1");
+      list1 = document.getElementById("addTable");
       var Row = list1.insertRow();
       Row.onmouseover=function(){list1.clickedRowIndex=this.rowIndex}; //clickedRowIndex - 클릭한 Row의 위치를 확인;
       var aCell = Row.insertCell();
-      var jb = $( 'input#searchbox1' ).val();
-      var frmTag1 = jb;
-       frmTag1 += "<input type='button' id='rmbutton' value='삭제' onClick='removeRow1()' style='cursor:hand'>";
-      aCell.innerHTML = frmTag1;
+      var jb = document.createElement("div");
+      $(jb).attr("class", "hatefood");
+      $(jb).css({"display" : "inline",
+                  "float" : "left",
+                  })
+
+      $(jb).html($('#searchbox').val());
+
+      console.log($('#searchbox').val())
+
+      $("input[name*='addText']").val("");
+      var button = $("<input type='button' id='rmbutton' value='삭제' onClick='removeRow1()' style='cursor:hand'>")
+      $("#addTable > tbody:last > tr:last > td:last").append(jb)
+      $(button).insertAfter(jb)
+
     }
     function removeRow() {
       list.deleteRow(list.clickedRowIndex);
     }
     function removeRow1() {
-      list1.deleteRow(list.clickedRowIndex);
+      list1.deleteRow(list1.clickedRowIndex);
     }
-    function twosend(){
-    alert("회원가입이 완료되었습니다.")
 
-document.form.submit();
+    function submit_form(){
 
-document.form1.submit();
+      var hatefood_list = []
+        $(".hatefood").each(function(index,elements){
+            hatefood_list.push($(elements).text())
+        })
 
+      var hateelement_list=[]
+      $(".hateelement").each(function(index,elements){
+        hateelement_list.push($(elements).text())
+      })
 
-}
+      var temp = document.createElement("input");
+      var temp1 = document.createElement("input");
+      var input1=$(temp1).attr('name',"ingredient_list").val(JSON.stringify(hateelement_list));
+      var input = $(temp).attr('name',"menu_list").val(JSON.stringify(hatefood_list));
+$(input1).attr('type' , 'hidden')
+      $(input).attr('type' , 'hidden')
+      $('#hatelistform').append($(input))
+      $('#hatelistform').append($(input1))
+      console.log(JSON.stringify(hatefood_list));
+      console.log(JSON.stringify(hateelement_list));
+      $('#hatelistform').submit()
+    }
+
     </script>
   </head>
 
@@ -96,52 +136,49 @@ document.form1.submit();
       <span style="font-weight: bold; font-size: 2em; line-height: 2em; color: black; font-family: 'Nanum Gothic';">개인적 식성 </span>
       <br><br>
         <span style="font-weight: bold; font-size: 1em; line-height: 2em; color: black; font-family: 'Nanum Gothic';">싫어하는 음식 </span>
-        <form name="form" class="hform"method="post" action="{% url 'YTMT:hatelistsave'%}" onsubmit="return check();">  {% csrf_token %}
-          <div class="row" style="padding-bottom:50px;">
-    <!-- <table width="400" border="0" cellspacing="0" cellpadding="0"> -->
-      <tr>
-        <td colspan="2" align="left" bgcolor="#FFFFFF" align="center">
-          <table width="100%" border="0" cellpadding="0" cellspacing="0">
-         <td colspan="5" bgcolor="#FFFFFF" height="auto%" align="center">
-           <input type="text" id="searchbox" name="addText">
-              <input name="addButton" id="addbutton" type="button" style="cursor:hand" onClick="insRow();" value="추가"></td></table></td>
-           </tr>
+        <form id ="hatelistform" name="form" class="hform"method="post" action="{% url 'YTMT:hatelistsave'%}" onsubmit="return check();">  {% csrf_token %}
+          <div>
+            <div  style="padding-bottom:50px;">
+              <tr>
+                <td colspan="4" align="left"  align="center">
+                  <table width="100%" border="0" cellpadding="0" cellspacing="0">
+                 <td colspan="5"  height="25" align="center">
+                   <input type="text" id="searchbox" name="addText">
+                      <input name="addButton" id="addbutton" type="button" style="cursor:hand" onClick="insRow1();" value="추가"></td></table></td>
+                   </tr>
 
+              <tr>
+               <td height="25" align="center"  >
+                 <table id="addTable"  cellspacing="0" cellpadding="0" bgcolor="#FFFFFF" border="0">
+                </table></td>
+              </tr>
 
-      </table>
-      <tr>
-       <td height="100%" align="center"  >
-         <table id="addTable" width="200" cellspacing="0" cellpadding="0" bgcolor="#FFFFFF" border="0" height="auto">
-        </table></td>
-      </tr>
-
-    </div>
-      </form>
+    </div></div>
 
 <span style="font-weight: bold; font-size: 1em; line-height: 2em; color: black; font-family: 'Nanum Gothic';">싫어하는 재료 </span>
   <br>
-  <form name="form1" class="hform" method="post" action="{% url 'YTMT:hatelistsave'%}" onsubmit="return check1();">  {% csrf_token %}
-    <div class="row" style="padding-bottom:50px;">
-  <!-- <table width="400" border="0" cellspacing="0" cellpadding="0"> -->
+    <div>
+      <div style="padding-bottom:50px;">
   <tr>
-  <td colspan="2" align="left" bgcolor="#FFFFFF">
+  <td colspan="2" align="left" >
   <table width="100%" border="0" cellpadding="0" cellspacing="0">
-  <td colspan="5" bgcolor="#FFFFFF" height="auto" align="center">
+  <td colspan="5"  height="auto" align="center">
    <input type="text" id="searchbox1" name="addText1">
-      <input name="addButton1" id="addbutton1" type="button" style="cursor:hand" onClick="insRow1();" value="추가"></td>
+      <input name="addButton1" id="addbutton1" type="button" style="cursor:hand" onClick="insRow();" value="추가"></td>
 
     </table>
    </td>
   </tr>
-  </table>
+
   <tr>
    <td height="auto">
-     <table id="addTable1" width="200" cellspacing="0" cellpadding="0" bgcolor="#FFFFFF" border="0">
+     <table id="addTable1"  cellspacing="0" cellpadding="0" bgcolor="#FFFFFF" border="0">
     </table></td>
   </tr>
-  </div>
+  </div></div>
+  <input type="button"id="submit_btn"  onclick="submit_form()"class="btn btn-pink w200" style="font-weight:bold;background-color: #fd7e14;width:250pt;margin-top:12px;"value="회원가입 완료">
+
   </form>
 
-  <input type="submit"id="btn_join"  onclick="twosend()"class="btn btn-pink w200" style="font-weight:bold;background-color: #fd7e14;width:250pt;margin-top:12px;"value="회원가입 완료">
 </center>
 {% endblock %}

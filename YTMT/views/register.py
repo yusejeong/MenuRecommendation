@@ -1,3 +1,4 @@
+#-*-coding: utf-8
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
@@ -5,14 +6,24 @@ from django.views import generic
 from django.contrib.auth.models import User
 from YTMT.models import *
 from django.contrib import auth
+import json
 import datetime
 from . import session as SS
+from . import utils
 
-def find_user(request):
-    # 저장된 session 안의 username을 저장
-    id = request.session.get('username')
-    # id가 동일한 user객체를 검색하여 생성
-    return User.objects.get(username = id)
+'''
+    회원가입 관련 기능이 저장되는 view 파일입니다.
+    회원가입에 추가적인 기능이 필요하면 추가하십시요.
+
+'''
+menu_list = []
+ingre_list = []
+
+for ingre in Ingredient.objects.all():
+    ingre_list.append(ingre.name)
+
+for menu in Menu.objects.all():
+    menu_list.append(menu.name)
 
 def signinrequest(request):
     if request.method == "POST":
@@ -49,8 +60,7 @@ def signuprequest(request):
                 user = User.objects.create_user(
                     username = request.POST["id"], password = request.POST["pwd"], email = request.POST["email"])
             #프로필 객체를 생성
-            userProfile = Profile.objects.create(user_id = user, birth = datetime.datetime.now())
-            userProfile.name = request.POST["name"]
+            userProfile = Profile.objects.create(user_id = user, birth = datetime.datetime.now(), name = request.POST["name"])
             userProfile.save()
             request.session['username'] = request.POST["id"]
             return render(request, 'user/birthandgender.html')
@@ -61,7 +71,7 @@ def birthandgender(request):
     return render(request, 'user/birthandgender.html')
 
 def birthandgendersave(request):
-    login_user = find_user(request)
+    login_user = SS.find_user(request)
     userProfile = Profile.objects.get(user_id = login_user)
 
     # 성별 구분
@@ -86,59 +96,80 @@ def birthandgendersave(request):
 def religion(request):
     return render(request, 'user/religion.html')
 
-def get_reli_id(reli_name):
-    return {'hindu':1, 'budd':2, 'christian':3, 'catholic':4, 'islam':5, 'juda':6, 'sikh':7, 'none':8}.get(reli_name, 8)
-
 def religionsave(request):
-    login_user = find_user(request)
+    login_user = SS.find_user(request)
     userProfile = Profile.objects.get(user_id = login_user)
 
     reli_name = request.POST.get("religion")
-    userProfile.reli_id = get_reli_id(reli_name)
+    userProfile.reli_id = utils.get_reli_id(reli_name)
 
     userProfile.save()
+
     return render(request, 'user/vegetarian.html')
 
 def vegetarian(request):
     return render(request, 'user/vegetarian.html')
 
-def get_vege_id(vege_name):
-    return {'vegan':1, 'lacto':2, 'ovo':3, 'lactoovo':4, 'pesco':5, 'flo':6, 'flexi':7}.get(vege_name, 8)
-
 def vegetariansave(request):
-    login_user = find_user(request)
+    login_user = SS.find_user(request)
     userProfile = Profile.objects.get(user_id = login_user)
 
     vege_name = request.POST.get("vegetarian")
-    userProfile.vege_id = get_vege_id(vege_name)
+    userProfile.vege_id = utils.get_vege_id(vege_name)
 
     userProfile.save()
-    return render(request, 'user/allergy.html')
+
+    return render(request, 'user/allergy.html', {"ingre_list" : ingre_list})
 
 def allergy(request):
-    return render(request, 'user/allergy.html')
+
+    return render(request, 'user/allergy.html', {"ingre_list" : ingre_list})
 
 def allergysave(request):
-    login_user = find_user(request)
+    login_user = SS.find_user(request)
     userProfile = Profile.objects.get(user_id = login_user)
+    allergy_list = request.POST.get("allergy_list")
 
-    ingre_list = []
-    menu_list = []
-    for ingre in Ingredient.objects.all():
-        ingre_list.append(ingre.name)
+    allergy_list = json.loads(allergy_list)
 
-    for menu in Menu.objects.all():
-        menu_list.append(Menu.name)
+    for allergy in allergy_list:
+        print(allergy)
+        i = Ingredient.objects.get(name = allergy)
+        if(i):
+            Allergy(user_id = login_user, ingre = i).save()
+        else:
+             i = Ingredient(name = allergy)
+             i.save()
+             Allergy(user_id = login_user, ingre = i).save()
 
     # 일대다
-    return render(request, 'user/hatelist.html',{'ingredient_list': ingre_list})
+    return render(request, 'user/hatelist.html',{'ingredient_list': ingre_list,'menu_list' : menu_list})
 
 def hatelist(request):
     return render(request, 'user/hatelist.html')
 
 def hatelistsave(request):
-    login_user = find_user(request)
+    login_user = SS.find_user(request)
     userProfile = Profile.objects.get(user_id = login_user)
+
+    hate_menu_list = request.POST.get("menu_list")
+    hate_menu_list = json.loads(hate_menu_list)
+
+    hate_ingredient_list = request.POST.get("ingredient_list")
+    hate_ingredient_list = json.loads(hate_ingredient_list)
+    for hate_menu in hate_menu_list:
+        temp = Menu.objects.get(name = hate_menu)
+        if(temp):
+            Hate_menu(user_id = login_user, menu = temp).save()
+
+    for ingredient in hate_ingredient_list:
+        i = Ingredient.objects.get(name = ingredient)
+        if(i):
+            Hate_ingredient(user_id = login_user, ingre = i).save()
+        else:
+            i = Ingredient(name = ingredient)
+            i.save()
+            Hate_ingredient(user_id = login_user, ingre = i).save()
 
     request.session.modified = True
     del request.session['username']

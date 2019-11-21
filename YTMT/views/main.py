@@ -22,7 +22,7 @@ def mainpage(request):
 
     # 기능1
 def menureco(request):
-    login_user = find_user(request)
+    login_user = SS.find_user(request)
     userProfile = Profile.objects.get(user_id = login_user)
 
     # 사용자의 싫어하는 메뉴, 싫어하는 재료, 알레르기 리스트를 로드함
@@ -35,7 +35,7 @@ def menureco(request):
     menu_list = []
 
     for food in history_list:
-        menu_name = food.menu_id
+        menu_name = food.menu
         cos = sim_df[str(menu_name)].sort_values(ascending=False)
         for name in cos.head(3).index:
             menu_list.append(Menu.objects.get(name = name))
