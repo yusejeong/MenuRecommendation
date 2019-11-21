@@ -11,7 +11,10 @@ FORM {
   font-weight:bold;
 
 }
-
+html, header, body {
+    font-family: 'Nanum Gothic';
+    background: #FCEEB5;
+}
 
 .row {
   width: 40%;

@@ -33,7 +33,7 @@ urlpatterns = [
     path('findinfo/findpw', find_info.findpw, name = 'findpw'),
 
     # 메인
-    path('mainpage', main.mainpage, name = 'mainpage'),    
+    path('mainpage', main.mainpage, name = 'mainpage'),
     # 기능1
     path('menureco', main.menureco, name = 'menureco'),
     path('friendreco', main.friendreco, name = 'friendreco'),
@@ -55,4 +55,5 @@ urlpatterns = [
     # 마이페이지_기타
     path('mypage/history', mypage.history, name ='history'),
     path('mypage/friendlist', mypage.friendlist, name ='friendlist'),
+    path('mypage/friendlistsave', mypage.friendlistsave, name ='friendlistsave'),
 ]

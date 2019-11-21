@@ -9,7 +9,10 @@
       font-size: 1em;
       border-radius: 5px;
     }
-
+    body {
+        font-family: 'Nanum Gothic';
+        background: #FCEEB5;
+    }
     table,
     FORM {
       border: none);
