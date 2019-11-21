@@ -89,19 +89,6 @@
       $('#allergyform').submit()
     }
 
-    // $('#allergyform').submit(function(event){
-
-    //     var allergy_list = []
-    //     $(".allergy").each(function(index,elements){
-    //         allergy_list.push($(elements).text())
-    //     })
-
-    //   var temp = document.createElement("input");
-    //   var input = $(temp).attr('name',"allergy_list").val(JSON.stringify(allergy_list));
-    //   $(input).attr('type' , 'hidden')
-    //   $('#allergyform').append($(input))
-    //   console.log(JSON.stringify(allergy_list));
-    // });
 
     </script>
   </head>
@@ -111,7 +98,8 @@
       <span style="font-weight: bold; font-size: 2em; line-height: 2em; color: black; font-family: 'Nanum Gothic';">알레르기 </span>
       <br>
 
-  <form id = "allergyform" name="form" method="post" action="{% url 'YTMT:allergysave'%}">
+  <form id = "allergyform" name="form" method="post" action="{% url 'YTMT:allergysave'%}" content_type=u"application/json; charset=utf-8">
+
      {% csrf_token %}
      <div>
       <div style="padding-bottom:50px;">
