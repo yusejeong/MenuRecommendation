@@ -1,4 +1,7 @@
-
+html, header, body,table,form {
+    font-family: 'Nanum Gothic';
+    background: #FCEEB5;
+}
 #addbutton {
 
   background-color: #000000;
