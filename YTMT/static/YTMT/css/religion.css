@@ -9,7 +9,13 @@ FORM {
   font-size: 1em;
   border-radius: 5px;
   font-weight:bold;
+
 }
+html, header, body {
+    font-family: 'Nanum Gothic';
+    background: #FCEEB5;
+}
+
 .row {
   width: 40%;
   display: table;
@@ -30,6 +36,7 @@ FORM {
   width: 50%;
   text-align: center;
 }
+
 @media (max-width: 480px) {
   .row {
     width: 100%;

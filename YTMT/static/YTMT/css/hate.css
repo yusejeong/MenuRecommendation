@@ -17,7 +17,10 @@
   cursor: pointer;
 
 }
-
+html, header, body,table,form {
+    font-family: 'Nanum Gothic';
+    background: #FCEEB5;
+}
 #rmbutton {
 
   background-color: #000000;

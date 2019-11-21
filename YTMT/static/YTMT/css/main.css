@@ -14,10 +14,13 @@
   font-weight: bold;
 
   margin: 4px 1px;
-  
+
   cursor: pointer;
 }
-
+body {
+    font-family: 'Nanum Gothic';
+    background: #FCEEB5;
+}
 
 .button2 {
 
