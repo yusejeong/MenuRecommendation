@@ -143,8 +143,8 @@ class Menu_store(models.Model):
         return self.rest_id.rest_name + " 판매 메뉴 : " + self.menu.name
 
 class Friend_list(models.Model):
-    user_id = models.ManyToManyField(User)
-    friend_id = models.ForeignKey(User, on_delete = models.CASCADE, related_name="owner", null=True)
+    user_id = models.ForeignKey(User,on_delete = models.CASCADE, related_name= "owner", null = True)
+    friend_id = models.ForeignKey(User, on_delete = models.CASCADE, related_name="flower", null=True)
     
     @classmethod
     def make_friend(cls, current_user, new_friend):
