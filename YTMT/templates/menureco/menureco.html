@@ -5,6 +5,7 @@
  {% load static %}
 
   <head>
+      <title>니맛내맛 : 개인맞춤형 메뉴 추천</title>
       <link rel="stylesheet" href='{% static "YTMT/css/menureco.css" %}'>
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
   </head>
@@ -26,7 +27,7 @@
                                 <div class="menutext">
                                     <span>{{ menu.text }}</span>
                                 </div>
-                                
+
                                  <br><br>
                             </div>
                                 <div class="like-img" align="right" >
@@ -39,22 +40,21 @@
                                     <script type="text/javascript">
                                         function likechange() {
                                             var likes = document.getElementById('likes');
-                                            
+
                                             if(likes.src.match('{% static "YTMT/img/like.png" %}')) {
                                                 likes.src = '{% static "YTMT/img/nolike.png" %}'
                                             } else {
                                                 likes.src = '{% static "YTMT/img/like.png" %}'
-                                            } 
+                                            }
                                         }
                                     </script>
                                 </div>
-                 
+
                         </div>
                     </div>
-                </div>        
-        </div>             
+                </div>
+        </div>
 
 
     {% endfor %}
 {% endblock %}
-
