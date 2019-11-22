@@ -61,6 +61,7 @@ header {
   box-shadow: 0 4px 6px -1px rgb(198, 207, 234);
   margin-bottom: 1.6%;
   overflow: hidden;
+    min-height: 195px;
 }
 .firma-resim{
   position: absolute;
@@ -92,6 +93,7 @@ header {
     position: relative;
     z-index: 0;
     height: 200px;
+    max-height: 365px;
   }
   .img-padding-no{
     padding-right: 0px;
