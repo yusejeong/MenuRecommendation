@@ -32,7 +32,7 @@ def selectinfo(request):
 
 def infomodify(request):
     login_user = SS.find_user(request)
-    
+
     return render(request, 'mypage/infomodify.html', {"user" : login_user})
 
 def infomodifysave(request):
@@ -115,10 +115,10 @@ def history(request):
     return render(request, 'mypage/history.html')
 
 def friendlist(request):
-    login_user = SS.find_user(request)
-    userProfile = Profile.objects.get(user_id = login_user)
+    # login_user = SS.find_user(request)
+    # userProfile = Profile.objects.get(user_id = login_user)
 
-    friend_list = Friend_list.objects.filter(user_id = login_user)
+    # friend_list = Friend_list.objects.filter(user_id = login_user)
     # for friend in friend_list:
         # print(friend.friend_id.name)
     return render(request, 'mypage/friendslist.html')
