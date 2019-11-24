@@ -1,0 +1,57 @@
+{% extends 'user/navbar.html' %}
+{% load staticfiles %}
+
+{% block content %}
+ {% load static %}
+
+  <head>
+      <title>니맛내맛 : 프로필</title>
+      <link rel="stylesheet" href='{% static "YTMT/css/menureco.css" %}'>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  </head>
+  <center>
+  <div class="title">프로필 정보</div>
+   {% for info in profile %}
+     <div class="post">
+                <div class="firma-card row">
+
+                    <div class="col-md-7">
+                        <div class="firma-aciklama card-body">
+                            <h4>{{ hate_menu_list }}</h4>
+
+                            <div class="yacht-info__list space-2">
+
+                                <div class="menutext">
+                                    <span>{{ menu.text }}</span>
+                                </div>
+
+                                 <br><br>
+                            </div>
+                                <div class="like-img" align="right" >
+<!--                                <a class="navbar-brand" href="/">-->
+<!--                                   여기에 좋아요 누르면 history로 반영되도록-->
+                                    <h5>
+                                    <img id="likes" src='{% static "YTMT/img/nolike.png" %}' width="35px" height="auto" onclick="likechange()">
+                                    {{menu.likes}}</h5>
+<!--                                여기에 좋아요 수 계산하는거 넣어줘-->
+                                    <script type="text/javascript">
+                                        function likechange() {
+                                            var likes = document.getElementById('likes');
+
+                                            if(likes.src.match('{% static "YTMT/img/like.png" %}')) {
+                                                likes.src = '{% static "YTMT/img/nolike.png" %}'
+                                            } else {
+                                                likes.src = '{% static "YTMT/img/like.png" %}'
+                                            }
+                                        }
+                                    </script>
+                                </div>
+
+                        </div>
+                    </div>
+                </div>
+        </div>
+</center>
+
+    {% endfor %}
+{% endblock %}

@@ -56,4 +56,5 @@ urlpatterns = [
     path('mypage/history', mypage.history, name ='history'),
     path('mypage/friendlist', mypage.friendlist, name ='friendlist'),
     path('mypage/friendlistsave', mypage.friendlistsave, name ='friendlistsave'),
+    path('mypage/profile', mypage.profile, name ='profile'),
 ]
