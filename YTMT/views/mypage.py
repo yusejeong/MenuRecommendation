@@ -10,6 +10,11 @@ from . import session as SS
 from . import utils
 menu_list = []
 ingre_list = []
+# friend_list=[]
+# for friend in Friend_list.objects.all():
+#     friend_list.append(friend.friend_id)
+
+
 
 for ingre in Ingredient.objects.all():
     ingre_list.append(ingre.name)
@@ -26,7 +31,9 @@ def selectinfo(request):
     return render(request, 'mypage/selectinfo.html')
 
 def infomodify(request):
-    return render(request, 'mypage/infomodify.html')
+    login_user = SS.find_user(request)
+    
+    return render(request, 'mypage/infomodify.html', {"user" : login_user})
 
 def infomodifysave(request):
     login_user = SS.find_user(request)
@@ -73,7 +80,14 @@ def vegetarianmodifysave(request):
     return render(request, 'mypage/selectinfo.html')
 
 def allergymodify(request):
-    return render(request, 'mypage/allergymodify.html',{"ingre_list" : ingre_list})
+    login_user = SS.find_user(request)
+    allergy_objects = Allergy.objects.filter(user_id = login_user)
+    allergy_list = []
+
+    for allergy in allergy_objects:
+        allergy_list.append(allergy)
+
+    return render(request, 'mypage/allergymodify.html',{"allergy_list" : allergy_list})
 
 def allergymodifysave(request):
     login_user = SS.find_user(request)
@@ -101,7 +115,13 @@ def history(request):
     return render(request, 'mypage/history.html')
 
 def friendlist(request):
-    return render(request, 'mypage/friendlist.html',{"ingre_list" : ingre_list})
+    login_user = SS.find_user(request)
+    userProfile = Profile.objects.get(user_id = login_user)
+
+    friend_list = Friend_list.objects.filter(user_id = login_user)
+    # for friend in friend_list:
+        # print(friend.friend_id.name)
+    return render(request, 'mypage/friendslist.html')
 
 def friendlistsave(request):
     # login_user = SS.find_user(request)

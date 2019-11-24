@@ -1,13 +1,12 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.contrib import auth
-
 # 메뉴
 class Menu(models.Model):
     id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=50, blank = False, null = False)
-    img_url = models.ImageField(null=True, max_length=100)
-    text = models.TextField(null=True)
+    img_url = models.ImageField(null=True, max_length=100, blank=True)
+    text = models.TextField(null=True, blank=True)
 
     likes = models.IntegerField(default= 0)
 
@@ -144,8 +143,8 @@ class Menu_store(models.Model):
         return self.rest_id.rest_name + " 판매 메뉴 : " + self.menu.name
 
 class Friend_list(models.Model):
-    user_id = models.ManyToManyField(User)
-    friend_id = models.ForeignKey(User, on_delete = models.CASCADE, related_name="owner", null=True)
+    user_id = models.ForeignKey(User,on_delete = models.CASCADE, related_name= "owner", null = True)
+    friend_id = models.ForeignKey(User, on_delete = models.CASCADE, related_name="flower", null=True)
     
     @classmethod
     def make_friend(cls, current_user, new_friend):

@@ -10,6 +10,8 @@
   <link rel="stylesheet" href="https://dfzrjox9sv97l.cloudfront.net/dicons_20160930/css/user_web.css?201709272">
   <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css?201709272">
   <link rel="stylesheet" href='{% static "YTMT/css/signin.css" %}'>
+  <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+
 </head>
 
 <body>
@@ -25,15 +27,18 @@
           <input name="retURL" type="hidden" value="https://.com/">
 
 
-            <img src="https://ytmtresource.s3.ap-northeast-2.amazonaws.com/YTMT_Logo.jpg" width="200" height="auto" style="padding-bottom: 10px">
+            <img src="https://ytmtresource.s3.ap-northeast-2.amazonaws.com/YTMT_Logo.jpg" width="200" height="auto" style="padding-bottom: 16px">
             <div>
               <input id="id" name="username" type="text" class="input-text" placeholder="아이디 입력" style="margin-bottom:7px;">
+              <br>
               <input id="pw" name="password" type="password" class="input-text" placeholder="비밀번호 입력">
+              <br>
             </div>
-            <div style="padding:10px 0;">
+            <div style="padding:20px 0;">
               <div class="clear"></div>
             </div>
             <input type="button" class="btn btn-black" onclick="logincheck()" value="로그인">
+            <br>
             <script type="text/javascript">
               function logincheck() {
                 if (!document.form.id.value) {
@@ -52,8 +57,9 @@
               }
             </script>
                    <a href="{% url 'YTMT:signup'%}">
-                      <input  id="btn_intro" type="button" class="btn btn-white" style="margin-top:12px;" value="회원가입">
+                      <input  id="btn_intro" type="button" class="btn btn-white" style="margin-top:12px;" value="회원가입"><br>
                      </a>
+                     <br>
                      <a href="{% url 'YTMT:findinfo'%}">
                       <input  type="button" class="btn btn-white" style="margin-top:12px;" value="아이디/비밀번호 찾기">
                     </a>
