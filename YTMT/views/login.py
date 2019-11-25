@@ -19,18 +19,24 @@ def signinrequest(request):
     if request.method == "POST":
         id = request.POST['username']
         pwd = request.POST['password']
-        user = auth.authenticate(request, username = id, password = pwd)
-        if user is not None:
-            auth.login(request, user)
-            SS.create_session(request, id, pwd)
-            return HttpResponseRedirect(reverse('YTMT:mainpage'))
+        
+        res_data = {}
+        if not (id):
+            res_data['error']="아이디를 입력하세요."
+        elif not (pwd):
+            res_data['error']="비밀번호를 입력하세요."
         else:
-            '''
-               수정 필요한 부분, 비동기적으로 로그인이 되지 않았음을 보내는 기능을 만들어야함
-                현재는 Template의 수정이 우선되어야 기능구현을 확인할 수 있으므로 추후 방안논의
-            '''
-            return render(request, 'user/signin.html', {'error':'id or pwd is incorrect'})
-        # 팝업창으로 띄우기
+            user = auth.authenticate(request, username = id, password = pwd)
+            if user is not None:
+                auth.login(request, user)
+                SS.create_session(request, id, pwd)
+                return redirect('YTMT:mainpage')
+            else:
+                '''
+                   로그인 실패시, url이 /signinrequest로 이동합니다. 그리고 input값이 남아있습니다. 수정 필요.
+                '''
+                res_data['error'] = "아이디 또는 비밀번호가 잘못되었습니다."
+        return render(request,'user/signin.html', res_data)
     else:
         return render(request, 'user/signin.html')
 

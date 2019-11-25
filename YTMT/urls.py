@@ -37,6 +37,7 @@ urlpatterns = [
     # 기능1
     path('menureco', main.menureco, name = 'menureco'),
     path('friendreco', main.friendreco, name = 'friendreco'),
+    path('locationreco', main.locationreco, name = 'locationreco'),
 
     # 마이페이지_수정
     path('mypage', mypage.mypagemain, name = 'mypagemain'),
