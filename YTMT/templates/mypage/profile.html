@@ -1,57 +1,90 @@
 {% extends 'user/navbar.html' %}
-{% load staticfiles %}
+{% block bodycontent %}
+{% load static %}
 
-{% block content %}
- {% load static %}
+<head>
+  <title>니맛내맛 : 프로필</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <link rel="stylesheet" href={% static "YTMT/css/signup.css" %}>
+  <script src="//code.jquery.com/jquery.min.js"></script>
 
-  <head>
-      <title>니맛내맛 : 프로필</title>
-      <link rel="stylesheet" href='{% static "YTMT/css/menureco.css" %}'>
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  </head>
-  <center>
-  <div class="title">프로필 정보</div>
-   {% for info in profile %}
-     <div class="post">
-                <div class="firma-card row">
+</head>
+<center>
 
-                    <div class="col-md-7">
-                        <div class="firma-aciklama card-body">
-                            <h4>{{ hate_menu_list }}</h4>
+  <br>
+  <span style="font-weight: bold; font-size: 2em; line-height: 2em; color: black; font-family: 'Nanum Gothic';">
+    프로필 정보
+  </span>
+  <br><br>
+    {% csrf_token %}
+    <table border="0" cellspacing="0" frame="void">
+      <tr>
+        <th style="float:left;">아이디 </th>
+      </tr>
+      <td>
+        {{아이디}}
+      </td>
+      <tr>
+        <th style="float:left;">이름 </th>
+      </tr>
 
-                            <div class="yacht-info__list space-2">
+      <td>
+        {{이름}}
+      </td>
+      <tr>
+        <th style="float:left;">이메일 </th>
+      </tr>
+      <td>
+        {{이메일주소}}
+      </td>
 
-                                <div class="menutext">
-                                    <span>{{ menu.text }}</span>
-                                </div>
+      <tr>
+        <th style="float:left;">생일 </th>
+      </tr>
+      <td>
+        {{생일}}
+      </td>
+      <tr>
+        <th style="float:left;">성별 </th>
+      </tr>
+      <td>
+        {{성별}}
+      </td>
+      <tr>
+        <th style="float:left;">종교 </th>
+      </tr>
+      <td>
+        {{종교}}
+      </td>
+      <tr>
+        <th style="float:left;">채식주의 </th>
+      </tr>
+      <td>
+        {{채식주의}}
+      </td>
+      <tr>
+        <th style="float:left;">알레르기 </th>
+      </tr>
+      <td>
+        {{알레르기}}
+      </td>
+      <tr>
+        <th style="float:left;">싫어하는 음식 </th>
+      </tr>
+      <td>
+        {{싫어음식}}
+      </td>
+      <tr>
+        <th style="float:left;">싫어하는 재료 </th>
+      </tr>
+      <td>
+        {{싫어재료}}
+      </td>
+    </table>
 
-                                 <br><br>
-                            </div>
-                                <div class="like-img" align="right" >
-<!--                                <a class="navbar-brand" href="/">-->
-<!--                                   여기에 좋아요 누르면 history로 반영되도록-->
-                                    <h5>
-                                    <img id="likes" src='{% static "YTMT/img/nolike.png" %}' width="35px" height="auto" onclick="likechange()">
-                                    {{menu.likes}}</h5>
-<!--                                여기에 좋아요 수 계산하는거 넣어줘-->
-                                    <script type="text/javascript">
-                                        function likechange() {
-                                            var likes = document.getElementById('likes');
 
-                                            if(likes.src.match('{% static "YTMT/img/like.png" %}')) {
-                                                likes.src = '{% static "YTMT/img/nolike.png" %}'
-                                            } else {
-                                                likes.src = '{% static "YTMT/img/like.png" %}'
-                                            }
-                                        }
-                                    </script>
-                                </div>
+    <a href="{% url 'YTMT:mypagemain'%}"><input type="submit" id="btn_join" class="btn btn-pink w200" style="font-weight:bold;background-color: #fd7e14;width:250pt;margin-top:12px;" value="이전으로">
+      </a>
 
-                        </div>
-                    </div>
-                </div>
-        </div>
-</center>
-
-    {% endfor %}
+  </center>
 {% endblock %}

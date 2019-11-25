@@ -115,36 +115,20 @@ def history(request):
     return render(request, 'mypage/history.html')
 
 def friendlist(request):
-    # login_user = SS.find_user(request)
-    # userProfile = Profile.objects.get(user_id = login_user)
+    login_user = SS.find_user(request)
+    userProfile = Profile.objects.get(user_id = login_user)
 
-    # friend_list = Friend_list.objects.filter(user_id = login_user)
-    # for friend in friend_list:
-        # print(friend.friend_id.name)
+    friend_list = Friend_list.objects.filter(user_id = login_user)
+    for friend in friend_list:
+        print(friend.friend_id.name)
     return render(request, 'mypage/friendslist.html')
 
 def friendlistsave(request):
-    # login_user = SS.find_user(request)
-    # userProfile = Profile.objects.get(user_id = login_user)
+    login_user = SS.find_user(request)
+    userProfile = Profile.objects.get(user_id = login_user)
     return render(request, 'mypage/mypagemain.html')
 
 def profile(request):
     # login_user = SS.find_user(request)
     # userProfile = Profile.objects.get(user_id = login_user)
-
-    brithday_str = request.POST.get('birth')
-    # POST 방식으로 받아온 birth가 String값이기 때문에 DateTime 객체로 변환
-    # birthday_obj = datetime.datetime.strptime(brithday_str, '%Y-%m-%d')
-    # userProfile.gender = gender_num
-    # userProfile.birth = birthday_obj
-
-    hate_menu_list = request.POST.get("menu_list")
-    # hate_menu_list = json.loads(hate_menu_list)
-    vege_name = request.POST.get("vegetarian")
-    # userProfile.vege_id = utils.get_vege_id(vege_name)
-    hate_ingredient_list = request.POST.get("ingredient_list")
-    # hate_ingredient_list = json.loads(hate_ingredient_list)
-
-    reli_name = request.POST.get("religion")
-    # userProfile.reli_id = utils.get_reli_id(reli_name)
     return render(request, 'mypage/profile.html')
