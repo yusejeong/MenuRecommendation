@@ -118,10 +118,14 @@ def friendlist(request):
     login_user = SS.find_user(request)
     userProfile = Profile.objects.get(user_id = login_user)
 
-    friend_list = Friend_list.objects.filter(user_id = login_user)
-    # for friend in friend_list:
-        # print(friend.friend_id.name)
-    return render(request, 'mypage/friendslist.html')
+    friend_objects = Friend_list.objects.filter(user_id = login_user)
+    friend_list = []
+    for friend in friend_objects:
+        friend_id = friend.friend_id.username 
+        name = Profile.objects.get(user_id = friend.friend_id).name
+        friend_list.append({"id" : friend_id, "name" : name})
+    
+    return render(request, 'mypage/friendslist.html', {"friend_list" : friend_list})
 
 def friendlistsave(request):
     # login_user = SS.find_user(request)
