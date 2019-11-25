@@ -21,10 +21,11 @@ header {
     margin-bottom: 1em;
 }
 #goto_main {
+
     background-color:#FFC81E;
-    width:100pt;
-    font-weight:500;
-    margin-right: 0;
+    width: 85pt;
+    font-weight: 500;
+    margin-right: 0; 
     float: right;
 }
 #goto_main a {
