@@ -56,6 +56,11 @@ urlpatterns = [
     # 마이페이지_기타
     path('mypage/history', mypage.history, name ='history'),
     path('mypage/friendlist', mypage.friendlist, name ='friendlist'),
+    path('mypage/profile', mypage.profile, name= 'profile'),
     path('mypage/friendlistsave', mypage.friendlistsave, name ='friendlistsave'),
-    path('mypage/profile', mypage.profile, name ='profile'),
+
+    #마이페이지_친구
+    path('friends/find_friend', friends.find_friend, name = 'find_friend'),    
+    path('friends/add_friend', friends.add_friend, name = 'add_friend'),
+    path('friends/remove_friend', friends.remove_friend, name = 'remove_friend'),
 ]

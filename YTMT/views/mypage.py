@@ -118,10 +118,14 @@ def friendlist(request):
     login_user = SS.find_user(request)
     userProfile = Profile.objects.get(user_id = login_user)
 
-    friend_list = Friend_list.objects.filter(user_id = login_user)
-    for friend in friend_list:
-        print(friend.friend_id.name)
-    return render(request, 'mypage/friendslist.html')
+    friend_objects = Friend_list.objects.filter(user_id = login_user)
+    friend_list = []
+    for friend in friend_objects:
+        friend_id = friend.friend_id.username 
+        name = Profile.objects.get(user_id = friend.friend_id).name
+        friend_list.append({"id" : friend_id, "name" : name})
+    
+    return render(request, 'mypage/friendslist.html', {"friend_list" : friend_list})
 
 def friendlistsave(request):
     login_user = SS.find_user(request)
@@ -129,6 +133,34 @@ def friendlistsave(request):
     return render(request, 'mypage/mypagemain.html')
 
 def profile(request):
-    # login_user = SS.find_user(request)
-    # userProfile = Profile.objects.get(user_id = login_user)
-    return render(request, 'mypage/profile.html')
+    login_user = SS.find_user(request)
+    tempProfile = Profile.objects.get(user_id = login_user)   
+    
+    Gender_TYPE = (
+        (1, "남자"),
+        (2, "여자"),
+    )
+
+    Religion_TYPE = (
+        (1, "힌두교"), (2, "불교"),
+        (3, "기독교"), (4, "천주교"),
+        (5, "이슬람교"), (6, "유대교"),
+        (7, "시크교도"), (8, "무교"),
+    )
+
+    Vegetarian_TYPE = (
+        (1, "비건"), (2, "락토 베지테리언"),
+        (3, "오보 베지테리언"), (4, "락토 오보 베지테리언"),
+        (5, "페스코 베지테리언"), (6, "플로 베지테리언"),
+        (7, "플렉시테리언"), (8, "해당사항없음"),
+    )
+
+    userProfile = {
+        "name" : tempProfile.name,
+        "religion" : Religion_TYPE[tempProfile.reli_id -1][1],
+        "vegetarian" : Vegetarian_TYPE[tempProfile.vege_id- 1][1],
+        "gender" : Gender_TYPE[tempProfile.gender - 1][1],
+        "birth" : tempProfile.birth,
+    }
+
+    return render(request, 'mypage/profile.html',{"profile" : userProfile})
