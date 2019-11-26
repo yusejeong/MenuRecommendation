@@ -1,0 +1,42 @@
+html, header, body,table,form {
+    font-family: 'Nanum Gothic';
+    background: #FCEEB5;
+}
+#addbutton {
+background-color:#FFC81E;
+  border: none;
+  color: white;
+  text-align: center;
+
+  text-decoration: none;
+
+  display: inline-block;
+
+  font-size: 20px;
+  font-weight: bold;
+
+  margin: 4px 1px;
+
+  cursor: pointer;
+
+}
+
+#rmbutton {
+
+background-color:#FFC81E;
+  border: none;
+  color: white;
+  text-align: center;
+
+  text-decoration: none;
+
+  display: inline-block;
+
+  font-size: 20px;
+  font-weight: bold;
+
+
+
+  cursor: pointer;
+
+}
