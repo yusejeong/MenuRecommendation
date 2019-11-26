@@ -112,3 +112,6 @@ def menureco(request):
 
 def friendreco(request):
     return render(request, 'menureco/friendreco.html')
+
+def restaurantreco(request):
+    return render(request, 'menureco/restaurantreco.html')
