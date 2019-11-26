@@ -20,7 +20,7 @@ header {
     margin-right:5px;
     margin-bottom: 1em;
 }
-#goto_main {
+#navrightbtn {
 
     background-color:#FFC81E;
     width: 85pt;
@@ -28,7 +28,7 @@ header {
     margin-right: 0; 
     float: right;
 }
-#goto_main a {
+#navrightbtn a, #navleftbtn a  {
     text-decoration:none;
 }
 
@@ -49,10 +49,23 @@ header {
           font-size: 1.2rem;
       }
 
+h4 {
+    color: black;
+}
 
+/*restaurantreco css*/
+#navleftbtn {
 
-
-/**/
+    background-color:#FFC81E;
+    width: 70pt;
+    font-weight: 500;
+    margin-right: 0; 
+}
+ul li a {
+    text-decoration: none;
+    color: black;
+}
+/*menureco*/
 .firma-card{
   background: #fff;
   border: 1px solid;

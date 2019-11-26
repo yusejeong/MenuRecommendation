@@ -114,7 +114,9 @@ def friendreco(request):
     return render(request, 'menureco/friendreco.html')
 
 def restaurantreco(request):
-    return render(request, 'menureco/restaurantreco.html')
+    restaurants = Restaurant.objects.filter()
+    return render(request, 'menureco/restaurantreco.html',{'restaurants': restaurants})
 
 def locationreco(request):
     return render(request, 'menureco/locationreco.html')
+
