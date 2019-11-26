@@ -6,12 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://dfzrjox9sv97l.cloudfront.net/dicons_20160930/css/common.css?201709272">
     <link rel="stylesheet" type="text/css" href={% static "YTMT/css/allergy.css" %}>
-    <script type="text/javascript" src={% static "YTMT/js/Autocomplete/jquery/lib/jquery.js" %}></script>
-    <script type="text/javascript" src={% static "YTMT/js/Autocomplete/jquery/lib/jquery.bgiframe.min.js" %}></script>
-    <script type="text/javascript" src={% static "YTMT/js/Autocomplete/jquery/lib/jquery.ajaxQueue.js" %}></script>
-    <script type="text/javascript" src={% static "YTMT/js/Autocomplete/jquery/jquery.autocomplete.js" %}></script>
-    <script type="text/javascript" src={% static "YTMT/js/friendList.js%"}></script>
-    <link rel="stylesheet" type="text/css" href={% static "YTMT/js/Autocomplete/jquery/jquery.autocomplete.css" %}>
+    <script type="text/javascript" src={% static "YTMT/js/friendList.js" %}></script>
     <style>
         hr.style1 {
             border-top: 1px solid #d1d0cc;
@@ -26,6 +21,115 @@
             height: 75px;
         }
     </style>
+
+    <script type="text/javascript">
+        $(document).on("click", ".searchBtn", function(event) {
+            $(".find_card.Showing").remove()
+            var friend_name = $("#inputBox").val()
+
+            $.ajax({
+                headers: {
+                    "X-CSRFToken": '{{csrf_token}}'
+                },
+                url: "/friends/find_friend",
+                type: "POST",
+                data: {
+                    "friend_name": friend_name,
+                },
+                cache: false,
+                dataType: "json",
+
+                success: function(response) {
+                    var find_list = response.find_list
+                    find_list.forEach(function(user) {
+                        var id = user[0];
+                        var name = user[1];
+                        find_card = $(".find_card.hidden").clone()
+
+                        console.log($(find_card).find(".d-none"));
+                        $(find_card).removeClass("hidden").addClass("Showing")
+                            .find(".d-none").removeClass("d-none")
+
+                        $(find_card).find(".name_place").html(name)
+                        $(find_card).find(".id_place").html(id)
+                        $(find_card).find(".addBtn").data("id", id)
+                        $(find_card).appendTo(".find_user_container")
+                    })
+                },
+                error: function(response, error) {
+                    alert(friend_name + " 회원님을 찾을 수 없습니다")
+                }
+            })
+        });
+
+        $(document).on("click", ".deleteBtn", function(event) {
+            // alert($(this).data("id") + " delete")
+            var parentTag = $(this).closest(".friend_card.Showing")
+            var friend_id = $(this).data("id")
+            var friend_name = $(parentTag).find(".name_place").text()
+            $.ajax({
+                headers: {
+                    "X-CSRFToken": '{{csrf_token}}'
+                },
+                url: "/friends/remove_friend",
+                type: "POST",
+                data: {
+                    "friend_id": friend_id
+                },
+                dataType: "text",
+                success: function(response) {
+                    alert(friend_name + " 님을 친구목록에서 제거하였습니다")
+                    parentTag.remove()
+                },
+                error: function(response, error) {
+                    alert(friend_name + " 회원님을 찾을 수 없습니다")
+                    console.log(response)
+                }
+            })
+        });
+
+        $(document).on("click", ".addBtn", function(event) {
+            // alert($(this).data("id") + " add")
+            var parentTag = $(this).closest(".find_card.Showing")
+            var friend_id = $(this).data("id")
+            var friend_name = $(parentTag).find(".name_place").text()
+            console.log(friend_id);
+            console.log(friend_name);
+
+            $.ajax({
+                headers: {
+                    "X-CSRFToken": '{{csrf_token}}'
+                },
+                url: "/friends/add_friend",
+                type: "POST",
+                data: {
+                    "friend_id": friend_id
+                },
+                dataType: "text",
+                success: function(response) {
+                    console.log(response);
+                    alert(friend_id + " 님을 친구목록에 추가하였습니다!")
+                    parentTag.remove()
+
+                    var friend_card = $(".friend_card.hidden").clone()
+
+                    $(friend_card).removeClass("hidden").addClass("Showing")
+                        .find(".d-none").removeClass("d-none")
+
+                    $(friend_card).find(".name_place").html(friend_name)
+                    $(friend_card).find(".id_place").html(friend_id)
+                    $(friend_card).find(".deleteBtn").data("id", friend_id)
+                    $(friend_card).appendTo(".friend_card_place")
+
+                },
+                error: function(response, error) {
+                    console.log(response);
+                    alert(friend_name + " 회원님을 찾을 수 없습니다")
+                }
+            })
+
+        });
+    </script>
 </head>
 
 <body>
@@ -35,100 +139,89 @@
                 <div class="align-self-start align-self-center mr-auto ml-2">
                     <b class="h5">친구 추가</b>
                 </div>
-                <div class="align-self-end mr-2">
-                    <button type="button" class="btn btn-secondary btn-sm rounded-pill"><b>마이페이지로</b></button>
-                </div>
+
             </div>
             <div class="friend_add container p-1 py-3  my-2 rounded bg-light row">
                 <div class="d-flex col">
-                    <input class="form-control mr-3 ml-auto align-self-center" type="text" placeholder="친구 이름을 검색하세요!">
-                    <button type="" class="btn btn-secondary btn-sm w-50"><b>검색</b></button>
+                    <input ID="inputBox" class="form-control mr-3 ml-auto align-self-center" type="text" placeholder="친구 이름을 검색하세요!">
+                    <button type="" class="btn btn-secondary btn-sm w-50 searchBtn"><b>검색</b></button>
                 </div>
             </div>
-            <div class="container p-2 bg-light">
-                <div class="d-flex row bg-warning w-100 my-1 rounded">
-                    <div class="row">
-                        <div class="d-inline-flex justify-content-center p-2 ">
-                            <img src='{% static "YTMT/img/default-user.png" %}' class="user_img_size rounded-circle" alt="... ">
-                        </div>
-                        <div class="align-self-center justify-content-start mr-auto ml-2 ">
-                            <div class="">
-                                <h5 class="card-title ">사용자 이름</h5>
-                                <p class="card-text">
-                                    <i>사용자 아이디</i>
-                                </p>
-                            </div>
-                        </div>
-                        <div class="align-self-center justify-content-center mr-2">
-                            <button type="" class="btn btn-primary btn-sm"><b>친구 추가</b></button>
-                        </div>
-                    </div>
-                </div>
-                <div class="d-flex row bg-warning w-100 my-1 rounded">
-                    <div class="row">
-                        <div class="d-inline-flex justify-content-center p-2 ">
-                            <img src='{% static "YTMT/img/default-user.png" %}' class="user_img_size rounded-circle" alt="... ">
-                        </div>
-                        <div class="align-self-center justify-content-start mr-auto ml-2 ">
-                            <div class="">
-                                <h5 class="card-title ">사용자 이름</h5>
-                                <p class="card-text">
-                                    <i>사용자 아이디</i>
-                                </p>
-                            </div>
-                        </div>
-                        <div class="align-self-center justify-content-center mr-2">
-                            <button type="" class="btn btn-primary btn-sm"><b>친구 추가</b></button>
-                        </div>
-                    </div>
-                </div>
+            <div class="container p-2 bg-light find_user_container">
             </div>
 
-            <hr class="row style1 my-1">
+            <hr class="row my-1">
 
             <div class="container p-2 bg-white row">
                 <div class="row">
                     <b class="h5 ml-2 ">친구 목록</b>
                 </div>
-                <div class="d-flex row bg-light w-100 my-1 rounded">
-                    <div class="row">
-                        <div class="d-inline-flex justify-content-center p-2 ">
-                            <img src='{% static "YTMT/img/default-user.png" %}' class="user_img_size rounded-circle" alt="... ">
-                        </div>
-                        <div class="align-self-center justify-content-start mr-auto ml-2 ">
-                            <div class="">
-                                <h5 class="card-title ">사용자 이름</h5>
-                                <p class="card-text">
-                                    <i>사용자 아이디</i>
-                                </p>
+                <div class="d-flex row w-100 my-1 rounded friend_card_place">
+                    {% for friend in friend_list %}
+                    <div id="friend_card" class="d-flex row bg-light w-100 my-1 rounded friend_card Showing">
+                        <div class="row">
+                            <div class="d-inline-flex justify-content-center p-2 ">
+                                <img src='{% static "YTMT/img/default-user.png" %}' class="user_img_size rounded-circle" alt="... ">
+                            </div>
+                            <div class="align-self-center justify-content-start mr-auto ml-2 ">
+                                <div>
+                                    <h5 class="card-title name_place">{{friend.name}}</h5>
+                                    <p class="card-text">
+                                        <i class="id_place">{{friend.id}}</i>
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="align-self-center justify-content-center mr-2">
+                                <button type="" class="btn btn-secondary btn-sm deleteBtn" data-id="{{friend.id}}"><b>친구 제거</b></button>
                             </div>
                         </div>
-                        <div class="align-self-center justify-content-center mr-2">
-                            <button type="" class="btn btn-secondary btn-sm"><b>친구 제거</b></button>
-                        </div>
                     </div>
+                    {% endfor %}
                 </div>
-                <div class="d-flex row bg-light w-100 my-1 rounded">
-                    <div class="row">
-                        <div class="d-inline-flex justify-content-center p-2 ">
-                            <img src='{% static "YTMT/img/default-user.png" %}' class="user_img_size rounded-circle" alt="... ">
-                        </div>
-                        <div class="align-self-center justify-content-start mr-auto ml-2 ">
-                            <div class="">
-                                <h5 class="card-title ">사용자 이름</h5>
-                                <p class="card-text">
-                                    <i>사용자 아이디</i>
-                                </p>
-                            </div>
-                        </div>
-                        <div class="align-self-center justify-content-center mr-2">
-                            <button type="" class="btn btn-secondary btn-sm"><b>친구 제거</b></button>
-                        </div>
-                    </div>
-                </div>
+
             </div>
 
         </div>
     </center>
+
+    <div class="d-flex row bg-warning w-100 my-1 rounded find_card hidden">
+        <div class="row d-none">
+            <div class="d-inline-flex justify-content-center p-2 ">
+                <img src='{% static "YTMT/img/default-user.png" %}' class="user_img_size rounded-circle" alt="... ">
+            </div>
+            <div class="align-self-center justify-content-start mr-auto ml-2 ">
+                <div class="">
+                    <h5 class="card-title name_place"></h5>
+                    <p class="card-text">
+                        <i class="id_place"></i>
+                    </p>
+                </div>
+            </div>
+            <div class="align-self-center justify-content-center mr-2">
+                <button id="addFriend" type="" class="btn btn-primary btn-sm addBtn" data-id=""><b>친구 추가</b></button>
+            </div>
+        </div>
+    </div>
+
+    <div id="friend_card" class="d-flex row bg-light w-100 my-1 rounded friend_card hidden">
+        <div class="row d-none">
+            <div class="d-inline-flex justify-content-center p-2 ">
+                <img src='{% static "YTMT/img/default-user.png" %}' class="user_img_size rounded-circle" alt="... ">
+            </div>
+            <div class="align-self-center justify-content-start mr-auto ml-2 ">
+                <div>
+                    <h5 class="card-title name_place">사용자 이름</h5>
+                    <p class="card-text">
+                        <i class="id_place">사용자 아이디</i>
+                    </p>
+                </div>
+            </div>
+            <div class="align-self-center justify-content-center mr-2">
+                <button type="" class="btn btn-secondary btn-sm deleteBtn" data-id=""><b>친구 제거</b></button>
+            </div>
+        </div>
+    </div>
+
+
 </body>
 {% endblock %}

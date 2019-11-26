@@ -85,7 +85,7 @@ def menureco(request):
     filter_menu = []
 
     menu_cnt = Menu.objects.count()
-    
+
     while True:
         menu_id = random.randint(1, menu_cnt)
         menu_obj = Menu.objects.get(id = menu_id)
@@ -112,3 +112,5 @@ def menureco(request):
 
 def friendreco(request):
     return render(request, 'menureco/friendreco.html')
+def locationreco(request):
+    return render(request, 'menureco/locationreco.html')
