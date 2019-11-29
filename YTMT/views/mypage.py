@@ -163,4 +163,21 @@ def profile(request):
         "birth" : tempProfile.birth,
     }
 
-    return render(request, 'mypage/profile.html',{"profile" : userProfile})
+    allergy_objects = Allergy.objects.filter(user_id = login_user)
+    hate_menu_objects = Hate_menu.objects.filter(user_id = login_user)
+    hate_ingredient_objects = Hate_ingredient.objects.filter(user_id = login_user)
+
+    allergy = []
+    hate_menu = []
+    hate_ingredient = []
+
+    for obj in allergy_objects:
+        allergy.append(obj.ingre.name)
+
+    for obj in hate_ingredient_objects:
+        hate_ingredient.append(obj.ingre.name)
+
+    for obj in hate_menu_objects:
+        hate_menu.append(obj.menu.name)
+
+    return render(request, 'mypage/profile.html',{"profile" : userProfile, "hate_ingredient_list" : hate_ingredient, "allergy_list" : allergy, "hate_menu_list" : hate_menu})

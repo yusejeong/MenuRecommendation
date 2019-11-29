@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://dfzrjox9sv97l.cloudfront.net/dicons_20160930/css/common.css?201709272">
     <link rel="stylesheet" type="text/css" href={% static "YTMT/css/allergy.css" %}>
-    <script type="text/javascript" src={% static "YTMT/js/friendList.js" %}></script>
+    <!-- <script type="text/javascript" src={% static "YTMT/js/friendList.js" %}></script> -->
     <style>
         hr.style1 {
             border-top: 1px solid #d1d0cc;
@@ -158,8 +158,8 @@
                 </div>
                 <div class="d-flex row w-100 my-1 rounded friend_card_place">
                     {% for friend in friend_list %}
-                    <div id="friend_card" class="d-flex row bg-light w-100 my-1 rounded friend_card Showing">
-                        <div class="row">
+                    <div id="friend_card" class=" d-flex row bg-light w-100 my-1 rounded friend_card Showing">
+                        <div class="row ">
                             <div class="d-inline-flex justify-content-center p-2 ">
                                 <img src='{% static "YTMT/img/default-user.png" %}' class="user_img_size rounded-circle" alt="... ">
                             </div>

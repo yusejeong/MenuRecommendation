@@ -1,128 +1,156 @@
-{% extends 'user/navbar.html' %}
-{% load static %}
-
-{% block bodycontent %}
+<!--<html lang="ko">-->
+{% extends 'user/navbar.html' %} {% load static %} {% block bodycontent %}
 
 <head>
-          <title>친구와 함께하는 메뉴 추천</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <link rel="stylesheet" href="https://dfzrjox9sv97l.cloudfront.net/dicons_20160930/css/common.css?201709272">
-      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" >
-      <script type="text/javascript" src={% static "YTMT/js/Autocomplete/jquery/lib/jquery.js" %}></script>
-      <script type="text/javascript" src={% static "YTMT/js/Autocomplete/jquery/lib/jquery.bgiframe.min.js" %}></script>
-      <script type="text/javascript" src={% static "YTMT/js/Autocomplete/jquery/lib/jquery.ajaxQueue.js" %}></script>
-      <script type="text/javascript" src={% static "YTMT/js/Autocomplete/jquery/jquery.autocomplete.js" %}></script>
-      <link rel="stylesheet" type="text/css" href={% static "YTMT/js/Autocomplete/jquery/jquery.autocomplete.css" %}>
+    <title>친구와 함께하는 메뉴 추천</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="https://dfzrjox9sv97l.cloudfront.net/dicons_20160930/css/common.css?201709272">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href={% static "YTMT/js/Autocomplete/jquery/jquery.autocomplete.css" %}>
 
-<link rel="stylesheet" href='{% static "YTMT/css/allergy.css" %}'>
+    <link rel="stylesheet" href='{% static "YTMT/css/allergy.css" %}'>
 
+    <script type="text/javascript">
+        var friends = [
+            {% for friend in friend_list%}            
+            "id" : "{{friend.user_id.username }}",            
+            {% endfor %}
+        ]
 
-<!--<body>-->
-  <center>
-    <br><br>
-    <span style="font-weight: bold; font-size: 2em; line-height: 2em; color: black; font-family: 'Nanum Gothic';">
-     친구와 함께 하는 메뉴 추천
-   </span><br>
-    <span style="font-weight: bold; font-size: 1em; line-height: 2em; color: black; font-family: 'Nanum Gothic';">
-    친구를 검색해서 함께 먹을 음식을 추천 받으세요!
-    </span>
-    <br><br><br>
-      <form name="form" method="post" action= "{% url 'YTMT:friendreco'%}" onsubmit="return check()">
-            {% csrf_token %}
-        <span style="font-weight: bold; font-size:1em; line-height: 2em; color: black; font-family: 'Nanum Gothic';">
-        같이 먹을 친구들
-        </span>
-        <script type="text/javascript">
-          var friend = {{ingre_list|safe}};
+    var autocompleteSourceArray = ['Choice1', 'Choice2', 'Choice3'];
+        var autocompleteSourceObjs = [{
+    label: 'Choice1',  // This will be displayed in the dropdown
+    value: 'value1'    // This will be inserted into the input element after choosing 'Choice1'
+    }, {
+    label: 'Choice2',
+    value: 'value2'
+    }];
+        $(document).on("click", ".searchBtn", function(event) {
 
-          $(document).ready(function() {
-              $("#searchbox").autocomplete(friend,{
-                  matchContains: true,
-                  selectFirst: false
-              });
-          });
-          var list;
+            $.ajax({
+                headers: {
+                    "X-CSRFToken": '{{csrf_token}}'
+                },
+                url: "/friends/find_friend",
+                type: "POST",
+                data: {
+                    "friend_name": friend_name,
+                },
+                cache: false,
+                dataType: "json",
 
-          function insRow() {
-            var frm = document.form;
-            for( var i = 0; i <= frm.elements.length - 1; i++ ){
-               if( frm.elements[i].name == "addText" )
-               {
-                   if( !frm.elements[i].value ){
-                       alert("글자를 입력하세요!");
-                           frm.elements[i].focus();
-                    return ;
-                    }
+                success: function(response) {
+                    var find_list = response.find_list
+                    find_list.forEach(function(user) {
+                        var id = user[0];
+                        var name = user[1];
+                        find_card = $(".find_card.hidden").clone()
+
+                        console.log($(find_card).find(".d-none"));
+                        $(find_card).removeClass("hidden").addClass("Showing")
+                            .find(".d-none").removeClass("d-none")
+
+                        $(find_card).find(".name_place").html(name)
+                        $(find_card).find(".id_place").html(id)
+                        $(find_card).find(".addBtn").data("id", id)
+                        $(find_card).appendTo(".find_user_container")
+                    })
+                },
+                error: function(response, error) {
+                    alert(friend_name + " 회원님을 찾을 수 없습니다")
                 }
-              }
-            list = document.getElementById("addTable");
-            var Row = list.insertRow();
-            Row.onmouseover=function(){list.clickedRowIndex=this.rowIndex}; //clickedRowIndex - 클릭한 Row의 위치를 확인;
-            var aCell = Row.insertCell();
+            })
+        });
 
-
-            var jb = document.createElement("div");
-            $(jb).attr("class", "friend");
-            $(jb).css({"display" : "inline",
-                        "float" : "left",
-                        })
-
-            $(jb).html($('#searchbox').val());
-
-            console.log($('#searchbox').val())
-
-            $("input[name*='addText']").val("");
-            var button = $("<input type='button' id='rmbutton' value='삭제' onClick='removeRow()' style='cursor:hand'>")
-            $("#addTable > tbody:last > tr:last > td:last").append(jb)
-            $(button).insertAfter(jb)
-
-
-          }
-
-          function removeRow() {
-            list.deleteRow(list.clickedRowIndex);
-          }
-
-
-          function submit_form(){
+        function submit_form() {
 
             var friend_list = []
-              $(".friend").each(function(index,elements){
-                  friend_list.push($(elements).text())
-              })
+
+            $(".friend").each(function(index, elements) {
+                friend_list.push($(elements).text())
+            })
 
             var temp = document.createElement("input");
-            var input = $(temp).attr('name',"friend_list").val(JSON.stringify(friend_list));
-            $(input).attr('type' , 'hidden')
+            var input = $(temp).attr('name', "friend_list").val(JSON.stringify(friend_list));
+            $(input).attr('type', 'hidden')
             $('#friendform').append($(input))
             console.log(JSON.stringify(friend_list));
             $('#friendform').submit()
-          }
-          </script>
-          <form name="form" id="friendform"  method="post" action="{% url 'YTMT:friendreco'%}" content_type=u"application/json; charset=utf-8">
-          <div >
-            <div style="padding-bottom:50px;">
-      <tr>
-        <td colspan="2" align="left" align="center">
-          <table width="100%" border="0" cellpadding="0" cellspacing="0">
-         <td colspan="5"  height="25" align="center">
-           <input type="text" id="searchbox" name="addText">
-              <input name="addButton" id="addbutton" type="button" style="cursor:hand" onClick="insRow();" value="추가"></td></table></td>
-           </tr>
+        }
+    </script>
+    <style>
+        .user_img_size {
+            height: 4em;
+            width: 4em;
+        }
+        
+        .round-20 {
+            border-radius: 25px;
+        }
+        
+        .remove_btn {
+            z-index: 3;
+            position: relative;
+            top: 8px;
+            right: 0px;
+        }
+    </style>
 
-      <tr>
-       <td height="25" align="center"  >
-         <table id="addTable" width="200" cellspacing="0" cellpadding="0" bgcolor="#FFFFFF" border="0">
-        </table></td>
-      </tr>
+    <!--<body>-->
+    <center>
+        <div class="container">
+            <br><br>
+            <span style="font-weight: bold; font-size: 1.8em; line-height: 2em; color: black; font-family: 'Nanum Gothic';">
+         친구와 함께 하는 메뉴 추천
+       </span><br>
+            <span style="font-weight: bold; font-size: 1em; line-height: 2em; color: black; font-family: 'Nanum Gothic';">
+        친구를 검색해서 함께 먹을 음식을 추천 받으세요!
+        </span>
+            <br><br>
+            <form name="form" method="post" action="" onsubmit="submit_form()">
+                {% csrf_token %}
+                <span style="font-weight: bold; font-size:1.5em; line-height: 2em; color: black; font-family: 'Nanum Gothic';">
+                    같이 먹을 친구들          
+        </span>
+                <div class="container justify-content-center w-100">
+                    <div class="d-inline-flex justify-content-center ">
+                        <div class="d-inline p-1">
+                            <button type="button" class="close remove_btn rounded-circle" aria-label="Close">
+                                <span class = "" aria-hidden="true">&times;</span>
+                              </button>
+                            <div class="mb-1">
+                                <img src='{% static "YTMT/img/default-user.png" %}' class="user_img_size round-20" alt="... ">
+                            </div>
+                            <b class="name_place">백승주</b>
+                        </div>
+                    </div>                    
+                </div>
+                <form name="form" id="friendform" method="post" action="{% url 'YTMT:friendreco'%}" content_type=u "application/json; charset=utf-8">
+                    <div>
+                        <div style="padding-bottom:50px;">
+                            <tr>
+                                <td colspan="2" align="left" align="center">
+                                    <table width="100%" border="0" cellpadding="0" cellspacing="0">
+                                        <td colspan="5" height="25" align="center">
+                                            <input type="text" id="searchbox" name="addText">
+                                            <input name="addButton" id="addbutton" class="searchBtn" type="button" style="cursor:hand" value="추가"></td>
+                                    </table>
+                                </td>
+                            </tr>
 
-    </div></div>
+                            <tr>
+                                <td height="25" align="center">
+                                    <table id="addTable" width="200" cellspacing="0" cellpadding="0" bgcolor="#FFFFFF" border="0">
+                                    </table>
+                                </td>
+                            </tr>
 
+                        </div>
+                    </div>
+                    <input type="submit" id="submit_btn" class="btn btn-pink w-75" style="font-weight:bold;background-color: #fd7e14;width:250pt;margin-top:12px;" value="메뉴 추천 받기">
+                </form>
+        </div>
 
-    <input type="button"id="submit_btn" onClick="submit_form()" class="btn btn-pink w200" style="font-weight:bold;background-color: #fd7e14;width:250pt;margin-top:12px;"value="메뉴 추천 받기">
+    </center>
 
-
-</form>
-  </center>
-
-{% endblock %}
+    {% endblock %}

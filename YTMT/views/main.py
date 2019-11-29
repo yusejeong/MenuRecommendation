@@ -111,6 +111,16 @@ def menureco(request):
     return render(request, 'menureco/menureco.html',{ 'menu_list': menu_list })
 
 def friendreco(request):
-    return render(request, 'menureco/friendreco.html')
+    login_user = SS.find_user(request)
+    userProfile = Profile.objects.get(user_id = login_user)
+
+    temp_objects = Friend_list.objects.filter(user_id = login_user)
+    temp_list = []
+    for temp in temp_objects:
+        temp_list.append(temp.friend_id)
+    friend_list = Profile.objects.filter(user_id__in = temp_list)
+
+    return render(request, 'menureco/friendreco.html', {"friend_list" : friend_list})
+
 def locationreco(request):
     return render(request, 'menureco/locationreco.html')
