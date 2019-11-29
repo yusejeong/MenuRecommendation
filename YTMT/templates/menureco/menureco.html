@@ -8,9 +8,52 @@
       <title>니맛내맛 : 개인맞춤형 메뉴 추천</title>
       <link rel="stylesheet" href='{% static "YTMT/css/menureco.css" %}'>
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      
+      <script type="text/javascript">
+          
+
+            $(document).on("click", ".imgBtn", function(event){
+                var menu_id = $(this).data("id")
+             
+            $.ajax({
+                headers: {
+                    "X-CSRFToken": '{{csrf_token}}'
+                },
+                url: "/menu/like",
+                type: "POST",
+                data: {
+                    "menu_id": menu_id
+                },
+                cache: false,
+                dataType: "json",
+                
+                success: function(response) {
+                    var menu_id = response.like_id
+                    var menu_likes = response.like_count
+                    var status = response.status //좋아요 했는지 현 상태 (+1/-1)
+//                    console.log("status:" + status)
+
+                    if (status == 1) {
+                        $('#img'+ menu_id).attr('src','{% static "YTMT/img/like.png" %}')
+                    } else if (status == -1) {
+                        $('#img'+ menu_id).attr('src','{% static "YTMT/img/nolike.png" %}')
+                    }
+            
+                    $('#count'+ menu_id).find(".like_count").html(menu_likes)
+//                    console.log(menu_id + " : " + menu_likes)
+                },
+                error: function(response, error) {
+                    console.log("실패")
+                }
+            })
+                
+        });
+        
+      </script>
   </head>
+  
    {% for menu in menu_list %}
-     <div class="post">
+     <div class="menu"> 
                 <div class="firma-card row">
                     <div class="col-md-5 img-padding-no">
                         <img class="firma-resim" 
@@ -20,7 +63,7 @@
                     </div>
                     <div class="col-md-7">
                         <div class="firma-aciklama card-body">
-                            <h4>{{ menu.name }}</h4>
+                            <a href="{% url 'YTMT:locationreco'%}" ><h4>{{ menu.name }}</h4></a>
 
                             <div class="yacht-info__list space-2">
 
@@ -37,24 +80,25 @@
 
                                  <br><br>
                             </div>
-                                <div class="like-img" align="right" >
-<!--                                <a class="navbar-brand" href="/">-->
-<!--                                   여기에 좋아요 누르면 history로 반영되도록-->
-                                    <h5>
-                                    <img id="likes" src='{% static "YTMT/img/nolike.png" %}' width="35px" height="auto" onclick="likechange()">
-                                    {{menu.likes}}</h5>
-<!--                                여기에 좋아요 수 계산하는거 넣어줘-->
-                                    <script type="text/javascript">
-                                        function likechange() {
-                                            var likes = document.getElementById('likes');
+                                <div class="like-img" id="count{{ menu.id }}" align="right" >
 
-                                            if(likes.src.match('{% static "YTMT/img/like.png" %}')) {
-                                                likes.src = '{% static "YTMT/img/nolike.png" %}'
-                                            } else {
-                                                likes.src = '{% static "YTMT/img/like.png" %}'
-                                            }
-                                        }
-                                    </script>
+                                    <h5>
+<!--                                        메뉴마다 미리 좋아요 상태에 따라 적용되어야 함-->
+<!--
+                                      {% if menu.checked == true %}
+                                           <img id="img{{ menu.id }}" src='{% static "YTMT/img/like.png" %}' width="35px" height="auto">
+                                       {% else %} 
+                                           <img id="img{{ menu.id }}" src='{% static "YTMT/img/nolike.png" %}' width="35px" height="auto">
+                                       {% endif %}
+                                       
+-->
+                                        <img id="img{{ menu.id }}" class="imgBtn" src='{% static "YTMT/img/nolike.png" %}' data-id="{{menu.id}}" width="35px" height="auto" style="cursor: pointer;">
+                                    
+<!--                                        <button type="" class="btn likeBtn" data-id="{{menu.id}}">좋아요</button>-->
+                                    <b class="like_count">{{menu.likes}}</b>
+                                                                   </h5>
+                                                                    
+
                                 </div>
 
                         </div>
@@ -62,6 +106,6 @@
                 </div>
         </div>
 
-
     {% endfor %}
+
 {% endblock %}

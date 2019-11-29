@@ -62,19 +62,17 @@
             <th style="float:left;">알레르기 </th>
         </tr>
         <td>
-            {{allergy}}
+            {% for allergy in allergy_list %} {{allergy}} {% endfor %}
         </td>
         <tr>
             <th style="float:left;">싫어하는 음식 </th>
         </tr>
-        <td>
-            {{hate_food}}
+        <td>{% for hate_menu in hate_menu_list %} {{hate_menu}} {% endfor %}
         </td>
         <tr>
             <th style="float:left;">싫어하는 재료 </th>
         </tr>
-        <td>
-            {{hate_ingre}}
+        <td>{% for hate_ingredient in hate_ingredient_list %} {{hate_ingredient}} {% endfor %}
         </td>
     </table>
 
