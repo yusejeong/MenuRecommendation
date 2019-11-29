@@ -13,7 +13,7 @@
     <script type="text/javascript">
         var friends = [
             {% for friend in friend_list%}            
-            "id" : "{{friend.user_id.username }}",            
+            "{{friend.user_id.username }}" : "{{friend.user_id.id}}",            
             {% endfor %}
         ]
 
