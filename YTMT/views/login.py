@@ -32,9 +32,6 @@ def signinrequest(request):
                 SS.create_session(request, id, pwd)
                 return redirect('YTMT:mainpage')
             else:
-                '''
-                   로그인 실패시, url이 /signinrequest로 이동합니다. 그리고 input값이 남아있습니다. 수정 필요.
-                '''
                 res_data['error'] = "아이디 또는 비밀번호가 잘못되었습니다."
         return render(request,'user/signin.html', res_data)
     else:
