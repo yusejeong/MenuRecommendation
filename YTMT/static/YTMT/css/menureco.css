@@ -42,8 +42,9 @@ header {
           position:absolute;
           right:2rem;
           bottom:0.5rem;
-
+          
       }
+
       .card-text {
           padding-top: 1rem;
           font-size: 1.2rem;

@@ -36,9 +36,9 @@ urlpatterns = [
     path('mainpage', main.mainpage, name = 'mainpage'),
     # 기능1
     path('menureco', main.menureco, name = 'menureco'),
+    path('restaurantreco', main.restaurantreco, name='restaurantreco'),
     path('friendreco', main.friendreco, name = 'friendreco'),
     # 기능2
-    path('restaurantreco', main.restaurantreco, name = 'restaurantreco'),
     path('locationreco', main.locationreco, name = 'locationreco'),
 
     # 마이페이지_수정
@@ -65,4 +65,7 @@ urlpatterns = [
     path('friends/find_friend', friends.find_friend, name = 'find_friend'),    
     path('friends/add_friend', friends.add_friend, name = 'add_friend'),
     path('friends/remove_friend', friends.remove_friend, name = 'remove_friend'),
+    
+    #좋아요
+    path('menu/like', main.menu_like, name = 'menu_like'),
 ]

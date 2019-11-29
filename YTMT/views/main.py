@@ -8,7 +8,7 @@ from django.contrib import auth
 import datetime
 import random
 from . import session as SS
-
+import json
 import os
 import math
 import pandas as pd
@@ -120,3 +120,26 @@ def restaurantreco(request):
 def locationreco(request):
     return render(request, 'menureco/locationreco.html')
 
+def menu_like(request):
+#    if request.method == "POST":
+        login_user = SS.find_user(request)
+        like_menu_id = request.POST.get("menu_id")
+        like_menu = Menu.objects.get(id = like_menu_id)
+        status = 0
+        
+        try:
+            history =History.objects.get(user_id = login_user, menu = like_menu)
+        except History.DoesNotExist:
+            newHistory = History.objects.create(user_id = login_user, menu = like_menu)
+            newHistory.save()
+            status = 1
+            
+        if status == 0 :
+            history.delete()
+            status = -1
+
+#        like_menu.likes = like_menu.likes + status
+        like_menu.likes = History.objects.filter(menu = like_menu).count()
+
+        return HttpResponse(json.dumps({'like_id' : like_menu.id, 'like_count' : like_menu.likes, 'status' : status }), content_type="application/json")
+#    return HttpResponse("posterror")
