@@ -1,5 +1,4 @@
-{% extends 'user/navbar.html' %}
-{% block bodycontent %}
+{% extends 'user/navbar.html' %} {% block bodycontent %}
 {% load static %}
 
 <html>
@@ -15,13 +14,15 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
 </head>
+
+
   <body>
   <center>
     <br>
     <span style="font-weight: bold; font-size: 2em; line-height: 2em; color: black; font-family: 'Nanum Gothic';">
      위치 기반 인기 메뉴 추천
    </span><br>
-        <div id="map" style="width:100%;height:350px;background: #FCEEB5;"></div>{% csrf_token %}
+        <div id="map" style="width:100%;height:350px;background: #FCEEB5;"></div>
         <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=1c13d4963456ed2479e73cff1b937b40"></script>
         <script>
         var mapContainer = document.getElementById('map'), // 지도를 표시할 div
@@ -82,5 +83,4 @@
         </script>
 <form name="form" id="locationform"  method="post" content_type=u"application/json; charset=utf-8">
 </body>
-</html>
-{% endblock %}
+</html>{% endblock %}
