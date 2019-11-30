@@ -33,29 +33,14 @@
                   <input id="pw" name="password" type="password" class="input-text" placeholder="비밀번호 입력">
                   <br>
                 </div>
-                <div style="padding-top: 20px">{{ error }}</div>
+
+                {% if error %}
+                    <div style="padding-top: 10px; padding-bottom: 10px; color: orangered; font-weight: bolder;">{{ error }}</div>
+                {% else %} 
+                    <div style="padding-top: 37px"><div class="clear"></div></div>
+                {% endif %}
                 <input type="submit" class="btn btn-black"  value="로그인">
                 <br>
-<!--
-                <script type="text/javascript">
-                  function logincheck() {
-                        {% if error %}
-                           alert({{ error }});
-                        {% else %} 
-//                        {% endif %}
-//                    if (!document.form.id.value) {
-//                      alert("아이디를 입력하세요.");
-//                      return false;
-//                    }
-//                    if (!document.form.pw.value) {
-//                      alert("비밀번호를 입력하세요.");
-//                      return false;
-//                    }
-//                    document.form.submit();
-                        
-                  }
-                </script>
--->
            
                    <a href="{% url 'YTMT:signup'%}">
                       <input  id="btn_intro" type="button" class="btn btn-white" style="margin-top:12px;" value="회원가입"><br>
