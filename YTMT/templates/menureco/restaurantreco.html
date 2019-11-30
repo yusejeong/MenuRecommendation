@@ -29,7 +29,6 @@
 
 
              <button class="btn btn-default navbar-btn" id="navleftbtn"><a href="{% url 'YTMT:menureco'%}" style="color: black;">이전으로</a> </button>
-             <button class="btn btn-default navbar-btn" id="navleftbtn"><a href="{% url 'YTMT:locationreco'%}" style="color: black;">지도로보기</a> </button>
 
         </nav>
 
@@ -50,7 +49,7 @@
                                         </div>
                                         <div class="col-md-7">
                                             <div class="firma-aciklama card-body">
-                                                <h4>{{ rest.rest_name }}</h4>
+                                                <a href="https://map.kakao.com/link/search/아주대학교{{rest.rest_name}}" ><h4>{{ rest.rest_name }}</h4></a>
 
                                                 <div class="yacht-info__list space-2">
 
