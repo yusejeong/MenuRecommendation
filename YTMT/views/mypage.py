@@ -112,7 +112,10 @@ def hatemodifysave(request):
 
 # 마이페이지_기타
 def history(request):
-    return render(request, 'mypage/history.html')
+    login_user = SS.find_user(request)
+    historys = History.objects.filter(user_id = login_user)
+
+    return render(request, 'mypage/history.html', {"history_list" : historys })
 
 def friendlist(request):
     login_user = SS.find_user(request)
