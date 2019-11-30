@@ -140,6 +140,7 @@ def menu_like(request):
 
 #        like_menu.likes = like_menu.likes + status
         like_menu.likes = History.objects.filter(menu = like_menu).count()
+        like_menu.save()
 
         return HttpResponse(json.dumps({'like_id' : like_menu.id, 'like_count' : like_menu.likes, 'status' : status }), content_type="application/json")
 #    return HttpResponse("posterror")
