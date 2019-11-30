@@ -8,13 +8,13 @@
       <title>니맛내맛 : 개인맞춤형 메뉴 추천</title>
       <link rel="stylesheet" href='{% static "YTMT/css/menureco.css" %}'>
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      
+
       <script type="text/javascript">
-          
+
 
             $(document).on("click", ".imgBtn", function(event){
                 var menu_id = $(this).data("id")
-             
+
             $.ajax({
                 headers: {
                     "X-CSRFToken": '{{csrf_token}}'
@@ -26,7 +26,7 @@
                 },
                 cache: false,
                 dataType: "json",
-                
+
                 success: function(response) {
                     var menu_id = response.like_id
                     var menu_likes = response.like_count
@@ -38,7 +38,7 @@
                     } else if (status == -1) {
                         $('#img'+ menu_id).attr('src','{% static "YTMT/img/nolike.png" %}')
                     }
-            
+
                     $('#count'+ menu_id).find(".like_count").html(menu_likes)
 //                    console.log(menu_id + " : " + menu_likes)
                 },
@@ -46,24 +46,24 @@
                     console.log("실패")
                 }
             })
-                
+
         });
-        
+
       </script>
   </head>
-  
+
    {% for menu in menu_list %}
-     <div class="menu"> 
+     <div class="menu">
                 <div class="firma-card row">
                     <div class="col-md-5 img-padding-no">
-                        <img class="firma-resim" 
+                        <img class="firma-resim"
                         style="height: 100%;
     width: 100%;"
                         src = '{% static  "YTMT/food_images/"%}{{menu.name}}.jpg'>
                     </div>
                     <div class="col-md-7">
                         <div class="firma-aciklama card-body">
-                            <a href="{% url 'YTMT:locationreco'%}" ><h4>{{ menu.name }}</h4></a>
+                            <a href="{% url 'YTMT:restaurantreco'%}" ><h4>{{ menu.name }}</h4></a>
 
                             <div class="yacht-info__list space-2">
 
@@ -72,7 +72,7 @@
 <!--                                    {{ menu.text }}-->
                                        {% if menu.text != "None" %}
                                            <span>{{ menu.text }}</span>
-                                       {% else %} 
+                                       {% else %}
                                            <span>{{ menu.name }} 입니다.</span>
                                        {% endif %}
                                     </span>
@@ -87,17 +87,17 @@
 <!--
                                       {% if menu.checked == true %}
                                            <img id="img{{ menu.id }}" src='{% static "YTMT/img/like.png" %}' width="35px" height="auto">
-                                       {% else %} 
+                                       {% else %}
                                            <img id="img{{ menu.id }}" src='{% static "YTMT/img/nolike.png" %}' width="35px" height="auto">
                                        {% endif %}
-                                       
+
 -->
                                         <img id="img{{ menu.id }}" class="imgBtn" src='{% static "YTMT/img/nolike.png" %}' data-id="{{menu.id}}" width="35px" height="auto" style="cursor: pointer;">
-                                    
+
 <!--                                        <button type="" class="btn likeBtn" data-id="{{menu.id}}">좋아요</button>-->
                                     <b class="like_count">{{menu.likes}}</b>
                                                                    </h5>
-                                                                    
+
 
                                 </div>
 

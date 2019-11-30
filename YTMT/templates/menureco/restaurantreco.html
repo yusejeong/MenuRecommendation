@@ -1,12 +1,12 @@
 {% extends 'user/navbar.html' %}
 
-{% block bodycontent %} 
-{% load static %} 
+{% block bodycontent %}
+{% load static %}
 
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>추천 식당 리스트</title> 
+        <title>추천 식당 리스트</title>
         <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
         <link rel="stylesheet" href='{% static "YTMT/css/menureco.css" %}'>
     </head>
@@ -26,22 +26,24 @@
                 <li role="presentation"><a role="menuitem" tabindex="-1" href="#" style="color: black;">인기</a></li>
               </ul>
             </div>
-            
+
 
              <button class="btn btn-default navbar-btn" id="navleftbtn"><a href="{% url 'YTMT:menureco'%}" style="color: black;">이전으로</a> </button>
+             <button class="btn btn-default navbar-btn" id="navleftbtn"><a href="{% url 'YTMT:locationreco'%}" style="color: black;">지도로보기</a> </button>
+
         </nav>
 
-        <div class="firmalar">    
+        <div class="firmalar">
             <div class="container">
                 <div class="row">
                     <div class="col-md-2"></div>
                     <div class="col-md-8">
-                        
+
                        {% for rest in restaurants %}
                          <div class="post">
                                     <div class="firma-card row">
                                         <div class="col-md-5 img-padding-no">
-                                            <img class="firma-resim" 
+                                            <img class="firma-resim"
                                             style="height: 100%;
                         width: 100%;"
                                             src = '{% static "YTMT/img/default-user.png" %}'>
@@ -69,11 +71,11 @@
 
 
                         {% endfor %}
-                        
+
                     </div>
                 </div>
             </div>
         </div>
 
-		
+
 {% endblock %}

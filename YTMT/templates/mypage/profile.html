@@ -34,7 +34,7 @@
         <td style="float:left;">
             {{user.email}}
 
-        </td> <td></td> </tr>
+        </td> </tr>
 
         <tr>
             <th colspan="2" style="float:left;align:center;">생일 </th>
@@ -62,23 +62,23 @@
         </td></tr>
         <tr>
 
-            <th style="float:left;">알레르기 </th>
-        </tr>
-        <td>
+            <th colspan="2" style="float:left;align:center;">알레르기 </th>
+
+        <td style="float:left;">
             {% for allergy in allergy_list %} {{allergy}} {% endfor %}
-        </td>
+        </td>    </tr>
 
         <tr>
             <th colspan="2" style="float:left;align:center;">싫어하는 음식 </th>
-        </tr>
 
-        <td>{% for hate_menu in hate_menu_list %} {{hate_menu}} {% endfor %}
-        </td>
+
+        <td style="float:left;">{% for hate_menu in hate_menu_list %} {{hate_menu}} {% endfor %}
+        </td>      </tr>
         <tr>
-            <th style="float:left;">싫어하는 재료 </th>
-        </tr>
-        <td>{% for hate_ingredient in hate_ingredient_list %} {{hate_ingredient}} {% endfor %}
-        </td>
+            <th colspan="2" style="float:left;align:center;">싫어하는 재료 </th>
+
+        <td style="float:left;">{% for hate_ingredient in hate_ingredient_list %} {{hate_ingredient}} {% endfor %}
+        </td>        </tr>
 
     </table>
 
