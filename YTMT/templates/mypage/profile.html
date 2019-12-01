@@ -15,65 +15,71 @@
     <br><br> {% csrf_token %}
     <table border="0" cellspacing="0" frame="void">
         <tr>
-            <th style="float:left;">아이디 </th>
-        </tr>
-        <td>
+            <th colspan="2" style="float:left;align:center;">아이디 </th>
+
+        <td style="float:left;">
             {{user.username}}
         </td>
+</tr>
         <tr>
-            <th style="float:left;">이름 </th>
-        </tr>
+            <th colspan="2" style="float:left;align:center;">이름 </th>
 
-        <td>
+
+        <td style="float:left;">
             {{profile.name}}
-        </td>
+        </td>  </tr>
         <tr>
-            <th style="float:left;">이메일 </th>
-        </tr>
-        <td>
+            <th colspan="2" style="float:left;align:center;">이메일 </th>
+
+        <td style="float:left;">
             {{user.email}}
-        </td>
+
+        </td> </tr>
 
         <tr>
-            <th style="float:left;">생일 </th>
-        </tr>
-        <td>
+            <th colspan="2" style="float:left;align:center;">생일 </th>
+
+        <td style="float:left;">
             {{profile.birth}}
-        </td>
+        </td></tr>
         <tr>
-            <th style="float:left;">성별 </th>
-        </tr>
-        <td>
+            <th colspan="2" style="float:left;align:center;">성별 </th>
+
+        <td style="float:left;">
             {{profile.gender}}
-        </td>
+        </td>  </tr>
         <tr>
-            <th style="float:left;">종교 </th>
-        </tr>
-        <td>
+            <th colspan="2" style="float:left;align:center;">종교 </th>
+
+        <td style="float:left;">
             {{profile.religion}}
-        </td>
+        </td></tr>
         <tr>
-            <th style="float:left;">채식주의 </th>
-        </tr>
-        <td>
+            <th colspan="2" style="float:left;align:center;">채식주의 </th>
+
+        <td style="float:left;">
             {{profile.vegetarian}}
-        </td>
+        </td></tr>
         <tr>
-            <th style="float:left;">알레르기 </th>
-        </tr>
-        <td>
+
+            <th colspan="2" style="float:left;align:center;">알레르기 </th>
+
+        <td style="float:left;">
             {% for allergy in allergy_list %} {{allergy}} {% endfor %}
-        </td>
+        </td>    </tr>
+
         <tr>
-            <th style="float:left;">싫어하는 음식 </th>
-        </tr>
-        <td>{% for hate_menu in hate_menu_list %} {{hate_menu}} {% endfor %}
-        </td>
+            <th colspan="2" style="float:left;align:center;">싫어하는 음식 </th>
+
+
+        <td style="float:left;">{% for hate_menu in hate_menu_list %} {{hate_menu}} {% endfor %}
+        </td>      </tr>
         <tr>
-            <th style="float:left;">싫어하는 재료 </th>
-        </tr>
-        <td>{% for hate_ingredient in hate_ingredient_list %} {{hate_ingredient}} {% endfor %}
-        </td>
+            <th colspan="2" style="float:left;align:center;">싫어하는 재료 </th>
+
+        <td style="float:left;">{% for hate_ingredient in hate_ingredient_list %} {{hate_ingredient}} {% endfor %}
+        </td>        </tr>
+
     </table>
 
 
