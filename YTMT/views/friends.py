@@ -40,3 +40,12 @@ def remove_friend(request):
     Friend_list.objects.filter(user_id = login_user, friend_id = friend).delete()
     
     return HttpResponse("Success")
+
+def find_friend_from_list(request):
+    login_user = SS.find_user(request)
+    friend_name = request.POST.get("friend_id")
+    
+    
+        #동명이인의 친구가 두명이상이라면
+    
+    return HttpResponse()
