@@ -21,11 +21,11 @@ def findpw(request):
     return render(request, 'findinfo/findpw.html')
 
 def sendpw(request):
-    id = request.POST['id']
-    temp_user = User.objects.get(username=id)
-    if temp_user.email == request.POST['email']:
-        pw = random.randrange(10000, 100000)
-        mail = EmailMessage('[니맛내맛] 임시 비밀번호 입니다', '임시비밀번호는 '+pw+'입니다.', to=[temp_user.email])
-        mail.send()
-        temp_user.set_password(pw)
-    return render(request, 'findinfo/findinfo.html')
+    # id = request.POST['id']
+    # temp_user = User.objects.get(username=id)
+    # if temp_user.email == request.POST['email']:
+    pw = random.randrange(10000, 100000)
+    mail = EmailMessage('[니맛내맛] 임시 비밀번호 입니다', '임시비밀번호는 '+pw+'입니다.', to=[lm040466@gmail.com])
+    mail.send()
+        # temp_user.set_password(pw)
+    return render(request, 'mainpage.html')

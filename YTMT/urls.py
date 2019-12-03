@@ -31,6 +31,7 @@ urlpatterns = [
     path('findinfo', find_info.findinfo, name = 'findinfo'),
     path('findinfo/findid', find_info.findid, name = 'findid'),
     path('findinfo/findpw', find_info.findpw, name = 'findpw'),
+    path('findinfo/sendpw', find_info.sendpw, name = 'sendpw'),
 
     # 메인
     path('mainpage', main.mainpage, name = 'mainpage'),
