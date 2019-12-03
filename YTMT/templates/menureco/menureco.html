@@ -86,9 +86,9 @@
 <!--                                        메뉴마다 미리 좋아요 상태에 따라 적용되어야 함-->
 <!--
                                       {% if menu.checked == true %}
-                                           <img id="img{{ menu.id }}" src='{% static "YTMT/img/like.png" %}' width="35px" height="auto">
+                                           <img id="img{{ menu.id }}" class="imgBtn" src='{% static "YTMT/img/like.png" %}' data-id="{{menu.id}}" width="35px" height="auto" style="cursor: pointer;">
                                        {% else %}
-                                           <img id="img{{ menu.id }}" src='{% static "YTMT/img/nolike.png" %}' width="35px" height="auto">
+                                           <img id="img{{ menu.id }}" class="imgBtn" src='{% static "YTMT/img/nolike.png" %}' data-id="{{menu.id}}" width="35px" height="auto" style="cursor: pointer;">
                                        {% endif %}
 
 -->
