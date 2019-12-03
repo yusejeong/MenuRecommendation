@@ -1,87 +1,96 @@
-{% extends 'user/navbar.html' %} 
-{% block bodycontent %} 
-{% load static %} 
+{% extends 'user/navbar.html' %}
+{% block bodycontent %}
+{% load static %}
+  
 <head>
-    <title>니맛내맛 : 프로필</title>
+    <title>회원정보 확인</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <link rel="stylesheet" href={% static "YTMT/css/signup.css" %}>
-
+    <style>
+        td {
+            padding-left: 10px;
+        }
+    </style>
 </head>
 <center>
 
     <br>
     <span style="font-weight: bold; font-size: 2em; line-height: 2em; color: black; font-family: 'Nanum Gothic';">
-    회원정보 확인
+    프로필 정보
   </span>
     <br><br> {% csrf_token %}
     <table border="0" cellspacing="0" frame="void">
         <tr>
-            <th style="float:left;">아이디 </th>
-        </tr>
-        <td>
-            {{profile.user_id}}
-        </td>
-        <tr>
-            <th style="float:left;">이름 </th>
-        </tr>
+            <th colspan="2" style="float:left;align:center;">아이디 </th>
 
-        <td>
+        <td style="float:left;">
+            {{user.username}}
+        </td>
+</tr>
+        <tr>
+            <th colspan="2" style="float:left;align:center;">이름 </th>
+
+
+        <td style="float:left;">
             {{profile.name}}
-        </td>
+        </td>  </tr>
         <tr>
-            <th style="float:left;">이메일 </th>
-        </tr>
-        <td>
+            <th colspan="2" style="float:left;align:center;">이메일 </th>
+
+        <td style="float:left;">
             {{user.email}}
-        </td>
+
+        </td> </tr>
 
         <tr>
-            <th style="float:left;">생일 </th>
-        </tr>
-        <td>
+            <th colspan="2" style="float:left;align:center;">생일 </th>
+
+        <td style="float:left;">
             {{profile.birth}}
-        </td>
+        </td></tr>
         <tr>
-            <th style="float:left;">성별 </th>
-        </tr>
-        <td>
+            <th colspan="2" style="float:left;align:center;">성별 </th>
+
+        <td style="float:left;">
             {{profile.gender}}
-        </td>
+        </td>  </tr>
         <tr>
-            <th style="float:left;">종교 </th>
-        </tr>
-        <td>
+            <th colspan="2" style="float:left;align:center;">종교 </th>
+
+        <td style="float:left;">
             {{profile.religion}}
-        </td>
+        </td></tr>
         <tr>
-            <th style="float:left;">채식주의 </th>
-        </tr>
-        <td>
+            <th colspan="2" style="float:left;align:center;">채식주의 </th>
+
+        <td style="float:left;">
             {{profile.vegetarian}}
-        </td>
+        </td></tr>
         <tr>
-            <th style="float:left;">알레르기 </th>
-        </tr>
-        <td>
-            {{allergy}}
-        </td>
+
+            <th colspan="2" style="float:left;align:center;">알레르기 </th>
+
+        <td style="float:left;">
+            {% for allergy in allergy_list %} {{allergy}} {% endfor %}
+        </td>    </tr>
+
         <tr>
-            <th style="float:left;">싫어하는 음식 </th>
-        </tr>
-        <td>
-            {{hate_food}}
-        </td>
+            <th colspan="2" style="float:left;align:center;">싫어하는 음식 </th>
+
+
+        <td style="float:left;">{% for hate_menu in hate_menu_list %} {{hate_menu}} {% endfor %}
+        </td>      </tr>
         <tr>
-            <th style="float:left;">싫어하는 재료 </th>
-        </tr>
-        <td>
-            {{hate_ingre}}
-        </td>
+            <th colspan="2" style="float:left;align:center;">싫어하는 재료 </th>
+
+        <td style="float:left;">{% for hate_ingredient in hate_ingredient_list %} {{hate_ingredient}} {% endfor %}
+        </td>        </tr>
+
     </table>
 
 
-    <a href="{% url 'YTMT:signin'%}"><input id="btn_join" class="btn btn-pink w200" style="font-weight:bold;background-color: #fd7e14;width:250pt;margin-top:12px;" value="회원가입 완료">
+    <a href="{% url 'YTMT:signin'%}"><button class="btn btn-pink w200" style="font-weight:bold;background-color: #fd7e14;width:250pt;margin-top:20px;">회원가입 완료</button>
     </a>
 
-</center>		
+</center>            
 {% endblock %}
