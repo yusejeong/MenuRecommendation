@@ -4,71 +4,63 @@
 <head>
     <title>친구와 함께하는 메뉴 추천</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta charset="utf-8">
+    <!-- jQuery ui style sheet -->
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <!-- jQuery library -->
+    <script src="https://code.jquery.com/jquery.js"></script>
+    <!-- jQuery ui library -->
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <link rel="stylesheet" href="https://dfzrjox9sv97l.cloudfront.net/dicons_20160930/css/common.css?201709272">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href={% static "YTMT/js/Autocomplete/jquery/jquery.autocomplete.css" %}>
 
     <link rel="stylesheet" href='{% static "YTMT/css/allergy.css" %}'>
 
     <script type="text/javascript">
-        var friends = [
-            {% for friend in friend_list%}            
-            "{{friend.user_id.username }}" : "{{friend.user_id.id}}",            
-            {% endfor %}
-        ]
+        $(document).ready(function () {
+            var friends = [{%for friend in friend_list %}
+                "{{friend.name}}, {{friend.user_id.username}}",
+                {% endfor %}
+            ];
 
-    var autocompleteSourceArray = ['Choice1', 'Choice2', 'Choice3'];
-        var autocompleteSourceObjs = [{
-    label: 'Choice1',  // This will be displayed in the dropdown
-    value: 'value1'    // This will be inserted into the input element after choosing 'Choice1'
-    }, {
-    label: 'Choice2',
-    value: 'value2'
-    }];
-        $(document).on("click", ".searchBtn", function(event) {
+            /**
+             * source - 검색될 배열
+             */
+            $("#searchbox").autocomplete({
+                source: friends
+            });
+        });
 
-            $.ajax({
-                headers: {
-                    "X-CSRFToken": '{{csrf_token}}'
-                },
-                url: "/friends/find_friend",
-                type: "POST",
-                data: {
-                    "friend_name": friend_name,
-                },
-                cache: false,
-                dataType: "json",
+        $(document).on("click", ".searchBtn", function (event) {
+            var friend_info = $("#searchbox").val()
+            $("#searchbox").val("")
+            var friend_id = friend_info.split(',')[1].trim()
 
-                success: function(response) {
-                    var find_list = response.find_list
-                    find_list.forEach(function(user) {
-                        var id = user[0];
-                        var name = user[1];
-                        find_card = $(".find_card.hidden").clone()
+            var friend_card = $("[data-id='" + friend_id + "']")
+            var parentTag = $(friend_card).find(".display")
+            console.log(parentTag)
+            $(parentTag).removeClass("d-none")
+            friend_card.appendTo(".card_container")
 
-                        console.log($(find_card).find(".d-none"));
-                        $(find_card).removeClass("hidden").addClass("Showing")
-                            .find(".d-none").removeClass("d-none")
+        });
 
-                        $(find_card).find(".name_place").html(name)
-                        $(find_card).find(".id_place").html(id)
-                        $(find_card).find(".addBtn").data("id", id)
-                        $(find_card).appendTo(".find_user_container")
-                    })
-                },
-                error: function(response, error) {
-                    alert(friend_name + " 회원님을 찾을 수 없습니다")
-                }
-            })
+        $(document).on("click", ".remove_btn", function (event) {
+            var parentTag = $(this).closest(".friend_card")
+            console.log(parentTag)
+            parentTag.find(".display").addClass("d-none")
+            parentTag.appentTo(".hidden_container")
         });
 
         function submit_form() {
-
+            console.log("clicked")
             var friend_list = []
+            friend_cards = $(".card_container").find(".friend_card")
 
-            $(".friend").each(function(index, elements) {
-                friend_list.push($(elements).text())
+
+            $(friend_cards).each(function (index, elements) {
+                friend_list.push($(elements).data("id"))
             })
+            console.log(friend_list)
 
             var temp = document.createElement("input");
             var input = $(temp).attr('name', "friend_list").val(JSON.stringify(friend_list));
@@ -78,16 +70,17 @@
             $('#friendform').submit()
         }
     </script>
+
     <style>
         .user_img_size {
             height: 4em;
             width: 4em;
         }
-        
+
         .round-20 {
             border-radius: 25px;
         }
-        
+
         .remove_btn {
             z-index: 3;
             position: relative;
@@ -100,57 +93,73 @@
     <center>
         <div class="container">
             <br><br>
-            <span style="font-weight: bold; font-size: 1.8em; line-height: 2em; color: black; font-family: 'Nanum Gothic';">
-         친구와 함께 하는 메뉴 추천
-       </span><br>
-            <span style="font-weight: bold; font-size: 1em; line-height: 2em; color: black; font-family: 'Nanum Gothic';">
-        친구를 검색해서 함께 먹을 음식을 추천 받으세요!
-        </span>
+            <span
+                style="font-weight: bold; font-size: 1.8em; line-height: 2em; color: black; font-family: 'Nanum Gothic';">
+                친구와 함께 하는 메뉴 추천
+            </span><br>
+            <span
+                style="font-weight: bold; font-size: 1em; line-height: 2em; color: black; font-family: 'Nanum Gothic';">
+                친구를 검색해서 함께 먹을 음식을 추천 받으세요!
+            </span>
             <br><br>
-            <form name="form" method="post" action="" onsubmit="submit_form()">
+            
+            <span
+                style="font-weight: bold; font-size:1.5em; line-height: 2em; color: black; font-family: 'Nanum Gothic';">
+                같이 먹을 친구들
+            </span>
+            <div class="container justify-content-center w-100 card_container">
+
+            </div>
+            <form name="form" id="friendform" method="post" action="{% url 'YTMT:groupmenureco'%}"
+                content_type=u "application/json; charset=utf-8">
                 {% csrf_token %}
-                <span style="font-weight: bold; font-size:1.5em; line-height: 2em; color: black; font-family: 'Nanum Gothic';">
-                    같이 먹을 친구들          
-        </span>
-                <div class="container justify-content-center w-100">
-                    <div class="d-inline-flex justify-content-center ">
-                        <div class="d-inline p-1">
-                            <button type="button" class="close remove_btn rounded-circle" aria-label="Close">
-                                <span class = "" aria-hidden="true">&times;</span>
-                              </button>
-                            <div class="mb-1">
-                                <img src='{% static "YTMT/img/default-user.png" %}' class="user_img_size round-20" alt="... ">
-                            </div>
-                            <b class="name_place">백승주</b>
-                        </div>
-                    </div>                    
-                </div>
-                <form name="form" id="friendform" method="post" action="{% url 'YTMT:friendreco'%}" content_type=u "application/json; charset=utf-8">
-                    <div>
-                        <div style="padding-bottom:50px;">
-                            <tr>
-                                <td colspan="2" align="left" align="center">
-                                    <table width="100%" border="0" cellpadding="0" cellspacing="0">
-                                        <td colspan="5" height="25" align="center">
-                                            <input type="text" id="searchbox" name="addText">
-                                            <input name="addButton" id="addbutton" class="searchBtn" type="button" style="cursor:hand" value="추가"></td>
-                                    </table>
-                                </td>
-                            </tr>
+                <div>
+                    <div style="padding-bottom:50px;">
+                        <tr>
+                            <td colspan="2" align="left" align="center">
+                                <table width="100%" border="0" cellpadding="0" cellspacing="0">
+                                    <td colspan="5" height="25" align="center">
 
-                            <tr>
-                                <td height="25" align="center">
-                                    <table id="addTable" width="200" cellspacing="0" cellpadding="0" bgcolor="#FFFFFF" border="0">
-                                    </table>
-                                </td>
-                            </tr>
+                                        <input type="text" id="searchbox" name="addText">
+                                        <input name="addButton" id="addbutton" class="searchBtn" type="button"
+                                            style="cursor:hand" value="추가">
+                                    </td>
+                                </table>
+                            </td>
+                        </tr>
 
-                        </div>
+                        <tr>
+                            <td height="25" align="center">
+                                <table id="addTable" width="200" cellspacing="0" cellpadding="0" bgcolor="#FFFFFF"
+                                    border="0">
+                                </table>
+                            </td>
+                        </tr>
+
                     </div>
-                    <input type="submit" id="submit_btn" class="btn btn-pink w-75" style="font-weight:bold;background-color: #fd7e14;width:250pt;margin-top:12px;" value="메뉴 추천 받기">
-                </form>
+                </div>
+                <input id="submit_btn" class="btn btn-pink w-75" onClick="submit_form()"
+                    style="font-weight:bold;background-color: #fd7e14;width:250pt;margin-top:12px;" value="메뉴 추천 받기">
+            </form>
+
         </div>
 
-    </center>
 
+
+    </center>
+    <div class="hidden_container">
+        {% for friend in friend_list%}
+        <div class="d-inline-flex justify-content-center friend_card" data-id={{friend.user_id.username}}>
+            <div class="display p-1 d-none">
+                <button type="remove_btn button" class="close remove_btn rounded-circle" aria-label="Close">
+                    <span class="remove_btn" aria-hidden="true">&times;</span>
+                </button>
+                <div class="mb-1">
+                    <img src='{% static "YTMT/img/default-user.png" %}' class="user_img_size round-20" alt="... ">
+                </div>
+                <b class="name_place">{{friend.name }}</b>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
     {% endblock %}
