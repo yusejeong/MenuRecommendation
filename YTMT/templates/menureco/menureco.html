@@ -70,7 +70,7 @@
                                 <div class="menutext">
                                     <span>
 <!--                                    {{ menu.text }}-->
-                                       {% if menu.text != "None" %}
+                                       {% if menu.text != "None"%}
                                            <span>{{ menu.text }}</span>
                                        {% else %}
                                            <span>{{ menu.name }} 입니다.</span>
@@ -83,21 +83,14 @@
                                 <div class="like-img" id="count{{ menu.id }}" align="right" >
 
                                     <h5>
-<!--                                        메뉴마다 미리 좋아요 상태에 따라 적용되어야 함-->
-<!--
-                                      {% if menu.checked == true %}
+                                      {% if menu in heart_list %}
                                            <img id="img{{ menu.id }}" class="imgBtn" src='{% static "YTMT/img/like.png" %}' data-id="{{menu.id}}" width="35px" height="auto" style="cursor: pointer;">
                                        {% else %}
                                            <img id="img{{ menu.id }}" class="imgBtn" src='{% static "YTMT/img/nolike.png" %}' data-id="{{menu.id}}" width="35px" height="auto" style="cursor: pointer;">
                                        {% endif %}
 
--->
-                                        <img id="img{{ menu.id }}" class="imgBtn" src='{% static "YTMT/img/nolike.png" %}' data-id="{{menu.id}}" width="35px" height="auto" style="cursor: pointer;">
-
-<!--                                        <button type="" class="btn likeBtn" data-id="{{menu.id}}">좋아요</button>-->
                                     <b class="like_count">{{menu.likes}}</b>
-                                                                   </h5>
-
+                                    </h5>
 
                                 </div>
 

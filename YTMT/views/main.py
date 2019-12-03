@@ -63,11 +63,12 @@ def menureco(request):
     history_list = History.objects.filter(user_id = login_user)
     menu_list = []
 
+    heart_list = []
     for food in history_list:
         menu_name = food.menu
         cos = sim_df[str(menu_name)].sort_values(ascending=False)
-
-        for name in cos[1:2].index:
+        heart_list.append(Menu.objects.get(name = food.menu))
+        for name in cos[0:2].index:
             menu_obj = Menu.objects.get(name = name)
             recipes = Recipe.objects.filter(menu = menu_obj)
             can_append = True
@@ -104,9 +105,8 @@ def menureco(request):
             break
 
     menu_list.extend(filter_menu)
-
-
-    return render(request, 'menureco/menureco.html',{ 'menu_list': menu_list })
+    
+    return render(request, 'menureco/menureco.html',{ 'menu_list': menu_list, "heart_list": heart_list})
 
 def friendreco(request):
     login_user = SS.find_user(request)
