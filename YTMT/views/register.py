@@ -92,6 +92,13 @@ def birthandgendersave(request):
     userProfile.save()
     return render(request, 'user/religion.html')
 
+## 아이디 중복확인
+#def user_check(request):
+#    id_check = request.POST['id']
+#    chk = True
+#    if User.objects.filter(username = id_check).exit():
+#        chk = False
+#    return HttpResponse(json.dump{"chk" : chk}, content_type="application/json")
 
 # 회원가입 추가정보
 def religion(request):
@@ -195,7 +202,7 @@ def hatelistsave(request):
         "religion" : Religion_TYPE[userProfile.reli_id -1][1],
         "vegetarian" : Vegetarian_TYPE[userProfile.vege_id- 1][1],
         "gender" : Gender_TYPE[userProfile.gender - 1][1],
-        "birth" : userProfile.birth,
+        "birth" : userProfile.birth.date(),
     }
 
     allergy_objects = Allergy.objects.filter(user_id = login_user)
