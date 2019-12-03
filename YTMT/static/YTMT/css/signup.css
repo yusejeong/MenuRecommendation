@@ -13,11 +13,11 @@ body {
     font-family: 'Nanum Gothic';
     background: #FCEEB5;
 }
-th {
+/* th {
   text-align: center;
   padding-right: 15px;
-  padding-left: 15px;
-}
+  padding-left: 20px;
+} */
 
 button {
 
