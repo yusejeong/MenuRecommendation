@@ -26,6 +26,7 @@ urlpatterns = [
     path('signup/allergysave', register.allergysave, name = 'allergysave'),
     path('signup/hatelist', register.hatelist, name = 'hatelist'),
     path('signup/hatelistsave', register.hatelistsave, name = 'hatelistsave'),
+    path('signup/profilecheck', register.profilecheck, name = 'profilecheck'),
 
     # 회원정보찾기
     path('findinfo', find_info.findinfo, name = 'findinfo'),
@@ -39,6 +40,7 @@ urlpatterns = [
     path('restaurantreco', main.restaurantreco, name='restaurantreco'),
     path('friendreco', main.friendreco, name = 'friendreco'),
     # 기능2
+    path('groupmenureco', main.groupmenureco, name = 'groupmenureco'),
     path('locationreco', main.locationreco, name = 'locationreco'),
 
     # 마이페이지_수정
