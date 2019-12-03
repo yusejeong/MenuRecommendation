@@ -1,7 +1,9 @@
-{% extends 'user/navbar.html' %} {% block bodycontent %} {% load static %}
-
+{% extends 'user/navbar.html' %}
+{% block bodycontent %}
+{% load static %}
+  
 <head>
-    <title>니맛내맛 : 프로필</title>
+    <title>회원정보 확인</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <link rel="stylesheet" href={% static "YTMT/css/signup.css" %}>
     <style>
@@ -87,8 +89,8 @@
     </table>
 
 
-    <a href="{% url 'YTMT:mypagemain'%}"><input id="btn_join" class="btn btn-pink w200" style="font-weight:bold;background-color: #fd7e14;width:250pt;margin-top:20px;" value="이전으로">
+    <a href="{% url 'YTMT:signin'%}"><button class="btn btn-pink w200" style="font-weight:bold;background-color: #fd7e14;width:250pt;margin-top:20px;">회원가입 완료</button>
     </a>
 
-</center>
+</center>            
 {% endblock %}

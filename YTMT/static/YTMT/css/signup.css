@@ -9,9 +9,9 @@ FORM {
   font-size: 1em;
   border-radius: 5px;
 }
-body {
+html, header, body {
     font-family: 'Nanum Gothic';
-    background: #FCEEB5;
+    background-color: #FCEEB5;
 }
 /* th {
   text-align: center;
