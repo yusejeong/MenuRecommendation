@@ -34,8 +34,6 @@ def menureco(request):
     #사용자의 종교, 채식주의 성향 확인
     user_religion_type = userProfile.reli_id
     user_vege_type = userProfile.vege_id
-    # print("사용자 종교, 채식 성향")
-    # print(user_religion_type, user_vege_type)
 
     # 종교, 채식주의 성향에 따른 필터 재료 목록 가져오기
     vegetarian_list = Vegetarian_case.objects.filter(vege_id = user_vege_type)
@@ -65,11 +63,12 @@ def menureco(request):
     history_list = History.objects.filter(user_id = login_user)
     menu_list = []
 
+    heart_list = []
     for food in history_list:
         menu_name = food.menu
         cos = sim_df[str(menu_name)].sort_values(ascending=False)
-
-        for name in cos[1:4].index:
+        heart_list.append(Menu.objects.get(name = food.menu))
+        for name in cos[0:2].index:
             menu_obj = Menu.objects.get(name = name)
             recipes = Recipe.objects.filter(menu = menu_obj)
             can_append = True
@@ -106,9 +105,8 @@ def menureco(request):
             break
 
     menu_list.extend(filter_menu)
-
-
-    return render(request, 'menureco/menureco.html',{ 'menu_list': menu_list })
+    
+    return render(request, 'menureco/menureco.html',{ 'menu_list': menu_list, "heart_list": heart_list})
 
 def friendreco(request):
     login_user = SS.find_user(request)
@@ -121,6 +119,73 @@ def friendreco(request):
     friend_list = Profile.objects.filter(user_id__in = temp_list)
 
     return render(request, 'menureco/friendreco.html', {"friend_list" : friend_list})
+
+def groupmenureco(request):
+    login_user = SS.find_user(request)
+    friends_list = request.POST.get("friend_list")
+    friends_list = json.loads(friends_list)
+
+    friends_list.append(login_user.username)
+    
+    filter_list = []
+
+    user_objects = User.objects.filter(username__in = friends_list)
+    for user in user_objects:
+        userProfile = Profile.objects.get(user_id = user)
+        hate_menu_list = Hate_menu.objects.filter(user_id = user)
+        hate_ingredient_list = Hate_ingredient.objects.filter(user_id = user)
+        Allergy_list = Allergy.objects.filter(user_id = user)
+
+        #사용자의 종교, 채식주의 성향 확인
+        user_religion_type = userProfile.reli_id
+        user_vege_type = userProfile.vege_id
+
+        # 종교, 채식주의 성향에 따른 필터 재료 목록 가져오기
+        vegetarian_list = Vegetarian_case.objects.filter(vege_id = user_vege_type)
+        religion_list = Religion_case.objects.filter(reli_id= user_religion_type)
+
+        for hate_religion_ingre in religion_list:
+            filter_list.append(hate_religion_ingre.ingre.name)
+            #채식 성향 재료 필터
+        for hate_vege_ingre in vegetarian_list:
+            filter_list.append(hate_vege_ingre.ingre.name)
+        # #싫어하는 재료 필터
+        for hate_ingredient in hate_ingredient_list:
+            filter_list.append(hate_ingredient.ingre.name)
+        # #알레르기 재료 필터
+        for allergy in Allergy_list:
+            filter_list.append(allergy.ingre.name)
+
+    filter_list = list(dict.fromkeys(filter_list))
+
+    menu_list = []
+
+    filter_menu = []
+
+    menu_cnt = Menu.objects.count()
+
+    while True:
+        menu_id = random.randint(1, menu_cnt)
+        menu_obj = Menu.objects.get(id = menu_id)
+        recipes = Recipe.objects.filter(menu = menu_obj)
+        can_append = True
+
+        for recipe in recipes:
+            if recipe.ingre.name in filter_list:
+                # print(menu_obj.name + " has " + recipe.ingre.name)
+                can_append = False
+                break
+
+        if can_append:
+            # print("append : " + menu_obj.name)
+            filter_menu.append(menu_obj)
+
+        if len(filter_menu) >= 5:
+            break
+
+    menu_list.extend(filter_menu)
+
+    return render(request, 'menureco/menureco.html', { 'menu_list': menu_list })
 
 def restaurantreco(request):
     restaurants = Restaurant.objects.filter()

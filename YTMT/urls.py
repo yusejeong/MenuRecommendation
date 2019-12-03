@@ -32,6 +32,7 @@ urlpatterns = [
     path('findinfo', find_info.findinfo, name = 'findinfo'),
     path('findinfo/findid', find_info.findid, name = 'findid'),
     path('findinfo/findpw', find_info.findpw, name = 'findpw'),
+    path('findinfo/sendpw', find_info.sendpw, name = 'sendpw'),
 
     # 메인
     path('mainpage', main.mainpage, name = 'mainpage'),
@@ -40,6 +41,7 @@ urlpatterns = [
     path('restaurantreco', main.restaurantreco, name='restaurantreco'),
     path('friendreco', main.friendreco, name = 'friendreco'),
     # 기능2
+    path('groupmenureco', main.groupmenureco, name = 'groupmenureco'),
     path('locationreco', main.locationreco, name = 'locationreco'),
 
     # 마이페이지_수정
