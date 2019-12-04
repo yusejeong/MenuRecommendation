@@ -14,6 +14,7 @@ urlpatterns = [
     # 회원가입
     path('signup', register.signup, name = 'signup'),
     path('signup/signuprequeset', register.signuprequest, name = 'signuprequest'),
+    path('signup/usercheck', register.user_check, name = 'usercheck'),
     path('signup/birthandgender', register.birthandgender, name = 'birthandgender'),
     path('signup/birthandgendersave', register.birthandgendersave, name = 'birthandgendersave'),
 
@@ -32,6 +33,7 @@ urlpatterns = [
     path('findinfo', find_info.findinfo, name = 'findinfo'),
     path('findinfo/findid', find_info.findid, name = 'findid'),
     path('findinfo/findpw', find_info.findpw, name = 'findpw'),
+    path('findinfo/sendpw', find_info.sendpw, name = 'sendpw'),
 
     # 메인
     path('mainpage', main.mainpage, name = 'mainpage'),

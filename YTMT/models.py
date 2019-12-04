@@ -12,6 +12,17 @@ class Menu(models.Model):
 
     def __str__(self):
         return self.name
+
+# class Ajou_menu(models):
+#     id = models.AutoField(primary_key=True)
+#     name = models.CharField(max_length=50, blank = False, null = False)
+#     img_url = models.ImageField(null=True, max_length=100, blank=True)
+#     text = models.TextField(null=True, blank=True)
+
+#     likes = models.IntegerField(default= 0)
+
+#     def __str__(self):
+#         return self.name
         
 class Ingredient(models.Model):    
     id = models.AutoField(primary_key=True)
@@ -21,12 +32,26 @@ class Ingredient(models.Model):
     def __str__(self):
         return self.name
 
+# class Ajou_ingredient(models.Model):    
+#     id = models.AutoField(primary_key=True)
+#     name = models.CharField(max_length=50, blank = False, null = False)
+
+#     def __str__(self):
+#         return self.name
+
 class Recipe(models.Model):
     menu = models.ForeignKey(Menu, on_delete = models.CASCADE)
     ingre = models.ForeignKey(Ingredient, on_delete = models.CASCADE)
  
     def __str__(self):
         return self.menu.name + " " + self.ingre.name
+
+# class Ajou_recipe(models.Model):
+#     menu = models.ForeignKey(Menu, on_delete = models.CASCADE)
+#     ingre = models.ForeignKey(Ingredient, on_delete = models.CASCADE)
+ 
+#     def __str__(self):
+#         return self.menu.name + " " + self.ingre.name
 
 # 회원정보
 class Profile(models.Model):
@@ -97,7 +122,7 @@ class Vegetarian_case(models.Model):
     ingre = models.ForeignKey(Ingredient, on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.Vegetarian_TYPE(self.vege_id) + " : " + self.ingre.name
+        return str(self.vege_id) + " : " + self.ingre.name
 
 class Religion_case(models.Model):
 
@@ -112,7 +137,7 @@ class Religion_case(models.Model):
     ingre = models.ForeignKey(Ingredient, on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.Religion_TYPE(self.reli_id) + " : " + self.ingre.name
+        return str(self.reli_id) + " : " + self.ingre.name
 
 class History(models.Model):
     user_id = models.ForeignKey(User, on_delete = models.CASCADE)

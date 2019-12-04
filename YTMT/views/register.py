@@ -68,6 +68,14 @@ def signuprequest(request):
         return render(request, 'user/signup.html')
     return render(request, 'user/signup.html')
 
+# 아이디 중복확인
+def user_check(request):
+    id_check = request.POST['id']
+    chk = True
+    if User.objects.filter(username = id_check).exit():
+        chk = False
+    return HttpResponse(json.dump{"chk" : chk}, content_type="application/json")
+
 def birthandgender(request):
     return render(request, 'user/birthandgender.html')
 

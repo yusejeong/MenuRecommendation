@@ -38,7 +38,8 @@
       비밀번호 찾기
     </span>
     <br><br>
-    <form name="form" method="post" onsubmit="return checkValue()">
+    <form name="form" method="post" action= "{% url 'YTMT:sendpw'%}">
+      {% csrf_token %}    
       <table frame="void"  border="0"  cellspacing="0" >
 
         <tr>
@@ -75,7 +76,7 @@
     <!-- <input type="submit" value="회원가입" />
     <input type="reset" value="다시 입력" /> -->
 
-<input type="button"id="btn_join" onclick="checkValue();" class="btn btn-pink w200" style="background-color: #fd7e14;width:250pt;margin-top:12px;font-weight:bold;" value="임시 비밀번호 이메일로 전송">
+<input type="submit" type="button"id="btn_join" onclick="checkValue();" class="btn btn-pink w200" style="background-color: #fd7e14;width:250pt;margin-top:12px;font-weight:bold;" value="임시 비밀번호 이메일로 전송">
 
 </form>
   </center>
