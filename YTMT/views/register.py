@@ -74,7 +74,7 @@ def user_check(request):
     chk = True
     if User.objects.filter(username = id_check).exit():
         chk = False
-    return HttpResponse(json.dump{"chk" : chk}, content_type="application/json")
+    # return HttpResponse(json.dump{"chk" : chk}, content_type="application/json")
 
 def birthandgender(request):
     return render(request, 'user/birthandgender.html')
@@ -207,7 +207,7 @@ def hatelistsave(request):
     }
 
     allergy_objects = Allergy.objects.filter(user_id = login_user)
-    
+
     allergy = []
 
     for obj in allergy_objects:
@@ -215,7 +215,7 @@ def hatelistsave(request):
 
     request.session.modified = True
     del request.session['username']
-    
+
     return render(request, 'user/profilecheck.html', { "user" : login_user, "profile" : userProfile, "hate_ingredient_list" : hate_ingredient_list, "allergy_list" : allergy, "hate_menu_list" : hate_menu_list })
 
 def profilecheck(request):
