@@ -69,12 +69,10 @@ def signuprequest(request):
     return render(request, 'user/signup.html')
 
 # 아이디 중복확인
-def user_check(request):
-    id_check = request.POST['id']
-    chk = True
-    if User.objects.filter(username = id_check).exit():
-        chk = False
-    return HttpResponse(json.dump{"chk" : chk}, content_type="application/json")
+def idcheck(request):
+    id_check = request.POST.get('id')
+    chk = User.objects.filter(username = id_check).exists()
+    return HttpResponse(json.dumps({"chk" : chk}), content_type="application/json")
 
 def birthandgender(request):
     return render(request, 'user/birthandgender.html')
@@ -99,14 +97,6 @@ def birthandgendersave(request):
     # 수정된 프로필을 저장
     userProfile.save()
     return render(request, 'user/religion.html')
-
-## 아이디 중복확인
-#def user_check(request):
-#    id_check = request.POST['id']
-#    chk = True
-#    if User.objects.filter(username = id_check).exit():
-#        chk = False
-#    return HttpResponse(json.dump{"chk" : chk}, content_type="application/json")
 
 # 회원가입 추가정보
 def religion(request):

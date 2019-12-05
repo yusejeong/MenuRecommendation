@@ -13,9 +13,8 @@ urlpatterns = [
 
     # 회원가입
     path('signup', register.signup, name = 'signup'),
-    path('signup', register.idcheck, name = 'idcheck'),
     path('signup/signuprequeset', register.signuprequest, name = 'signuprequest'),
-    path('signup/usercheck', register.user_check, name = 'usercheck'),
+    path('signup/idcheck', register.idcheck, name = 'idcheck'),
     path('signup/birthandgender', register.birthandgender, name = 'birthandgender'),
     path('signup/birthandgendersave', register.birthandgendersave, name = 'birthandgendersave'),
 
