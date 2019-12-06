@@ -163,7 +163,8 @@ def profile(request):
         "religion" : Religion_TYPE[tempProfile.reli_id -1][1],
         "vegetarian" : Vegetarian_TYPE[tempProfile.vege_id- 1][1],
         "gender" : Gender_TYPE[tempProfile.gender - 1][1],
-        "birth" : tempProfile.birth,
+        "birth" : tempProfile.birth.date(),
+        
     }
 
     allergy_objects = Allergy.objects.filter(user_id = login_user)
