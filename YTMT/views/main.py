@@ -113,7 +113,6 @@ def menureco(request):
     return render(request, 'menureco/menureco.html',{ 'menu_list': menu_list, "heart_list": heart_list})
 def locationreco(request):
     menu_name = request.GET.get("menu")
-    
     return render(request, 'menureco/locationreco.html')
 def friendreco(request):
     login_user = SS.find_user(request)
@@ -201,8 +200,6 @@ def groupmenureco(request):
 def restaurantreco(request):
     restaurants = Restaurant.objects.filter()
     return render(request, 'menureco/restaurantreco.html',{'restaurants': restaurants})
-
-
 
 def menu_like(request):
 #    if request.method == "POST":
