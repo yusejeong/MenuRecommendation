@@ -113,7 +113,8 @@ def menureco(request):
     return render(request, 'menureco/menureco.html',{ 'menu_list': menu_list, "heart_list": heart_list})
 def locationreco(request):
     menu_name = request.GET.get("menu")
-    return render(request, 'menureco/locationreco.html')
+
+    return render(request, 'menureco/locationreco.html',{"menu_name" : menu_name})
 def friendreco(request):
     login_user = SS.find_user(request)
     userProfile = Profile.objects.get(user_id = login_user)
