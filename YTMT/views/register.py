@@ -14,7 +14,6 @@ from . import utils
 '''
     회원가입 관련 기능이 저장되는 view 파일입니다.
     회원가입에 추가적인 기능이 필요하면 추가하십시요.
-
 '''
 menu_list = []
 ingre_list = []
@@ -45,7 +44,6 @@ def signinrequest(request):
     else:
         return render(request, 'user/signin.html')
 
-
 # 회원가입
 def signup(request):
     auth.logout(request)
@@ -69,12 +67,10 @@ def signuprequest(request):
     return render(request, 'user/signup.html')
 
 # 아이디 중복확인
-def user_check(request):
-    id_check = request.POST['id']
-    chk = True
-    if User.objects.filter(username = id_check).exit():
-        chk = False
-    # return HttpResponse(json.dump{"chk" : chk}, content_type="application/json")
+def idcheck(request):
+    id_check = request.POST.get('id')
+    chk = User.objects.filter(username = id_check).exists()
+    return HttpResponse(json.dumps({"chk" : chk}), content_type="application/json")
 
 def birthandgender(request):
     return render(request, 'user/birthandgender.html')
@@ -99,7 +95,6 @@ def birthandgendersave(request):
     # 수정된 프로필을 저장
     userProfile.save()
     return render(request, 'user/religion.html')
-
 
 # 회원가입 추가정보
 def religion(request):
@@ -203,7 +198,7 @@ def hatelistsave(request):
         "religion" : Religion_TYPE[userProfile.reli_id -1][1],
         "vegetarian" : Vegetarian_TYPE[userProfile.vege_id- 1][1],
         "gender" : Gender_TYPE[userProfile.gender - 1][1],
-        "birth" : userProfile.birth,
+        "birth" : userProfile.birth.date(),
     }
 
     allergy_objects = Allergy.objects.filter(user_id = login_user)

@@ -17,18 +17,9 @@
             <div class="title">메뉴 추천</div>
          </center>
          <nav class="navbar navbar-inverse" id="navbar2">
-           <div class="dropdown">
-              <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false" style="background-color: white;border: double;">정렬 기준
-                <span class="caret"></span>
-              </button>
-              <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
-                <li role="presentation"><a role="menuitem" tabindex="-1" href="#" style="color: black;">없음</a></li>
-                <li role="presentation"><a role="menuitem" tabindex="-1" href="#" style="color: black;">가격</a></li>
-                <li role="presentation"><a role="menuitem" tabindex="-1" href="#" style="color: black;">인기</a></li>
-              </ul>
-            </div>
+        <button class="btn btn-default navbar-btn" id="navrightbtn"><a href="{% url 'YTMT:mainpage'%}" style="color: black;">홈으로</a> </button>
+        <button class="btn btn-default navbar-btn" id="navrightbtn" onClick="window.location.reload()" style="width: 120pt;">다른 메뉴 추천 받기</button>
 
-         <button class="btn btn-default navbar-btn" id="navrightbtn"><a href="{% url 'YTMT:mainpage'%}" style="color: black;">홈으로</a> </button>
         </nav>
 
         <div class="firmalar">    
