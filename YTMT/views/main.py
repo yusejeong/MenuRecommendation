@@ -68,7 +68,7 @@ def menureco(request):
         menu_name = food.menu
         cos = sim_df[str(menu_name)].sort_values(ascending=False)
         heart_list.append(Menu.objects.get(name = food.menu))
-        for name in cos[0:2].index:
+        for name in cos[1:3].index:
             menu_obj = Menu.objects.get(name = name)
             recipes = Recipe.objects.filter(menu = menu_obj)
             can_append = True
@@ -112,6 +112,8 @@ def menureco(request):
 
     return render(request, 'menureco/menureco.html',{ 'menu_list': menu_list, "heart_list": heart_list})
 def locationreco(request):
+    menu_name = request.GET.get("menu")
+    
     return render(request, 'menureco/locationreco.html')
 def friendreco(request):
     login_user = SS.find_user(request)
@@ -173,7 +175,7 @@ def groupmenureco(request):
         menu_id = 0
         while True:
             menu_id = random.randint(1, menu_cnt)
-            if Menu.objects.filter(id = menu_id).exists():                
+            if Menu.objects.filter(id = menu_id).exists():
                 break
         menu_obj = Menu.objects.get(id = menu_id)
         recipes = Recipe.objects.filter(menu = menu_obj)
