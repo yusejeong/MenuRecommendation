@@ -108,9 +108,10 @@ def menureco(request):
             break
 
     menu_list.extend(filter_menu)
-    
-    return render(request, 'menureco/menureco.html',{ 'menu_list': menu_list, "heart_list": heart_list})
 
+    return render(request, 'menureco/menureco.html',{ 'menu_list': menu_list, "heart_list": heart_list})
+def locationreco(request):
+    return render(request, 'menureco/locationreco.html')
 def friendreco(request):
     login_user = SS.find_user(request)
     userProfile = Profile.objects.get(user_id = login_user)
@@ -129,7 +130,7 @@ def groupmenureco(request):
     friends_list = json.loads(friends_list)
 
     friends_list.append(login_user.username)
-    
+
     filter_list = []
 
     user_objects = User.objects.filter(username__in = friends_list)
@@ -194,8 +195,7 @@ def restaurantreco(request):
     restaurants = Restaurant.objects.filter()
     return render(request, 'menureco/restaurantreco.html',{'restaurants': restaurants})
 
-def locationreco(request):
-    return render(request, 'menureco/locationreco.html')
+
 
 def menu_like(request):
 #    if request.method == "POST":
@@ -203,14 +203,14 @@ def menu_like(request):
         like_menu_id = request.POST.get("menu_id")
         like_menu = Menu.objects.get(id = like_menu_id)
         status = 0
-        
+
         try:
             history =History.objects.get(user_id = login_user, menu = like_menu)
         except History.DoesNotExist:
             newHistory = History.objects.create(user_id = login_user, menu = like_menu)
             newHistory.save()
             status = 1
-            
+
         if status == 0 :
             history.delete()
             status = -1

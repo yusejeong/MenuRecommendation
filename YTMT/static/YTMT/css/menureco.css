@@ -41,7 +41,7 @@ header {
           position:absolute;
           right:2rem;
           bottom:0.5rem;
-          
+
       }
 
       .card-text {
@@ -59,7 +59,7 @@ h4 {
     background-color:#FFC81E;
     width: 70pt;
     font-weight: 500;
-    margin-right: 0; 
+    margin-right: 0;
 }
 ul li a {
     text-decoration: none;
