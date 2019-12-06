@@ -13,45 +13,94 @@
   <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css">
   <script src="//code.jquery.com/jquery.min.js"></script>
   <script src="//maxcdn.bootstrapcdn.com/bootstrap/latest/js/bootstrap.min.js"></script>
-  <script type="text/javascript">
-  function checkValue()
-        {
-            if(!document.form.id.value){
-                alert("아이디를 입력하세요.");
-                return false;
-            }
-            if(!document.form.email.value){
-                alert("이메일주소를 입력하세요.");
-                return false;
-            }
-            if(!document.form.email2.value){
-                alert("이메일주소를 선택하세요.");
-                return false;
-            }
-
-            if(!document.form.pwd.value){
-                alert("비밀번호를 입력하세요.");
-                return false;
-            }
-            if(!document.form.pwdchk.value){
-                alert("비밀번호를 한번 더 입력하세요.");
-                return false;
-            }
-            // 비밀번호와 비밀번호 확인에 입력된 값이 동일한지 확인
-            if(document.form.pwd.value != document.form.pwdchk.value ){
-                alert("비밀번호를 동일하게 입력하세요.");
-                return false;
-            }
-
-            return true;
-        }
-  </script>
   <style>
       body {
           background-color: #FCEEB5;
       }
     </style>
-  
+<script type="text/javascript">
+    $(function(){
+//        아이디 수정했을 때
+        $("#id").on("change keyup paste", function(){
+            console.log("id 변경");
+			$('#idcheckBtn').prop("disabled", false);
+            $("#btn_join").attr("id_check_result", "fail");
+        });
+//        아이디 중복확인
+        $('#idcheckBtn').click(function(){
+            var id = $('#id').val()
+//            console.log(id)
+            if(id == ''){
+                alert("아이디를 입력하세요.")
+                return;
+            }
+            
+            $.ajax({
+                headers: {
+                    "X-CSRFToken": '{{csrf_token}}'
+                },
+                url: "/signup/idcheck",
+                type: "POST",
+                data: {
+                    "id": id,
+                },
+                cache: false,
+                dataType: "json",
+                success: function(reponse){
+                    if(reponse.chk == true) {
+                        alert("이미 존재하는 아이디입니다.");
+                        $('#id').val('').focus();
+                        return;
+                    } else{
+                        alert("사용 가능한 아이디입니다.");
+                        $('#idcheckBtn').prop("disabled", true);
+                        $("#btn_join").attr("id_check_result", "success");
+                        return;
+                    }
+                },
+                error: function(xhr,error) {
+                    alert("통신 오류");
+                    console.error(error);
+                }
+            })
+        });
+//        유효성검사
+        $('#join-form').submit(function(){
+            if($('#btn_join').attr("id_check_result") == "fail") {
+                alert("아이디 중복 확인을 해주세요.");
+                return false;
+            }
+            if(!document.form.name.value){
+                    alert("이름을 입력하세요.");
+                    return false;
+            }
+            if(!document.form.email.value){
+                    alert("이메일주소를 입력하세요.");
+                    return false;
+            }
+            if(!document.form.email2.value){
+                    alert("이메일주소를 선택하세요.");
+                    return false;
+            }
+
+            if(!document.form.pwd.value){
+                    alert("비밀번호를 입력하세요.");
+                    return false;
+            }
+            if(!document.form.pwdchk.value){
+                    alert("비밀번호를 한번 더 입력하세요.");
+                    return false;
+            }
+                // 비밀번호와 비밀번호 확인에 입력된 값이 동일한지 확인
+            if(document.form.pwd.value != document.form.pwdchk.value ){
+                    alert("비밀번호를 동일하게 입력하세요.");
+                    return false;
+            }
+        });
+    });
+
+</script> 
+ 
   </head>
   <center>
 
@@ -60,14 +109,16 @@
       회원가입
     </span>
     <br><br>
-      <form name="form" method="post" action= "{% url 'YTMT:signuprequest'%}" onsubmit="return checkValue()">
+      <form id="join-form" name="form" method="post" action= "{% url 'YTMT:signuprequest'%}">
             {% csrf_token %}
     <table border="0" cellspacing="0" frame="void">
       <tr>
         <th style="float:left;">아이디 </th></tr>
         <td>
           <input type="text" style="width:120pt;" name="id" id="id" placeholder="아이디를 입력해주세요" />
-          <input type="button" value="중복확인" />
+
+        <input id="idcheckBtn" type="button" value="중복확인" class="btn btn-secondary btn-sm" data-id="#id" style="background-color: #fd7e14; height: 28px; width: auto;font-size: 0.9em;border:none; color:black;">
+            
         </td>
       <tr>
         <th style="float:left;">이름 </th></tr>
@@ -103,17 +154,14 @@
         <tr>
           <th style="float:left;"> 비밀번호 확인 </th></tr>
           <td> <input type="password" style="width:120pt;"name="pwdchk" id="pwdchk" placeholder="비밀번호를 입력해주세요" /> </td>
-
-
-
     </table>
 
 
     <!-- <input type="submit" value="회원가입" />
     <input type="reset" value="다시 입력" /> -->
 
-    <input type="submit"id="btn_join" class="btn btn-pink w200" style="font-weight:bold;background-color: #fd7e14;width:250pt;margin-top:12px;"value="next">
-    
+    <input type="submit" id="btn_join" id_check_result="fail" class="btn btn-pink w200" style="font-weight:bold;background-color: #fd7e14;width:250pt;margin-top:12px;" value="next">
+          
 </form>
    
     <div class="pagination p6" style="display: table;">
