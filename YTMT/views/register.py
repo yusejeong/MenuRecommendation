@@ -14,7 +14,6 @@ from . import utils
 '''
     회원가입 관련 기능이 저장되는 view 파일입니다.
     회원가입에 추가적인 기능이 필요하면 추가하십시요.
-
 '''
 menu_list = []
 ingre_list = []
@@ -44,7 +43,6 @@ def signinrequest(request):
         # 팝업창으로 띄우기
     else:
         return render(request, 'user/signin.html')
-
 
 # 회원가입
 def signup(request):
