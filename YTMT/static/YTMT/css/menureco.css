@@ -23,10 +23,9 @@ header {
 #navrightbtn {
 
     background-color:#FFC81E;
-    width: 85pt;
-    font-weight: 500;
-    margin-right: 0; 
     float: right;
+    font-weight: 500;
+    margin-right: 0;
 }
 #navrightbtn a, #navleftbtn a  {
     text-decoration:none;
