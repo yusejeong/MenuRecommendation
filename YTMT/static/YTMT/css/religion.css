@@ -37,6 +37,7 @@ html, header, body {
   text-align: center;
 }
 
+
 @media (max-width: 480px) {
   .row {
     width: 100%;
