@@ -68,7 +68,7 @@ def menureco(request):
         menu_name = food.menu
         cos = sim_df[str(menu_name)].sort_values(ascending=False)
         heart_list.append(Menu.objects.get(name = food.menu))
-        for name in cos[0:2].index:
+        for name in cos[1:3].index:
             menu_obj = Menu.objects.get(name = name)
             recipes = Recipe.objects.filter(menu = menu_obj)
             can_append = True
@@ -86,7 +86,11 @@ def menureco(request):
     menu_cnt = Menu.objects.count()
 
     while True:
-        menu_id = random.randint(1, menu_cnt)
+        menu_id = 0
+        while True:
+            menu_id = random.randint(1, menu_cnt)
+            if Menu.objects.filter(id = menu_id).exists():                
+                break
         menu_obj = Menu.objects.get(id = menu_id)
         recipes = Recipe.objects.filter(menu = menu_obj)
         can_append = True
@@ -105,9 +109,12 @@ def menureco(request):
             break
 
     menu_list.extend(filter_menu)
-    
-    return render(request, 'menureco/menureco.html',{ 'menu_list': menu_list, "heart_list": heart_list})
 
+    return render(request, 'menureco/menureco.html',{ 'menu_list': menu_list, "heart_list": heart_list})
+def locationreco(request):
+    menu_name = request.GET.get("menu")
+
+    return render(request, 'menureco/locationreco.html',{"menu_name" : menu_name})
 def friendreco(request):
     login_user = SS.find_user(request)
     userProfile = Profile.objects.get(user_id = login_user)
@@ -126,7 +133,7 @@ def groupmenureco(request):
     friends_list = json.loads(friends_list)
 
     friends_list.append(login_user.username)
-    
+
     filter_list = []
 
     user_objects = User.objects.filter(username__in = friends_list)
@@ -165,7 +172,11 @@ def groupmenureco(request):
     menu_cnt = Menu.objects.count()
 
     while True:
-        menu_id = random.randint(1, menu_cnt)
+        menu_id = 0
+        while True:
+            menu_id = random.randint(1, menu_cnt)
+            if Menu.objects.filter(id = menu_id).exists():
+                break
         menu_obj = Menu.objects.get(id = menu_id)
         recipes = Recipe.objects.filter(menu = menu_obj)
         can_append = True
@@ -191,23 +202,20 @@ def restaurantreco(request):
     restaurants = Restaurant.objects.filter()
     return render(request, 'menureco/restaurantreco.html',{'restaurants': restaurants})
 
-def locationreco(request):
-    return render(request, 'menureco/locationreco.html')
-
 def menu_like(request):
 #    if request.method == "POST":
         login_user = SS.find_user(request)
         like_menu_id = request.POST.get("menu_id")
         like_menu = Menu.objects.get(id = like_menu_id)
         status = 0
-        
+
         try:
             history =History.objects.get(user_id = login_user, menu = like_menu)
         except History.DoesNotExist:
             newHistory = History.objects.create(user_id = login_user, menu = like_menu)
             newHistory.save()
             status = 1
-            
+
         if status == 0 :
             history.delete()
             status = -1
