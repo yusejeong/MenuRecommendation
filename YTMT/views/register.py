@@ -52,6 +52,10 @@ def signup(request):
     return render(request, 'user/signup.html')
 
 def signuprequest(request):
+    if len(request.session['username']) > 0:
+        user = User.objects.filter(username = request.sesion['username'])
+        user.delete()
+
     if request.method == "POST":
         if request.POST["pwd"] == request.POST["pwdchk"]:
             if request.POST["email2"] != "etc":
@@ -72,7 +76,7 @@ def signuprequest(request):
 def user_check(request):
     id_check = request.POST['id']
     chk = True
-    if User.objects.filter(username = id_check).exit():
+    if User.objects.filter(username = id_check).exist():
         chk = False
     return HttpResponse(json.dump{"chk" : chk}, content_type="application/json")
 
