@@ -17,7 +17,7 @@ sim_df = pd.read_csv("similarity_matrix.csv", index_col = 0)
 
 # 메인
 def mainpage(request):
-    if request.session.get('username') is not None:
+    if request.user.is_authenticated:
         return render(request, 'main.html')
     return render(request, 'user/signin.html')
 
