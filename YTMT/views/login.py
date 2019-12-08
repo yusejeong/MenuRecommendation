@@ -40,4 +40,6 @@ def signinrequest(request):
 def signout(request):
     request.session.modified = True
     del request.session['username'], request.session['password']
+
+    auth.logout(request)
     return render(request, 'user/signin.html')

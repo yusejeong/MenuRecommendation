@@ -17,7 +17,7 @@ sim_df = pd.read_csv("similarity_matrix.csv", index_col = 0)
 
 # 메인
 def mainpage(request):
-    if request.session.get('username') is not None:
+    if request.user.is_authenticated:
         return render(request, 'main.html')
     return render(request, 'user/signin.html')
 
@@ -57,7 +57,6 @@ def menureco(request):
 
     #중복 요소 제거
     filter_list = list(dict.fromkeys(filter_list))
-
 
     # 사용자의 좋아했던 메뉴를 로드
     history_list = History.objects.filter(user_id = login_user)

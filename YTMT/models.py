@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.contrib import auth
+
 # 메뉴
 class Menu(models.Model):
     id = models.AutoField(primary_key=True)
@@ -12,17 +13,6 @@ class Menu(models.Model):
 
     def __str__(self):
         return self.name
-
-# class Ajou_menu(models):
-#     id = models.AutoField(primary_key=True)
-#     name = models.CharField(max_length=50, blank = False, null = False)
-#     img_url = models.ImageField(null=True, max_length=100, blank=True)
-#     text = models.TextField(null=True, blank=True)
-
-#     likes = models.IntegerField(default= 0)
-
-#     def __str__(self):
-#         return self.name
         
 class Ingredient(models.Model):    
     id = models.AutoField(primary_key=True)
@@ -32,26 +22,12 @@ class Ingredient(models.Model):
     def __str__(self):
         return self.name
 
-# class Ajou_ingredient(models.Model):    
-#     id = models.AutoField(primary_key=True)
-#     name = models.CharField(max_length=50, blank = False, null = False)
-
-#     def __str__(self):
-#         return self.name
-
 class Recipe(models.Model):
     menu = models.ForeignKey(Menu, on_delete = models.CASCADE)
     ingre = models.ForeignKey(Ingredient, on_delete = models.CASCADE)
  
     def __str__(self):
         return self.menu.name + " " + self.ingre.name
-
-# class Ajou_recipe(models.Model):
-#     menu = models.ForeignKey(Menu, on_delete = models.CASCADE)
-#     ingre = models.ForeignKey(Ingredient, on_delete = models.CASCADE)
- 
-#     def __str__(self):
-#         return self.menu.name + " " + self.ingre.name
 
 # 회원정보
 class Profile(models.Model):

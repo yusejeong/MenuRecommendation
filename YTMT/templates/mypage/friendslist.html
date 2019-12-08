@@ -1,11 +1,12 @@
 <!--<html lang="ko">-->
 {% extends 'user/navbar.html' %} {% load static %} {% block bodycontent %}
 
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://dfzrjox9sv97l.cloudfront.net/dicons_20160930/css/common.css?201709272">
-    <link rel="stylesheet" type="text/css" href={% static "YTMT/css/allergy.css" %}>
+    <link rel="stylesheet" type="text/css" href='{% static "YTMT/css/allergy.css" %}'>
     <!-- <script type="text/javascript" src={% static "YTMT/js/friendList.js" %}></script> -->
     <style>
         hr.style1 {
@@ -144,7 +145,7 @@
             <div class="friend_add container p-1 py-3  my-2 rounded bg-light row">
                 <div class="d-flex col">
                     <input ID="inputBox" class="form-control mr-3 ml-auto align-self-center" type="text" placeholder="친구 이름을 검색하세요!">
-                    <button type="" class="btn btn-secondary btn-sm w-50 searchBtn"><b>검색</b></button>
+                    <button type="" class="btn btn-secondary btn-sm w-50 searchBtn"  style="background-color: slategrey"><b>검색</b></button>
                 </div>
             </div>
             <div class="container p-2 bg-light find_user_container">
@@ -161,7 +162,7 @@
                     <div id="friend_card" class=" d-flex row bg-light w-100 my-1 rounded friend_card Showing">
                         <div class="row ">
                             <div class="d-inline-flex justify-content-center p-2 ">
-                                <img src='{% static "YTMT/img/default-user.png" %}' class="user_img_size rounded-circle" alt="... ">
+                                <img src='{% static "YTMT/img/user3.jpg" %}' class="user_img_size rounded-circle" alt="... ">
                             </div>
                             <div class="align-self-center justify-content-start mr-auto ml-2 ">
                                 <div>
@@ -172,7 +173,7 @@
                                 </div>
                             </div>
                             <div class="align-self-center justify-content-center mr-2">
-                                <button type="" class="btn btn-secondary btn-sm deleteBtn" data-id="{{friend.id}}"><b>친구 제거</b></button>
+                                <button type="" class="btn btn-secondary btn-sm deleteBtn" data-id="{{friend.id}}" style="background-color: slategrey"><b>친구 제거</b></button>
                             </div>
                         </div>
                     </div>
@@ -187,7 +188,7 @@
     <div class="d-flex row bg-warning w-100 my-1 rounded find_card hidden">
         <div class="row d-none">
             <div class="d-inline-flex justify-content-center p-2 ">
-                <img src='{% static "YTMT/img/default-user.png" %}' class="user_img_size rounded-circle" alt="... ">
+                <img src='{% static "YTMT/img/user2.jpg" %}' class="user_img_size rounded-circle" alt="... ">
             </div>
             <div class="align-self-center justify-content-start mr-auto ml-2 ">
                 <div class="">
@@ -206,7 +207,7 @@
     <div id="friend_card" class="d-flex row bg-light w-100 my-1 rounded friend_card hidden">
         <div class="row d-none">
             <div class="d-inline-flex justify-content-center p-2 ">
-                <img src='{% static "YTMT/img/default-user.png" %}' class="user_img_size rounded-circle" alt="... ">
+                <img src='{% static "YTMT/img/user4.jpg" %}' class="user_img_size rounded-circle" alt="... ">
             </div>
             <div class="align-self-center justify-content-start mr-auto ml-2 ">
                 <div>
