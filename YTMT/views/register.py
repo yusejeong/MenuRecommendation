@@ -24,48 +24,21 @@ for ingre in Ingredient.objects.all():
 for menu in Menu.objects.all():
     menu_list.append(menu.name)
 
-
-def signinrequest(request):
-    if request.method == "POST":
-        id = request.POST['username']
-        pwd = request.POST['password']
-        user = auth.authenticate(request, username = id, password = pwd)
-        if user is not None:
-            auth.login(request, user)
-            SS.create_session(request, id, pwd)
-            return HttpResponseRedirect(reverse('YTMT:mainpage'))
-        else:
-            '''
-               수정 필요한 부분, 비동기적으로 로그인이 되지 않았음을 보내는 기능을 만들어야함
-                현재는 Template의 수정이 우선되어야 기능구현을 확인할 수 있으므로 추후 방안논의
-            '''
-            return render(request, 'user/signin.html', {'error':'id or pwd is incorrect'})
-        # 팝업창으로 띄우기
-    else:
-        return render(request, 'user/signin.html')
-
 # 회원가입
 def signup(request):
     auth.logout(request)
     return render(request, 'user/signup.html')
 
 def signuprequest(request):
-    if len(request.session['username']) > 0:
-        user = User.objects.filter(username = request.sesion['username'])
-        user.delete()
-
     if request.method == "POST":
         if request.POST["pwd"] == request.POST["pwdchk"]:
-            if request.POST["email2"] != "etc":
-                user = User.objects.create_user(
-                    username = request.POST["id"], password = request.POST["pwd"], email = request.POST["email"] + "@" + request.POST["email2"])
-            else:
-                user = User.objects.create_user(
-                    username = request.POST["id"], password = request.POST["pwd"], email = request.POST["email"])
-            #프로필 객체를 생성
-            userProfile = Profile.objects.create(user_id = user, birth = datetime.datetime.now(), name = request.POST["name"])
-            userProfile.save()
             request.session['username'] = request.POST["id"]
+            request.session['pwd'] = request.POST["pwd"]
+            if request.POST["email2"] != "etc":
+                request.session['email'] = request.POST["email"] + "@" + request.POST["email2"]
+            else:
+                request.session['email'] = request.POST["email"]
+            request.session['name'] = request.POST["name"]
             return render(request, 'user/birthandgender.html')
         return render(request, 'user/signup.html')
     return render(request, 'user/signup.html')
@@ -76,13 +49,7 @@ def idcheck(request):
     chk = User.objects.filter(username = id_check).exists()
     return HttpResponse(json.dumps({"chk" : chk}), content_type="application/json")
 
-def birthandgender(request):
-    return render(request, 'user/birthandgender.html')
-
 def birthandgendersave(request):
-    login_user = SS.find_user(request)
-    userProfile = Profile.objects.get(user_id = login_user)
-
     # 성별 구분
     gender = request.POST.get("gender")
     if gender == "M":
@@ -90,94 +57,40 @@ def birthandgendersave(request):
     else:
         gender_num = 2
 
-    brithday_str = request.POST.get('birth')
-    # POST 방식으로 받아온 birth가 String값이기 때문에 DateTime 객체로 변환
-    birthday_obj = datetime.datetime.strptime(brithday_str, '%Y-%m-%d')
+    birthday_str = request.POST.get('birth')
 
-    userProfile.gender = gender_num
-    userProfile.birth = birthday_obj
-    # 수정된 프로필을 저장
-    userProfile.save()
+    request.session['gender'] = gender_num
+    request.session['birthday_str'] = birthday_str
+
     return render(request, 'user/religion.html')
+
 
 # 회원가입 추가정보
-def religion(request):
-    return render(request, 'user/religion.html')
-
 def religionsave(request):
-    login_user = SS.find_user(request)
-    userProfile = Profile.objects.get(user_id = login_user)
-
-    reli_name = request.POST.get("religion")
-    userProfile.reli_id = utils.get_reli_id(reli_name)
-
-    userProfile.save()
-
-    return render(request, 'user/vegetarian.html')
-
-def vegetarian(request):
+    request.session['religion'] = utils.get_reli_id(request.POST.get("religion"))
     return render(request, 'user/vegetarian.html')
 
 def vegetariansave(request):
-    login_user = SS.find_user(request)
-    userProfile = Profile.objects.get(user_id = login_user)
-
-    vege_name = request.POST.get("vegetarian")
-    userProfile.vege_id = utils.get_vege_id(vege_name)
-
-    userProfile.save()
-
-    return render(request, 'user/allergy.html', {"ingre_list" : ingre_list})
-
-def allergy(request):
-
+    request.session['vegetarian'] = utils.get_vege_id(request.POST.get("vegetarian"))
     return render(request, 'user/allergy.html', {"ingre_list" : ingre_list})
 
 def allergysave(request):
-    login_user = SS.find_user(request)
-    userProfile = Profile.objects.get(user_id = login_user)
     allergy_list = request.POST.get("allergy_list")
-
     allergy_list = json.loads(allergy_list)
 
-    for allergy in allergy_list:
-        print(allergy)
-        i = Ingredient.objects.get(name = allergy)
-        if(i):
-            Allergy(user_id = login_user, ingre = i).save()
-        else:
-             i = Ingredient(name = allergy)
-             i.save()
-             Allergy(user_id = login_user, ingre = i).save()
-
+    request.session['allergy'] = allergy_list
     # 일대다
     return render(request, 'user/hatelist.html',{'ingredient_list': ingre_list,'menu_list' : menu_list})
 
-def hatelist(request):
-    return render(request, 'user/hatelist.html')
-
 def hatelistsave(request):
-    login_user = SS.find_user(request)
-    userProfile = Profile.objects.get(user_id = login_user)
-
     hate_menu_list = request.POST.get("menu_list")
     hate_menu_list = json.loads(hate_menu_list)
 
     hate_ingredient_list = request.POST.get("ingredient_list")
     hate_ingredient_list = json.loads(hate_ingredient_list)
-    for hate_menu in hate_menu_list:
-        temp = Menu.objects.get(name = hate_menu)
-        if(temp):
-            Hate_menu(user_id = login_user, menu = temp).save()
 
-    for ingredient in hate_ingredient_list:
-        i = Ingredient.objects.get(name = ingredient)
-        if(i):
-            Hate_ingredient(user_id = login_user, ingre = i).save()
-        else:
-            i = Ingredient(name = ingredient)
-            i.save()
-            Hate_ingredient(user_id = login_user, ingre = i).save()
+    request.session['hate_menu'] = hate_menu_list
+    request.session['hate_ingre'] = hate_ingredient_list
 
     # profilecheck.html 을 rendering하기 위한 작업
     Gender_TYPE = (
@@ -196,26 +109,65 @@ def hatelistsave(request):
         (5, "페스코 베지테리언"), (6, "플로 베지테리언"),
         (7, "플렉시테리언"), (8, "해당사항없음"),
     )
+    
+    # POST 방식으로 받아온 birth가 String값이기 때문에 DateTime 객체로 변환
+    birthday_obj = datetime.datetime.strptime(request.session['birthday_str'], '%Y-%m-%d')
 
     userProfile = {
-        "name" : userProfile.name,
-        "religion" : Religion_TYPE[userProfile.reli_id -1][1],
-        "vegetarian" : Vegetarian_TYPE[userProfile.vege_id- 1][1],
-        "gender" : Gender_TYPE[userProfile.gender - 1][1],
-        "birth" : userProfile.birth.date(),
-    }
+        "username" : request.session['username'],
+        "email" : request.session['email'],
+        "name" : request.session['name'],
+        "gender" : Gender_TYPE[request.session['gender'] - 1][1],
+        "birth" : birthday_obj.date(),
+        "religion" : Religion_TYPE[request.session['religion'] -1][1],
+        "vegetarian" : Vegetarian_TYPE[request.session['vegetarian']- 1][1],
+    }    
 
-    allergy_objects = Allergy.objects.filter(user_id = login_user)
+    allergy = request.session['allergy']
 
-    allergy = []
+    return render(request, 'user/profilecheck.html', {"profile" : userProfile, "hate_ingredient_list" : hate_ingredient_list, "allergy_list" : allergy, "hate_menu_list" : hate_menu_list })
 
-    for obj in allergy_objects:
-        allergy.append(obj.ingre.name)
-
-    request.session.modified = True
-    del request.session['username']
-
-    return render(request, 'user/profilecheck.html', { "user" : login_user, "profile" : userProfile, "hate_ingredient_list" : hate_ingredient_list, "allergy_list" : allergy, "hate_menu_list" : hate_menu_list })
-
+# 입력정보 확인
 def profilecheck(request):
     return render(request, 'user/profilecheck.html')
+
+
+# 최종 회원가입
+def signupfinal(request):
+    login_user = User.objects.create_user(
+        username = request.session['username'], password = request.session['pwd'], email = request.session['email']
+    )
+    
+    birthday_obj = datetime.datetime.strptime(request.session['birthday_str'], '%Y-%m-%d')
+
+    userProfile = Profile.objects.create(
+        user_id = login_user, name = request.session['name'], gender = request.session['gender'], birth = birthday_obj, reli_id = request.session['religion'], vege_id = request.session['vegetarian']
+    )
+    userProfile.save()
+
+    for allergy in request.session['allergy']:
+        i = Ingredient.objects.get(name = allergy)
+        if(i):
+            Allergy(user_id = login_user, ingre = i).save()
+        else:
+             i = Ingredient(name = allergy)
+             i.save()
+             Allergy(user_id = login_user, ingre = i).save()
+
+    for hate_menu in request.session['hate_menu']:
+        temp = Menu.objects.get(name = hate_menu)
+        if(temp):
+            Hate_menu(user_id = login_user, menu = temp).save()
+
+    for ingredient in request.session['hate_ingre']:
+        i = Ingredient.objects.get(name = ingredient)
+        if(i):
+            Hate_ingredient(user_id = login_user, ingre = i).save()
+        else:
+            i = Ingredient(name = ingredient)
+            i.save()
+            Hate_ingredient(user_id = login_user, ingre = i).save()
+
+    request.session.modified = True
+    del request.session['username'], request.session['pwd'], request.session['email'], request.session['name'], request.session['gender'], request.session['birthday_str'], request.session['religion'], request.session['vegetarian'], request.session['allergy'], request.session['hate_menu'], request.session['hate_ingre']
+    return render(request, 'user/signin.html')

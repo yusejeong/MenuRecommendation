@@ -15,19 +15,15 @@ urlpatterns = [
     path('signup', register.signup, name = 'signup'),
     path('signup/signuprequeset', register.signuprequest, name = 'signuprequest'),
     path('signup/idcheck', register.idcheck, name = 'idcheck'),
-    path('signup/birthandgender', register.birthandgender, name = 'birthandgender'),
     path('signup/birthandgendersave', register.birthandgendersave, name = 'birthandgendersave'),
 
     # 회원가입 추가정보
-    path('signup/religion', register.religion, name = 'religion'),
     path('signup/religionsave', register.religionsave, name = 'religionsave'),
-    path('signup/vegetarian', register.vegetarian, name = 'vegetarian'),
     path('signup/vegetariansave', register.vegetariansave, name = 'vegetariansave'),
-    path('signup/allergy', register.allergy, name = 'allergy'),
     path('signup/allergysave', register.allergysave, name = 'allergysave'),
-    path('signup/hatelist', register.hatelist, name = 'hatelist'),
     path('signup/hatelistsave', register.hatelistsave, name = 'hatelistsave'),
     path('signup/profilecheck', register.profilecheck, name = 'profilecheck'),
+    path('signup/signupfinal', register.signupfinal, name = 'signupfinal'),
 
     # 회원정보찾기
     path('findinfo', find_info.findinfo, name = 'findinfo'),
