@@ -58,7 +58,6 @@ def menureco(request):
     #중복 요소 제거
     filter_list = list(dict.fromkeys(filter_list))
 
-
     # 사용자의 좋아했던 메뉴를 로드
     history_list = History.objects.filter(user_id = login_user)
     menu_list = []
