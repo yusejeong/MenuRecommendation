@@ -18,6 +18,82 @@
           background-color: #FCEEB5;
       }
     </style>
+
+ 
+  </head>
+  <center>
+
+    <br>
+    <span style="font-weight: bold; font-size: 2em; line-height: 2em; color: black; font-family: 'Nanum Gothic';">
+      회원가입
+    </span>
+    <br><br>
+      <form id="join-form" name="form" method="post" action= "{% url 'YTMT:signuprequest'%}">
+            {% csrf_token %}
+    <table border="0" cellspacing="0" frame="void">
+      <tr>
+        <th style="float:left;">아이디 </th></tr>
+        <td>
+          <input type="text" style="width:120pt;vertical-align:middle;" name="id" id="id" placeholder="아이디를 입력해주세요"/>
+           <input id="idcheckBtn" type="button" value="중복확인" class="btn btn-secondary btn-sm" data-id="#id" style="background-color: #fd7e14; height: 28px; width: auto;font-size: 0.9em;border:none; color:black;vertical-align:middle;">  
+        </td>
+      <tr>
+        <th style="float:left;">이름 </th></tr>
+        <!-- #이름추가 -->
+        <td>
+          <input type="text" style="width:120pt;" name="name" id="name" placeholder="이름을 입력해주세요" />
+        </td>
+
+
+
+        <tr>
+          <th style="float:left;">이메일 </th></tr>
+          <td>
+            <input type="text" style="width:120pt;"name="email" id="email" placeholder="이메일 아이디" />@<select id="email2" name="email2">
+                <option value="" selected="selected">-메일 주소-</option>
+                <option value="naver.com">naver.com</option>
+                <option value="daum.net">daum.net</option>
+                <option value="nate.com">nate.com</option>
+                <option value="hotmail.com">hotmail.com</option>
+                <option value="yahoo.com">yahoo.com</option>
+                <option value="empas.com">empas.com</option>
+                <option value="korea.com">korea.com</option>
+                <option value="dreamwiz.com">dreamwiz.com</option>
+                <option value="gmail.com">gmail.com</option>
+                <option value="etc">직접입력</option>
+              </select>
+            </td>
+
+        <tr>
+          <th style="float:left;"> 비밀번호 </th></tr>
+          <td> <input type="password"style="width:120pt;" name="pwd" id="pwd" placeholder="비밀번호를 입력해주세요" /> </td>
+
+        <tr>
+          <th style="float:left;"> 비밀번호 확인 </th></tr>
+          <td> <input type="password" style="width:120pt;"name="pwdchk" id="pwdchk" placeholder="비밀번호를 입력해주세요" /> </td>
+    </table>
+
+
+    <!-- <input type="submit" value="회원가입" />
+    <input type="reset" value="다시 입력" /> -->
+
+    <input type="submit" id="btn_join" id_check_result="fail" class="btn btn-pink w200" style="font-weight:bold;background-color: #fd7e14;width:250pt;margin-top:12px;" value="next">
+          
+</form>
+   
+    <div class="pagination p6" style="display: table;">
+      <ul>
+        <a class="is-active" href="#"><li></li></a>
+        <a href="#"><li></li></a>
+        <a href="#"><li></li></a>
+        <a href="#"><li></li></a>
+        <a href="#"><li></li></a>
+        <a href="#"><li></li></a>
+      </ul>
+    </div>
+
+  </center>
+  
 <script type="text/javascript">
     $(function(){
 //        아이디 수정했을 때
@@ -99,81 +175,5 @@
         });
     });
 
-</script> 
- 
-  </head>
-  <center>
-
-    <br>
-    <span style="font-weight: bold; font-size: 2em; line-height: 2em; color: black; font-family: 'Nanum Gothic';">
-      회원가입
-    </span>
-    <br><br>
-      <form id="join-form" name="form" method="post" action= "{% url 'YTMT:signuprequest'%}">
-            {% csrf_token %}
-    <table border="0" cellspacing="0" frame="void">
-      <tr>
-        <th style="float:left;">아이디 </th></tr>
-        <td>
-          <input type="text" style="width:120pt;" name="id" id="id" placeholder="아이디를 입력해주세요" />
-
-        <input id="idcheckBtn" type="button" value="중복확인" class="btn btn-secondary btn-sm" data-id="#id" style="background-color: #fd7e14; height: 28px; width: auto;font-size: 0.9em;border:none; color:black;">
-            
-        </td>
-      <tr>
-        <th style="float:left;">이름 </th></tr>
-        <!-- #이름추가 -->
-        <td>
-          <input type="text" style="width:120pt;" name="name" id="name" placeholder="이름을 입력해주세요" />
-        </td>
-
-
-
-        <tr>
-          <th style="float:left;">이메일 </th></tr>
-          <td>
-            <input type="text" style="width:120pt;"name="email" id="email" placeholder="이메일 아이디" />@<select id="email2" name="email2">
-                <option value="" selected="selected">-메일 주소-</option>
-                <option value="naver.com">naver.com</option>
-                <option value="daum.net">daum.net</option>
-                <option value="nate.com">nate.com</option>
-                <option value="hotmail.com">hotmail.com</option>
-                <option value="yahoo.com">yahoo.com</option>
-                <option value="empas.com">empas.com</option>
-                <option value="korea.com">korea.com</option>
-                <option value="dreamwiz.com">dreamwiz.com</option>
-                <option value="gmail.com">gmail.com</option>
-                <option value="etc">직접입력</option>
-              </select>
-            </td>
-
-        <tr>
-          <th style="float:left;"> 비밀번호 </th></tr>
-          <td> <input type="password"style="width:120pt;" name="pwd" id="pwd" placeholder="비밀번호를 입력해주세요" /> </td>
-
-        <tr>
-          <th style="float:left;"> 비밀번호 확인 </th></tr>
-          <td> <input type="password" style="width:120pt;"name="pwdchk" id="pwdchk" placeholder="비밀번호를 입력해주세요" /> </td>
-    </table>
-
-
-    <!-- <input type="submit" value="회원가입" />
-    <input type="reset" value="다시 입력" /> -->
-
-    <input type="submit" id="btn_join" id_check_result="fail" class="btn btn-pink w200" style="font-weight:bold;background-color: #fd7e14;width:250pt;margin-top:12px;" value="next">
-          
-</form>
-   
-    <div class="pagination p6" style="display: table;">
-      <ul>
-        <a class="is-active" href="#"><li></li></a>
-        <a href="#"><li></li></a>
-        <a href="#"><li></li></a>
-        <a href="#"><li></li></a>
-        <a href="#"><li></li></a>
-        <a href="#"><li></li></a>
-      </ul>
-    </div>
-
-  </center>
+</script>   
 {% endblock %}
