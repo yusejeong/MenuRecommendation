@@ -10,61 +10,32 @@
   <link rel="stylesheet" href="https://dfzrjox9sv97l.cloudfront.net/dicons_20160930/css/common.css?201709272">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
   <link rel="stylesheet" type="text/css" href={% static "YTMT/css/hate.css" %}>
-  <script type="text/javascript" src={% static "YTMT/js/Autocomplete/jquery/lib/jquery.js" %}></script>
-  <script type="text/javascript" src={% static "YTMT/js/Autocomplete/jquery/lib/jquery.bgiframe.min.js" %}></script>
-  <script type="text/javascript" src={% static "YTMT/js/Autocomplete/jquery/lib/jquery.ajaxQueue.js" %}></script>
-  <script type="text/javascript" src={% static "YTMT/js/Autocomplete/jquery/jquery.autocomplete.js" %}></script>
-  <link rel="stylesheet" type="text/css" href={% static "YTMT/js/Autocomplete/jquery/jquery.autocomplete.css" %}>
-  <script type="text/javascript">
+  <!-- jQuery ui style sheet -->
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <!-- jQuery library -->
+    <script src="https://code.jquery.com/jquery.js"></script>
+    <!-- jQuery ui library -->
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script type="text/javascript">
 
-    var hateelement = {{ingredient_list|safe}};
-
-    var hatefood = {{menu_list|safe}};
-
-    $(document).ready(function() {
-        $("#searchbox").autocomplete(hatefood,{
-            matchContains: true,
-            selectFirst: false
+        $(document).ready(function () {
+           var hateelement = [{%for ingre in ingredient_list %}
+                "{{ingre}}",
+                {% endfor %}
+            ];
+           var hatefood = [{%for menu in menu_list %}
+                "{{menu}}",
+                {% endfor %}
+            ];
+           $("#searchbox").autocomplete({
+            source: hatefood,
+           });
+           $("#searchbox1").autocomplete({
+            source: hateelement,
+           });
         });
-        $("#searchbox1").autocomplete(hateelement,{
-            matchContains: true,
-            selectFirst: false
-        });
-    });
 
-    function insRow() {
-      var frm = document.form;
-      for( var i = 0; i <= frm.elements.length - 1; i++ ){
-         if( frm.elements[i].name == "addText1" )
-         {
-             if( !frm.elements[i].value ){
-                 alert("글자를 입력하세요!");
-                     frm.elements[i].focus();
-       return;
-              }
-          }
-       }
-      list = document.getElementById("addTable1");
-      var Row = list.insertRow();
-      var aCell = Row.insertCell();
-      Row.onmouseover=function(){list.clickedRowIndex=this.rowIndex}; //clickedRowIndex - 클릭한 Row의 위치를 확인;
-      var jb = document.createElement("div");
-      $(jb).attr("class", "hateelement");
-      $(jb).css({"display" : "inline",
-                  "float" : "left",
-                  })
-
-      $(jb).html($('#searchbox1').val());
-
-      console.log($('#searchbox1').val())
-
-      $("input[name*='addText1']").val("");
-      var button = $("<input type='button' id='rmbutton' value='삭제' onClick='removeRow()' style='cursor:hand'>")
-      $("#addTable1 > tbody:last > tr:last > td:last").append(jb)
-      $(button).insertAfter(jb)
-
-    }
-    function insRow1() {
+    function addfood(){
       var frm = document.form;
       for( var i = 0; i <= frm.elements.length - 1; i++ ){
          if( frm.elements[i].name == "addText" )
@@ -72,36 +43,48 @@
              if( !frm.elements[i].value ){
                  alert("글자를 입력하세요!");
                      frm.elements[i].focus();
-       return;
+              return ;
               }
           }
-       }
-      list1 = document.getElementById("addTable");
-      var Row = list1.insertRow();
-      Row.onmouseover=function(){list1.clickedRowIndex=this.rowIndex}; //clickedRowIndex - 클릭한 Row의 위치를 확인;
-      var aCell = Row.insertCell();
-      var jb = document.createElement("div");
-      $(jb).attr("class", "hatefood");
-      $(jb).css({"display" : "inline",
-                  "float" : "left",
-                  })
+        }
+        
+        find_bdge = $(".badge.d-none.food").clone()
+        $(find_bdge).removeClass("d-none")
+        $(find_bdge).find(".hatefood").html($('#searchbox').val())
+        $(find_bdge).appendTo(".food_container")
 
-      $(jb).html($('#searchbox').val());
-
-      console.log($('#searchbox').val())
-
-      $("input[name*='addText']").val("");
-      var button = $("<input type='button' id='rmbutton' value='삭제' onClick='removeRow1()' style='cursor:hand'>")
-      $("#addTable > tbody:last > tr:last > td:last").append(jb)
-      $(button).insertAfter(jb)
-
+        $("#searchbox").val("");
     }
-    function removeRow() {
-      list.deleteRow(list.clickedRowIndex);
+        $(document).on("click", ".remove", function(event) {
+      var parentTag = $(this).closest(".badge")
+      parentTag.remove()
+    });
+
+    function addelement(){
+      var frm = document.form;
+      for( var i = 0; i <= frm.elements.length - 1; i++ ){
+         if( frm.elements[i].name == "addText1" )
+         {
+             if( !frm.elements[i].value ){
+                 alert("글자를 입력하세요!");
+                     frm.elements[i].focus();
+              return ;
+              }
+          }
+        }
+        
+        find_bdge = $(".badge.d-none.element").clone()
+        $(find_bdge).removeClass("d-none")
+        $(find_bdge).find(".hateelement").html($('#searchbox1').val())
+        $(find_bdge).appendTo(".element_container")
+
+        $("#searchbox1").val("");
     }
-    function removeRow1() {
-      list1.deleteRow(list1.clickedRowIndex);
-    }
+
+        $(document).on("click", ".remove", function(event) {
+      var parentTag = $(this).closest(".badge")
+      parentTag.remove()
+    });
 
     function submit_form(){
 
@@ -119,7 +102,7 @@
       var temp1 = document.createElement("input");
       var input1=$(temp1).attr('name',"ingredient_list").val(JSON.stringify(hateelement_list));
       var input = $(temp).attr('name',"menu_list").val(JSON.stringify(hatefood_list));
-$(input1).attr('type' , 'hidden')
+      $(input1).attr('type' , 'hidden')
       $(input).attr('type' , 'hidden')
       $('#hatelistform').append($(input))
       $('#hatelistform').append($(input1))
@@ -136,15 +119,15 @@ $(input1).attr('type' , 'hidden')
       <span style="font-weight: bold; font-size: 2em; line-height: 2em; color: black; font-family: 'Nanum Gothic';">개인적 식성 </span>
       <br><br>
         <span style="font-weight: bold; font-size: 1em; line-height: 2em; color: black; font-family: 'Nanum Gothic';">싫어하는 음식 </span>
-        <form id ="hatelistform" name="form" class="hform"method="post" action="{% url 'YTMT:hatemodifysave'%}" onsubmit="return check();">  {% csrf_token %}
-          <div>
+        <form id ="hatelistform" name="form" class="hform"method="post" action="{% url 'YTMT:hatemodifysave'%}">  {% csrf_token %}
+          <div class="container col-md-4 mt-3">
             <div  style="padding-bottom:50px;">
               <tr>
                 <td colspan="4" align="left" align="center">
                   <table width="100%" border="0" cellpadding="0" cellspacing="0">
                  <td colspan="5"  height="25" align="center">
                    <input type="text" id="searchbox" name="addText"style="width:200px">
-                      <input name="addButton" id="addbutton" type="button" style="cursor:hand" onClick="insRow1();" value="추가"></td></table></td>
+                      <input name="addButton" id="addbutton" type="button" style="cursor:hand" onClick="addfood();" value="추가"></td></table></td>
                    </tr>
 
               <tr>
@@ -152,19 +135,24 @@ $(input1).attr('type' , 'hidden')
                  <table id="addTable"  cellspacing="0" cellpadding="0" bgcolor="#FFFFFF" border="0">
                 </table></td>
               </tr>
-
+  <div class = "food_container">
+    {% for food in user_food %}
+   <span class="m-1 badge badge-primary">
+    <span class= "hatefood">{{ food.menu.name}}</span><span class = "remove" style="cursor:pointer"> X</span></span>
+  {% endfor %}
+  </div>
     </div></div>
 
 <span style="font-weight: bold; font-size: 1em; line-height: 2em; color: black; font-family: 'Nanum Gothic';">싫어하는 재료 </span>
   <br>
-    <div>
+    <div class = "container col-md-4 mt-3">
       <div style="padding-bottom:50px;">
   <tr>
   <td colspan="2" align="left">
   <table width="100%" border="0" cellpadding="0" cellspacing="0">
   <td colspan="5"  height="auto" align="center">
    <input type="text" id="searchbox1" name="addText1"style="width:200px">
-      <input name="addButton1" id="addbutton1" type="button" style="cursor:hand" onClick="insRow();" value="추가"></td>
+      <input name="addButton1" id="addbutton1" type="button" style="cursor:hand" onClick="addelement();" value="추가"></td>
 
     </table>
    </td>
@@ -175,10 +163,19 @@ $(input1).attr('type' , 'hidden')
      <table id="addTable1"  cellspacing="0" cellpadding="0" bgcolor="#FFFFFF" border="0">
     </table></td>
   </tr>
+  <div class = "element_container">
+  {% for ingre in user_ingre %}
+   <span class="m-1 badge badge-success">
+    <span class= "hateelement">{{ingre}}</span><span class = "remove" style="cursor:pointer"> X</span></span>
+  {% endfor %}</div>
   </div></div>
   <input type="button"id="submit_btn"  onclick="submit_form()"class="btn btn-pink w200" style="font-weight:bold;background-color: #fd7e14;width:250pt;margin-top:12px;"value="수정완료">
 
   </form>
+<span class="m-1 badge badge-primary food d-none">
+    <span class= "hatefood"></span><span class = "remove" style="cursor:pointer"> X </span></span>
+      <span class="m-1 badge badge-success element d-none">
+    <span class= "hateelement"></span><span class = "remove" style="cursor:pointer"> X </span></span>
 
 </center>
 {% endblock %}

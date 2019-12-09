@@ -8,6 +8,7 @@ from django.contrib import auth
 import datetime
 from . import session as SS
 from . import utils
+import json
 menu_list = []
 ingre_list = []
 # friend_list=[]
@@ -94,17 +95,33 @@ def allergymodify(request):
     for allergy in allergy_objects:
         allergy_list.append(allergy)
 
-    return render(request, 'mypage/allergymodify.html',{"allergy_list" : allergy_list})
+    return render(request, 'mypage/allergymodify.html',{"allergy_list" : allergy_list, "ingre_list" : ingre_list})
 
 def allergymodifysave(request):
     login_user = SS.find_user(request)
     userProfile = Profile.objects.get(user_id = login_user)
 
-    # 일대다
+    allergy_list = request.POST.get("allergy_list")
+    allergy_list = json.loads(allergy_list)
+    Allergy.objects.filter(user_id = login_user).delete()
+    # print(allergy_list)
+    for ingre_obj in Ingredient.objects.filter(name__in = allergy_list):
+        Allergy(user_id = login_user, ingre = ingre_obj).save()
+
     return render(request, 'mypage/selectinfo.html')
 
 def hatemodify(request):
-    return render(request, 'mypage/hatemodify.html',{'ingredient_list': ingre_list,'menu_list' : menu_list})
+    login_user = SS.find_user(request)
+    userProfile = Profile.objects.get(user_id = login_user)
+
+    user_ingre = []
+    user_food = []
+
+    for menu in Hate_menu.objects.filter(user_id = login_user):
+        user_food.append(menu)
+    for hate_ingre in Hate_ingredient.objects.filter(user_id = login_user):
+        user_ingre.append(hate_ingre.ingre)
+    return render(request, 'mypage/hatemodify.html',{'ingredient_list': ingre_list,'menu_list' : menu_list, "user_ingre" : user_ingre, "user_food" : user_food})
 
 def hatemodifysave(request):
     login_user = SS.find_user(request)
@@ -115,6 +132,18 @@ def hatemodifysave(request):
     hate_ingredient_list = request.POST.get("ingredient_list")
     hate_ingredient_list = json.loads(hate_ingredient_list)
 
+    Hate_menu.objects.filter(user_id = login_user).delete()    
+    Hate_ingredient.objects.filter(user_id = login_user).delete()
+    
+    menu_objects = Menu.objects.filter(name__in = hate_menu_list)
+    ingre_objects = Ingredient.objects.filter(name__in = hate_ingredient_list)
+
+    for ingre_obj in ingre_objects:
+        Hate_ingredient(user_id = login_user, ingre = ingre_obj).save()
+
+    for menu_obj in menu_objects:
+        Hate_menu(user_id = login_user, menu = menu_obj).save()
+    
     return render(request, 'mypage/selectinfo.html')
 
 # 마이페이지_기타
