@@ -8,3 +8,4 @@ venvReq.txt
 __pycache__/
 *.ipynb
 .csv
+*.jpg
