@@ -5,7 +5,6 @@ from numpy.linalg import norm
 import numpy as np
 import os
 import json
-from nltk.tokenize import TreebankWordTokenizer
 from YTMT.models import *
 from sklearn.metrics.pairwise import cosine_similarity
 import threading
