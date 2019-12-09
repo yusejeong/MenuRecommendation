@@ -9,56 +9,19 @@
       <link rel="stylesheet" href='{% static "YTMT/css/menureco.css" %}'>
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-      <script type="text/javascript">
 
-
-            $(document).on("click", ".imgBtn", function(event){
-                var menu_id = $(this).data("id")
-
-            $.ajax({
-                headers: {
-                    "X-CSRFToken": '{{csrf_token}}'
-                },
-                url: "/menu/like",
-                type: "POST",
-                data: {
-                    "menu_id": menu_id
-                },
-                cache: false,
-                dataType: "json",
-
-                success: function(response) {
-                    var menu_id = response.like_id
-                    var menu_likes = response.like_count
-                    var status = response.status //좋아요 했는지 현 상태 (+1/-1)
-//                    console.log("status:" + status)
-
-                    if (status == 1) {
-                        $('#img'+ menu_id).attr('src','{% static "YTMT/img/like.png" %}')
-                    } else if (status == -1) {
-                        $('#img'+ menu_id).attr('src','{% static "YTMT/img/nolike.png" %}')
-                    }
-
-                    $('#count'+ menu_id).find(".like_count").html(menu_likes)
-//                    console.log(menu_id + " : " + menu_likes)
-                },
-                error: function(response, error) {
-                    console.log("실패")
-                }
-            })
-
-        });
-
-      </script>
   </head>
 
    {% for menu in menu_list %}
      <div class="menu">
                 <div class="firma-card row">
                     <div class="col-md-5 img-padding-no">
-                        <img class="firma-resim"
+                        <a href="{% url 'YTMT:locationreco'%}?menu={{menu.name}}">
+                            <img class="firma-resim"
                         style="height: 100%; width: 100%;"
-                        src = '{% static  "YTMT/food_images/"%}{{menu.name}}.jpg'>
+                        src = '{% static  "YTMT/food_images/"%}{{menu.name}}.jpg' style="cursor: pointer;">
+                        </a>
+                        
                     </div>
                     <div class="col-md-7">
                         <div class="firma-aciklama card-body">
@@ -100,5 +63,45 @@
         </div>
 
     {% endfor %}
+      <script type="text/javascript">
 
+
+            $(document).on("click", ".imgBtn", function(event){
+                var menu_id = $(this).data("id")
+
+            $.ajax({
+                headers: {
+                    "X-CSRFToken": '{{csrf_token}}'
+                },
+                url: "/menu/like",
+                type: "POST",
+                data: {
+                    "menu_id": menu_id
+                },
+                cache: false,
+                dataType: "json",
+
+                success: function(response) {
+                    var menu_id = response.like_id
+                    var menu_likes = response.like_count
+                    var status = response.status //좋아요 했는지 현 상태 (+1/-1)
+//                    console.log("status:" + status)
+
+                    if (status == 1) {
+                        $('#img'+ menu_id).attr('src','{% static "YTMT/img/like.png" %}')
+                    } else if (status == -1) {
+                        $('#img'+ menu_id).attr('src','{% static "YTMT/img/nolike.png" %}')
+                    }
+
+                    $('#count'+ menu_id).find(".like_count").html(menu_likes)
+//                    console.log(menu_id + " : " + menu_likes)
+                },
+                error: function(response, error) {
+                    console.log("실패")
+                }
+            })
+
+        });
+
+      </script>
 {% endblock %}
