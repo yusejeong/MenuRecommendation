@@ -12,9 +12,12 @@
       <link rel="stylesheet" href='{% static "YTMT/css/pagination.css" %}'>
   <script type="text/javascript">
 
-  function checkValue()
+//  function checkValue()
+   $(function(){   
+      $('#birth-form').submit(function()
         {
-//            console.log(document.form.birth.value);
+            alert(document.form.birth.value);
+          
             if(!document.form.birth.value){
                 alert("생년월일을 입력하세요!");
                 return false;
@@ -23,11 +26,12 @@
                 alert("성별을 입력하세요.");
                 return false;
             }
-//            if(document.form.birth.value.getYear < 1900 || document.form.birth.value.getYear > 2019){
-//                alert("생년월일을 정확히 입력해주세요!")
-//            }
+            if(document.form.birth.getYear() < 1900 || document.form.birth.getYear() > 2017){
+                alert("생년월일을 정확히 입력해주세요!");
+            }
 return true;
-        }
+        });
+   });
   </script>
 </head>
 
@@ -36,7 +40,7 @@ return true;
 
     <br>
     <br>
-  <form name="form" method="post"  action="{% url 'YTMT:birthandgendersave'%}" onsubmit="return checkValue()">
+  <form id="birth-form" name="form" method="post"  action="{% url 'YTMT:birthandgendersave'%}" >
     {% csrf_token %}
     <table boder=""  cellspacing="0">
         <tr>
