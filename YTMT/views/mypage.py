@@ -33,7 +33,14 @@ def selectinfo(request):
 def infomodify(request):
     login_user = SS.find_user(request)
 
-    return render(request, 'mypage/infomodify.html', {"user" : login_user})
+    domain_list = ['naver.com', 'daum.net', 'nate.com', 'hotmail.com', 'yahoo.com', 'empas.com', 'korea.com', 'dreamwiz.com', 'gmail.com']
+    if login_user.email.split('@')[1] in domain_list:
+        email1 = login_user.email.split('@')[0]
+        email2 = login_user.email.split('@')[1]
+    else:
+        email1 = login_user.email
+        email2 = "etc"
+    return render(request, 'mypage/infomodify.html', {"user" : login_user, "email1" : email1, "email2" : email2})
 
 def infomodifysave(request):
     login_user = SS.find_user(request)
