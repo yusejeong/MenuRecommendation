@@ -16,8 +16,6 @@
    $(function(){   
       $('#birth-form').submit(function()
         {
-            alert(document.form.birth.value);
-          
             if(!document.form.birth.value){
                 alert("생년월일을 입력하세요!");
                 return false;
@@ -26,9 +24,9 @@
                 alert("성별을 입력하세요.");
                 return false;
             }
-            if(document.form.birth.getYear() < 1900 || document.form.birth.getYear() > 2017){
-                alert("생년월일을 정확히 입력해주세요!");
-            }
+//            if(document.form.birth.getYear() < 1900 || document.form.birth.getYear() > 2017){
+//                alert("생년월일을 정확히 입력해주세요!");
+//            }
 return true;
         });
    });

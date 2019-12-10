@@ -34,7 +34,12 @@
 <!--                                    {{ menu.text }}-->
                                        {% if menu.text == "None" %}
                                           <span>{{ menu.name }}입니다.</span>
-                                        {% elif menu.text == "None " %}
+                                       {% elif menu.text == "None " %}
+                                           <span>{{ menu.name }}입니다.</span>
+                                       {% elif menu.text == "text" %}
+                                           <span>{{ menu.name }}입니다.</span>
+                                       {% elif menu.text == "text " %}
+                                           <span>{{ menu.name }}입니다.</span>
                                        {% else %}
                                            <span>{{ menu.text }}</span>
                                        {% endif %}
