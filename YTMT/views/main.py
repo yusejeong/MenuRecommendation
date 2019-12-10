@@ -64,19 +64,21 @@ def menureco(request):
 
     #협업 필터링 추천 알고리즘
     collabo_df = pd.read_csv("collaborative_matrix.csv", index_col = 0)
-    cos = collabo_df[str(login_user.username)].sort_values(ascending=False)
-    
+    try:
+        cos = collabo_df[str(login_user.username)].sort_values(ascending=False)       
 
-    for user in cos[1:5].index:
-        if cos[user] > 0.9 or cos[user] < 0.3: break
-        like_list = History.objects.filter(user_id = User.objects.get(username = user))
-        for menu in [x for x in like_list if x not in history_list]:
-            menu_list.append(menu_obj)
+        for user in cos[1:5].index:
+            if cos[user] > 0.9 or cos[user] < 0.3: break
+            like_list = History.objects.filter(user_id = User.objects.get(username = user))
+            for menu in [x for x in like_list if x not in history_list]:
+                menu_list.append(menu_obj)
+                if len(menu_list) >= 5:
+                    break
+
             if len(menu_list) >= 5:
-                break
-
-        if len(menu_list) >= 5:
-                break
+                    break
+    except:
+        pass
 
     for food in history_list:
         menu_name = food.menu
