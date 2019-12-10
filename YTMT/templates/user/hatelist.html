@@ -90,13 +90,16 @@
     function submit_form(){
       var hatefood_list = []
         $(".hatefood").each(function(index,elements){
+          if($(elements).text()){
             hatefood_list.push($(elements).text())
+          }
         })
 
       var hateelement_list=[]
       $(".hateelement").each(function(index,elements){
+        if($(elements).text()){
         hateelement_list.push($(elements).text())
-      })
+      }})
 
       var temp = document.createElement("input");
       var temp1 = document.createElement("input");
@@ -119,7 +122,7 @@
       <span style="font-weight: bold; font-size: 2em; line-height: 2em; color: black; font-family: 'Nanum Gothic';">개인적 식성 </span>
       <br><br>
         <span style="font-weight: bold; font-size: 1em; line-height: 2em; color: black; font-family: 'Nanum Gothic';">싫어하는 음식 </span>
-        <form id ="hatelistform" name="form" class="hform"method="post" action="{% url 'YTMT:hatelistsave'%}" onsubmit="return check();">  {% csrf_token %}
+        <form id ="hatelistform" name="form" class="hform"method="post" action="{% url 'YTMT:hatelistsave'%}">  {% csrf_token %}
           <div class="container col-md-4 mt-3">
             <div  style="padding-bottom:50px;">
               <tr>
