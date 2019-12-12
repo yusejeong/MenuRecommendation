@@ -5,6 +5,7 @@
 
 <link rel="stylesheet" href='{% static "YTMT/css/menureco.css" %}'>
 <head>
+
   <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=ed3ea55ab213888471fe6450d533852b&libraries=services"></script>
 
 <meta charset="utf-8">
@@ -17,14 +18,14 @@
 #menu_wrap .option p {margin:10px 0;}
 #menu_wrap .option button {margin-left:5px;}
 #placesList li {list-style: none;}
-#placesList .item {position:relative; solid #888;overflow: hidden;cursor: pointer;min-height: 65px;}
+#placesList .item {position:relative;border-bottom:1px solid #888;overflow: hidden;cursor: pointer;min-height: 65px;}
 #placesList .item span {display: block;margin-top:4px;}
 #placesList .item h5, #placesList .item .info {text-overflow: ellipsis;overflow: hidden;white-space: nowrap;}
 #placesList .item .info{padding:10px 0 10px 55px;}
 #placesList .info .gray {color:#8a8a8a;}
 #placesList .info .jibun {padding-left:26px;background:url(http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/places_jibun.png) no-repeat;}
 #placesList .info .tel {color:#009900;}
-#placesList .item .markerbg {float:left;position:absolute;width:36px; height:37px;margin:10px 0 0 10px;background:url(http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_number_blue.png);}
+#placesList .item .markerbg {float:left;position:absolute;width:36px; height:37px;margin:10px 0 0 10px;background:url(http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_number_blue.png) no-repeat;}
 #placesList .item .marker_1 {background-position: 0 -10px;}
 #placesList .item .marker_2 {background-position: 0 -56px;}
 #placesList .item .marker_3 {background-position: 0 -102px}
@@ -46,18 +47,19 @@
 </style>
 </head>
 <center>
-<span style="font-weight: bold; font-size: 2em; line-height: 2em; color: black; font-family: 'Nanum Gothic';">{{menu_name}} </span>
-
+  <span style="font-weight: bold; font-size: 2em; line-height: 2em; color: black; font-family: 'Nanum Gothic';">{{menu_name}} </span>
 </center>
 <div class="map_wrap" align=middle>
-    <div id="map" style="width:80%;height:98%;position:relative;overflow:hidden;"></div>
+    <div id="map" style="width:80%;height:95%;position:relative;overflow:hidden;"></div>
 </div>
 <div class="list">
     <div id="menu_wrap">
         <div class="option">
             <div>
                 <form onsubmit="searchPlaces(); return false;">
+
                   <input type="hidden" value="아주대 {{menu_name}}" id="keyword" size="15">
+
                 </form>
             </div>
         </div>
@@ -67,7 +69,7 @@
     </div>
 </div>
 
-
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=caabdd0825a33e45f0ba6cdb6c0570af&libraries=services"></script>
 <script>
 var markers = [];
 
@@ -287,6 +289,7 @@ function removeAllChildNods(el) {
 </script>
 
 <div id="map" style="width:100%;height:350px;"></div>
+
 
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=caabdd0825a33e45f0ba6cdb6c0570af"></script>
 <script>
