@@ -35,7 +35,6 @@ urlpatterns = [
     path('mainpage', main.mainpage, name = 'mainpage'),
     # 기능1
     path('menureco', main.menureco, name = 'menureco'),
-    path('restaurantreco', main.restaurantreco, name='restaurantreco'),
     path('friendreco', main.friendreco, name = 'friendreco'),
     # 기능2
     path('groupmenureco', main.groupmenureco, name = 'groupmenureco'),

@@ -8,47 +8,6 @@
         <title>니맛내맛 : 히스토리</title> 
         <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
         <link rel="stylesheet" href='{% static "YTMT/css/menureco.css" %}'>
-      
-      <script type="text/javascript">
-          
-            $(document).on("click", ".imgBtn", function(event){
-                var menu_id = $(this).data("id")
-             
-            $.ajax({
-                headers: {
-                    "X-CSRFToken": '{{csrf_token}}'
-                },
-                url: "/menu/like",
-                type: "POST",
-                data: {
-                    "menu_id": menu_id
-                },
-                cache: false,
-                dataType: "json",
-                
-                success: function(response) {
-                    var menu_id = response.like_id
-                    var menu_likes = response.like_count
-                    var status = response.status //좋아요 했는지 현 상태 (+1/-1)
-//                    console.log("status:" + status)
-
-                    if (status == 1) {
-                        $('#img'+ menu_id).attr('src','{% static "YTMT/img/like.png" %}')
-                    } else if (status == -1) {
-                        $('#img'+ menu_id).attr('src','{% static "YTMT/img/nolike.png" %}')
-                    }
-            
-                    $('#count'+ menu_id).find(".like_count").html(menu_likes)
-//                    console.log(menu_id + " : " + menu_likes)
-                },
-                error: function(response, error) {
-                    console.log("실패")
-                }
-            })
-                
-        });
-        
-      </script>
   </head>
 
         <center>
@@ -112,5 +71,42 @@
                 </div>
             </div>
         </div>
-  	
+        
+      <script type="text/javascript">
+          
+            $(document).on("click", ".imgBtn", function(event){
+                var menu_id = $(this).data("id")
+             
+            $.ajax({
+                headers: {
+                    "X-CSRFToken": '{{csrf_token}}'
+                },
+                url: "/menu/like",
+                type: "POST",
+                data: {
+                    "menu_id": menu_id
+                },
+                cache: false,
+                dataType: "json",
+                
+                success: function(response) {
+                    var menu_id = response.like_id
+                    var menu_likes = response.like_count
+                    var status = response.status //좋아요 했는지 현 상태 (+1/-1)
+
+                    if (status == 1) {
+                        $('#img'+ menu_id).attr('src','{% static "YTMT/img/like.png" %}')
+                    } else if (status == -1) {
+                        $('#img'+ menu_id).attr('src','{% static "YTMT/img/nolike.png" %}')
+                    }
+            
+                    $('#count'+ menu_id).find(".like_count").html(menu_likes)
+                },
+                error: function(response, error) {
+                    console.log("실패")
+                }
+            })
+                
+        });
+      </script>
 	{% endblock %}

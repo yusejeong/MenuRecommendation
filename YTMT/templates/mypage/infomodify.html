@@ -7,52 +7,8 @@
   <link rel="stylesheet" href="https://dfzrjox9sv97l.cloudfront.net/dicons_20160930/css/common.css?201709272">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
   <link rel="stylesheet" href={% static "YTMT/css/signup.css" %}>
-  <script type="text/javascript">
-
-        function checkValue2()
-              {
-
-                if(!document.form.pwd.value){
-                    alert("비밀번호를 입력하세요.");
-                    return false;
-                }
-                if(document.form.pwd.value==document.form.newpwd.value){
-                       alert("현재 비밀번호와 같습니다. 새로운 비밀번호를 입력하세요.");
-                       return false;
-                   }
-                   if(!document.form.pwdchk.value){
-                       alert("비밀번호를 한번 더 입력하세요.");
-                       return false;
-                   }
-                   // 비밀번호와 비밀번호 확인에 입력된 값이 동일한지 확인
-                   if(document.form.newpwd.value != document.form.pwdchk.value ){
-                       alert("비밀번호를 동일하게 입력하세요.");
-                       return false;
-                   }
-                if(!document.form.email.value){
-                    alert("이메일주소를 입력하세요.");
-                    return false;
-                }
-                if(!document.form.email2.value){
-                    alert("이메일주소를 선택하세요.");
-                    return false;
-                }
-                else{
-                  document.form.submit();
-                alert("회원정보 수정이 완료되었습니다.");
-                document.form.action="{% url 'YTMT:infomodifysave'%}";
-              }
-        }
-          $(function(){                             $('#email2').find('option:contains({{email2}})').attr("selected", true);
-                console.log('{{email2}}');
-      });
-      
-  </script>
-
 </head>
 
-
-<!--<body>-->
   <center>
     <br>
     <span style="font-weight: bold; font-size: 2em; line-height: 2em; color: black; font-family: 'Nanum Gothic';">
@@ -102,8 +58,48 @@
 
 <br>
 
-<input type="submit"id="btn_join" onclick="return checkValue2();" class="btn btn-pink w200" style="font-weight:bold;background-color: #fd7e14;width:250pt;margin-top:12px;"value="수정완료">
+<input type="submit" id="btn_join" onclick="return checkValue2();" class="btn btn-pink w200" style="font-weight:bold;background-color: #fd7e14;width:250pt;margin-top:12px;"value="수정완료">
 </form>
   </center>
+  <script type="text/javascript">
 
+        function checkValue2()
+              {
+
+                if(!document.form.pwd.value){
+                    alert("비밀번호를 입력하세요.");
+                    return false;
+                }
+                if(document.form.pwd.value==document.form.newpwd.value){
+                       alert("현재 비밀번호와 같습니다. 새로운 비밀번호를 입력하세요.");
+                       return false;
+                   }
+                   if(!document.form.pwdchk.value){
+                       alert("비밀번호를 한번 더 입력하세요.");
+                       return false;
+                   }
+                   // 비밀번호와 비밀번호 확인에 입력된 값이 동일한지 확인
+                   if(document.form.newpwd.value != document.form.pwdchk.value ){
+                       alert("비밀번호를 동일하게 입력하세요.");
+                       return false;
+                   }
+                if(!document.form.email.value){
+                    alert("이메일주소를 입력하세요.");
+                    return false;
+                }
+                if(!document.form.email2.value){
+                    alert("이메일주소를 선택하세요.");
+                    return false;
+                }
+                else{
+                  document.form.submit();
+                alert("회원정보 수정이 완료되었습니다.");
+                document.form.action="{% url 'YTMT:infomodifysave'%}";
+              }
+        }
+          $(function(){                             $('#email2').find('option:contains({{email2}})').attr("selected", true);
+                console.log('{{email2}}');
+      });
+      
+  </script>
 {% endblock %}

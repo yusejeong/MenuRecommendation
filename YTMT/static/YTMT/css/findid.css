@@ -20,23 +20,16 @@ th {
 }
 
 button {
-
   background-color: #000000;
   border: none;
   padding: 5px 16px;
   text-align: center;
   color:white;
-
   text-decoration: none;
-
   display: inline-block;
-
   font-size: 16px;
   font-weight: bold;
-
-
   cursor: pointer;
-
 }
 
 table,
@@ -45,8 +38,4 @@ FORM {
   border-spacing: 15px;
   border-collapse: collapse
 
-}
-
-body {
-  font-family: 나눔고딕;
 }

@@ -26,10 +26,6 @@ header {
     font-weight: 500;
     margin-right: 0;
 }
-#navrightbtn a, #navleftbtn a  {
-    text-decoration:none;
-}
-
     .center {
       position: absolute;
       top: 50%;
@@ -60,10 +56,7 @@ h4 {
     font-weight: 500;
     margin-right: 0;
 }
-ul li a {
-    text-decoration: none;
-    color: black;
-}
+
 /*menureco*/
 .firma-card{
   background: #fff;
@@ -96,7 +89,6 @@ ul li a {
 }
 
 @media (max-width: 768px) {
-
   .firma-logo{
         width: calc(33.66667% - .75rem);
         height: 6.5rem;
