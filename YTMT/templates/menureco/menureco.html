@@ -1,6 +1,5 @@
 {% extends 'menureco/menulist.html' %}
 {% load staticfiles %}
-
 {% block content %}
  {% load static %}
 
@@ -8,8 +7,6 @@
       <title>니맛내맛 : 개인맞춤형 메뉴 추천</title>
       <link rel="stylesheet" href='{% static "YTMT/css/menureco.css" %}'>
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-
   </head>
 
    {% for menu in menu_list %}
@@ -31,18 +28,13 @@
 
                                 <div class="menutext">
                                     <span>
-<!--                                    {{ menu.text }}-->
-                                       {% if menu.text == "None" %}
+                                      {% if 'None' in menu.text %}
                                           <span>{{ menu.name }}입니다.</span>
-                                       {% elif menu.text == "None " %}
-                                           <span>{{ menu.name }}입니다.</span>
-                                       {% elif menu.text == "text" %}
-                                           <span>{{ menu.name }}입니다.</span>
-                                       {% elif menu.text == "text " %}
-                                           <span>{{ menu.name }}입니다.</span>
-                                       {% else %}
-                                           <span>{{ menu.text }}</span>
-                                       {% endif %}
+                                      {% elif 'text' in menu.text %}
+                                          <span>{{ menu.name }}입니다.</span>
+                                      {% else %}
+                                          <span>{{ menu.text }}</span>
+                                      {% endif %}
                                     </span>
                                 </div>
 
@@ -90,7 +82,6 @@
                     var menu_id = response.like_id
                     var menu_likes = response.like_count
                     var status = response.status //좋아요 했는지 현 상태 (+1/-1)
-//                    console.log("status:" + status)
 
                     if (status == 1) {
                         $('#img'+ menu_id).attr('src','{% static "YTMT/img/like.png" %}')
@@ -99,7 +90,6 @@
                     }
 
                     $('#count'+ menu_id).find(".like_count").html(menu_likes)
-//                    console.log(menu_id + " : " + menu_likes)
                 },
                 error: function(response, error) {
                     console.log("실패")

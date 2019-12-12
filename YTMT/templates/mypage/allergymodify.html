@@ -18,6 +18,46 @@
     <link rel="stylesheet" href="https://dfzrjox9sv97l.cloudfront.net/dicons_20160930/css/common.css?201709272">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
   <link rel="stylesheet" type="text/css" href={% static "YTMT/css/allergy.css" %}>
+  </head>
+   
+    <center>
+      <br>
+      <span style="font-weight: bold; font-size: 2em; line-height: 2em; color: black; font-family: 'Nanum Gothic';">알레르기 </span>
+      <br>
+
+  <form id = "allergyform" name="form" method="post" action="{% url 'YTMT:allergymodifysave'%}" content_type=u"application/json; charset=utf-8">
+
+     {% csrf_token %}
+     <div class="container col-md-4 mt-3">
+      <div  style="padding-bottom:50px;">
+
+  <tr>
+    <td colspan="4" align="left" align="center">
+      <table width="100%" border="0" cellpadding="0" cellspacing="0">
+     <td colspan="5"  height="25" align="center">
+       <input type="text" id="searchbox" name="addText"style="width:200px">
+          <input name="addButton" id="addbutton" type="button" style="cursor:hand" onClick="addelement();" value="추가"></td></table></td>
+      </tr>
+  <tr>
+   <td height="25" align="center"  >
+     <table id="addTable" cellspacing="0" cellpadding="0" bgcolor="#FFFFFF" border="0">
+    </table></td>
+  </tr>
+  <div class = "allergy_container">  
+  {% for allergy in allergy_list %}
+   <span class="m-1 badge badge-danger">
+    <span class= "allergy">{{ allergy.ingre}}</span><span class = "remove" style="cursor:pointer"> X</span></span>
+  {% endfor %}    
+  </div>
+  
+</div>
+<input type="button" id="submit_btn" onClick="submit_form()" class="btn btn-pink w200" style="font-weight:bold;background-color: #fd7e14;width:250pt;margin-top:12px;"value="수정완료">
+
+  </form>
+  <span class="m-1 badge badge-danger d-none">
+    <span class= "allergy"></span><span class = "remove" style="cursor:pointer"> X </span></span>
+</center>
+ 
   <script type="text/javascript">
 
 
@@ -77,44 +117,4 @@
 
 
     </script>
-  </head>
-   
-    <center>
-      <br>
-      <span style="font-weight: bold; font-size: 2em; line-height: 2em; color: black; font-family: 'Nanum Gothic';">알레르기 </span>
-      <br>
-
-  <form id = "allergyform" name="form" method="post" action="{% url 'YTMT:allergymodifysave'%}" content_type=u"application/json; charset=utf-8">
-
-     {% csrf_token %}
-     <div class="container col-md-4 mt-3">
-      <div  style="padding-bottom:50px;">
-
-  <tr>
-    <td colspan="4" align="left" align="center">
-      <table width="100%" border="0" cellpadding="0" cellspacing="0">
-     <td colspan="5"  height="25" align="center">
-       <input type="text" id="searchbox" name="addText"style="width:200px">
-          <input name="addButton" id="addbutton" type="button" style="cursor:hand" onClick="addelement();" value="추가"></td></table></td>
-      </tr>
-  <tr>
-   <td height="25" align="center"  >
-     <table id="addTable" cellspacing="0" cellpadding="0" bgcolor="#FFFFFF" border="0">
-    </table></td>
-  </tr>
-  <div class = "allergy_container">  
-  {% for allergy in allergy_list %}
-   <span class="m-1 badge badge-danger">
-    <span class= "allergy">{{ allergy.ingre}}</span><span class = "remove" style="cursor:pointer"> X</span></span>
-  {% endfor %}    
-  </div>
-  
-</div>
-<input type="button" id="submit_btn" onClick="submit_form()" class="btn btn-pink w200" style="font-weight:bold;background-color: #fd7e14;width:250pt;margin-top:12px;"value="수정완료">
-
-  </form>
-  <span class="m-1 badge badge-danger d-none">
-    <span class= "allergy"></span><span class = "remove" style="cursor:pointer"> X </span></span>
-</center>
-
 {% endblock %}

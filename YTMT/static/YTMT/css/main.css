@@ -1,3 +1,11 @@
+p {
+    font-weight: 500; 
+    font-size: 18px;
+}
+
+header1 img {
+    width:300px; height:auto; padding-top:10px; padding-bottom: 20px
+}
 
 .button {
 
@@ -5,39 +13,18 @@
   border: none;
   padding: 25px 20px;
   text-align: center;
-
-/*  text-decoration: none;*/
   color: white;
   width: 300px;
   display: inline-block;
-
-  font-size: 18px;
+  font-size: 20px;
   font-weight: bold;
-
   margin: 4px 1px;
-
+  margin-bottom: 5px;
   cursor: pointer;
 }
+
 body {
     font-family: 'Nanum Gothic';
     background: #FCEEB5;
 }
 
-.button2 {
-
-  background-color: #000000;
-  border: none;
-  padding: 25px 61px;
-  text-align: center;
-
-  text-decoration: none;
-
-  display: inline-block;
-
-  font-size: 18px;
-  font-weight: bold;
-
-  margin: 4px 1px;
-
-  cursor: pointer;
-}
