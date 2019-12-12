@@ -37,12 +37,14 @@
                                                 <div class="yacht-info__list space-2">
 
                                                     <div class="menutext">
-                                                        <span>
-                                                           {% if history.menu.text != "None" %}
-                                                               <span>{{ history.menu.text }}</span>
-                                                           {% else %} 
-                                                               <span>{{ history.menu.name }} 입니다.</span>
-                                                           {% endif %}
+                                                        <span>   
+                                                          {% if 'None' in history.menu.text %}
+                                                              <span>{{ history.menu.name }}입니다.</span>
+                                                          {% elif 'text' in menu.text %}
+                                                              <span>{{ history.menu.name }}입니다.</span>
+                                                          {% else %}
+                                                              <span>{{ history.menu.text }}</span>
+                                                          {% endif %}
                                                         </span>
                                                     </div>
 
