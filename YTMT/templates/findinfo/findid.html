@@ -21,7 +21,7 @@
                 return false;
             }
             form.method="post";
-            alert("회원님의 아이디는 kimmalguk입니다.")
+//            alert("회원님의 아이디는 kimmalguk입니다.")
         }
 
   </script>
@@ -45,26 +45,25 @@
                 <option value="naver.com">naver.com</option>
                 <option value="daum.net">daum.net</option>
                 <option value="nate.com">nate.com</option>
-                <option value="hotmail.com">hotmail.com</option>
+                <option value="hanmail.net">hanmail.net</option>
                 <option value="yahoo.com">yahoo.com</option>
                 <option value="empas.com">empas.com</option>
                 <option value="korea.com">korea.com</option>
-                <option value="dreamwiz.com">dreamwiz.com</option>
                 <option value="gmail.com">gmail.com</option>
                 <option value="etc">직접입력</option>
               </select>
             </td>
 
           <tr><td>
-            <input type="button"id="btn_join"  class="btn btn-warning w200" style="width:250pt;font-weight:bold;" value="이메일로 인증번호 발송"></td></tr>
+            <input type="button" id="btn_join"  class="btn btn-warning w200" style="width:250pt;font-weight:bold;margin-top: 10px; margin-bottom: 15px;" value="이메일로 인증번호 발송"></td></tr>
         <tr>
           <th style="float:left;"> 인증번호 </th></tr>
-          <td> <input style="width:200px;" type="password" name="pwd" id="pwd" placeholder="인증번호를 입력해주세요" />
+          <td> <input style="width:190px;" type="password" name="pwd" id="pwd" placeholder="인증번호를 입력해주세요" />
 <a href="{% url 'YTMT:findpw'%}"><button class="button"> 인증번호 확인 </button></a>
 </td>
 
 <tr>
-<td><input type="button"id="btn_join" onclick="checkValue();" class="btn btn-pink w200" style="background-color: #fd7e14;width:250pt;margin-top:12px;font-weight:bold;" value="아이디 찾기">
+<td><input type="button" id="btn_join" onclick="checkValue();" class="btn btn-pink w200" style="background-color: #fd7e14;width:250pt;margin-top:12px;font-weight:bold;" value="아이디 찾기">
 </td></tr>
   </table>
 </form>
