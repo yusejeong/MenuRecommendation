@@ -19,7 +19,7 @@
       }
     </style>
 
- 
+
   </head>
   <center>
 
@@ -35,7 +35,7 @@
         <th style="float:left;">아이디 </th></tr>
         <td>
           <input type="text" style="width:120pt;vertical-align:middle;" name="id" id="id" placeholder="아이디를 입력해주세요"/>
-           <input id="idcheckBtn" type="button" value="중복확인" class="btn btn-secondary btn-sm" data-id="#id" style="background-color: #fd7e14; height: 28px; width: auto;font-size: 0.9em;border:none; color:black;vertical-align:middle;">  
+           <input id="idcheckBtn" type="button" value="중복확인" class="btn btn-secondary btn-sm" data-id="#id" style="background-color: #fd7e14; height: 28px; width: auto;font-size: 0.9em;border:none; color:black;vertical-align:middle;">
         </td>
       <tr>
         <th style="float:left;">이름 </th></tr>
@@ -52,11 +52,9 @@
                 <option value="naver.com">naver.com</option>
                 <option value="daum.net">daum.net</option>
                 <option value="nate.com">nate.com</option>
-                <option value="hotmail.com">hotmail.com</option>
+                <option value="hotmail.com">honmail.com</option>
                 <option value="yahoo.com">yahoo.com</option>
-                <option value="empas.com">empas.com</option>
                 <option value="korea.com">korea.com</option>
-                <option value="dreamwiz.com">dreamwiz.com</option>
                 <option value="gmail.com">gmail.com</option>
                 <option value="etc">직접입력</option>
               </select>
@@ -73,9 +71,9 @@
 
 
     <input type="submit" id="btn_join" id_check_result="fail" class="btn btn-pink w200" style="font-weight:bold;background-color: #fd7e14;width:250pt;margin-top:12px;" value="next">
-          
+
 </form>
-   
+
     <div class="pagination p6" style="display: table;">
       <ul>
         <a class="is-active" href="#"><li></li></a>
@@ -88,7 +86,7 @@
     </div>
 
   </center>
-  
+
 <script type="text/javascript">
     $(function(){
 //        아이디 수정했을 때
@@ -105,7 +103,7 @@
                 alert("아이디를 입력하세요.")
                 return;
             }
-            
+
             $.ajax({
                 headers: {
                     "X-CSRFToken": '{{csrf_token}}'
@@ -170,5 +168,5 @@
         });
     });
 
-</script>   
+</script>
 {% endblock %}
