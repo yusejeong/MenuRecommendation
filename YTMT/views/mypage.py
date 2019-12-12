@@ -34,11 +34,7 @@ def selectinfo(request):
 def infomodify(request):
     login_user = SS.find_user(request)
 
-<<<<<<< HEAD
-    domain_list = ['naver.com', 'daum.net', 'nate.com', 'hanmail.net', 'yahoo.com', 'empas.com', 'korea.com', 'gmail.com']
-=======
-    domain_list = ['naver.com', 'daum.net', 'nate.com', 'honmail.com', 'yahoo.com', 'korea.com', 'gmail.com']
->>>>>>> origin/master
+    domain_list = ['naver.com', 'daum.net', 'nate.com', 'hanmail.net', 'yahoo.com', 'korea.com', 'gmail.com']
     if login_user.email.split('@')[1] in domain_list:
         email1 = login_user.email.split('@')[0]
         email2 = login_user.email.split('@')[1]
