@@ -10,27 +10,19 @@
 	<link rel="stylesheet" href='{% static "YTMT/css/main.css" %}'>
 
 </head>
-
-
 	{% csrf_token %}
 	<center>
-		<br>
-		<header1 class="main-header"><img src="https://ytmtresource.s3.ap-northeast-2.amazonaws.com/YTMT_Logo.jpg" style="width:300px; height:auto; padding-top:10px;">
-			<div>
-			</div>
+		<br><br>
+		<p>나만의, 우리만의 메뉴를 추천 받아보세요!</p>
+		<header1 class="main-header"><img src="https://ytmtresource.s3.ap-northeast-2.amazonaws.com/YTMT_Logo.jpg">
 		</header1>
 		<br>
-		<button class="button" onclick="location.href='{% url 'YTMT:menureco'%}'" style="color: white;width: 300px;padding: 25px 20px;">나를 위한 메뉴 추천</button>
+		
+		<button class="button" onclick="location.href='{% url 'YTMT:menureco'%}'">나를 위한 메뉴 추천</button>
 		<br>
 
-		<button class="button" onclick="location.href='{% url 'YTMT:friendreco'%}'" style="color: white;width: 300px;padding: 25px 20px;">친구와 함께 추천 받기</button>
-
+		<button class="button" onclick="location.href='{% url 'YTMT:friendreco'%}'">친구와 함께 추천 받기</button>
 		<br>
-
-		{% comment %} <button class="button" style="color: white;width: 300px;padding: 25px 20px;">주변 인기 메뉴 추천<br>(준비중입니다.)</button> {% endcomment %}
-
-
-
 	</center>
 
 {% endblock %}
