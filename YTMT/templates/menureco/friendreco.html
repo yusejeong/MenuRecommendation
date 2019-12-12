@@ -16,7 +16,104 @@
 
     <link rel="stylesheet" href='{% static "YTMT/css/allergy.css" %}'>
 
-    <script type="text/javascript">
+ 
+    <style>
+        .user_img_size {
+            height: 4em;
+            width: 4em;
+        }
+
+        .round-20 {
+            border-radius: 25px;
+        }
+
+        .remove_btn {
+            z-index: 3;
+            position: relative;
+            top: 8px;
+            right: 0px;
+        }
+    </style>
+
+    <!--<body>-->
+    <center>
+        <div class="container">
+            <br><br>
+            <span
+                style="font-weight: bold; font-size: 1.8em; line-height: 2em; color: black; font-family: 'Nanum Gothic';">
+                친구와 함께 하는 메뉴 추천
+            </span><br>
+            <span
+                style=" font-size: 1em; line-height: 2em; color: black; font-family: 'Nanum Gothic';">
+                친구를 검색해서 함께 먹을 음식을 추천 받으세요!
+            </span>
+            <br><br>
+
+            <span
+                style="font-weight: bold; font-size:1.5em; line-height: 2em; color: black; font-family: 'Nanum Gothic';">
+                같이 먹을 친구들
+            </span>
+            <div class="container justify-content-center w-100 card_container">
+
+            </div>
+            <form name="form" id="friendform" method="post" action="{% url 'YTMT:groupmenureco'%}"
+                content_type=u "application/json; charset=utf-8">
+                {% csrf_token %}
+                <div>
+                    <div style="padding-bottom:30px;">
+                        <tr>
+                            <td colspan="2" align="left" align="center">
+                                <table width="100%" border="0" cellpadding="0" cellspacing="0">
+                                    <td colspan="5" height="25" align="center">
+
+                                        <input type="text" id="searchbox" name="addText">
+                                        <input name="addButton" id="addbutton" class="searchBtn" type="button"
+                                            style="cursor:hand" value="추가">
+                                    </td>
+                                </table>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td height="25" align="center">
+                                <table id="addTable" width="200" cellspacing="0" cellpadding="0" bgcolor="#FFFFFF"
+                                    border="0">
+                                </table>
+                            </td>
+                        </tr>
+
+                    </div>
+                </div>
+                <a href="{% url 'YTMT:friendlist'%}">
+                <span style=" font-size: 0.8em; line-height: 2em; text-decoration: underline; color: black;">
+                잠깐, 마이페이지에서 친구를 추가하셨나요?
+                </span></a><br>
+                <input type="button" id="submit_btn" class="btn btn-pink" onClick="submit_form()"
+                    style="font-weight:bold;background-color: #fd7e14;width:300px;margin-top:12px;" value="메뉴 추천 받기">
+            </form>
+
+        </div>
+
+
+
+    </center>
+    <div class="hidden_container">
+        {% for friend in friend_list%}
+        <div class="d-inline-flex justify-content-center friend_card" data-id={{friend.user_id.username}}>
+            <div class="display p-1 d-none">
+                <button type="remove_btn button" class="close remove_btn rounded-circle" aria-label="Close">
+                    <span class="remove_btn" aria-hidden="true">&times;</span>
+                </button>
+                <div class="mb-1">
+                    <img src='{% static "YTMT/img/default-user.png" %}' class="user_img_size round-20" alt="... ">
+                </div>
+                <b class="name_place">{{friend.name }}</b>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    
+   <script type="text/javascript">
         $(document).ready(function () {
             var friends = [{%for friend in friend_list %}
                 "{{friend.name}}, {{friend.user_id.username}}",
@@ -70,96 +167,5 @@
             $('#friendform').submit()
         }
     </script>
-
-    <style>
-        .user_img_size {
-            height: 4em;
-            width: 4em;
-        }
-
-        .round-20 {
-            border-radius: 25px;
-        }
-
-        .remove_btn {
-            z-index: 3;
-            position: relative;
-            top: 8px;
-            right: 0px;
-        }
-    </style>
-
-    <!--<body>-->
-    <center>
-        <div class="container">
-            <br><br>
-            <span
-                style="font-weight: bold; font-size: 1.8em; line-height: 2em; color: black; font-family: 'Nanum Gothic';">
-                친구와 함께 하는 메뉴 추천
-            </span><br>
-            <span
-                style="font-weight: bold; font-size: 1em; line-height: 2em; color: black; font-family: 'Nanum Gothic';">
-                친구를 검색해서 함께 먹을 음식을 추천 받으세요!
-            </span>
-            <br><br>
-
-            <span
-                style="font-weight: bold; font-size:1.5em; line-height: 2em; color: black; font-family: 'Nanum Gothic';">
-                같이 먹을 친구들
-            </span>
-            <div class="container justify-content-center w-100 card_container">
-
-            </div>
-            <form name="form" id="friendform" method="post" action="{% url 'YTMT:groupmenureco'%}"
-                content_type=u "application/json; charset=utf-8">
-                {% csrf_token %}
-                <div>
-                    <div style="padding-bottom:50px;">
-                        <tr>
-                            <td colspan="2" align="left" align="center">
-                                <table width="100%" border="0" cellpadding="0" cellspacing="0">
-                                    <td colspan="5" height="25" align="center">
-
-                                        <input type="text" id="searchbox" name="addText">
-                                        <input name="addButton" id="addbutton" class="searchBtn" type="button"
-                                            style="cursor:hand" value="추가">
-                                    </td>
-                                </table>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td height="25" align="center">
-                                <table id="addTable" width="200" cellspacing="0" cellpadding="0" bgcolor="#FFFFFF"
-                                    border="0">
-                                </table>
-                            </td>
-                        </tr>
-
-                    </div>
-                </div>
-                <input type="button" id="submit_btn" class="btn btn-pink w200" onClick="submit_form()"
-                    style="font-weight:bold;background-color: #fd7e14;width:250pt;margin-top:12px;" value="메뉴 추천 받기">
-            </form>
-
-        </div>
-
-
-
-    </center>
-    <div class="hidden_container">
-        {% for friend in friend_list%}
-        <div class="d-inline-flex justify-content-center friend_card" data-id={{friend.user_id.username}}>
-            <div class="display p-1 d-none">
-                <button type="remove_btn button" class="close remove_btn rounded-circle" aria-label="Close">
-                    <span class="remove_btn" aria-hidden="true">&times;</span>
-                </button>
-                <div class="mb-1">
-                    <img src='{% static "YTMT/img/default-user.png" %}' class="user_img_size round-20" alt="... ">
-                </div>
-                <b class="name_place">{{friend.name }}</b>
-            </div>
-        </div>
-        {% endfor %}
-    </div>
+    
     {% endblock %}

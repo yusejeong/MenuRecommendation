@@ -58,7 +58,7 @@ def birthandgendersave(request):
         gender_num = 2
 
     birthday_str = request.POST.get('birth')
-
+   
     request.session['gender'] = gender_num
     request.session['birthday_str'] = birthday_str
 

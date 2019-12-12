@@ -53,8 +53,6 @@ def menureco(request):
     for allergy in Allergy_list:
         filter_list.append(allergy.ingre.name)
 
-
-
     #중복 요소 제거
     filter_list = list(dict.fromkeys(filter_list))
 
@@ -63,11 +61,31 @@ def menureco(request):
     menu_list = []
 
     heart_list = []
+
+    #협업 필터링 추천 알고리즘
+    collabo_df = pd.read_csv("collaborative_matrix.csv", index_col = 0)
+    try:
+        cos = collabo_df[str(login_user.username)].sort_values(ascending=False)       
+
+        for user in cos[1:5].index:
+            if cos[user] > 0.9 or cos[user] < 0.3: break
+            like_list = History.objects.filter(user_id = User.objects.get(username = user))
+            for menu in [x for x in like_list if x not in history_list]:
+                menu_list.append(menu_obj)
+                if len(menu_list) >= 5:
+                    break
+
+            if len(menu_list) >= 5:
+                    break
+    except:
+        pass
+
     for food in history_list:
         menu_name = food.menu
         cos = sim_df[str(menu_name)].sort_values(ascending=False)
         heart_list.append(Menu.objects.get(name = food.menu))
-        for name in cos[1:3].index:
+        for name in cos[1:5].index:
+            if cos[name] < 0.6 : break
             menu_obj = Menu.objects.get(name = name)
             recipes = Recipe.objects.filter(menu = menu_obj)
             can_append = True
@@ -79,7 +97,10 @@ def menureco(request):
 
             if can_append:
                 menu_list.append(menu_obj)
-
+            
+            if len(menu_list) >= 10:
+                break
+    
     filter_menu = []
 
     menu_cnt = Menu.objects.count()
@@ -108,12 +129,14 @@ def menureco(request):
             break
 
     menu_list.extend(filter_menu)
+    menu_list = random.sample(menu_list, 5)
 
     return render(request, 'menureco/menureco.html',{ 'menu_list': menu_list, "heart_list": heart_list})
 def locationreco(request):
     menu_name = request.GET.get("menu")
 
     return render(request, 'menureco/locationreco.html',{"menu_name" : menu_name})
+
 def friendreco(request):
     login_user = SS.find_user(request)
     userProfile = Profile.objects.get(user_id = login_user)
@@ -152,7 +175,7 @@ def groupmenureco(request):
 
         for hate_religion_ingre in religion_list:
             filter_list.append(hate_religion_ingre.ingre.name)
-            #채식 성향 재료 필터
+        #채식 성향 재료 필터
         for hate_vege_ingre in vegetarian_list:
             filter_list.append(hate_vege_ingre.ingre.name)
         # #싫어하는 재료 필터
@@ -190,10 +213,11 @@ def groupmenureco(request):
             # print("append : " + menu_obj.name)
             filter_menu.append(menu_obj)
 
-        if len(filter_menu) >= 5:
+        if len(filter_menu) >= 10:
             break
 
     menu_list.extend(filter_menu)
+    menu_list = random.sample(menu_list, 5)
 
     return render(request, 'menureco/menureco.html', { 'menu_list': menu_list })
 

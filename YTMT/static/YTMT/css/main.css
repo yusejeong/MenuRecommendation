@@ -3,11 +3,12 @@
 
   background-color: #000000;
   border: none;
-  padding: 25px 70px;
+  padding: 25px 20px;
   text-align: center;
 
 /*  text-decoration: none;*/
-
+  color: white;
+  width: 300px;
   display: inline-block;
 
   font-size: 18px;

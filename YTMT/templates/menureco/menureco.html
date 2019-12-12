@@ -9,6 +9,65 @@
       <link rel="stylesheet" href='{% static "YTMT/css/menureco.css" %}'>
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+
+  </head>
+
+   {% for menu in menu_list %}
+     <div class="menu">
+                <div class="firma-card row">
+                    <div class="col-md-5 img-padding-no">
+                        <a href="{% url 'YTMT:locationreco'%}?menu={{menu.name}}">
+                            <img class="firma-resim"
+                        style="height: 100%; width: 100%;"
+                        src = '{% static  "YTMT/food_images/"%}{{menu.name}}.jpg' style="cursor: pointer;">
+                        </a>
+                        
+                    </div>
+                    <div class="col-md-7">
+                        <div class="firma-aciklama card-body">
+                            <a href="{% url 'YTMT:locationreco'%}?menu={{menu.name}}"><h4>{{ menu.name }}</h4></a>
+
+                            <div class="yacht-info__list space-2">
+
+                                <div class="menutext">
+                                    <span>
+<!--                                    {{ menu.text }}-->
+                                       {% if menu.text == "None" %}
+                                          <span>{{ menu.name }}입니다.</span>
+                                       {% elif menu.text == "None " %}
+                                           <span>{{ menu.name }}입니다.</span>
+                                       {% elif menu.text == "text" %}
+                                           <span>{{ menu.name }}입니다.</span>
+                                       {% elif menu.text == "text " %}
+                                           <span>{{ menu.name }}입니다.</span>
+                                       {% else %}
+                                           <span>{{ menu.text }}</span>
+                                       {% endif %}
+                                    </span>
+                                </div>
+
+                                 <br><br>
+                            </div>
+                                <div class="like-img" id="count{{ menu.id }}" align="right" >
+
+                                    <h5>
+                                      {% if menu in heart_list %}
+                                           <img id="img{{ menu.id }}" class="imgBtn" src='{% static "YTMT/img/like.png" %}' data-id="{{menu.id}}" width="35px" height="auto" style="cursor: pointer;">
+                                       {% else %}
+                                           <img id="img{{ menu.id }}" class="imgBtn" src='{% static "YTMT/img/nolike.png" %}' data-id="{{menu.id}}" width="35px" height="auto" style="cursor: pointer;">
+                                       {% endif %}
+
+                                    <b class="like_count">{{menu.likes}}</b>
+                                    </h5>
+
+                                </div>
+
+                        </div>
+                    </div>
+                </div>
+        </div>
+
+    {% endfor %}
       <script type="text/javascript">
 
 
@@ -50,55 +109,4 @@
         });
 
       </script>
-  </head>
-
-   {% for menu in menu_list %}
-     <div class="menu">
-                <div class="firma-card row">
-                    <div class="col-md-5 img-padding-no">
-                        <img class="firma-resim"
-                        style="height: 100%; width: 100%;"
-                        src = '{% static  "YTMT/food_images/"%}{{menu.name}}.jpg'>
-                    </div>
-                    <div class="col-md-7">
-                        <div class="firma-aciklama card-body">
-                            <a href="{% url 'YTMT:locationreco'%}?menu={{menu.name}}"><h4>{{ menu.name }}</h4></a>
-
-                            <div class="yacht-info__list space-2">
-
-                                <div class="menutext">
-                                    <span>
-<!--                                    {{ menu.text }}-->
-                                       {% if menu.text == "None" %}
-                                          <span>{{ menu.name }}입니다.</span>
-                                        {% elif menu.text == "None " %}
-                                       {% else %}
-                                           <span>{{ menu.text }}</span>
-                                       {% endif %}
-                                    </span>
-                                </div>
-
-                                 <br><br>
-                            </div>
-                                <div class="like-img" id="count{{ menu.id }}" align="right" >
-
-                                    <h5>
-                                      {% if menu in heart_list %}
-                                           <img id="img{{ menu.id }}" class="imgBtn" src='{% static "YTMT/img/like.png" %}' data-id="{{menu.id}}" width="35px" height="auto" style="cursor: pointer;">
-                                       {% else %}
-                                           <img id="img{{ menu.id }}" class="imgBtn" src='{% static "YTMT/img/nolike.png" %}' data-id="{{menu.id}}" width="35px" height="auto" style="cursor: pointer;">
-                                       {% endif %}
-
-                                    <b class="like_count">{{menu.likes}}</b>
-                                    </h5>
-
-                                </div>
-
-                        </div>
-                    </div>
-                </div>
-        </div>
-
-    {% endfor %}
-
 {% endblock %}
