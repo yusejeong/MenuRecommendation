@@ -34,7 +34,11 @@ def selectinfo(request):
 def infomodify(request):
     login_user = SS.find_user(request)
 
+<<<<<<< HEAD
     domain_list = ['naver.com', 'daum.net', 'nate.com', 'hanmail.net', 'yahoo.com', 'empas.com', 'korea.com', 'gmail.com']
+=======
+    domain_list = ['naver.com', 'daum.net', 'nate.com', 'honmail.com', 'yahoo.com', 'korea.com', 'gmail.com']
+>>>>>>> origin/master
     if login_user.email.split('@')[1] in domain_list:
         email1 = login_user.email.split('@')[0]
         email2 = login_user.email.split('@')[1]
@@ -132,9 +136,9 @@ def hatemodifysave(request):
     hate_ingredient_list = request.POST.get("ingredient_list")
     hate_ingredient_list = json.loads(hate_ingredient_list)
 
-    Hate_menu.objects.filter(user_id = login_user).delete()    
+    Hate_menu.objects.filter(user_id = login_user).delete()
     Hate_ingredient.objects.filter(user_id = login_user).delete()
-    
+
     menu_objects = Menu.objects.filter(name__in = hate_menu_list)
     ingre_objects = Ingredient.objects.filter(name__in = hate_ingredient_list)
 
@@ -143,7 +147,7 @@ def hatemodifysave(request):
 
     for menu_obj in menu_objects:
         Hate_menu(user_id = login_user, menu = menu_obj).save()
-    
+
     return render(request, 'mypage/selectinfo.html')
 
 # 마이페이지_기타
@@ -160,10 +164,10 @@ def friendlist(request):
     friend_objects = Friend_list.objects.filter(user_id = login_user)
     friend_list = []
     for friend in friend_objects:
-        friend_id = friend.friend_id.username 
+        friend_id = friend.friend_id.username
         name = Profile.objects.get(user_id = friend.friend_id).name
         friend_list.append({"id" : friend_id, "name" : name})
-    
+
     return render(request, 'mypage/friendslist.html', {"friend_list" : friend_list})
 
 def friendlistsave(request):
@@ -173,8 +177,8 @@ def friendlistsave(request):
 
 def profile(request):
     login_user = SS.find_user(request)
-    tempProfile = Profile.objects.get(user_id = login_user)   
-    
+    tempProfile = Profile.objects.get(user_id = login_user)
+
     Gender_TYPE = (
         (1, "남자"),
         (2, "여자"),
@@ -200,7 +204,7 @@ def profile(request):
         "vegetarian" : Vegetarian_TYPE[tempProfile.vege_id- 1][1],
         "gender" : Gender_TYPE[tempProfile.gender - 1][1],
         "birth" : tempProfile.birth.date(),
-        
+
     }
 
     allergy_objects = Allergy.objects.filter(user_id = login_user)
