@@ -16,7 +16,73 @@
     <script src="https://code.jquery.com/jquery.js"></script>
     <!-- jQuery ui library -->
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    <script type="text/javascript">
+  </head>
+
+    <center>
+      <br>
+      <span style="font-weight: bold; font-size: 2em; line-height: 2em; color: black; font-family: 'Nanum Gothic';">개인적 식성 </span>
+      <br><br>
+        <span style="font-weight: bold; font-size: 1em; line-height: 2em; color: black; font-family: 'Nanum Gothic';">싫어하는 음식 </span>
+        <form id ="hatelistform" name="form" class="hform"method="post" action="{% url 'YTMT:hatemodifysave'%}">  {% csrf_token %}
+          <div class="container col-md-4 mt-3">
+            <div  style="padding-bottom:50px;">
+              <tr>
+                <td colspan="4" align="left" align="center">
+                  <table width="100%" border="0" cellpadding="0" cellspacing="0">
+                 <td colspan="5"  height="25" align="center">
+                   <input type="text" id="searchbox" name="addText"style="width:200px">
+                      <input name="addButton" id="addbutton" type="button" style="cursor:hand" onClick="addfood();" value="추가"></td></table></td>
+                   </tr>
+
+              <tr>
+               <td height="25" align="center"  >
+                 <table id="addTable"  cellspacing="0" cellpadding="0" bgcolor="#FFFFFF" border="0">
+                </table></td>
+              </tr>
+  <div class = "food_container">
+    {% for food in user_food %}
+   <span class="m-1 badge badge-primary">
+    <span class= "hatefood">{{ food.menu.name}}</span><span class = "remove" style="cursor:pointer"> X</span></span>
+  {% endfor %}
+  </div>
+    </div></div>
+
+<span style="font-weight: bold; font-size: 1em; line-height: 2em; color: black; font-family: 'Nanum Gothic';">싫어하는 재료 </span>
+  <br>
+    <div class = "container col-md-4 mt-3">
+      <div style="padding-bottom:50px;">
+  <tr>
+  <td colspan="2" align="left">
+  <table width="100%" border="0" cellpadding="0" cellspacing="0">
+  <td colspan="5"  height="auto" align="center">
+   <input type="text" id="searchbox1" name="addText1"style="width:200px">
+      <input name="addButton1" id="addbutton1" type="button" style="cursor:hand" onClick="addelement();" value="추가"></td>
+
+    </table>
+   </td>
+  </tr>
+
+  <tr>
+   <td height="auto">
+     <table id="addTable1"  cellspacing="0" cellpadding="0" bgcolor="#FFFFFF" border="0">
+    </table></td>
+  </tr>
+  <div class = "element_container">
+  {% for ingre in user_ingre %}
+   <span class="m-1 badge badge-success">
+    <span class= "hateelement">{{ingre}}</span><span class = "remove" style="cursor:pointer"> X</span></span>
+  {% endfor %}</div>
+  </div></div>
+  <input type="button" id="submit_btn"  onclick="submit_form()"class="btn btn-pink w200" style="font-weight:bold;background-color: #fd7e14;width:250pt;margin-top:12px;"value="수정완료">
+
+  </form>
+<span class="m-1 badge badge-primary food d-none">
+    <span class= "hatefood"></span><span class = "remove" style="cursor:pointer"> X </span></span>
+      <span class="m-1 badge badge-success element d-none">
+    <span class= "hateelement"></span><span class = "remove" style="cursor:pointer"> X </span></span>
+
+</center>
+   <script type="text/javascript">
 
         $(document).ready(function () {
            var hateelement = [{%for ingre in ingredient_list %}
@@ -112,70 +178,4 @@
     }
 
     </script>
-  </head>
-
-    <center>
-      <br>
-      <span style="font-weight: bold; font-size: 2em; line-height: 2em; color: black; font-family: 'Nanum Gothic';">개인적 식성 </span>
-      <br><br>
-        <span style="font-weight: bold; font-size: 1em; line-height: 2em; color: black; font-family: 'Nanum Gothic';">싫어하는 음식 </span>
-        <form id ="hatelistform" name="form" class="hform"method="post" action="{% url 'YTMT:hatemodifysave'%}">  {% csrf_token %}
-          <div class="container col-md-4 mt-3">
-            <div  style="padding-bottom:50px;">
-              <tr>
-                <td colspan="4" align="left" align="center">
-                  <table width="100%" border="0" cellpadding="0" cellspacing="0">
-                 <td colspan="5"  height="25" align="center">
-                   <input type="text" id="searchbox" name="addText"style="width:200px">
-                      <input name="addButton" id="addbutton" type="button" style="cursor:hand" onClick="addfood();" value="추가"></td></table></td>
-                   </tr>
-
-              <tr>
-               <td height="25" align="center"  >
-                 <table id="addTable"  cellspacing="0" cellpadding="0" bgcolor="#FFFFFF" border="0">
-                </table></td>
-              </tr>
-  <div class = "food_container">
-    {% for food in user_food %}
-   <span class="m-1 badge badge-primary">
-    <span class= "hatefood">{{ food.menu.name}}</span><span class = "remove" style="cursor:pointer"> X</span></span>
-  {% endfor %}
-  </div>
-    </div></div>
-
-<span style="font-weight: bold; font-size: 1em; line-height: 2em; color: black; font-family: 'Nanum Gothic';">싫어하는 재료 </span>
-  <br>
-    <div class = "container col-md-4 mt-3">
-      <div style="padding-bottom:50px;">
-  <tr>
-  <td colspan="2" align="left">
-  <table width="100%" border="0" cellpadding="0" cellspacing="0">
-  <td colspan="5"  height="auto" align="center">
-   <input type="text" id="searchbox1" name="addText1"style="width:200px">
-      <input name="addButton1" id="addbutton1" type="button" style="cursor:hand" onClick="addelement();" value="추가"></td>
-
-    </table>
-   </td>
-  </tr>
-
-  <tr>
-   <td height="auto">
-     <table id="addTable1"  cellspacing="0" cellpadding="0" bgcolor="#FFFFFF" border="0">
-    </table></td>
-  </tr>
-  <div class = "element_container">
-  {% for ingre in user_ingre %}
-   <span class="m-1 badge badge-success">
-    <span class= "hateelement">{{ingre}}</span><span class = "remove" style="cursor:pointer"> X</span></span>
-  {% endfor %}</div>
-  </div></div>
-  <input type="button"id="submit_btn"  onclick="submit_form()"class="btn btn-pink w200" style="font-weight:bold;background-color: #fd7e14;width:250pt;margin-top:12px;"value="수정완료">
-
-  </form>
-<span class="m-1 badge badge-primary food d-none">
-    <span class= "hatefood"></span><span class = "remove" style="cursor:pointer"> X </span></span>
-      <span class="m-1 badge badge-success element d-none">
-    <span class= "hateelement"></span><span class = "remove" style="cursor:pointer"> X </span></span>
-
-</center>
 {% endblock %}
