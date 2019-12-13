@@ -66,7 +66,7 @@ def menureco(request):
     collabo_df = pd.read_csv("collaborative_matrix.csv", index_col = 0)
     try:
         cos = collabo_df[str(login_user.username)].sort_values(ascending=False)       
-
+        random.shuffle(cos)
         for user in cos[1:5].index:
             if cos[user] > 0.9 or cos[user] < 0.3: break
             like_list = History.objects.filter(user_id = User.objects.get(username = user))
@@ -74,7 +74,6 @@ def menureco(request):
                 menu_list.append(menu_obj)
                 if len(menu_list) >= 5:
                     break
-
             if len(menu_list) >= 5:
                     break
     except:
@@ -82,8 +81,9 @@ def menureco(request):
 
     for food in history_list:
         menu_name = food.menu
-        cos = sim_df[str(menu_name)].sort_values(ascending=False)
+        cos = sim_df[str(menu_name)].sort_values(ascending=False)        
         heart_list.append(Menu.objects.get(name = food.menu))
+        random.shuffle(cos)
         for name in cos[1:5].index:
             if cos[name] < 0.6 : break
             menu_obj = Menu.objects.get(name = name)
@@ -132,6 +132,7 @@ def menureco(request):
     menu_list = random.sample(menu_list, 5)
 
     return render(request, 'menureco/menureco.html',{ 'menu_list': menu_list, "heart_list": heart_list})
+
 def locationreco(request):
     menu_name = request.GET.get("menu")
 
@@ -159,6 +160,7 @@ def groupmenureco(request):
     filter_list = []
 
     user_objects = User.objects.filter(username__in = friends_list)
+    
     for user in user_objects:
         userProfile = Profile.objects.get(user_id = user)
         hate_menu_list = Hate_menu.objects.filter(user_id = user)
@@ -248,4 +250,3 @@ def menu_like(request):
         like_menu.save()
 
         return HttpResponse(json.dumps({'like_id' : like_menu.id, 'like_count' : like_menu.likes, 'status' : status }), content_type="application/json")
-#    return HttpResponse("posterror")
