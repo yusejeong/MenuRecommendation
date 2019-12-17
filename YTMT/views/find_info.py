@@ -17,6 +17,31 @@ def findinfo(request):
 def findid(request):
     return render(request, 'findinfo/findid.html')
 
+def chkinfo(request):
+    if request.POST["email2"] != "etc":
+        email = request.POST["email"] + "@" + request.POST["email2"]
+    else:
+        email = request.POST["email"]
+    print(email)
+
+    temp_user = User.objects.filter(email = email)
+    print(temp_user.username)
+    if temp_user is None:
+        print("F")
+        return HttpResponse("Failure")
+
+    temp_profile = Profile.objects.filter(user_id = temp_user)
+    print(temp_profile.name)
+    if temp_profile is None:
+        print("F")
+        return HttpResponse("Failure")
+
+    if temp_profile.name == request.POST["name"]:
+        id = temp_user.username
+        print("S")
+        return HttpResponse(json.dumps({'id': id}), content_type="application/json")
+    return HttpResponse("Failure")
+
 def findpw(request):
     return render(request, 'findinfo/findpw.html')
 

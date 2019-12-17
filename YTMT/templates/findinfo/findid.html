@@ -34,7 +34,7 @@
       아이디 찾기
     </span>
     <br><br>
-    <form name="form" method="post" onsubmit="return checkValue()">
+    <form name="form" method="post">
                   {% csrf_token %}
       <table border="0" cellspacing="0" frame="void">
         <tr>
@@ -55,15 +55,16 @@
             </td>
 
           <tr><td>
-            <input type="button" id="btn_join"  class="btn btn-warning w200" style="width:250pt;font-weight:bold;margin-top: 10px; margin-bottom: 15px;" value="이메일로 인증번호 발송"></td></tr>
+            <button id="btn_join"  class="btn btn-warning w200 button"
+            style="width:250pt;font-weight:bold;margin-top: 10px; margin-bottom: 15px;" >이메일로 인증번호 발송</button></td></tr>
         <tr>
           <th style="float:left;"> 인증번호 </th></tr>
-          <td> <input style="width:190px;" type="password" name="pwd" id="pwd" placeholder="인증번호를 입력해주세요" />
-<a href="{% url 'YTMT:findpw'%}"><button class="button"> 인증번호 확인 </button></a>
+          <td> <input style="width:190px;" type="text" name="pwd" id="pwd" placeholder="인증번호를 입력해주세요" />
+<a href="{% url 'YTMT:chkinfo'%}"><button class="button"> 인증번호 확인 </button></a>
 </td>
 
 <tr>
-<td><input type="button" id="btn_join" onclick="checkValue();" class="btn btn-pink w200" style="background-color: #fd7e14;width:250pt;margin-top:12px;font-weight:bold;" value="아이디 찾기">
+<td><a href="{% url 'YTMT:chkinfo'%}"></a><input type="button" id="btn_join" class="btn btn-pink w200" style="background-color: #fd7e14;width:250pt;margin-top:12px;font-weight:bold;" value="아이디 찾기">
 </td></tr>
   </table>
 </form>
