@@ -28,6 +28,7 @@ urlpatterns = [
     # 회원정보찾기
     path('findinfo', find_info.findinfo, name = 'findinfo'),
     path('findinfo/findid', find_info.findid, name = 'findid'),
+    path('findinfo/chkinfo', find_info.chkinfo, name = 'chkinfo'),
     path('findinfo/findpw', find_info.findpw, name = 'findpw'),
     path('findinfo/sendpw', find_info.sendpw, name = 'sendpw'),
     path('findinfo/chkinfo', find_info.chkinfo, name = 'chkinfo'),
