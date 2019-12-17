@@ -20,6 +20,9 @@ def findid(request):
 def findpw(request):
     return render(request, 'findinfo/findpw.html')
 
+def chkinfo(request):
+    return httpResponse("success")
+
 def sendpw(request):
     id = request.POST['id']
     temp_user = User.objects.get(username=id)
