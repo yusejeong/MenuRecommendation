@@ -30,7 +30,8 @@ urlpatterns = [
     path('findinfo/findid', find_info.findid, name = 'findid'),
     path('findinfo/findpw', find_info.findpw, name = 'findpw'),
     path('findinfo/sendpw', find_info.sendpw, name = 'sendpw'),
-
+    path('findinfo/chkinfo', find_info.chkinfo, name = 'chkinfo'),
+    
     # 메인
     path('mainpage', main.mainpage, name = 'mainpage'),
     # 기능1
