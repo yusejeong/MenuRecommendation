@@ -19,23 +19,29 @@ def findid(request):
     return render(request, 'findinfo/findid.html')
 
 def chkinfo(request):
-    if request.POST["email2"] != "etc":
-        email = request.POST["email"] + "@" + request.POST["email2"]
+    chk = False
+    chk_id = ''
+#    if request.POST["email2"] != "etc":
+#        email = request.POST["email"] + "@" + request.POST["email2"]
+#    else:
+    email = request.POST["email"]
+    
+    if User.objects.get(email = email).exists():
+        print("ess")
+        temp_user = User.objects.get(email = email)
     else:
-        email = request.POST["email"]
-
-    temp_user = User.objects.get(email = email)
-    if temp_user is None:
-        return HttpResponse("Failure")
+        print("efail")
+        return HttpResponse(json.dumps({'chk': chk, 'id': chk_id}), content_type="application/json")
 
     temp_profile = Profile.objects.get(user_id = temp_user)
-    if temp_profile is None:
-        return HttpResponse("Failure")
-
     if temp_profile.name == request.POST["name"]:
         id = temp_user.username
-        return HttpResponse(json.dumps({'id': id}), content_type="application/json")
-    return HttpResponse("Failure")
+        chk = True
+        print("ss")
+        return HttpResponse(json.dumps({'chk': chk, 'id': chk_id}), content_type="application/json")
+    
+    print("fail")
+    return HttpResponse(json.dumps({'chk': chk, 'id': chk_id}), content_type="application/json")
 
 def findpw(request):
     return render(request, 'findinfo/findpw.html')

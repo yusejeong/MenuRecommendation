@@ -31,7 +31,6 @@ urlpatterns = [
     path('findinfo/chkinfo', find_info.chkinfo, name = 'chkinfo'),
     path('findinfo/findpw', find_info.findpw, name = 'findpw'),
     path('findinfo/sendpw', find_info.sendpw, name = 'sendpw'),
-    path('findinfo/chkinfo', find_info.chkinfo, name = 'chkinfo'),
     
     # 메인
     path('mainpage', main.mainpage, name = 'mainpage'),
