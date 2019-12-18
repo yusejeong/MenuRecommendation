@@ -12,19 +12,66 @@
   <script type="text/javascript">
       $(function(){
           //        유효성검사
-        $('#idfind-form').submit(function(){
-            if(!document.form.name.value){
+//        $('#idfind-form').submit(function(){
+//            if(!document.form.name.value){
+//                alert("이름을 입력하세요.")
+//                return false;
+//            }
+//            if(!document.form.email.value){
+//                alert("이메일주소를 입력하세요.");
+//                return false;
+//            }
+//            if(!document.form.email2.value){
+//                alert("이메일주소를 선택하세요.");
+//                return false;
+//            }
+//        });
+//          
+        $('#btn_join').click(function(){
+            var name = $('#name').val()
+            if($('email2').val() == 'etc'){
+                var email = $('email').val();
+            }
+            else{
+                var email = $('email').val()+'@'+$('email2').val();
+            }
+            console.log(name + email);
+            
+            if(name == ''){
                 alert("이름을 입력하세요.")
-                return false;
+                return;
             }
-            if(!document.form.email.value){
-                alert("이메일주소를 입력하세요.");
-                return false;
+            if(email == ''){
+                alert("이메일을 입력하세요.")
+                return;
             }
-            if(!document.form.email2.value){
-                alert("이메일주소를 선택하세요.");
-                return false;
-            }
+
+            $.ajax({
+                headers: {
+                    "X-CSRFToken": '{{csrf_token}}'
+                },
+                url: "/findinfo/chkinfo",
+                type: "POST",
+                data: {
+                    "name" : name,
+                    "email" : email,
+                },
+                cache: false,
+                dataType: "json",
+                success: function(reponse){
+                    if(reponse.chk == true) {
+                        alert("회원님의 아이디는 "+reponse.id+" 입니다.");
+                        return;
+                    } else{
+                        alert("입력하신 정보와 일치하는 회원이 없습니다.");
+                        return;
+                    }
+                },
+                error: function(xhr,error) {
+                    alert("통신 오류");
+                    console.error(error);
+                }
+            })
         });
       })
 
