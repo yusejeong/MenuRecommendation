@@ -1,9 +1,8 @@
-/*
-body {
-    margin-left: auto;
-    margin-right: auto;
+
+#login_body important {
+    padding-top:50px;
 }
-*/
+
 .btn, .input-text {
     width: 400px;
 }
@@ -20,4 +19,5 @@ body {
 html, header, body {
     font-family: 'Nanum Gothic';
     background: #FCEEB5;
+    margin-top: 50px;
 }
