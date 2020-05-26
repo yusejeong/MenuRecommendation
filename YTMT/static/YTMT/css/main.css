@@ -4,14 +4,15 @@ p {
 }
 
 header1 img {
-    width:300px; height:auto; padding-top:10px; padding-bottom: 20px
+    width:250px; 
+    height:auto; 
 }
 
 .button {
 
   background-color: #000000;
   border: none;
-  padding: 25px 20px;
+  /* padding: 25px 20px; */
   text-align: center;
   color: white;
   width: 300px;
