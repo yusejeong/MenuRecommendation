@@ -4,8 +4,7 @@ p {
 }
 
 header1 img {
-    width:250px; 
-    height:auto; 
+    width:300px; height:auto; padding-top:10px; padding-bottom: 20px
 }
 
 .button {
@@ -28,4 +27,3 @@ body {
     font-family: 'Nanum Gothic';
     background: #FCEEB5;
 }
-
