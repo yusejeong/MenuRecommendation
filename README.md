@@ -2,6 +2,20 @@
 
 #### putty
 
+* 스크린 설치
+
+  ```bash
+  $ sudo apt-get install screen
+  ```
+
+* 스크린 만들기
+
+  ```bash
+  $ screen -S build1
+  ```
+
+  
+
 > screen -list or screen -ls : 스크린 목록
 
 > screen -r 아이디 : 해당 스크린에 attached(평소에는 detached라고 표시됨)
